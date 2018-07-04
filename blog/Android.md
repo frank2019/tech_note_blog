@@ -2,84 +2,18 @@
 
 ## TODO
 
-1. 什么是激活函数，有哪些激活函数
-
-2. 常见的神经网络算法  实验过哪些模型
-
-3. hashmap的实现原理
-
-4. ConcurrentHashMap  的实现原理  kənˈkɜrənt
-
-5. http://baijiahao.baidu.com/s?id=1599851390737984369&wfr=spider&for=pc
-
-6. http://a.codekk.com/
-
-7. 腾讯音乐如何提高音频文件的遍历效率，增量和全量
-
-8. 函数式编程
-
-    
-
-
-
-
-
-
-
-## 
-
-
-
-
-
-## 系统编程
-
-
-
-### LLVM Clang 是什么
-
-
-
-1. [LLVM与Clang的概述及关系](https://www.cnblogs.com/saintlas/p/5738739.html) 		
-2. [你或许应该知道的LLVM](https://blog.csdn.net/khlljm/article/details/51822973)                         
-
-
-
-
-
 1. 
 
-    
-
-
-## JAVA
-
-### Java中的String，StringBuilder，StringBuffer的区别
-
-#### 执行速度的快慢
-
-**StringBuilder > StringBuffer > String** 
-
-#### 线程安全角度
-
-**StringBuilder是线程不安全的，而StringBuffer是线程安全的** 
-
-实现的区别
-
-1. String为字符串常量，即String对象一旦创建之后该对象是不可更改的，如果对这个对象做修改，本质上是创建新的对象，然后老的对象被系统自动回收。
-2. 而StringBuilder和StringBuffer均为字符串变量，是可以更改的
-
-[Java中的String，StringBuilder，StringBuffer三者的区别](https://www.cnblogs.com/su-feng/p/6659064.html)
 
 
 
-#### 源码分析
+----
 
 
 
-## Android小结
 
-耐能kneron
+
+
 
 
 
@@ -100,6 +34,338 @@ retrofit 中使用gson  与测试框架中的 gson版本差异问题
 
 
 http://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.0
+
+
+
+
+
+
+
+
+
+### T0x11  Android官方数据库框架 Room 
+
+
+
+Room持久性库提供了SQLite的抽象层，以便在充分利用SQLite的同时允许流畅的数据库访问。 和常规的ORM框架一样，让Entity对应数据库表，然后通过添加编译期注解来进行表和字段的配置 。
+
+#### Room优点
+
+1. SQL查询在编译时即会验证，**检查每个@Query和@Entity等**    不会有运行时的错误风险。
+2. 较少的目标代码
+3. 和LiveData集成
+
+#### Room的使用
+
+##### 1、在build.gradle中增加依赖
+
+```
+compile 'android.arch.persistence.room:runtime:1.0.0'
+annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+```
+
+##### 2、创建JavaBean 对应数据库中的一个表
+
+```java
+/**
+ * Immutable model class for a Task.
+ */
+@Entity(tableName = "tasks")
+public final class Task {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "entryid")
+    private final String mId;
+
+    @Nullable
+    @ColumnInfo(name = "title")
+    private final String mTitle;
+
+    @Nullable
+    @ColumnInfo(name = "description")
+    private final String mDescription;
+
+    @ColumnInfo(name = "completed")
+    private final boolean mCompleted;
+
+    /**
+     * Use this constructor to create a new active Task.
+     *
+     * @param title       title of the task
+     * @param description description of the task
+     */
+    @Ignore
+    public Task(@Nullable String title, @Nullable String description) {
+        this(title, description, UUID.randomUUID().toString(), false);
+    }
+
+    /**
+     * Use this constructor to create an active Task if the Task already has an id (copy of another
+     * Task).
+     *
+     * @param title       title of the task
+     * @param description description of the task
+     * @param id          id of the task
+     */
+    @Ignore
+    public Task(@Nullable String title, @Nullable String description, @NonNull String id) {
+        this(title, description, id, false);
+    }
+
+    /**
+     * Use this constructor to create a new completed Task.
+     *
+     * @param title       title of the task
+     * @param description description of the task
+     * @param completed   true if the task is completed, false if it's active
+     */
+    @Ignore
+    public Task(@Nullable String title, @Nullable String description, boolean completed) {
+        this(title, description, UUID.randomUUID().toString(), completed);
+    }
+
+    /**
+     * Use this constructor to specify a completed Task if the Task already has an id (copy of
+     * another Task).
+     *
+     * @param title       title of the task
+     * @param description description of the task
+     * @param id          id of the task
+     * @param completed   true if the task is completed, false if it's active
+     */
+    public Task(@Nullable String title, @Nullable String description,
+                @NonNull String id, boolean completed) {
+        mId = id;
+        mTitle = title;
+        mDescription = description;
+        mCompleted = completed;
+    }
+
+    @NonNull
+    public String getId() {
+        return mId;
+    }
+
+    @Nullable
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Nullable
+    public String getTitleForList() {
+        if (!Strings.isNullOrEmpty(mTitle)) {
+            return mTitle;
+        } else {
+            return mDescription;
+        }
+    }
+
+    @Nullable
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public boolean isCompleted() {
+        return mCompleted;
+    }
+
+    public boolean isActive() {
+        return !mCompleted;
+    }
+
+    public boolean isEmpty() {
+        return Strings.isNullOrEmpty(mTitle) &&
+               Strings.isNullOrEmpty(mDescription);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equal(mId, task.mId) &&
+               Objects.equal(mTitle, task.mTitle) &&
+               Objects.equal(mDescription, task.mDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(mId, mTitle, mDescription);
+    }
+
+    @Override
+    public String toString() {
+        return "Task with title " + mTitle;
+    }
+}
+
+```
+
+- 这里需要使用`@Entity`来注解该类
+
+- 至少要有一个主键`@PrimaryKey` 
+
+- @Entity(tableName = "table_name**") 注解POJO类，定义数据表名称;
+
+  @PrimaryKey 定义主键，如果一个Entity使用的是复合主键，可以通过@Entity注解的primaryKeys 属性定义复合主键：@Entity(primaryKeys = {"firstName", "lastName"})
+
+  @ColumnInfo(name = “column_name”) 定义数据表中的字段名
+
+  @Ignore 用于告诉Room需要忽略的字段或方法
+
+  建立索引：在@Entity注解的indices属性中添加索引字段。例如：indices = [{@Index(value](mailto:{@Index(value) = {"first_name", "last_name"}, unique = true), ...}, unique = true可以确保表中不会出现{"first_name", "last_name"} 相同的数据
+
+
+
+##### 3、创建 *DAO*(Data Access Object数据访问对象 ）
+
+```java
+/**
+ * Data Access Object for the tasks table.
+ */
+@Dao
+public interface TasksDao {
+
+    /**
+     * Select all tasks from the tasks table.
+     *
+     * @return all tasks.
+     */
+    @Query("SELECT * FROM Tasks")
+    List<Task> getTasks();
+
+    /**
+     * Select a task by id.
+     *
+     * @param taskId the task id.
+     * @return the task with taskId.
+     */
+    @Query("SELECT * FROM Tasks WHERE entryid = :taskId")
+    Task getTaskById(String taskId);
+
+    /**
+     * Insert a task in the database. If the task already exists, replace it.
+     *
+     * @param task the task to be inserted.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertTask(Task task);
+
+    /**
+     * Update a task.
+     *
+     * @param task task to be updated
+     * @return the number of tasks updated. This should always be 1.
+     */
+    @Update
+    int updateTask(Task task);
+
+    /**
+     * Update the complete status of a task
+     *
+     * @param taskId    id of the task
+     * @param completed status to be updated
+     */
+    @Query("UPDATE tasks SET completed = :completed WHERE entryid = :taskId")
+    void updateCompleted(String taskId, boolean completed);
+
+    /**
+     * Delete a task by id.
+     *
+     * @return the number of tasks deleted. This should always be 1.
+     */
+    @Query("DELETE FROM Tasks WHERE entryid = :taskId")
+    int deleteTaskById(String taskId);
+
+    /**
+     * Delete all tasks.
+     */
+    @Query("DELETE FROM Tasks")
+    void deleteTasks();
+
+    /**
+     * Delete all completed tasks from the table.
+     *
+     * @return the number of tasks deleted.
+     */
+    @Query("DELETE FROM Tasks WHERE completed = 1")
+    int deleteCompletedTasks();
+}
+
+```
+
+- 使用`@Dao`注解该接口
+-  `@Insert`, `@Update`, `@Delete`,`@Query`代表我们常用的`插入`、`更新`、`删除`、`查询`数据库操作
+
+
+
+##### 4、**创建数据库** 
+
+
+
+```java
+@Database(entities = {Task.class}, version = 1,exportSchema = true)
+public abstract class ToDoDatabase extends RoomDatabase {
+
+    private static ToDoDatabase INSTANCE;
+
+    public abstract TasksDao taskDao();
+
+    private static final Object sLock = new Object();
+
+    public static ToDoDatabase getInstance(Context context) {
+        synchronized (sLock) {
+            if (INSTANCE == null) {
+                INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                        ToDoDatabase.class, "Tasks.db")
+                        .build();
+            }
+            return INSTANCE;
+        }
+    }
+
+}
+```
+
+这里使用`@Database`注解该类并添加了**表名**、**数据库版本**（每当我们改变数据库中的内容时它都会增加） 
+
+
+
+##### 5、数据库使用
+
+```
+
+```
+
+
+
+#### 参考链接
+
+1. [LiveData是什么]([Android官方架构组件介绍之LiveData](https://www.cnblogs.com/zqlxtt/p/6887940.html))   一个生命感知组件
+2. [Android—Room数据库（介绍）](https://www.jianshu.com/p/cfde3535233d)
+
+
+
+
+
+find  ./  -name  "*.java" |xargs  -i  -n 1  ls  {}
+
+sed 's/com.example.android.architecture.blueprints.todoapp/com.colour.time.todo/g'
+
+```
+find  ./  -name  "*.java" |xargs  -i  -n 1  sed -i  's/com.example.android.architecture.blueprints.todoapp/com.colour.time.todo/g' {}
+```
+
+
+
+
+
+```
+<!--android:background="?attr/colorPrimary"-->
+```
+
+### 
 
 
 
@@ -819,30 +1085,6 @@ Test Pyramid理论基本大意是，单元测试是基础，是我们应该花�
 1. 
 
 
-
-### Android 数据库框架
-
-
-
-参考链接 
-
-1.[Android—Room数据库（介绍）](https://www.jianshu.com/p/cfde3535233d)
-
-find  ./  -name  "*.java" |xargs  -i  -n 1  ls  {}
-
-sed 's/com.example.android.architecture.blueprints.todoapp/com.colour.time.todo/g'
-
-```
-find  ./  -name  "*.java" |xargs  -i  -n 1  sed -i  's/com.example.android.architecture.blueprints.todoapp/com.colour.time.todo/g' {}
-```
-
-
-
-
-
-```
-<!--android:background="?attr/colorPrimary"-->
-```
 
 ### 0x02 MVP模式
 

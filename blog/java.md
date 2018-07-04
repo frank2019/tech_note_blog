@@ -6,6 +6,39 @@
 
 
 
+
+
+## 
+
+### Java中的String，StringBuilder，StringBuffer的区别
+
+#### 执行速度的快慢
+
+**StringBuilder > StringBuffer > String** 
+
+#### 线程安全角度
+
+**StringBuilder是线程不安全的，而StringBuffer是线程安全的** 
+
+实现的区别
+
+1. String为字符串常量，即String对象一旦创建之后该对象是不可更改的，如果对这个对象做修改，本质上是创建新的对象，然后老的对象被系统自动回收。
+2. 而StringBuilder和StringBuffer均为字符串变量，是可以更改的
+
+[Java中的String，StringBuilder，StringBuffer三者的区别](https://www.cnblogs.com/su-feng/p/6659064.html)
+
+
+
+#### 源码分析
+
+
+
+
+
+----
+
+
+
 ### mybatis   Mapper 的配置
 
 Mybatis中定义Mapper信息有两种方式，一种是利用xml写一个对应的包含Mapper信息的配置文件；另一种就是定义一个Mapper接口，然后定义一些相应的操作方法，再辅以相应的操作注解。

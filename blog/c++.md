@@ -10,6 +10,19 @@
 
 
 
+### LLVM Clang 是什么
+
+
+
+1. [LLVM与Clang的概述及关系](https://www.cnblogs.com/saintlas/p/5738739.html) 		
+2. [你或许应该知道的LLVM](https://blog.csdn.net/khlljm/article/details/51822973)                         
+
+
+
+
+
+
+
 ### Proxygen编译安装和开发环境的搭建
 
 Proxygen是facebook开源的高性能的http框架，它和thriftrpc一起，构成一套http和rpc的访问的姊妹框架。由于项目的选用了thrift作为rpc框架，所以采用proxygen作为对外提供http服务的框架。  
@@ -43,6 +56,12 @@ https://github.com/facebook/proxygen
 相关的模块：  Mysql 数据库的ORM，json解析  rsa加密，http协议解析，日志模块   [redis库]
 
 
+
+
+
+
+
+-----
 
 
 
