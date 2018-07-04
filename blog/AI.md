@@ -2,7 +2,7 @@ todo
 
 1. 李飞飞 视频
 2. 吴恩达 课程  图书
-3. 
+3. Python机器学习实践指南
 
 
 
@@ -21,7 +21,14 @@ todo
 #### 参考链接
 
 1. [如何利用机器学习预测房价？ ](https://www.leiphone.com/news/201709/G7jncGzgKHebUG7i.html)
-2. 
+
+
+
+#### 0、需求目标是什么
+
+1. 根据已知的数据，预测数据集之外的给定的公寓的价格
+
+
 
 #### 1.主要步骤
 
@@ -48,12 +55,22 @@ todo
 #### 2. 机器学习中常用的Python库
 
 1. request  可以获取网络上的数据
-2. pandas   开源数据分析操作工具
-3. Jupyter 交互式计算环境
-4. matplotlib Python 会图库的鼻祖
-5. seaborn 专门为统计可视化而创建的库 可以和pandas的数据框完美协作
-6. statsmodels   用于探索数据 估计模型 并运行统计检验
-7. scikit-learn 库  机器学习库
+
+2. numpy 
+
+3. pandas   开源数据分析操作工具
+
+4. Jupyter 交互式计算环境
+
+5. matplotlib Python 会图库的鼻祖
+
+6. seaborn 专门为统计可视化而创建的库 可以和pandas的数据框完美协作
+
+7. statsmodels   用于探索数据 估计模型 并运行统计检验
+
+8. sklearn   即scikit-learn 库  机器学习库
+
+   
 
 #### 3.机器学习环境
 
@@ -83,6 +100,150 @@ pip install jupyter
 ```
 jupyter notebook
 ```
+
+
+
+#### 5、Anaconda 的安装使用
+
+##### Anaconda是什么
+
+`Conda`是一个开源的包、环境管理器，可以用于在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换 
+
+Anaconda包括Conda、Python以及一大堆安装好的工具包，比如：`numpy`、`pandas`等 
+
+##### 下载安装
+
+1. [清华镜像下载链接 较快](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/)
+2. [官网下载链接](https://www.anaconda.com/download/)
+
+配置path环境变量
+
+```
+D:\ProgramData\Anaconda3\Scripts
+```
+
+##### 使用
+
+安装完成后，我们还需要对所有工具包进行升级，以避免可能发生的错误。 
+
+```
+conda upgrade --all
+```
+
+##### 如何管理Python包？
+
+安装一个 package：
+
+```
+conda install package_name
+```
+
+这里 package_name 是需要安装包的名称。你也可以同时安装多个包，比如同时安装numpy 、scipy 和 pandas，则执行如下命令：
+
+```
+conda install numpy scipy pandas
+```
+
+你也可以指定安装的版本，比如安装 1.1 版本的 numpy ：
+
+```
+conda install numpy=1.10
+```
+
+移除一个 package：
+
+```
+conda remove package_name
+```
+
+
+
+升级 package 版本：
+
+```
+conda update package_name
+```
+
+
+
+查看所有的 packages：
+
+```
+conda list
+```
+
+如果你记不清 package 的具体名称，也可以进行模糊查询：
+
+```bash
+conda  search search_term
+```
+
+##### 管理Python环境？
+
+默认的环境是 root，你也可以创建一个新环境：
+
+```
+conda create -n env_name  list of packages
+```
+
+其中 `-n` 代表 name，`env_name` 是需要创建的环境名称，`list of packages` 则是列出在新环境中需要安装的工具包。
+
+例如，当我安装了 Python3 版本的 Anaconda 后，默认的 root 环境自然是 Python3，但是我还需要创建一个 Python 2 的环境来运行旧版本的 Python 代码，最好还安装了 pandas 包，于是我们运行以下命令来创建：
+
+```
+conda create -n py2 python=2.7 pandas
+```
+
+细心的你一定会发现，py2 环境中不仅安装了 pandas，还安装了 numpy 等一系列 packages，这就是使用 conda 的方便之处，它会自动为你安装相应的依赖包，而不需要你一个个手动安装。
+
+进入名为 env_name 的环境：
+
+```
+source activate env_name
+```
+
+退出当前环境：
+
+```
+source deactivate
+```
+
+另外注意，在 Windows 系统中，使用 `activate env_name` 和 `deactivate` 来进入和退出某个环境。
+
+删除名为 env_name 的环境：
+
+```
+conda env remove -n env_name
+```
+
+
+
+显示所有的环境：
+
+```
+conda env list
+```
+
+当分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中。
+
+```
+conda env export > environment.yaml
+```
+
+同样，当执行他人的代码时，也需要配置相应的环境。这时你可以用对方分享的 YAML 文件来创建一摸一样的运行环境。
+
+```
+conda env create -f environment.yaml
+```
+
+
+
+
+
+##### 参考链接
+
+1. [Anaconda使用入门](https://www.cnblogs.com/baiyangcao/p/anaconda_basic.html)
+2. [致Python初学者们 - Anaconda入门使用指南](https://www.jianshu.com/p/169403f7e40c)
 
 
 
