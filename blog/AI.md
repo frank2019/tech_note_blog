@@ -16,6 +16,14 @@ todo
 
 
 
+0x03 
+
+
+
+空间聚类算法（DBSCAN）    
+
+
+
 ### 0x02 构建应用程序，发现低价的公寓
 
 #### 参考链接
@@ -123,6 +131,36 @@ D:\ProgramData\Anaconda3\Scripts
 ```
 
 ##### 使用
+
+修改源
+
+```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
+```
+
+此时，目录 C:\Users<你的用户名> 下就会生成配置文件.condarc，内容如下： 
+
+```
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - defaults
+show_channel_urls: true
+```
+
+删除第三行
+
+查看是否生效
+
+通过命令 conda info 查看当前配置信息，内容如下，即修改成功，关注 channel URLs 字段内容
+
+
+
+中科大的镜像是：
+
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/    
+
+
 
 安装完成后，我们还需要对所有工具包进行升级，以避免可能发生的错误。 
 
