@@ -6,6 +6,11 @@ todo
 
 
 
+问题
+
+1. [机器学习---分类、回归、聚类、降维的区别](https://blog.csdn.net/u011630575/article/details/78637517)
+2. 
+
 
 
 ![img](https://pic1.zhimg.com/80/v2-a3685a05ccd1517dc402c911b5395cdd_hd.jpg) 
