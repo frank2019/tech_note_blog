@@ -9,7 +9,129 @@ todo
 问题
 
 1. [机器学习---分类、回归、聚类、降维的区别](https://blog.csdn.net/u011630575/article/details/78637517)
-2. 
+
+
+
+## TODO
+
+1. [入门 | 机器学习新手必看10大算法](http://www.sohu.com/a/220248494_129720)
+2. [如何简单形象又有趣地讲解神经网络是什么？](https://www.zhihu.com/question/22553761)
+3. [10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
+4. https://www.cnblogs.com/nkwy2012/p/7875897.html
+5. https://www.cnblogs.com/fangbei/p/python-time.html
+
+
+
+
+
+
+
+### 0x02 独立同分布
+
+独立同分布independent and identically distributed (i.i.d.)
+
+在概率统计理论中，指随机过程中，任何时刻的取值都为随机变量，如果这些随机变量服从同一[分布](https://baike.baidu.com/item/%E5%88%86%E5%B8%83)，并且互相独立，那么这些随机变量是独立同分布。如果随机变量X1和X2独立，是指X1的取值不影响X2的取值，X2的取值也不影响X1的取值且随机变量X1和X2服从同一分布，这意味着X1和X2具有相同的分布形状和相同的分布参数，对离随机变量具有相同的分布律，对连续随机变量具有相同的[概率密度函数](https://baike.baidu.com/item/%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0)，有着相同的[分布函数](https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0)，相同的期望、方差。如实验条件保持不变，一系列的抛硬币的正反面结果是独立同分布
+
+
+
+### 0x01 线性回归
+
+监督学习指的是有目标变量或预测目标的机器学习方法。回归与分类的不同，就在于其目标变量是否是连续数值型
+
+
+
+#### 什么是回归
+
+回归分析是在一系列的已知或能通过获取的自变量与因变量之间的相关关系的基础上，建立变量之间的回归方程，把回归方程作为算法模型，通过其来实现对新自变量得出因变量的关系。因此回归分析是实用的预测模型或分类模型。
+
+凡事皆有因果关系，解读“回归”二字，其实就是由因回溯果的过程，最终得到的因与果的关系，就称为回归。
+
+回归方法是一种对数值型连续随机变量进行预测和建模的监督学习算法。使用案例一般包括房价预测、股票走势或测试成绩等连续变化的案例。
+
+  回归任务的特点是标注的数据集具有数值型的目标变量。也就是说，每一个观察样本都有一个数值型的标注真值以监督算法。
+
+#### 什么是线性回归
+
+线性回归是处理回归任务最常用的算法之一。该算法的形式十分简单，它期望使用一个超平面拟合数据集（只有两个变量的时候就是一条直线）。如果数据集中的变量存在线性关系，那么其就能拟合地非常好。
+
+在实践中，简单的线性回归通常被使用正则化的回归方法（LASSO、Ridge 和 Elastic-Net）所代替。正则化其实就是一种对过多回归系数采取惩罚以减少过拟合风险的技术。当然，我们还得确定惩罚强度以让模型在欠拟合和过拟合之间达到平衡。
+
+- 优点：线性回归的理解与解释都十分直观，并且还能通过正则化来降低过拟合的风险。另外，线性模型很容易使用随机梯度下降和新数据更新模型权重。
+- 缺点：线性回归在变量是非线性关系的时候表现很差。并且其也不够灵活以捕捉更复杂的模式，添加正确的交互项或使用多项式很困难并需要大量时间。
+
+- [Python](http://lib.csdn.net/base/python) 实现：http://scikit-learn.org/stable/modules/linear_model.html 
+- R 实现：https://cran.r-project.org/web/packages/glmnet/index.html 
+
+
+
+3种学习方式-监督、非监督和强化学习
+
+基于最佳拟合线的自变量与因变量之间的线性回归模型
+
+3 Learning styles - supervised, unsupervised & reinforcement learning
+
+Linear Regression models relationship between independent & dependent variables via line of best fit
+
+
+$$
+h_θ(x)=  ∑^n_{i=0} θ_ix_i =θ^Tx
+$$
+Thanks  to siraj raval
+
+**根据动物的大脑重量来预测对应体重**
+
+
+
+```bash
+pip install pandas matplotlib scikit-learn
+pip  install  scipy
+```
+
+
+
+```python
+import pandas as pd
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+
+#read data
+dataframe = pd.read_fwf('brain_body.txt')
+x_values = dataframe[['Brain']]
+y_values = dataframe[['Body']]
+
+#train model on data
+body_reg = linear_model.LinearRegression()
+body_reg.fit(x_values, y_values)
+
+#visualize results
+plt.scatter(x_values, y_values)
+plt.plot(x_values, body_reg.predict(x_values))
+plt.show()
+```
+
+
+
+
+
+参考链接
+
+1. [深度学习笔记 - 102 - 回归模型](https://www.jianshu.com/p/be9834f3c3fe)
+2. https://github.com/llSourcell/linear_regression_demo/blob/master/brain_body.txt
+3. https://www.jianshu.com/p/cd5a929bec33
+
+
+
+
+
+1. [城市公交聚合支付一体收费终端](http://www.slzrsz.com/show-22-303.html)
+2. https://wenku.baidu.com/view/afcdb9783a3567ec102de2bd960590c69ec3d8fa.html
+3. https://wenku.baidu.com/view/ce1fbbfb04a1b0717fd5ddfc.html?rec_flag=default&mark_pay_doc=0&mark_rec_page=1&mark_rec_position=5&mark_rec=view_r_1&clear_uda_param=1
+
+
+
+
+
+
 
 
 

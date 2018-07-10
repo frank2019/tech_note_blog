@@ -1,13 +1,6 @@
 
 
-
-
-## TODO
-1. [入门 | 机器学习新手必看10大算法](http://www.sohu.com/a/220248494_129720)
-2. [如何简单形象又有趣地讲解神经网络是什么？](https://www.zhihu.com/question/22553761)
-3. [10 种机器学习算法的要点（附 Python 和 R 代码）](http://blog.jobbole.com/92021/)
-4. https://www.cnblogs.com/nkwy2012/p/7875897.html
-5. https://www.cnblogs.com/fangbei/p/python-time.html
+# ToDO
 
 
 
@@ -27,121 +20,6 @@
 
 
 
-
-
-
-### 0x02 独立同分布
-
-独立同分布independent and identically distributed (i.i.d.)
-
-在概率统计理论中，指随机过程中，任何时刻的取值都为随机变量，如果这些随机变量服从同一[分布](https://baike.baidu.com/item/%E5%88%86%E5%B8%83)，并且互相独立，那么这些随机变量是独立同分布。如果随机变量X1和X2独立，是指X1的取值不影响X2的取值，X2的取值也不影响X1的取值且随机变量X1和X2服从同一分布，这意味着X1和X2具有相同的分布形状和相同的分布参数，对离随机变量具有相同的分布律，对连续随机变量具有相同的[概率密度函数](https://baike.baidu.com/item/%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0)，有着相同的[分布函数](https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0)，相同的期望、方差。如实验条件保持不变，一系列的抛硬币的正反面结果是独立同分布
-
-
-
-
-### 0x01 线性回归
-
-监督学习指的是有目标变量或预测目标的机器学习方法。回归与分类的不同，就在于其目标变量是否是连续数值型
-
-
-
-#### 什么是回归
-
-回归分析是在一系列的已知或能通过获取的自变量与因变量之间的相关关系的基础上，建立变量之间的回归方程，把回归方程作为算法模型，通过其来实现对新自变量得出因变量的关系。因此回归分析是实用的预测模型或分类模型。
-
-凡事皆有因果关系，解读“回归”二字，其实就是由因回溯果的过程，最终得到的因与果的关系，就称为回归。
-
-回归方法是一种对数值型连续随机变量进行预测和建模的监督学习算法。使用案例一般包括房价预测、股票走势或测试成绩等连续变化的案例。
-
-  回归任务的特点是标注的数据集具有数值型的目标变量。也就是说，每一个观察样本都有一个数值型的标注真值以监督算法。
-
-#### 什么是线性回归
-
-线性回归是处理回归任务最常用的算法之一。该算法的形式十分简单，它期望使用一个超平面拟合数据集（只有两个变量的时候就是一条直线）。如果数据集中的变量存在线性关系，那么其就能拟合地非常好。
-
-在实践中，简单的线性回归通常被使用正则化的回归方法（LASSO、Ridge 和 Elastic-Net）所代替。正则化其实就是一种对过多回归系数采取惩罚以减少过拟合风险的技术。当然，我们还得确定惩罚强度以让模型在欠拟合和过拟合之间达到平衡。
-
-- 优点：线性回归的理解与解释都十分直观，并且还能通过正则化来降低过拟合的风险。另外，线性模型很容易使用随机梯度下降和新数据更新模型权重。
-- 缺点：线性回归在变量是非线性关系的时候表现很差。并且其也不够灵活以捕捉更复杂的模式，添加正确的交互项或使用多项式很困难并需要大量时间。
-
-
-- [Python](http://lib.csdn.net/base/python) 实现：http://scikit-learn.org/stable/modules/linear_model.html 
-- R 实现：https://cran.r-project.org/web/packages/glmnet/index.html 
-
-
-
-3种学习方式-监督、非监督和强化学习
-
-基于最佳拟合线的自变量与因变量之间的线性回归模型
-
-3 Learning styles - supervised, unsupervised & reinforcement learning
-
-Linear Regression models relationship between independent & dependent variables via line of best fit
-
-
-
-
-$$
-h_θ(x)=  ∑^n_{i=0} θ_ix_i =θ^Tx
-$$
-
-
-Thanks  to siraj raval
-
-**根据动物的大脑重量来预测对应体重**
-
-
-
-```bash
-pip install pandas matplotlib scikit-learn
-pip  install  scipy
-```
-
-
-
-```python
-import pandas as pd
-from sklearn import linear_model
-import matplotlib.pyplot as plt
-
-#read data
-dataframe = pd.read_fwf('brain_body.txt')
-x_values = dataframe[['Brain']]
-y_values = dataframe[['Body']]
-
-#train model on data
-body_reg = linear_model.LinearRegression()
-body_reg.fit(x_values, y_values)
-
-#visualize results
-plt.scatter(x_values, y_values)
-plt.plot(x_values, body_reg.predict(x_values))
-plt.show()
-```
-
-
-
-
-
-参考链接
-
-1. [深度学习笔记 - 102 - 回归模型](https://www.jianshu.com/p/be9834f3c3fe)
-2. https://github.com/llSourcell/linear_regression_demo/blob/master/brain_body.txt
-3. https://www.jianshu.com/p/cd5a929bec33
-
-
-
-
-
-
-1. [城市公交聚合支付一体收费终端](http://www.slzrsz.com/show-22-303.html)
-2. https://wenku.baidu.com/view/afcdb9783a3567ec102de2bd960590c69ec3d8fa.html
-3. https://wenku.baidu.com/view/ce1fbbfb04a1b0717fd5ddfc.html?rec_flag=default&mark_pay_doc=0&mark_rec_page=1&mark_rec_position=5&mark_rec=view_r_1&clear_uda_param=1
-
-
-
-
-
 -----------------------------------------------
 
 # python   
@@ -152,9 +30,12 @@ python网络数据采集
 
 wordpress   提交文章接口
 
-
-
 https://blog.csdn.net/su_tianbiao/article/details/50622682
+
+
+
+1. [Python爬虫工程师告诉你爬虫应该怎么学，太详细了！](http://baijiahao.baidu.com/s?id=1578594478424685451&wfr=spider&for=pc)
+2. 
 
 
 
@@ -179,6 +60,148 @@ pip install requests
 #### 参考链接
 
 1.[快速上手](http://docs.python-requests.org/zh_CN/latest/user/quickstart.html)
+
+
+
+### T0x05 Python 项目目录结构规范
+
+1. 良好的项目结构和良好的编码风格 对于项目质量十分重要
+
+
+
+
+
+#### 目录结构约定
+
+```
+Foo/
+|-- bin/
+|   |-- foo
+|
+|-- foo/
+|   |-- tests/
+|   |   |-- __init__.py
+|   |   |-- test_main.py
+|   |
+|   |-- __init__.py
+|   |-- main.py
+|
+|-- docs/
+|   |-- conf.py
+|   |-- abc.rst
+|
+|-- setup.py
+|-- requirements.txt
+|-- README
+```
+
+
+
+1. `bin/`: 存放项目的一些可执行文件，文件名可自定义。
+2. `foo/`: 项目的所有源代码。(1) 源代码中的所有模块、包都应该放在此目录。不要置于顶层目录。(2) 其子目录`tests/`存放单元测试代码； (3) 程序的入口最好命名为`main.py`。
+3. `docs/`: 存放一些文档。
+4. `setup.py`: 安装、部署、打包的脚本。
+5. `requirements.txt`: 存放软件依赖的外部Python包列表。
+6. `README`: 项目说明文件。
+
+#### Readme.md内容说明
+
+每个项目都应该有的一个文件，简要描述该项目的信息。
+
+主要说明以下几个事项:
+
+1. 软件定位，软件的基本功能。
+2. 运行代码的方法: 安装环境、启动命令等。
+3. 简要的使用说明。
+4. 代码目录结构说明，更详细点可以说明软件的基本原理。
+5. 常见问题说明。
+
+
+
+可以参考Redis源码中[Readme](https://github.com/antirez/redis#what-is-redis)的写法，这里面简洁但是清晰的描述了Redis功能和源码结构。
+
+
+
+#### setup.py
+
+
+
+1. `setup.py`来管理代码的打包、安装、部署问题。
+2. 业界标准的写法是用Python流行的打包工具[setuptools](https://pythonhosted.org/setuptools/setuptools.html#developer-s-guide)来管理这些事情。这种方式普遍应用于开源项目中
+3. 一个项目一定要有一个安装部署工具，能快速便捷的在一台新机器上将环境装好、代码部署好和将程序运行起来。
+4. setup.py可以将这些事情自动化起来，提高效率、减少出错的概率。"复杂的东西自动化，能自动化的东西一定要自动化。"是一个非常好的习惯。
+
+
+
+可以参考   flask是如何写的: [setup.py](https://github.com/mitsuhiko/flask/blob/master/setup.py)
+
+
+
+#### requirements.txt
+
+这个文件存在的目的是:
+
+1. 方便开发者维护软件的包依赖。将开发过程中新增的包添加进这个列表中，避免在`setup.py`安装依赖时漏掉软件包。
+2. 方便读者明确项目使用了哪些Python包。
+
+这个文件的格式是每一行包含一个包依赖的说明，通常是`flask>=0.10`这种格式，要求是这个格式能被`pip`识别，这样就可以简单的通过 `pip install -r requirements.txt`来把所有Python包依赖都装好了。具体格式说明： [点这里](https://pip.readthedocs.org/en/1.1/requirements.html)。
+
+ 
+
+#### 关于配置文件的使用方法
+
+注意，在上面的目录结构中，没有将`conf.py`放在源码目录下，而是放在`docs/`目录下。
+
+很多项目对配置文件的使用做法是:
+
+1. 配置文件写在一个或多个python文件中，比如此处的conf.py。
+2. 项目中哪个模块用到这个配置文件就直接通过`import conf`这种形式来在代码中使用配置。
+
+这种做法我不太赞同:
+
+1. 这让单元测试变得困难（因为模块内部依赖了外部配置）
+2. 另一方面配置文件作为用户控制程序的接口，应当可以由用户自由指定该文件的路径。
+3. 程序组件可复用性太差，因为这种贯穿所有模块的代码硬编码方式，使得大部分模块都依赖`conf.py`这个文件。
+
+所以，我认为配置的使用，更好的方式是，
+
+1. 模块的配置都是可以灵活配置的，不受外部配置文件的影响。
+2. 程序的配置也是可以灵活控制的。
+
+能够佐证这个思想的是，用过nginx和mysql的同学都知道，nginx、mysql这些程序都可以自由的指定用户配置。
+
+所以，不应当在代码中直接`import conf`来使用配置文件。上面目录结构中的`conf.py`，是给出的一个配置样例，不是在写死在程序中直接引用的配置文件。可以通过给`main.py`启动参数指定配置路径的方式来让程序读取配置内容。当然，这里的`conf.py`你可以换个类似的名字，比如`settings.py`。或者你也可以使用其他格式的内容来编写配置文件，比如`settings.yaml`之类的。
+
+
+
+#### “_init__.py” 文件的使用
+
+
+
+1."__ init __.py"的在文件夹中，可以使文件夹变为一个python模块，python的每个模块对应的包中都有一个__init__.py文件的存在
+
+2.通常__init__.py文件为空，但是我们还可以为它增加其他的功能，我们在导入一个模块时候（也叫包），实际上导入的是这个模块的__init__.py文件。我们可以在__init__.py导入我们需要的模块，不需要一个个导入
+
+3._init__.py 中还有一个重要的变量，叫做 __all__。我们有时会使出一招“全部导入”，也就是这样：from PackageName import **，这时 import 就会把注册在包 __init__.py 文件中 __all__ 列表中的子模块和子包导入到当前作用域中来。比如：*
+
+*#文件 __init__.py*
+
+```
+__all__ = ["Module1", "Module2", "subPackage1", "subPackage2"]
+```
+
+
+
+
+
+#### 参考链接
+
+1. [Python学习-软件目录结构规范](https://www.cnblogs.com/Ian-learning/p/8366634.html)
+2. [Open Sourcing a Python Project the Right Way](https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way)
+
+
+
+
 
 ### 0x04  python2  和python3 的主要区别
 
