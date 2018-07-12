@@ -36,7 +36,93 @@ http://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.0
 
 
 
+------
 
+
+
+### android 底部导航栏框架
+
+#### BottomNavigation
+
+https://github.com/Ashok-Varma/BottomNavigation
+
+#### BottomNavigationViewEx
+
+[BottomNavigationViewEx](https://github.com/ittianyu/BottomNavigationViewEx) 
+
+
+
+参考链接
+
+1. [五种方式实现Android底部导航栏](https://blog.csdn.net/student9128/article/details/53435737)
+
+
+
+
+
+
+
+
+
+布局文件
+
+
+
+### 侧滑菜单DrawerLayout
+
+1. 在android support.v4 中有一个抽屉视图控件DrawerLayout。
+2. 使用这个控件，可以生成通过在屏幕上水平滑动打开或者关闭菜单，能给用户一个不错的体验效果。
+3. DrawerLayout分为侧边菜单和主内容区两部分，侧边菜单可以根据手势展开与隐藏，主内容区的部分可以随着菜单的点击而变化。DrawerLayout其实是一个控件，跟LinearLayout差不多，直接使用即可。
+
+属性
+
+drawerPosition：`指定 drawer 将从屏幕的一侧滑动。`
+
+drawerWidth :`指定 drawer 的宽度，即从窗口的边缘拉到视图更精确的宽度。`
+
+keyboardDismissMode :`确定键盘是否响应拖动被驳回。 `
+
+```
+'none' (默认值), 拖动不影响键盘。
+'on-drag', 拖动开始，键盘被驳回。
+```
+
+onDrawerClose :`导航视图关闭时调用函数。`
+
+onDrawerOpen :`导航视图打开时调用函数。`
+
+onDrawerSlide ：`与导航视图交互时调用函数。`
+
+onDrawerStateChanged ：`当 Drawer 状态发生变化时调用函数，drawer 有 3 种状态: `
+
+```
+ idle -- 表示与导航视图没有交互
+ dragging -- 表示目前有与导航视图的交互 
+ settling -- 表示有与导航视图的交互，并且导航视图正在的关闭或打开。
+```
+
+renderNavigationView ：`导航图将被渲染到屏幕的一侧，并且可以拉出。`
+
+
+
+#### CoordinatorLayout   
+
+CoordinatorLayout是一个“加强版”的 FrameLayout，它主要有两个用途：
+ （1） 用作应用的顶层布局管理器
+ （2） 通过为子View指定 behavior 实现自定义的交互行为。
+ 在我们做 Material Design 风格的app时通常都使用 CoordinatorLayout 作为布局的根节点，以便实现特定的UI交互行为
+
+ 
+
+FrameLayout(帧布局)可以说是六大布局中最为简单的一个布局,这个布局直接在屏幕上开辟出一块空白的区域,当我们往里面添加控件的时候,会默认把他们放到这块区域的左上角,而这种布局方式却没有任何的定位方式,所以它应用的场景并不多;帧布局的大小由控件中最大的子控件决定,如果控件的大小一样大的话,那么同一时刻就只能看到最上面的那个组件!后续添加的控件会覆盖前一个! 
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -400,6 +486,24 @@ Fragment每个生命周期方法的意义、作用
 
 
 ![](http://odsdowehg.bkt.clouddn.com/1354170682_3824.png)
+
+
+
+
+
+
+
+![](https://upload-images.jianshu.io/upload_images/2952813-0f4f821975d72317.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/640)
+
+
+
+
+
+
+
+参考链接
+
+1. [Android Fragment 非常详细的一篇](https://www.jianshu.com/p/11c8ced79193)
 
 
 
