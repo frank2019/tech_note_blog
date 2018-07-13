@@ -1,18 +1,18 @@
+## TODO
+
+
+
+1. [ConcurrentLinkedQueue使用和方法介绍](https://www.cnblogs.com/yangzhenlong/p/8359875.html)
+2. [一线互联网常见的14个Java面试题，你颤抖了吗程序员  ](http://group.jobbole.com/33336/?utm_source=python.jobbole.com&utm_medium=article-related-group-topic)         
+3. [java基础思维导图，让java不再难懂](https://www.jianshu.com/p/6a589ffbf34c)
 
 
 
 
-[ConcurrentLinkedQueue使用和方法介绍](https://www.cnblogs.com/yangzhenlong/p/8359875.html)
-
-[一线互联网常见的14个Java面试题，你颤抖了吗程序员  ](http://group.jobbole.com/33336/?utm_source=python.jobbole.com&utm_medium=article-related-group-topic)         
 
 
 
-
-
-##
-
-## java语言
+# java语言
 
 ### 反射机制及应用场景
 
@@ -70,11 +70,13 @@
 
 
 
+
+
 ----
 
 
 
-## Spring MVC
+# Spring MVC
 
 
 
