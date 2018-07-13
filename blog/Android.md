@@ -1,6 +1,6 @@
 ------
 
-## TODO
+# TODO
 
 1. 
 
@@ -10,9 +10,280 @@
 
 
 
+# Android进阶
 
 
 
+### Snackbar
+
+https://www.jianshu.com/p/487dca941e15
+
+### SwipeRefreshLayout及其扩展使用
+
+Google官方Widget,实现下拉刷新的效果。该控件继承自ViewGroup在support-v4兼容包下，需support library的版本到19.1以上。 
+
+#### 特点
+
+- 在竖直滑动时想要刷新页面可以用SwipeRefreshLayout来实现。它通过设置OnRefreshListener来监听界面的滑动从而实现刷新。也可以通过一些方法来设置SwipeRefreshLayout是否可以刷新。如：setRefreshing(true)，展开刷新动画。setRefreshing(false)，取消刷新动画。setEnable(false)下拉刷新将不可用。
+- 使用这个布局要想达到刷新的目的，需要在这个布局里包裹可以滑动的子控件，如ListView等，并且只能有一个子控件。
+
+
+
+```java
+/**
+ * The SwipeRefreshLayout should be used whenever the user can refresh the
+ * contents of a view via a vertical swipe gesture. The activity that
+ * instantiates this view should add an OnRefreshListener to be notified
+ * whenever the swipe to refresh gesture is completed. The SwipeRefreshLayout
+ * will notify the listener each and every time the gesture is completed again;
+ * the listener is responsible for correctly determining when to actually
+ * initiate a refresh of its content. If the listener determines there should
+ * not be a refresh, it must call setRefreshing(false) to cancel any visual
+ * indication of a refresh. If an activity wishes to show just the progress
+ * animation, it should call setRefreshing(true). To disable the gesture and
+ * progress animation, call setEnabled(false) on the view.
+ * <p>
+ * This layout should be made the parent of the view that will be refreshed as a
+ * result of the gesture and can only support one direct child. This view will
+ * also be made the target of the gesture and will be forced to match both the
+ * width and the height supplied in this layout. The SwipeRefreshLayout does not
+ * provide accessibility events; instead, a menu item must be provided to allow
+ * refresh of the content wherever this gesture is used.
+ * </p>
+ */
+```
+
+#### 主要方法
+
+
+
+- isRefreshing() 
+   判断当前的状态是否是刷新状态。
+- setColorSchemeResources(int… colorResIds) 
+   设置下拉进度条的颜色主题，参数为可变参数，并且是资源id，最多设置四种不同的颜色，每转一圈就显示一种颜色。
+- setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener listener) 
+   设置监听，需要重写onRefresh()方法，顶部下拉时会调用这个方法，在里面实现请求数据的逻辑，设置下拉进度条消失等等。
+- setProgressBackgroundColorSchemeResource(int colorRes) 
+   设置下拉进度条的背景颜色，默认白色。
+- setRefreshing(boolean refreshing) 
+   设置刷新状态，true表示正在刷新，false表示取消刷新。
+
+
+
+#### 参考链接
+
+1. [SwipeRefreshLayout及其扩展使用](https://blog.csdn.net/huaxun66/article/details/74614792)
+
+
+
+## Todo0x01 MVP模式
+
+Presenter [prɪˈzentər]
+
+#### 1、MVP模式是什么
+
+1. MVP  全称：Model-View-Presenter ；MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方；
+2. Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。
+
+
+
+![](https://sfault-image.b0.upaiyun.com/322/908/3229080209-56fde71591288_articlex)
+
+#### 2、MVP模式与MVC的比较
+
+**MVC结构示意图**
+
+![](assets\mvc.png)
+
+
+
+**MVP结构**
+
+
+
+![](assets/mvp.png)
+
+
+
+**主要区别**
+
+1. **Activity职责不同**，Activity在MVP中是View层，在MVC中是Controller层，这是MVC和MVP很主要的一个区别，可以说Android从MVC转向MVP开发也主要是优化Activity的代码，避免Activity的代码臃肿庞大。 
+
+2. **View层不同**，MVC的View层指的是XML布局文件或者是用Java自定义的View，MVP的View层是Activity或者Fragment。使用传统的MVC，其中的View，对应的是各种Layout布局文件，但是这些布局文件中并不像Web端那样强大，能做的事情非常有限。MVP的View层Activity在实际项目中，随着逻辑的复杂度越来越大，Activity臃肿的缺点仍然体现出来了，因为Activity中还是充满了大量与View层无关的代码，比如各种事件的处理派发，就如MVC中的那样View层和Controller代码耦合在一起无法自拔。 
+
+3. **控制层不同**，MVC的控制层是Activity，或者是Fragment，Controller对应的是Activity，而Activity中却又具有操作UI的功能，我们在实际的项目中也会有很多UI操作在这一层，也做了很多View中应该做的事情，当然Controller层Activity中也包含Controller应该做的事情，比如各种事件的派发回调，而且在一层中我们会根据事件再去调用Model层操作数据，所以这种MVC的方式在实际项目中，Activity所在的Controller是非常重的，各层次之间的耦合情况也比较严重，不方便单元测试。MVP的控制层是Presenter，里面没有很多的实际东西，主要是做Model和View层的交互。
+
+   **关系链不同**，MVP中Model层与View是没有关系的，彼此不会通讯和操作，Model与View的通讯都是Presenter层来传达的。但是在MVC中，Model层和View是曾在交互的。比如我们自定义的View控件里面肯定是要使用Model的数据的，View也要根据不同的Model数据做出不同的展现！这点尤其是体现在自定义的View中，自定义View需要设置数据，用户操作了自定义控件需要改变数据，View要操作Model怎么办？有人说把Controller传到自定义的View啊，现实是不可能没一个自定义View都去持有Controller的引用，其实在MVP中就不会这么尴尬，接口就可以完成。
+
+   **适用范围不同**，在Android中，MVP和MVC都用自己的适用情况，使用MVP可以更好的解耦三大模块，模块之间比较清晰，也很方便使用MVP来组件化架构整体项目。但是MVC也是有用武之地的，在组件化的Module或者中间件我们可以使用MVC来做，Module或者中间件不会存在很复杂的View层，使用MVC可以更加方便我们实现功能。
+
+   **交互方式不同**，MVP中通讯交互基本都是通过接口的，MVC中的通讯交互很多时候都是实打实的调用对象的方法，简单粗暴！
+
+   **实现方法不同**  ，MVC和MVP的Model几乎一样的，都是处理数据，只要不在Activity或者Fragment中请求数据，其他的所有控制都放在Activity或者Fragment中，这样写就基本是MVC的模式，这样写不麻烦，但是很容易把Activity写出上万行代码。用MVP的时候我们需要写很多View和Presenter接口来实现模块之间的通讯，会增加很多类。
+
+
+
+### **网络流行对比段子：**
+
+**（1）相同点：** 
+     **优点：** 
+         1.降低耦合度 
+         2.模块职责划分明显 
+         3.利于测试驱动开发 
+         4.代码复用 
+         5.隐藏数据 
+         6.代码灵活性 
+     **缺点：** 
+             额外的代码复杂度及学习成本。
+
+**（2）不同点：** 
+     **MVP模式：** 
+         1.View不直接与Model交互，而是通过与Presenter交互来与Model间接交互 
+         2.Presenter与View的交互是通过接口来进行的，更有利于添加单元测试 
+         3.通常View与Presenter是一对一的，但复杂的View可能绑定多个Presenter来处理逻辑，业务相似的时候也可以多同个View共享一个Presenter。 
+     **MVC模式：** 
+         1.View可以与Model直接交互 
+         2.Controller是基于行为的，并且可以被多个View共享 
+         3.Controller可以负责决定显示哪个View
+
+不管Activity在MVP中是View层，还是Activity在MVC中是Controller层，都无法避免Activity的代码量越来越大。我们可以根据项目的实际情况尽量优化，MVP和MVC只是一种编码思想，**再说再牛逼的架构都抵不过产品的傻逼需求！**
+
+#### 示例场景应用分析
+
+为充分学习这个架构，下面分析一个场景使用mvp架构如何设计
+
+需求
+
+一个番茄时钟TODO的主操作页面，响应以下操作
+
+1. 增加 修改一个任务
+2. 引导到其他界面 如： 任务详情，用户历史任务时间效率分析界面
+3. 提交一次番茄时钟
+
+##### 使用MVP设计
+
+
+
+![](assets/todo_mvp.png)
+
+
+
+Fragment作为View，View和Presenter通过Activity来进行关联，Presenter对数据的调用是通过TasksRepository来完成的，而TasksRepository维护着它自己的数据源和实现。 
+
+因此这个整体是这样一个对应关系
+
+- Model ：   TasksRepository   以及具体的数据获取部分
+- presenter：定义数据的操作的具体实现，为View响应操作
+- View：  通过Fragment 继承接口契约类的View接口实现
+
+辅助的模块
+
+1. Activity在项目中是一个全局的控制者，负责创建view以及presenter实例，并将二者联系起来。 而presenter负责实例化Model  即TasksRepository   
+2. 契约类（接口） public interface TasksContract    使用契约类来统一管理view与presenter的所有的接口，这种方式使得view与presenter中有哪些功能，一目了然，维护起来也很方便 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 
+
+
+
+
+
+
+
+
+
+基本思想：
+
+MVP把Activity中的UI逻辑抽象成View接口，把业务逻辑抽象成Presenter接口，Model类还是原来的Model,实体类，用于保存实例数据 。
+
+
+
+在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，
+
+Presenter完全把Model和View进行了分离，主要的程序逻辑在Presenter里实现。而且，Presenter与具体的View是没有直接关联的，而是通过接口进行交互，从而使得在变更View时候可以保持Presenter的不变，可以多次复用。
+
+在MVP里，应用程序的逻辑主要在Presenter来实现，其中的View是很薄的一层，只应该有简单的Set/Get的方法，用户输入和设置界面显示的内容，除此就不应该有更多的内容，绝不容许直接访问Model。
+
+MVP主要解决就是把逻辑层抽出来成P层，要是遇到需求逻辑上的更改就可以只需要修改P层了或者遇到逻辑上的大改我们可以直接重写一个P也可以，很多开发人员把所有的东西都写在了Activity/Fragment里面这样一来遇到频繁改需求或者逻辑越来越复杂的时候，Activity /Fragment里面就会出现过多的混杂逻辑导致出错，所以MVP模式对于APP来对控制逻辑和UI的解耦来说是一个不错的选择。
+
+#### 举例：
+
+假设这是一个登陆界面
+
+Presenter中实现：  逻辑方面的功能，如对账号密码的是否为空判断以及正则表达式判断
+
+View负责显示：
+
+1. 让ProgressDialog显示出来，
+
+2. 显示主界面
+
+3. 提示失败Toast。
+
+   ​
+
+model层中：   网络请求，
+
+
+
+![](https://sfault-image.b0.upaiyun.com/376/202/3762022390-56fde71603d5d_articlex)
+
+
+
+上面一张简单的MVP模式的UML图，从图中可以看出，使用MVP，至少需要经历以下步骤：
+
+1. 创建IPresenter接口，把所有业务逻辑的接口都放在这里，并创建它的实现PresenterCompl（在这里可以方便地查看业务功能，由于接口可以有多种实现所以也方便写单元测试）
+2. 创建IView接口，把所有视图逻辑的接口都放在这里，其实现类是当前的Activity/Fragment
+3. 由UML图可以看出，Activity里包含了一个IPresenter，而PresenterCompl里又包含了一个IView并且依赖了Model。Activity里只保留对IPresenter的调用，其它工作全部留到PresenterCompl中实现
+4. Model并不是必须有的，但是一定会有View和Presenter
+
+通过上面的介绍，MVP的主要特点就是把Activity里的许多逻辑都抽离到View和Presenter接口中去，并由具体的实现类来完成。这种写法多了许多IView和IPresenter的接口，在某种程度上加大了开发的工作量，刚开始使用MVP的小伙伴可能会觉得这种写法比较别扭，而且难以记住。其实一开始想太多也没有什么卵用，只要在具体项目中多写几次，就能熟悉MVP模式的写法，理解TA的意图，以及享♂受其带来的好处。
+
+
+
+
+
+#### 参考链接
+
+1. [两张图看懂Android开发中MVC与MVP的区别](https://blog.csdn.net/u010072711/article/details/77132403)
+2. [Android App的设计架构：MVC,MVP,MVVM与架构经验谈](https://www.cnblogs.com/wytiger/p/5305087.html)
+3. [Android官方MVP架构项目解析](https://www.jianshu.com/p/389c9ae1a82c)
+
+
+
+
+
+
+
+1. [Android MVP Pattern](https://www.cnblogs.com/changyiqiang/p/6044618.html)
+2. [最适合android的MVP模式](https://www.jianshu.com/p/bbb3b77d47eb)
+3. https://github.com/googlesamples/android-architecture
+4. 
+
+
+
+
+
+
+
+
+
+# 历史文章
+
+
+
+------
 
 
 
@@ -450,7 +721,56 @@ find  ./  -name  "*.java" |xargs  -i  -n 1  sed -i  's/com.example.android.archi
 <!--android:background="?attr/colorPrimary"-->
 ```
 
-### 
+### [注册JNI函数的两种方式
+
+1. [注册JNI函数的两种方式 ](https://blog.csdn.net/wwj_748/article/details/52347341)
+
+
+
+## Activity的四种启动模式
+
+
+
+1. standard：默认启动模式，每次启动Activity时都会创建一个新的Actiity，并放入任务栈。
+2. singleTop：栈顶复用，当任务栈的栈顶正好存在该Activity的实例，就会重用该实例，否则重新创建新的实例放入栈顶。
+3. singleTask：全栈复用，当任务栈中存在该Activity的实例，就会重用该实例（会调用实例的onNewIntent）。重用时，会让该实例回到栈顶，在他之上的实例将会被移除任务栈。
+4. singleInstance：将启动的Activity放在一个新创建的任务栈中，并让多个应用共享栈中该Activity的实例。
+
+ 
+
+ 当一个应用中的Activity供多种方式调用启动，但是希望任务栈中只有一个Activity实例。这样就需要将这个Activity launchMode设置为singleTask。第一次打开会执行onCreate--onStart--onResume，之后如果该Activity没有被destroy，重新打开执行onNewIntent--onRestart--onStart--onResume。
+
+​        当调用到onNewIntent(intent)的时候，需要在onNewIntent()中使用setIntent(intent)赋值给Activity的Intent.否则，后续的getIntent()都是得到老的Intent。
+
+#### Activity 生命周期
+
+打开一个Activity：onCreate---onStart--onResume
+
+back键返回：onPause--onStop--onDestory
+
+按home键或者打开其他Activity：onPause--onStop   再次打开  onReStart--onStart--onResume
+
+打开Activity样式的弹框：onPause
+
+Activity中打开一个普通的对话框，不会对该Activity的生命周期有影响。
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
 
 
 
@@ -1186,77 +1506,6 @@ Test Pyramid理论基本大意是，单元测试是基础，是我们应该花�
 1. [RecyclerView为每个item添加点击事件](http://www.jcodecraeer.com/plus/view.php?aid=7881)
 
 1. 
-
-
-
-### 0x02 MVP模式
-
-1. MVP  全称：Model-View-Presenter ；MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方；
-2. Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。
-
-
-
-![](https://sfault-image.b0.upaiyun.com/322/908/3229080209-56fde71591288_articlex)
-
-基本思想：
-
-MVP把Activity中的UI逻辑抽象成View接口，把业务逻辑抽象成Presenter接口，Model类还是原来的Model,实体类，用于保存实例数据 。
-
-
-
-在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，
-
-Presenter完全把Model和View进行了分离，主要的程序逻辑在Presenter里实现。而且，Presenter与具体的View是没有直接关联的，而是通过接口进行交互，从而使得在变更View时候可以保持Presenter的不变，可以多次复用。
-
-在MVP里，应用程序的逻辑主要在Presenter来实现，其中的View是很薄的一层，只应该有简单的Set/Get的方法，用户输入和设置界面显示的内容，除此就不应该有更多的内容，绝不容许直接访问Model。
-
-MVP主要解决就是把逻辑层抽出来成P层，要是遇到需求逻辑上的更改就可以只需要修改P层了或者遇到逻辑上的大改我们可以直接重写一个P也可以，很多开发人员把所有的东西都写在了Activity/Fragment里面这样一来遇到频繁改需求或者逻辑越来越复杂的时候，Activity /Fragment里面就会出现过多的混杂逻辑导致出错，所以MVP模式对于APP来对控制逻辑和UI的解耦来说是一个不错的选择。
-
-#### 举例：
-
-假设这是一个登陆界面
-
-Presenter中实现：  逻辑方面的功能，如对账号密码的是否为空判断以及正则表达式判断
-
-View负责显示：
-
-1. 让ProgressDialog显示出来，
-
-2. 显示主界面
-
-3. 提示失败Toast。
-
-   ​
-
-model层中：   网络请求，
-
-
-
-![](https://sfault-image.b0.upaiyun.com/376/202/3762022390-56fde71603d5d_articlex)
-
-
-
-上面一张简单的MVP模式的UML图，从图中可以看出，使用MVP，至少需要经历以下步骤：
-
-1. 创建IPresenter接口，把所有业务逻辑的接口都放在这里，并创建它的实现PresenterCompl（在这里可以方便地查看业务功能，由于接口可以有多种实现所以也方便写单元测试）
-2. 创建IView接口，把所有视图逻辑的接口都放在这里，其实现类是当前的Activity/Fragment
-3. 由UML图可以看出，Activity里包含了一个IPresenter，而PresenterCompl里又包含了一个IView并且依赖了Model。Activity里只保留对IPresenter的调用，其它工作全部留到PresenterCompl中实现
-4. Model并不是必须有的，但是一定会有View和Presenter
-
-通过上面的介绍，MVP的主要特点就是把Activity里的许多逻辑都抽离到View和Presenter接口中去，并由具体的实现类来完成。这种写法多了许多IView和IPresenter的接口，在某种程度上加大了开发的工作量，刚开始使用MVP的小伙伴可能会觉得这种写法比较别扭，而且难以记住。其实一开始想太多也没有什么卵用，只要在具体项目中多写几次，就能熟悉MVP模式的写法，理解TA的意图，以及享♂受其带来的好处。
-
-
-
-
-
-参考链接
-
-
-
-1. [Android MVP Pattern](https://www.cnblogs.com/changyiqiang/p/6044618.html)
-2. [最适合android的MVP模式](https://www.jianshu.com/p/bbb3b77d47eb)
-3. https://github.com/googlesamples/android-architecture
-4. [Android官方MVP架构项目解析](https://www.jianshu.com/p/389c9ae1a82c)
 
 
 
