@@ -2,15 +2,19 @@
 
 # TODO
 
-1. 
+1. [《Android虚拟机》--内存分配策略](https://www.cnblogs.com/anni-qianqian/p/7683072.html)
 
 
 
 ----
 
+## 设计模式
+
 ### 单例模式 Singleton
 
 #### 单例模式的特点
+
+**优点**
 
 单例模式在内存中只有一个实例
 
@@ -18,22 +22,193 @@
 2. 可以避免对资源的多重占用
 3. 单例模式可以在系统设置全局访问点，优化和共享资源的访问。
 
-缺点
+**缺点**
 
 1. 一般没有接口 扩展困难，若要扩展内需要修改代码。 （这与开闭原则时对立的）
 2. 单例模式如果持有Contex 那么容易引发内存泄漏，此时要注意传递给单例对象最好是 ApplicationContext。
 
+
+
+#### 单例模式设计的时候要考虑的问题
+
+1. 保证只有一个实例  使构造函数为private
+2. 同步。  保证并发调用，返回的是同一个实例
+3. 实例延时创建，尽可能使用的时候才进行创建。
+4. 反序列化时的情况
+
+
+
 #### 单例模式实现的几种方式
-
-
 
 ##### 1饿汉模式
 
+```java
+//饿汉式
+public class Singleton1 {
+    private final static Singleton1 INSTANCE =new Singleton1();
+
+    private Singleton1(){
+
+    }
+
+    public Singleton1 getInstance(){
+        return INSTANCE;
+    }
+
+}
+```
+
+
+
+存在的问题： 在类加载时就完成了初始化，所以类加载比较慢，但获取对象的速度快 
+
+
+
+##### 2.懒汉模式
+
+```java
+//懒汉式
+public class Singleton2 {
+
+    private Singleton2 instance;
+
+    public synchronized Singleton2 getInstance(){
+        if(instance == null){
+            instance =  new Singleton2();
+        }
+        return instance;
+    }
+
+    private  Singleton2(){
+
+    }
+}
+
+```
+
+存在的问题：   同步开销比较大
+
+##### 3.DCL模式
+
+```java
+
+public class SingletonDCL {
+
+    private SingletonDCL instance;
+
+    private SingletonDCL(){}
+
+    public SingletonDCL getInstance(){
+
+        if(instance == null){
+            synchronized (SingletonDCL.class){
+                if(instance == null){
+                    instance =  new SingletonDCL();
+                }
+            }
+        }
+
+        return instance;
+
+    }
+}
+```
 
 
 
 
 
+##### 4.静态内部类方式实现
+
+```java
+public class Singleton4 {
+
+    private static class SingletonHolder{
+        final static Singleton4 instance =  new Singleton4();
+    }
+
+    private Singleton4(){
+    }
+
+    public Singleton4 getInstance(){
+        return SingletonHolder.instance;
+    }
+
+    // 防止反序列化获取多个对象的漏洞。
+    // 无论是实现Serializable接口，或是Externalizable接口，当从I/O流中读取对象时，readResolve()方法都会被调用到。
+    // 实际上就是用readResolve()中返回的对象直接替换在反序列化过程中创建的对象。
+    private Object readResolve() throws ObjectStreamException {
+        return SingletonHolder.instance;
+    }
+
+}
+
+```
+
+
+
+这种方式同样利用了classloder的机制来保证初始化instance时只有一个线程，它跟第三种和第四种方式不同的是（很细微的差别）：第三种和第四种方式是只要Singleton类被装载了，那么instance就会被实例化（没有达到lazy loading效果），而这种方式是Singleton类被装载了，instance不一定被初始化。因为SingletonHolder类没有被主动使用，只有显示通过调用getInstance方法时，才会显示装载SingletonHolder类，从而实例化instance。 
+
+
+
+
+
+##### 5.枚举方式
+
+```java
+public enum  Singleton5 {
+    INSTANCE;
+    public void doSth(){
+
+    }
+}
+```
+
+
+
+简单，线程安全，
+
+但是  用法给用class实现的略有不同
+
+
+
+##### 6.使用容器map实现
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class SingletonManager {
+    private static Map<String,Object>  objectMap = new HashMap<String,Object>();
+
+    private SingletonManager(){}
+
+    public static void registerService(String key,Object instance){
+        if(!objectMap.containsKey(key)){
+            objectMap.put(key,instance);
+        }
+    }
+
+    public static  Object getService(String key){
+        return objectMap.get(key);
+    }
+}
+```
+
+看使用场景
+
+#### 总结
+
+平常推荐DCL模式  静态内部类模式
+
+
+
+
+
+#### 参考链接
+
+1. [单例模式的漏洞，通过反射和序列化、反序列化来破解单例，以及如何避免这些漏洞](https://www.cnblogs.com/shangxinfeng/p/6754345.html)
 
 
 
@@ -48,6 +223,18 @@
 参考链接
 
 1. [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)
+
+
+
+### 个人页面的设置
+
+
+
+https://github.com/lygttpod/SuperTextView
+
+
+
+
 
 
 
