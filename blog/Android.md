@@ -10,6 +10,18 @@
 
 
 
+# Android 开源项目
+
+
+
+### **SmoothProgressBar**  
+
+参考链接
+
+1. [SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)
+
+
+
 # Android进阶
 
 
@@ -76,6 +88,128 @@ Google官方Widget,实现下拉刷新的效果。该控件继承自ViewGroup在s
 
 
 
+
+
+
+
+### 0x03 Toolbar的使用
+
+
+
+```java
+public class MainActivity extends AppCompatActivity {
+ 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+ 
+        // Logo
+        toolbar.setLogo(R.mipmap.push_4);
+ 
+        // 主标题
+        toolbar.setTitle("Title");
+ 
+        // 副标题
+        toolbar.setSubtitle("Sub Title");
+ 
+        //设置toolbar
+        setSupportActionBar(toolbar);
+ 
+        //左边的小箭头（注意需要在setSupportActionBar(toolbar)之后才有效果）
+        toolbar.setNavigationIcon(R.mipmap.back);
+ 
+        //菜单点击事件（注意需要在setSupportActionBar(toolbar)之后才有效果）
+        toolbar.setOnMenuItemClickListener(onMenuItemClick);
+    }
+}
+```
+
+
+
+参考链接
+
+1. [关于Toolbar你需要知道的各种sao姿势。（操作篇）](https://www.jianshu.com/p/42400092f848)
+2. [Toolbar的简单使用](https://blog.csdn.net/monalisatearr/article/details/78415585)
+
+
+
+
+
+
+
+
+
+### 0x02 Fragment、FragmentTransaction
+
+
+
+#### android.support.v4.app.Fragment和android.app.Fragment区别
+
+1. 最低支持版本不同
+    android.app.Fragment 兼容的最低版本是android:minSdkVersion="11" 即3.0版
+    android.support.v4.app.Fragment 兼容的最低版本是android:minSdkVersion="4" 即1.6版
+
+2. fragment android.support.v4.app.Fragment 需要引入包android-support-v4.jar 
+
+3.  FragmentManager 在Activity中获取的方法不同 
+
+   android.app.Fragment   需继承Activity ，使用getFragmentManager() 
+
+   android.support.v4.app.Fragment   需要继承android.support.v4.app.FragmentActivity  使用getSupportFragmentManager ()
+
+4. v4.fragment使用<fragment>标签的时候就 ,Activity 需继承 FragmentActivity  
+
+    
+
+   
+
+    
+
+#### Android Support兼容包 **support-v4**  v7 v13的应用场景
+
+##### **support-v4** 
+
+用在API lever 4(即Android 1.6)或者更高版本之上。它包含了相对更多的内容，而且用的更为广泛，例如：Fragment，NotificationCompat，LoadBroadcastManager，ViewPager，PageTabAtrip，Loader，FileProvider 等
+ Gradle引用方法：
+
+```
+compile 'com.android.support:support-v4:21.0.3'
+```
+
+##### **support-v7**  
+
+ 这个包是为了考虑API level 7(即Android 2.1)及以上版本而设计的，但是v7是要依赖v4这个包的，v7支持了Action Bar以及一些Theme的兼容。  
+
+Gradle引用方法: 
+
+```
+compile 'com.android.support:appcompat-v7:21.0.3'
+```
+
+ 
+
+**support-v13** 
+
+这个包的设计是为了API level 13(即Android 3.2)及更高版本的，一般我们都不常用，平板开发中能用到 
+
+ 
+
+ 
+
+#### 参考链接
+
+1. [Android Fragment动态添加 FragmentTransaction FragmentManager](https://www.cnblogs.com/Claire6649/p/5997632.html)
+2. [android.support.v4.app.Fragment和android.app.Fragment区别](https://www.jianshu.com/p/db28adde1c39)
+
+
+
+
+
+
+
 ## Todo0x01 MVP模式
 
 Presenter [prɪˈzentər]
@@ -105,7 +239,7 @@ Presenter [prɪˈzentər]
 
 
 
-**主要区别**
+MVC和MVP的**主要区别**
 
 1. **Activity职责不同**，Activity在MVP中是View层，在MVC中是Controller层，这是MVC和MVP很主要的一个区别，可以说Android从MVC转向MVP开发也主要是优化Activity的代码，避免Activity的代码臃肿庞大。 
 
