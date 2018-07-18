@@ -8,6 +8,18 @@
 
 ----
 
+## Android UI组件
+
+
+
+### RecyclerView
+
+参考链接
+
+1.[RecyclerView 必知必会](https://mp.weixin.qq.com/s/CzrKotyupXbYY6EY2HP_dA)
+
+
+
 ## 设计模式
 
 ### 单例模式 Singleton
@@ -215,6 +227,22 @@ public class SingletonManager {
 
 
 # Android 开源项目
+
+
+
+
+
+https://yalantis.com/blog/how-we-used-micro-transitions-for-smooth-android-to-do-list-animations/
+
+[安利一波androidView视觉开源控件 每个都值得学习哦](https://mp.weixin.qq.com/s/a2BfSY_VHmMCfquoD_gG9Q)
+
+
+
+### ToDoList
+
+
+
+1. [ToDoList菜单](https://github.com/Yalantis/ToDoList)
 
 
 
