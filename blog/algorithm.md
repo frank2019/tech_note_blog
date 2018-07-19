@@ -22,3 +22,47 @@
 
 1. [Sql语句查询某列A相同值的另一列B最大值的数据](https://www.cnblogs.com/qubernet/p/5810257.html)
 
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+这是我收藏的经典算法网站，对题主或许有用
+有很多游戏开发相关的算法介绍： 
+[http://www.gamedev.net](https://link.zhihu.com/?target=http%3A//www.gamedev.net) 
+[http://theory.stanford.edu/~amitp/GameProgramming](https://link.zhihu.com/?target=http%3A//theory.stanford.edu/%7Eamitp/GameProgramming) 
+[http://www.gamasutra.com](https://link.zhihu.com/?target=http%3A//www.gamasutra.com) 
+[http://www.sudoku.com](https://link.zhihu.com/?target=http%3A//www.sudoku.com) 
+
+俄罗斯方块游戏的算法网站： 
+[http://gforge.inria.fr/projects/mdptetris](https://link.zhihu.com/?target=http%3A//gforge.inria.fr/projects/mdptetris) [http://colinfahey.com/tetris/tetris.html](https://link.zhihu.com/?target=http%3A//colinfahey.com/tetris/tetris.html) 
+
+leetcode，最近很火的算法网站： 
+[http://www.leetcode.com](https://link.zhihu.com/?target=http%3A//www.leetcode.com) 
+
+Topcoder，也很经典，每周都有竞赛，有奖金的： 
+[http://community.topcoder.com/tc](https://link.zhihu.com/?target=http%3A//community.topcoder.com/tc) 
+
+晋中教育网的“信息学竞赛辅导”： 
+[http://www.jzsyz.jzedu.cn/xxjs/suanfa/index.html](https://link.zhihu.com/?target=http%3A//www.jzsyz.jzedu.cn/xxjs/suanfa/index.html) 
+
+ 
+
+http://poj.org/
+
+ 
+
+http://acm.hdu.edu.cn/
+
+ 
+
+http://acm.hust.edu.cn/vjudge/toIndex.action
