@@ -9,21 +9,44 @@
 ## todo
 
 1. [Dubbo架构设计详解](http://shiyanjun.cn/archives/325.html)
+
 2. http://www.itsource.com.cn/thread-5218-1-2.html
+
+3. [spring Boot环境下dubbo+zookeeper的一个基础讲解与示例](https://blog.csdn.net/future_zhangkai/article/details/76660353)
+
+4. # 
 
 第一个 Dubbo 应用
 
 https://developer.qiniu.com/pili/sdk/3919/a-short-video-the-white-paper
 
-
+https://github.com/apache/incubator-dubbo-spring-boot-project
 
 ### SPI 与API的区别
+
+### [SpringMVC和Springboot的区别（网摘）](https://www.cnblogs.com/kouryoushine/p/7872880.html)
+
+spring boot  我理解就是把 spring spring mvc spring data jpa  等等的一些常用的常用的基础框架组合起来，提供默认的配置，然后提供可插拔的设计，就是各种 starter  ，来方便开发者使用这一系列的技术，套用官方的一句话， spring 家族发展到今天，已经很庞大了，作为一个开发者，如果想要使用 spring  家族一系列的技术，需要一个一个的搞配置，然后还有个版本兼容性问题，其实挺麻烦的，偶尔也会有小坑出现，其实蛮影响开发进度， spring boot  就是来解决这个问题，提供了一个解决方案吧，可以先不关心如何配置，可以快速的启动开发，进行业务逻辑编写，各种需要的技术，加入 starter  就配置好了，直接使用，可以说追求开箱即用的效果吧
+
+ 
+
+spring 框架有超多的延伸产品例如 boot security jpa etc... 但它的基础就是 spring 的 ioc 和  aop ioc 提供了依赖注入的容器 aop 解决了面向横切面的编程 然后在此两者的基础上实现了其他延伸产品的高级功能 Spring MVC  呢是基于 Servlet 的一个 MVC 框架 主要解决 WEB 开发的问题 因为 Spring 的配置太复杂了 各种 XML  JavaConfig hin 麻烦 于是懒人改变世界推出了 Spring boot 约定优于配置 简化了 spring 的配置流程
+
+ 
+
+Spring 最初利用“工厂模式”（ DI ）和“代理模式”（ AOP ）解耦应用组件。大家觉得挺好用，于是按照这种模式搞了一个 MVC  框架（一些用 Spring 解耦的组件），用开发 web 应用（ SpringMVC  ）。然后有发现每次开发都要搞很多依赖，写很多样板代码很麻烦，于是搞了一些懒人整合包（ starter ），这套就是 Spring Boot 。
+
+
+
+
 
 
 
 ## T0x02Spring boot Dubbo第一个程序
 
 假设我要开发一个短视频的后台  基于spring boot dubbo  整体该如何设计
+
+
 
 
 
@@ -38,6 +61,68 @@ https://developer.qiniu.com/pili/sdk/3919/a-short-video-the-white-paper
 3. http://start.dubbo.io/
 4. [Spring-boot:5分钟整合Dubbo构建分布式服务](https://www.cnblogs.com/jaycekon/p/SpringBootDubbo.html)
 5. git  clone  https://github.com/dubbo/dubbo-samples
+
+
+
+
+
+#### 安装zookeeper注册中心
+
+
+
+##### 参考链接 
+
+1. [下载地址](http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.13/)
+2. [ZooKeeper的部署以及简单使用](https://www.cnblogs.com/angelhu123/p/6707983.html) 
+3. https://www.cnblogs.com/angelhu123/p/6707983.html
+
+
+
+
+
+#### Spring boot Dubbo HelloWorld
+
+
+
+springboot内置了tomcat服务器，我们在开发时，启动web项目不用再把项目部署到tomcat中了，只需要运行main方法，就可以搞定了，就和我们启动java application一样。 
+
+https://www.linuxidc.com/Linux/2017-03/142101.htm
+
+
+
+http://start.dubbo.io/
+
+
+
+1. [创建一个简单的springboot项目](https://jingyan.baidu.com/article/48206aea8b3570216bd6b310.html)
+
+
+
+创建一个简单的Springboot helloworld项目
+
+1.  new -> project -> Spring initializr
+2. default : https://start.spring.io
+3. 创建项目
+4. 新建一个控制器 
+
+```java
+package com.helloworld;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+    @RequestMapping("/")
+    public String Hello() {
+        return "Hello SpringBoot!";
+    }
+
+    
+}
+```
 
 
 

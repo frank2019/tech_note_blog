@@ -3,8 +3,8 @@
 # TODO
 
 1. [《Android虚拟机》--内存分配策略](https://www.cnblogs.com/anni-qianqian/p/7683072.html)
-
-
+2. [Android内存泄漏终极解决篇（下）](https://www.jb51.net/article/77899.htm)
+3. [Android NDK开发——C代码回调Java代码callback](https://blog.csdn.net/gnnulzy/article/details/78031311)
 
 ----
 

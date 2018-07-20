@@ -14,6 +14,39 @@
 
 # java语言
 
+
+
+1、java中线程池和网络   
+
+2、自己实现c++智能指针  
+
+3、android多进程通信方式   
+
+4、进程被杀后怎样能自启动
+
+5、编程题  fibonacci数列
+
+6、共享内存优势
+7、一般通信优势
+8、C代码如何回掉Java
+9、网络运营商欠费，缴费之后，为什么上不了网
+
+
+
+
+
+
+1、熟悉android应用开发
+2、熟悉JAVA，c/c++，JAVA Script。
+3、熟悉linux系统框架，具有基于linux操作系统的开发经验。
+4、熟悉主流操作系统框架android framework，qt。
+5、熟悉 yocto /open openembedded 系统构建工具。
+6、具有android framework开发经验、linux 系统移植经验、bsp 开发经验、node js开发经验优先。
+7、熟悉 linux debug 方法，熟练使用相关开发及debug工具。
+8、团队合作精神强，任劳任怨，勇于创新。
+
+
+
 ### 反射机制及应用场景
 
 #### 什么是java反射机制
