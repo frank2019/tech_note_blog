@@ -126,6 +126,10 @@ public class HelloController {
 
 
 
+浏览器访问：
+
+http://localhost:8080/
+
 
 
 ### 0x01 Dubbo是什么
@@ -303,7 +307,31 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
+### T0x03 Spring Boot 
 
+可用的数据库ORM框架 mybatis  JDBC、JPA、MyBatis、
+
+#### 参考链接
+
+1. [spring boot+mybatis整合](https://www.cnblogs.com/peterxiao/p/7779188.html)
+2. [二、spring Boot构建的Web应用中，基于MySQL数据库的几种数据库连接方式进行介绍](https://www.cnblogs.com/chenliangcl/p/7345847.html)
+
+
+
+Spring boot  全局统一异常处理
+
+### T0x02  Spring MVC /SpringBoot HTTP通信加解密
+
+
+
+参考链接
+
+1. [Spring MVC /SpringBoot HTTP通信加解密](https://blog.csdn.net/lanmo555/article/details/77059879)
+2. [spring-boot-starter-encrypt](https://github.com/yinjihuan/spring-boot-starter-encrypt)
+
+
+
+### T0x01 Spring boot 入门Hello World 
 
 # 短视频平台
 
