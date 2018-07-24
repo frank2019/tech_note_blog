@@ -305,16 +305,117 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 [【转】Spring Boot干货系列：（一）优雅的入门篇](https://www.cnblogs.com/yw0219/p/8661439.html)
 
+测试框架  JUnit4  mockito
 
 
-### T0x03 Spring Boot 
+
+
+
+### T0x03 Spring Boot  MyBatis的使用 
 
 可用的数据库ORM框架 mybatis  JDBC、JPA、MyBatis、
 
-#### 参考链接
+#### 几种操作数据库的对比mybatis  JDBC、JPA、MyBatis  
 
-1. [spring boot+mybatis整合](https://www.cnblogs.com/peterxiao/p/7779188.html)
-2. [二、spring Boot构建的Web应用中，基于MySQL数据库的几种数据库连接方式进行介绍](https://www.cnblogs.com/chenliangcl/p/7345847.html)
+###### JDBC (Java Data Base Connection,java数据库连接)
+
+ JDBC(Java Data Base Connection,java数据库连接)是一种用于执行SQL语句的Java  API,可以为多种关系数据库提供统一访问,它由一组用Java语言编写的类和接口组成.JDBC提供了一种基准,据此可以构建更高级的工具和接口,使数据库开发人员能够编写数据库应用程序
+
+- 优点：运行期：快捷、高效
+- 缺点：编辑器：代码量大、繁琐异常处理、不支持数据库跨平台
+
+ ![img](http://images2015.cnblogs.com/blog/862246/201601/862246-20160101132324182-822488795.jpg)
+
+######  JDBCTemplate
+
+ JdbcTemplate针对数据查询提供了多个重载的模板方法,你可以根据需要选用不同的模板方法.如果你的查询很简单，仅仅是传入相应SQL或者相关参数，然后取得一个单一的结果，那么你可以选择如下一组便利的模板方法
+
+- 优点：运行期：高效、内嵌Spring框架中、支持基于AOP的声明式事务
+- 缺点：必须于Spring框架结合在一起使用、不支持数据库跨平台、默认没有缓存
+
+######  MyBatis
+
+ MyBatis的前身就是iBatis,iBatis本是apache的一个开源项目,2010年这个项目由apahce sofeware foundation 迁移到了google code，并且改名
+
+ 总体来说 MyBatis 主要完成两件事情
+
+1. 根据JDBC 规范建立与数据库的连接
+2. 通过Annotaion/XML+JAVA反射技术,实现 Java 对象与关系数据库之间相互转化
+
+ MyBatis优缺点如下:
+
+- 优点: 高效、支持动态、复杂的SQL构建, 支持与Spring整合和AOP事务、结果集做了轻量级Mapper封装、支持缓存
+- 缺点：不支持数据库跨平台, 还是需要自己写SQL语句
+
+ 
+
+######  Hibernate
+
+ Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装,使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库.  Hibernate可以应用在任何使用JDBC的场合,既可以在Java的客户端程序使用,也可以在Servlet/JSP的Web应用中使用
+
+ 
+
+ Hibernate的核心类和接口一共有6个,  分别为:Session、SessionFactory、Transaction、Query、Criteria和Configuration这6个核心类和接口在任何开发中都会用到。通过这些接口，不仅可以对持久化对象进行存取，还能够进行事务控制
+
+ Criteria是一种比hql更面向对象的查询方式。Criteria 可使用 Criterion 和 Projection  设置查询条件.可以设置FetchMode(联合查询抓取的模式)设置排序方式，Criteria 还可以设置 FlushModel（冲刷  Session 的方式）和LockMode
+
+```
+1 Criteria crit = sess.createCriteria(Cat.class);
+2 crit.setMaxResults(50);
+3 List cats = crit.list();
+```
+
+##### 参考链接
+
+1. [JDBC、JDBCTemplate、MyBatis、Hiberante 比较与分析](https://blog.csdn.net/sdmxdzb/article/details/72821571)
+2. [springboot中application.properties 改成 application.yml详解](https://blog.csdn.net/tjcyjd/article/details/78129354?ref=myrecommend)
+3. 
+
+
+
+#### Spring boot 支持 mybatis
+
+
+
+[SpringBoot（五）：SpringBoot整合MyBatis](https://blog.csdn.net/saytime/article/details/74783296)
+
+
+
+
+
+##### 参考链接
+
+1. [SpringBoot整合MyBatis](https://www.cnblogs.com/zhuxiaojie/p/5836159.html)
+2. [spring boot+mybatis整合](https://www.cnblogs.com/peterxiao/p/7779188.html)
+3. [二、spring Boot构建的Web应用中，基于MySQL数据库的几种数据库连接方式进行介绍](https://www.cnblogs.com/chenliangcl/p/7345847.html)
+
+
+
+[最新版本查询](http://mvnrepository.com/artifact/org.mybatis.spring.boot)
+
+
+
+#### 官方例子解析
+
+1. [mybatis-spring-boot-samples](https://github.com/mybatis/spring-boot-starter/tree/master/mybatis-spring-boot-samples)
+
+
+
+
+
+#### Spring boot 装配流程 
+
+SpringBoot项目的Bean装配默认规则是根据Application类所在的包位置从上往下扫描！“Application类”是指SpringBoot项目入口类。这个类的位置很关键：如果Application类所在的包为：com.boot.app，则只会扫描com.boot.app包及其所有子包，如果service或dao所在包不在com.boot.app及其子包下，则不会被扫描！即, 把Application类放到dao、service所在包的上级，com.boot.Application知道这一点非常关键 
+
+
+
+```
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.mx.video.mapper.MovieMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+```
+
+1. [Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)
+
+   ](https://blog.csdn.net/qq_17555933/article/details/51385244)
 
 
 
