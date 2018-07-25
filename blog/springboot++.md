@@ -14,7 +14,13 @@
 
 3. [spring Boot环境下dubbo+zookeeper的一个基础讲解与示例](https://blog.csdn.net/future_zhangkai/article/details/76660353)
 
-4. # 
+4.  [Service Mesh是什么技术 下一代微服务？](https://blog.csdn.net/weixin_38044696/article/details/80257488)
+
+5. [学习Spring Boot:使用Lombok来优雅的编码](https://www.cnblogs.com/qnight/p/8997493.html)
+
+   可以用来使用@getter @setter代替函数   从而简化代码
+
+6. 
 
 第一个 Dubbo 应用
 
@@ -313,6 +319,12 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 ### T0x03 Spring Boot  MyBatis的使用 
 
+
+
+Mysql中    java中 boolean 对应的数据库数据类型是TINYINT(1)
+
+
+
 可用的数据库ORM框架 mybatis  JDBC、JPA、MyBatis、
 
 #### 几种操作数据库的对比mybatis  JDBC、JPA、MyBatis  
@@ -433,6 +445,26 @@ Spring boot  全局统一异常处理
 
 
 ### T0x01 Spring boot 入门Hello World 
+
+
+
+# elasticsearch  全文检索
+
+
+
+ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful  web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于[云计算](https://baike.baidu.com/item/%E4%BA%91%E8%AE%A1%E7%AE%97/9969353)中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。
+
+我们建立一个网站或应用程序，并要添加搜索功能，但是想要完成搜索工作的创建是非常困难的。我们希望搜索解决方案要运行速度快，我们希望能有一个零配置和一个完全免费的搜索模式，我们希望能够简单地使用JSON通过HTTP来索引数据，我们希望我们的搜索服务器始终可用，我们希望能够从一台开始并扩展到数百台，我们要实时搜索，我们要简单的多租户，我们希望建立一个云的解决方案。因此我们利用Elasticsearch来解决所有这些问题及可能出现的更多其它问题。
+
+
+
+参考链接
+
+1. [Elasticsearch 权威指南（中文版）](https://es.xiaoleilu.com/)
+2. [Elasticsearch 权威指南（中文版）github](https://github.com/elasticsearch-cn/elasticsearch-definitive-guide)
+3. [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+
+
 
 # 短视频平台
 
