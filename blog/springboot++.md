@@ -1,4 +1,62 @@
+### Spring @Autowired注解在非Controller中注入为null
 
+```
+@Component
+```
+
+ **把Application类放到dao、service所在包的上级** 
+
+
+
+
+
+# 常用库
+
+TODO
+
+
+
+### FastJson
+
+
+
+1. FastJson数度快,无论序列化和反序列化,都是当之无愧的fast   
+2. 功能强大(支持普通JDK类包括任意Java Bean Class、Collection、Map、Date或enum)   
+3. 零依赖(没有依赖其它任何类库) 
+
+
+
+#### pom.xml 配置
+
+
+
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.47</version>
+</dependency>
+
+```
+
+
+
+1. [最新版本](http://mvnrepository.com/search?q=FastJson)
+
+#### POJO对象和json字符串之间的转换
+
+
+
+```
+JSON.toJSONString(studentList)
+```
+
+
+
+参考链接
+
+1. [为什么Fastjson能够做到这么快?](https://blog.csdn.net/xf_87/article/details/51872336)
 
 
 
@@ -317,6 +375,43 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
+### T0x04  Spring boot 的日志记录
+
+已经有的日志框架  JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j… 
+
+Spring Boot：    底层是Spring框架，Spring框架默认是JCL，commons-logging   **Spirng Boot：  排除掉了commons-logging，选用SLF4j和logback** 
+
+
+
+日志的抽象层    SLF4j
+
+
+
+推荐的组合：  SLF4j和logback
+
+#### SLF4j和logback配置
+
+3.2 lobback-spring.xml 配置
+
+ 
+
+\1. 我们先把 application.yml的关于日志的注释掉，新建一个文件   logback-spring.xml，为什么要取这个名字呢，Spring  Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），如果我们想自定义名字，也可以，可以在  application.yml中通过  logging.config=classpath:/xxx.xml等方式配置。
+
+
+
+
+
+
+
+#### 参考链接
+
+1. [Spring Boot 日志详解](https://blog.csdn.net/norrininthesky/article/details/80014469)
+2. [Spring Boot干货系列：（七）默认日志logback配置解析  ](http://tengj.top/2017/04/05/springboot7/)  
+
+
+
+
+
 ### T0x03 Spring Boot  MyBatis的使用 
 
 
@@ -448,13 +543,155 @@ Spring boot  全局统一异常处理
 
 
 
-# elasticsearch  全文检索
+# Elasticsearch  全文检索
 
 
+
+### 0x01 ElasticSearch 入门
+
+#### ElasticSearch是什么
 
 ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful  web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于[云计算](https://baike.baidu.com/item/%E4%BA%91%E8%AE%A1%E7%AE%97/9969353)中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。
 
 我们建立一个网站或应用程序，并要添加搜索功能，但是想要完成搜索工作的创建是非常困难的。我们希望搜索解决方案要运行速度快，我们希望能有一个零配置和一个完全免费的搜索模式，我们希望能够简单地使用JSON通过HTTP来索引数据，我们希望我们的搜索服务器始终可用，我们希望能够从一台开始并扩展到数百台，我们要实时搜索，我们要简单的多租户，我们希望建立一个云的解决方案。因此我们利用Elasticsearch来解决所有这些问题及可能出现的更多其它问题。
+
+
+
+#### ElasticSearch 安装
+
+1. Elastic 需要 Java 8 环境。注意要保证环境变量`JAVA_HOME`正确设置。 
+2. 可以跟着[官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/zip-targz.html)安装 Elastic   适用于window 和 linux
+3. 下载  
+
+```bash
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.zip
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.2.zip.sha512
+shasum -a 512 -c elasticsearch-6.3.2.zip.sha512 
+unzip elasticsearch-6.3.2.zip
+cd elasticsearch-6.3.2/ 
+```
+
+4. 启动  
+
+   ```
+   ./bin/elasticsearch
+   ```
+
+5. 测试
+
+   ```
+    curl localhost:9200
+   
+   {                                                       
+     "name" : "p764ksQ",                                   
+     "cluster_name" : "elasticsearch",                     
+     "cluster_uuid" : "JRtCfX_ITw2ZwuvMR7uKJA",            
+     "version" : {                                         
+       "number" : "6.3.2",                                 
+       "build_flavor" : "default",                         
+       "build_type" : "zip",                               
+       "build_hash" : "053779d",                           
+       "build_date" : "2018-07-20T05:20:23.451332Z",       
+       "build_snapshot" : false,                           
+       "lucene_version" : "7.3.1",                         
+       "minimum_wire_compatibility_version" : "5.6.0",     
+       "minimum_index_compatibility_version" : "5.0.0"     
+     },                                                    
+     "tagline" : "You Know, for Search"                    
+   }                                                       
+   ```
+
+   请求9200端口，Elastic 返回一个 JSON 对象，包含当前节点、集群、版本等信息 
+
+
+
+#### 基本概念
+
+1. Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例 
+
+2. 单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster） 
+
+3. Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引 
+
+4. Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。 
+
+5. 查看当前节点的所有 Index 
+
+   ```
+   curl -X GET  http://localhost:9200/_cat/indices?v
+   ```
+
+
+
+6. Index 里面单条的记录称为 Document（文档）。许多条 Document 构成了一个 Index。 
+
+7. Document 使用 JSON 格式表示，下面是一个例子。 
+
+   ```json
+       {
+         "user": "张三",
+         "title": "工程师",
+         "desc": "数据库管理"
+       }
+   ```
+
+8. 同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率。 
+
+9. Type  Document 可以分组，比如`weather`这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document。 
+
+10. 列出每个 Index 所包含的 Type。 
+
+    ```
+    curl localhost:9200/_mapping?pretty=true
+    ```
+
+    
+
+11. 根据[规划](https://www.elastic.co/blog/index-type-parent-child-join-now-future-in-elasticsearch)，Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会彻底移除 Type。 
+
+
+
+
+
+#### elasticsearch  vs 数据库 
+
+ES团队不推荐完全采用ES作为主要存储，缺乏访问控制还有一些数据丢失和污染的问题
+
+建议还是采用专门的 DB存储方案，然后用ES来做serving。
+
+es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内存提高性能。最逆天的是，mapping不能改。
+
+
+
+
+
+#### ElasticSearch vs Solr多维度分析对比
+
+![](https://images2015.cnblogs.com/blog/855959/201703/855959-20170324173110455-1473254525.png)
+
+
+
+**ElasticSearch vs Solr 总结**
+
+　　（1）二者安装都很简单。
+
+　　（2）Solr 利用 Zookeeper 进行分布式管理，而 Elasticsearch 自身带有分布式协调管理功能。
+
+　　（3）Solr 支持更多格式的数据，比如JSON、XML、CSV，而 Elasticsearch 仅支持json文件格式。
+
+　　（4）Solr 官方提供的功能更多，而 Elasticsearch 本身更注重于核心功能，高级功能多有第三方插件提供
+
+　　（5）Solr 在传统的搜索应用中表现好于 Elasticsearch，但在处理实时搜索应用时效率明显低于 Elasticsearch。
+
+　　（6）Solr 是传统搜索应用的有力解决方案，但 Elasticsearch 更适用于新兴的实时搜索应用。
+
+
+
+[ElasticSearch vs Solr多维度分析对比](https://www.cnblogs.com/zlslch/p/6612639.html)
+
+
+
+
 
 
 
@@ -463,6 +700,9 @@ ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布�
 1. [Elasticsearch 权威指南（中文版）](https://es.xiaoleilu.com/)
 2. [Elasticsearch 权威指南（中文版）github](https://github.com/elasticsearch-cn/elasticsearch-definitive-guide)
 3. [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+4. [Elasticsearch学习，请先看这一篇](https://blog.csdn.net/laoyang360/article/details/52244917)
+5. [时间序列数据库的秘密(2)——索引](http://www.infoq.com/cn/articles/database-timestamp-02?utm_source=infoq)
+6. https://www.jianshu.com/p/ed7e1ebb2fb7
 
 
 
