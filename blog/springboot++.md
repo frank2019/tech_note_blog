@@ -553,7 +553,9 @@ Spring boot  全局统一异常处理
 
 
 
+访问的是elastic search的tcp端口，需换成http端口。
 
+elastic search默认tcp端口9300，http端口9200
 
 ### 0x02   ElasticSearch   与Spring boot 的集成测试
 
@@ -625,6 +627,8 @@ org.elasticsearch.client.transport.NoNodeAvailableException: None of the configu
 
 1. [spring-boot集成elasticsearch并实现简单的增删改查](https://blog.csdn.net/zhaoyahui_666/article/details/78688688)
 2. [springBoot系列教程01：elasticsearch的集成及使用](https://www.cnblogs.com/xiaochangwei/p/8037110.html)
+3. [elasticsearch常用命令](https://www.cnblogs.com/moonandstar08/p/6582362.html)
+4. [elasticsearch配置](https://www.cnblogs.com/hanyouchun/p/5163183.html)
 
 
 
