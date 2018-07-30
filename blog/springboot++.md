@@ -547,6 +547,91 @@ Spring boot  全局统一异常处理
 
 
 
+参考链接
+
+1. [spring-boot-samples](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+
+
+
+
+
+### 0x02   ElasticSearch   与Spring boot 的集成测试
+
+
+
+#### 搭建集群环境
+
+参照。。。
+
+
+
+#### pom中引入elasticsearch 
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+</dependency>
+```
+
+
+
+创建
+
+ 
+
+```java
+public class Customer {
+	@Id
+	private String id;
+
+	private String firstName;
+
+	private String lastName;
+}
+```
+
+创建Index
+
+```
+curl -X PUT localhost:9200/customer
+```
+
+删除Index
+
+```
+curl -X DELETE localhost:9200/weather
+```
+
+
+
+#### 报错
+
+
+
+```
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{RM2dlbtCRH6TACc11n445Q}{localhost}{127.0.0.1:9200}]
+```
+
+
+
+#### spring boot  elasticsearch的配置
+
+[springboot elasticsearch 集成注意事项](https://www.cnblogs.com/guozp/p/8686904.html)
+
+
+
+#### 参考链接
+
+1. [spring-boot集成elasticsearch并实现简单的增删改查](https://blog.csdn.net/zhaoyahui_666/article/details/78688688)
+2. [springBoot系列教程01：elasticsearch的集成及使用](https://www.cnblogs.com/xiaochangwei/p/8037110.html)
+
+
+
+
+
+
+
 ### 0x01 ElasticSearch 入门
 
 #### ElasticSearch是什么
