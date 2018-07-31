@@ -36,6 +36,76 @@ Spring boot 中 Service
 
 
 
+
+
+Mysql 数据库乱码 
+
+https://blog.csdn.net/u012410733/article/details/61619656
+
+https://www.linuxidc.com/Linux/2017-05/144068.htm
+
+
+
+
+
+### 使用curl   做模拟rest full 接口测试
+
+curl -h来查看请求参数的含义   -v 显示请求的信息   -X 选项指定其它协议 
+
+
+
+#### GET
+
+```
+curl   http://localhost:8080/movie/220
+```
+
+#### POST
+
+```
+curl -v -X POST http://localhost:8080/movie/ -d '{"id":2,"name":"2222"}'
+```
+
+
+
+
+
+使用restfull api  操作
+
+1. https://www.cnblogs.com/Irving/p/4964489.html
+2. [我所理解的RESTful Web API [设计篇\]](https://www.cnblogs.com/artech/p/restful-web-api-02.html)
+
+
+
+### 使用spring boot 开发一个 rest full  接口
+
+
+
+```
+RESTful用法：
+http://127.0.0.1/user/1 GET  根据用户id查询用户数据
+http://127.0.0.1/user  POST 新增用户
+http://127.0.0.1/user  PUT 修改用户信息
+http://127.0.0.1/user  DELETE 删除用户信息
+```
+
+
+
+1. [基于SpringBoot开发一个Restful服务，实现增删改查功能](https://blog.csdn.net/qazwsxpcm/article/details/79028689)
+2. 
+
+
+
+### SpringBoot Controller接收参数的几种常用方式
+
+
+
+
+
+1. [SpringBoot Controller接收参数的几种常用方式](https://blog.csdn.net/suki_rong/article/details/80445880)
+
+
+
 # 常用库
 
 TODO
