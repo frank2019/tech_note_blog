@@ -1,3 +1,9 @@
+# Spring Boot
+
+
+
+
+
 ### Spring @Autowired注解在非Controller中注入为null
 
 ```
@@ -5,6 +11,26 @@
 ```
 
  **把Application类放到dao、service所在包的上级** 
+
+
+
+Spring boot 中 Service  
+
+@Service用于标注业务层组件 **： 将当前类注册为spring的Bean**
+
+@Controller用于标注控制层组件（如struts中的action）
+
+@Repository用于标注数据访问组件，即DAO组件
+
+@Component泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。**： 将当前类注册为spring的Bean**
+
+
+
+####  参考链接
+
+
+
+1. [spring boot: EL和资源 (一般注入说明(二) @Service注解 @Component注解)](https://www.cnblogs.com/achengmu/p/8117234.html)
 
 
 
