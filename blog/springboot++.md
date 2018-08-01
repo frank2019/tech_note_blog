@@ -653,6 +653,222 @@ Spring boot  全局统一异常处理
 
 elastic search默认tcp端口9300，http端口9200
 
+
+
+
+
+### Spring boot ElasticSearch的注解
+
+#### @Document
+
+
+
+chuco  
+
+
+
+```
+java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [id] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+	at org.elasticsearch.index.mapper.TextFieldMapper$TextFieldType.fielddataBuilder(TextFieldMapper.java:336) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.index.fielddata.IndexFieldDataService.getForField(IndexFieldDataService.java:111) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.index.query.QueryShardContext.getForField(QueryShardContext.java:166) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.sort.FieldSortBuilder.build(FieldSortBuilder.java:277) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.sort.SortBuilder.buildSort(SortBuilder.java:156) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.SearchService.parseSource(SearchService.java:630) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.SearchService.createContext(SearchService.java:481) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.SearchService.createAndPutContext(SearchService.java:457) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.search.SearchService.executeDfsPhase(SearchService.java:222) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.action.search.SearchTransportService$5.messageReceived(SearchTransportService.java:319) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.action.search.SearchTransportService$5.messageReceived(SearchTransportService.java:316) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.transport.RequestHandlerRegistry.processMessageReceived(RequestHandlerRegistry.java:69) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.transport.TcpTransport$RequestHandler.doRun(TcpTransport.java:1544) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.common.util.concurrent.ThreadContext$ContextPreservingAbstractRunnable.doRun(ThreadContext.java:638) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:37) ~[elasticsearch-5.6.10.jar:5.6.10]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_101]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_101]
+
+
+```
+
+
+
+### java项目中常用的分页对象Page
+
+
+
+1. https://blog.csdn.net/cgs666/article/details/50465377
+
+
+
+
+
+http://42.51.192.72:10802/_cat/indices?v
+
+
+
+### tips
+
+1. ES中默认的API的端口号是9300而不是9200。
+2. ES系统中Elasticsearch.yml配置文件中要加入network.host: 0.0.0.0，否则外网地址访问不了。**
+3. 最新的资料一定要去官网上面查看，博客上面好多都是过时的。官网地址：https://www.elastic.co
+4. 注意JDK、ES、Springboot三者之间的版本，很多时候错误都是版本冲突引起的。
+
+
+
+### T0x04  ES 的基本概念
+
+1. Elasticsearch集群可以包含多个**索引(indices)**（数据库），每一个索引可以包含多个**类型(types)**（表），每一个类型包含多个**文档(documents)**（行），然后每个文档包含多个**字段(Fields)**（列）。 
+
+
+
+#### T0x03  常用命令
+
+http://42.51.192.68:10802/
+
+
+
+
+
+
+
+```
+my_index/_mapping/my_type
+```
+
+
+
+#### 修改id可索引
+
+## fielddata
+
+这里看下fielddata: 
+ 大多数字段默认都是索引的，这使得它们可以搜索。但是，在脚本中进行排序、聚合和访问字段值需要从搜索中获得不同的访问模式。
+
+搜索需要回答“哪些文档包含这个术语？”排序和聚合需要回答一个不同的问题：“这个字段对这个文档的值是多少？”。
+
+大多数字段可以使用索引时，找到值但是text文本字段不支持。 
+ Text field使用fielddata的这种内存数据结构。它会在内存中存储反转整个索引的每个片段，包括文档关系。
+
+因为它非常耗费内存所以默认是关闭的disabled，一般不必要设置的不要设置。 
+ 参
+
+
+
+http://42.51.192.68:10802/movieresource/_mapping/movieresource 
+
+
+
+```
+{
+  "properties": {
+    "id": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+```
+
+
+
+```
+{
+  "properties": {
+    "id": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+#### 查看索引的元素
+
+http://42.51.192.68:10802/movieresource/_search
+
+##### 查看指定索引结构
+
+http://42.51.192.68:10802/movieresource/_mapping/
+
+
+
+
+
+elasticsearch rest api遵循的格式为：
+
+```
+curl -X<REST Verb> <Node>:<Port>/<Index>/<Type>/<ID>
+```
+
+1、检查es版本信息
+
+```
+curl localhost:9200
+```
+
+2、查看集群是否健康
+
+```
+curl  localhost:9200/_cat/health?v
+```
+
+3、查看节点列表
+
+```
+curl localhost:9200/_cat/nodes?v
+```
+
+4、列出所有索引及存储大小
+
+```
+curl localhost:9200/_cat/indices?v
+```
+
+5、创建索引
+
+`创建索引名为XX,默认会有5个分片，1个索引`
+
+`curl -XPUT ``'IP:9200/XX?pretty'`
+
+6、添加一个类型
+
+```
+curl -XPUT 'IP:9200/XX/external/2?pretty' -d '
+{
+   "gwyy": "John"
+}'
+```
+
+7、更新一个类型
+
+```
+curl -XPOST 'IP:9200/XX/external/1/_update?pretty' -d '
+{
+   "doc": {"name": "Jaf"}
+}'
+```
+
+8、删除指定索引
+
+```
+curl -XDELETE 'IP:9200/_index?pretty'
+```
+
+9、elasticsearch定期删除策略
+
+<http://www.jianshu.com/p/5e0ed65cd820>
+
+
+
+
+
 ### 0x02   ElasticSearch   与Spring boot 的集成测试
 
 
