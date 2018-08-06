@@ -110,6 +110,20 @@ http://127.0.0.1/user  DELETE 删除用户信息
 
 TODO
 
+### fastjson  中有重复的对象
+
+json  字符串中
+
+"$ref": "$.viewItems[0].resource_objects[5].movie.actor_info[0]"
+
+
+
+
+
+1. [fastjson 重复引用和循环引用问题](https://segmentfault.com/a/1190000013221859)
+
+
+
 
 
 ### FastJson
@@ -153,6 +167,10 @@ JSON.toJSONString(studentList)
 参考链接
 
 1. [为什么Fastjson能够做到这么快?](https://blog.csdn.net/xf_87/article/details/51872336)
+
+
+
+
 
 
 
@@ -654,6 +672,78 @@ Spring boot  全局统一异常处理
 elastic search默认tcp端口9300，http端口9200
 
 
+
+
+
+模糊查询
+
+
+
+```
+http://42.51.192.68:10802/movieresource/_search
+
+{
+  "query": {
+    "multi_match": {
+      "fields":  [ "id", "name" ],
+      "query":     "铁血刚拳",
+      "fuzziness": "AUTO"
+    }
+  }
+}
+```
+
+
+
+
+
+elasticsearch  出错
+
+### all shards failed [type=search_phase_execution_exception]
+
+2018年02月28日 13:56:51
+
+ 				阅读数：1401 											
+
+使用elasticsearch出现标题的异常， 
+ 出现原因: 
+ 当使用到term 查询的时候，由于是精准匹配，所以查询的关键字在es上的类型，必须是keyword而不能是text， 
+ 比如你的搜索条件是 “name”:”jack”,那么该name 字段的es类型得是keyword，而不能是text
+
+
+
+
+
+#### java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [name] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+
+
+
+
+
+### org.springframework.data.domain.Sort
+
+
+
+
+
+参考链接
+
+1. [Spring data 多字段排序方法](https://blog.csdn.net/flyaimo/article/details/24678081?locationNum=14)
+
+
+
+
+
+### elastic search 设置可检索
+
+
+
+参考链接
+
+1. [ElasticSearch 6.2 Mapping参数说明及text类型字段聚合查询配置](https://www.cnblogs.com/dxf813/p/8447467.html)
+2. [ElasticSearch查询 第四篇：匹配查询（Match）](https://www.cnblogs.com/ljhdo/p/4577065.html)
+3. [Spring Boot+Elasticsearch实现简单全文搜索](https://www.jianshu.com/p/29944f3e9f95)
+4. 
 
 
 
