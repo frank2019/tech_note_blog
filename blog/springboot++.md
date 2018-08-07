@@ -487,6 +487,12 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
+```
+ http and  http.request==1 and  http.request.method==POST and ip.dst == 192.168.1.9
+```
+
+
+
 
 
 ### T0x04  Spring boot 的日志记录

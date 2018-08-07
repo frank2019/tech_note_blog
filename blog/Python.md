@@ -35,13 +35,24 @@ https://blog.csdn.net/su_tianbiao/article/details/50622682
 
 
 1. [Python爬虫工程师告诉你爬虫应该怎么学，太详细了！](http://baijiahao.baidu.com/s?id=1578594478424685451&wfr=spider&for=pc)
-2. 
+2. RESTful架构与传统的RPC、SOAP等方式 
 
 
 
 
 
-RESTful架构与传统的RPC、SOAP等方式 
+### 0x06 python 操作mysql
+
+`conda install -c anaconda pymysql` 
+
+
+
+参考链接
+
+1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
+2. https://anaconda.org/anaconda/pymysql
+
+
 
 
 
@@ -256,6 +267,21 @@ print(bsObj.h1)
     print(r.text)   #打印解码后的返回数据
     '''
 ```
+
+
+
+
+
+
+
+
+
+#### 参考链接
+
+1. [BeautifulSoup中find(),find_all(),select()函数](https://blog.csdn.net/w_xuechun/article/details/76093950)
+2. [Beautiful Soup 4.2.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html)
+
+
 
 
 
