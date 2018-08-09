@@ -1,5 +1,40 @@
 # Spring Boot
 
+## TODO
+
+1. [Spring Boot 系列 - WebSocket 简单使用](https://www.cnblogs.com/magicalSam/p/7522060.html)
+2. [APP接口安全token设计](https://blog.csdn.net/b452608/article/details/50967849)
+3. [处理百万级以上的数据提高查询速度的方法](https://blog.csdn.net/netwinds/article/details/50977527)
+4. [大用户并发系统API设计心得](https://blog.csdn.net/feiniao198751/article/details/51378892)
+5. [URL短链接的实现原理和方法](http://blog.sina.com.cn/s/blog_a602def501031ksu.html)
+
+
+
+
+
+### spring boot 图片的上传与显示
+
+
+
+1. [spring boot 图片的上传与显示](https://blog.csdn.net/a625013/article/details/52414470)
+2. [springMVC一次选择多个图片上传](https://blog.csdn.net/u013086392/article/details/53332151)
+3. [multipart/form-data 文件上传表单中 传递参数无法获取的原因!](https://blog.csdn.net/zllww123/article/details/77587292)
+
+
+
+### @ControllerAdvice 拦截异常并统一处理
+
+
+
+1. [@ControllerAdvice 拦截异常并统一处理](https://www.cnblogs.com/magicalSam/p/7198420.html)
+2. [Spring Boot 2 全局异常处理](https://blog.csdn.net/guo_mao_zhen/article/details/80419181)
+
+
+
+
+
+
+
 
 
 
@@ -100,8 +135,6 @@ http://127.0.0.1/user  DELETE 删除用户信息
 
 
 
-
-
 1. [SpringBoot Controller接收参数的几种常用方式](https://blog.csdn.net/suki_rong/article/details/80445880)
 
 
@@ -109,6 +142,16 @@ http://127.0.0.1/user  DELETE 删除用户信息
 # 常用库
 
 TODO
+
+
+
+1. [Fastjson生成json时Null属性不显示](https://blog.csdn.net/a258831020/article/details/47333807)
+
+
+
+
+
+
 
 ### fastjson  中有重复的对象
 
