@@ -7,6 +7,9 @@
 3. [处理百万级以上的数据提高查询速度的方法](https://blog.csdn.net/netwinds/article/details/50977527)
 4. [大用户并发系统API设计心得](https://blog.csdn.net/feiniao198751/article/details/51378892)
 5. [URL短链接的实现原理和方法](http://blog.sina.com.cn/s/blog_a602def501031ksu.html)
+6. [Spring Boot（5）一个极简且完整的后台框架](https://www.jianshu.com/p/923d26d705ed)
+7. [Spring Boot 项目架构](https://www.cnblogs.com/loginloading/p/7599729.html)
+8. [静态代码扫描之阿里java代码规范IDEA插件](https://www.cnblogs.com/findyou/p/7679026.html)
 
 
 
@@ -32,6 +35,8 @@
 
 
 
+
+#### Spring boot 分层
 
 
 
