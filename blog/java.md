@@ -10,6 +10,16 @@
 
 
 
+### java中的map
+
+
+
+[java中几种Map在什么情况下使用，并简单介绍原因及原理](https://www.cnblogs.com/kersen0815/p/5325434.html)
+
+
+
+
+
 
 
 # java语言

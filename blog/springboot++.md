@@ -12,6 +12,157 @@
 8. [静态代码扫描之阿里java代码规范IDEA插件](https://www.cnblogs.com/findyou/p/7679026.html)
 9. [SpringBoot企业级核心技术，对应简书《Spring Boot 核心技术》专题配套源码 ](https://gitee.com/hengboy/spring-boot-chapter)
 10. [wireshark如何抓取本机包](https://www.cnblogs.com/lvdongjie/p/6110183.html)
+11. 设计软件  ps  CDR和AI 
+
+
+
+
+
+
+
+### token的验证
+
+
+
+token的生成策略 
+
+
+
+要包含的信息
+
+1. 用户id
+2. 到期时间
+3. 密码md5 +  随机数
+
+
+
+1. 客户端上传 userid +  keymd5
+2. 服务端生成 token  下发给客户端
+3. 客户端 发送任务  +  token
+4. 服务端 验证token 是否有效   获取对应user信息  解析任务下发回应
+5. 
+
+
+
+
+
+
+
+
+
+#### 参考链接
+
+1. [Token：服务端身份验证的流行方案](https://www.cnblogs.com/menyiin/p/token.html)
+2. [深入了解Token认证的来龙去脉](https://baijiahao.baidu.com/s?id=1593244938986076867&wfr=spider&for=pc)
+3. [基于 Token 的身份验证和安全问题](https://blog.csdn.net/qq_35246620/article/details/55049812)
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 解决前端调试时候的跨域问题
+
+
+
+[springboot中通过cors协议解决跨域问题](https://www.cnblogs.com/520playboy/p/7306008.html)
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-using-springbootapplication-annotation.html
+
+
+
+1. [前端接口调试 -- 通过Nginx反向代理机制解决跨域问题](https://blog.csdn.net/github_36618205/article/details/53539933)
+
+
+
+ [vok_think](https://www.cnblogs.com/vok-think/) 
+
+ 			[前端前后端分离开发调试过程中跨域问题解决方式](https://www.cnblogs.com/vok-think/p/7044556.html) 		
+
+\1. 将后台代码部署到你的电脑(安装各种jdk或者环境软件) - 麻烦! 后台改了代码得找后台要
+
+\2. 将前端代码放到跟服务器代码一起 - 麻烦! 前端改一下东西就得上传一次
+
+\3. 使用方便快捷的nginx做代理 (仅仅需要下载nginx稍加配置 , 一次性避免上面两点缺点)
+
+详情(有道云笔记个人记录总结): http://note.youdao.com/noteshare?id=97d0047e7a87d7809d2b15e6be04eec1
+
+
+
+
+
+Chrome可以安装CORS Toggle。Safari本身自带该功能。 
+
+
+
+所有的跨域2种解决办法
+1前端提升js权限
+2后端配合跨域
+
+对于1，本地调试很多浏览器开发模式都是支持的。或者用浏览器插件。
+
+对于2，后端在HTTP头中增加允许跨域标识。后端使用jsonp技术解决数据访问跨域。
+
+本质跨域限制是浏览器造成的。后端这么强势也是有理由，不过出于同事关系在调试模式下增加跨域http头不是难事。
+
+最好还是沟通好吧，还有就是既然不是联调，前后分离应该前后无疑离吧，自建mock server吧
+
+
+
+
+
+#### 后端配合跨域
+
+
+
+```java
+    @RequestMapping(value = "/admininfo", method = RequestMethod.GET)
+    public String  test_admininfo() {
+
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        MyUtils.supportCrossDomain(requestAttributes.getResponse());
+
+       return "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"name\":\"admin\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\"}}";
+    }
+  
+  
+  
+  public static void supportCrossDomain(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+        response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+
+        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+    }
+```
+
+
+
+
+
+#### Spring Boot全局支持CORS（跨源请求）的配置方法
+
+1. [Spring Boot全局支持CORS（跨源请求）的配置方法](https://blog.csdn.net/zhangchao19890805/article/details/53893735/)
+2. 
+
+
+
+### MYSQL limit用法
+
+[MYSQL limit用法](https://www.cnblogs.com/cai170221/p/7122289.html)
+
+
+
+
 
 
 
