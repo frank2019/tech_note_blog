@@ -13,6 +13,7 @@
 9. [SpringBoot企业级核心技术，对应简书《Spring Boot 核心技术》专题配套源码 ](https://gitee.com/hengboy/spring-boot-chapter)
 10. [wireshark如何抓取本机包](https://www.cnblogs.com/lvdongjie/p/6110183.html)
 11. 设计软件  ps  CDR和AI 
+12. [为什么要培养自己的产品能力？](http://caibaojian.com/productions.html)
 
 
 
@@ -60,7 +61,11 @@ token的生成策略
 
 
 
+### 邀请码的设计规则
 
+1. [小而美的邀请码设计实现方案](https://www.jianshu.com/p/0201459f3c52)
+2. https://github.com/dylang/shortid
+3. [基于用户id的最优邀请码生成方案](https://blog.csdn.net/shamg/article/details/80385782)
 
 
 
@@ -115,6 +120,50 @@ Chrome可以安装CORS Toggle。Safari本身自带该功能。
 最好还是沟通好吧，还有就是既然不是联调，前后分离应该前后无疑离吧，自建mock server吧
 
 
+
+
+
+#### 具体实现
+
+
+
+后端配置 亲测有效
+
+```java
+import org.springframework.stereotype.Component;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class CorsFilter implements Filter {
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        chain.doFilter(req, res);
+    }
+    @Override
+    public void init(FilterConfig filterConfig) {}
+
+    @Override
+    public void destroy() {}
+}
+```
+
+
+
+
+
+1. [SpringBoot之跨域过滤器配置允许跨域访问](https://blog.csdn.net/moshowgame/article/details/80364904)
+2. 
 
 
 
