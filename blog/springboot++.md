@@ -21,6 +21,18 @@
 
 
 
+### java  获取请求IP
+
+
+
+1. [处理java获取ip为0:0:0:0:0:0:0:1的问题](https://www.cnblogs.com/leiqiannian/p/7753156.html)
+
+
+
+
+
+
+
 ### token的验证
 
 
@@ -1618,11 +1630,9 @@ cd elasticsearch-6.3.2/
 
 10. 列出每个 Index 所包含的 Type。 
 
-    ```
-    curl localhost:9200/_mapping?pretty=true
-    ```
-
-    
+   ```
+   curl localhost:9200/_mapping?pretty=true
+   ```
 
 11. 根据[规划](https://www.elastic.co/blog/index-type-parent-child-join-now-future-in-elasticsearch)，Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会彻底移除 Type。 
 
