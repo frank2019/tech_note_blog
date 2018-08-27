@@ -85,6 +85,10 @@ token的生成策略
 
 
 
+
+
+
+
 ### 解决前端调试时候的跨域问题
 
 
@@ -987,6 +991,131 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
+### T0x05 Spring boot  单元测试Controller
+
+
+
+```
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.mx.usercenter.vo.Device;
+import com.mx.usercenter.vo.request.RequestTouristLoginVo;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UsersControllerTest {
+
+    @Test
+    public void contextLoads() {
+    }
+    private MockMvc mockMvc; // 模拟MVC对象，通过MockMvcBuilders.webAppContextSetup(this.wac).build()初始化。
+
+    @Autowired
+    private WebApplicationContext wac; // 注入WebApplicationContext
+
+    @Before // 在测试开始前初始化工作
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
+
+
+    @Test
+    public void handlerBulletinBoardPost() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        Integer id =  1;
+        map.put("id", id);
+
+        MvcResult result = mockMvc.perform(post("/bulletinboard").content(JSONObject.toJSONString(map)))
+                .andExpect(status().isOk())// 模拟向testRest发送get请求
+                //.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+  /*  @Test
+    public void handlerDownloadReportPost() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("invitation_code", "ru68wk");
+        map.put("inner_net_ip", "192.168.1.250");
+
+        MvcResult result = mockMvc.perform(post("/download_report?invitation_code=ru68wk&inner_net_ip=192.168.1.9").content("invitation_code=ru68wk&inner_net_ip=192.168.1.250" ))
+                .andExpect(status().isOk())// 模拟向testRest发送get请求
+                //.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+*/
+
+    @Test
+    public void handlerTouristLoginPost() throws Exception {
+        RequestTouristLoginVo request =  new RequestTouristLoginVo();
+
+        Device device = new Device("imei60","a","deviceid","from");
+        device.setBrand("HuaWei");
+        device.setModel("Honour");
+        device.setMac("mac");
+        device.setImsi("imsi");
+
+
+        request.setUser(null);
+        request.setDevice(device);
+        //request.setInvitation_code("0");
+        request.setInner_net_ip("192.168.1.9");
+
+
+        String  requestStr = JSON.toJSONString(request);
+
+        MvcResult result = mockMvc.perform(post("/tourist_login").content(requestStr))
+                .andExpect(status().isOk())// 模拟向testRest发送get请求
+                //.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+
+    @Test
+    public void handlerRegisterPost() throws Exception {
+
+    }
+}
+```
+
+
+
+参考链接
+
+1. [Spring Boot Junit 测试Controller](https://blog.csdn.net/xiaolyuh123/article/details/73281522/)
+
+
+
+
+
 ### T0x04  Spring boot 的日志记录
 
 已经有的日志框架  JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j… 
@@ -1008,6 +1137,102 @@ Spring Boot：    底层是Spring框架，Spring框架默认是JCL，commons-log
  
 
 \1. 我们先把 application.yml的关于日志的注释掉，新建一个文件   logback-spring.xml，为什么要取这个名字呢，Spring  Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），如果我们想自定义名字，也可以，可以在  application.yml中通过  logging.config=classpath:/xxx.xml等方式配置。
+
+
+
+
+
+
+
+设置日志打印基本
+
+设置日志落地级别
+
+
+
+
+
+日志输出内容元素具体如下：
+
+- 时间日期：精确到毫秒
+- 日志级别：ERROR, WARN, INFO, DEBUG or TRACE
+- 进程ID
+- 分隔符：- - - 标识实际日志的开始
+- 线程名：方括号括起来（可能会截断控制台输出）
+- Logger名：通常使用源代码的类名
+- 日志内容
+
+## **日志依赖**
+
+
+
+```html
+<dependency>
+
+
+
+    <groupId>org.springframework.boot</groupId>
+
+
+
+    <artifactId>spring-boot-starter-logging</artifactId>
+
+
+
+</dependency>
+```
+
+但是呢，实际开发中我们
+
+不需要直接添加该依赖
+
+，你会发现spring-boot-starter其中包含了 spring-boot-starter-logging，该依赖内容就是 Spring Boot 默认的日志框架 logback。
+
+
+
+## **控制台输出**
+
+
+
+日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出。
+Spring Boot中默认配置`ERROR`、`WARN`和`INFO`级别的日志输出到控制台。您还可以通过启动您的应用程序–debug标志来启用“调试”模式（开发的时候推荐开启）,以下两种方式皆可：
+
+- 在运行命令后加入`--debug`标志，如：`$ java -jar springTest.jar --debug`
+- 在`application.properties`中配置`debug=true`，该属性置为true的时候，核心Logger（包含嵌入式容器、hibernate、spring）会输出更多内容，但是你自己应用的日志并不会输出为DEBUG级别。
+- 
+
+## **文件输出**
+
+
+
+默认情况下，Spring Boot将日志输出到控制台，不会写到日志文件。如果要编写除控制台输出之外的日志文件，则需在application.properties中设置logging.file或logging.path属性。
+
+- logging.file，设置文件，可以是绝对路径，也可以是相对路径。如：`logging.file=log/my.log(相对)或者/log/my.log(绝对)`
+- logging.path，设置目录，会在该目录下创建spring.log文件，并写入日志内容，如：`logging.path=/var/log`
+
+如果只配置 logging.file，会在项目的当前路径下生成一个 xxx.log 日志文件。
+如果只配置 logging.path，在 /var/log文件夹生成一个日志文件为 spring.log
+
+**注：二者不能同时使用，如若同时使用，则只有logging.file生效**
+
+默认情况下，日志文件的大小达到10MB时会切分一次，产生新的日志文件，默认级别为：ERROR、WARN、INFO
+
+
+
+## **级别控制**
+
+
+
+所有支持的日志记录系统都可以在Spring环境中设置记录级别（例如在application.properties中）
+格式为：’logging.level.* = LEVEL’
+
+- `logging.level`：日志级别控制前缀，`*`为包名或Logger名
+- `LEVEL`：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+
+举例：
+
+- `logging.level.com.gwd=DEBUG`：`com.gwd`包下所有class以DEBUG级别输出
+- `logging.level.root=WARN`：root日志以WARN级别输出
 
 
 
