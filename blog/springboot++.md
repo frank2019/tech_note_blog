@@ -14,10 +14,16 @@
 10. [wireshark如何抓取本机包](https://www.cnblogs.com/lvdongjie/p/6110183.html)
 11. 设计软件  ps  CDR和AI 
 12. [为什么要培养自己的产品能力？](http://caibaojian.com/productions.html)
+13. https://blog.csdn.net/zllww123/article/details/80549397
+14. [spring boot 官网](http://spring.io/projects/spring-boot)
 
 
 
 
+
+
+
+http://spring.io/projects/spring-boot
 
 
 
@@ -85,7 +91,8 @@ token的生成策略
 
 
 
-
+Warning:java: 未知的枚举常量 javax.annotation.meta.When.MAYBE
+  原因: 找不到javax.annotation.meta.When的类文件
 
 
 
@@ -480,7 +487,12 @@ jpa（Java Persistence API） 与 hibernate 的关系：
 1. [@ControllerAdvice 拦截异常并统一处理](https://www.cnblogs.com/magicalSam/p/7198420.html)
 2. [Spring Boot 2 全局异常处理](https://blog.csdn.net/guo_mao_zhen/article/details/80419181)
 
+3. [SpringBoot 统一异常处理 @ControllerAdvice 失效](https://blog.csdn.net/zx1323/article/details/78670778)
+4. https://img-blog.csdn.net/20180702164038112?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RvbmdndWFiYWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70
 
+
+
+Detected @ExceptionHandler methods in globalExceptionHandler
 
 
 
@@ -990,6 +1002,89 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
+
+### tomcat 部署 spring boot  项目
+
+1. [SpringgBoot入门系列篇(十三):部署SpringBoot到tomcat上并启动](https://blog.csdn.net/qq_27905183/article/details/79121759)
+2. 
+
+
+
+
+
+
+
+### Spring boot  性能优化
+
+
+
+
+
+参考链接
+
+1. [Spring Boot 性能优化](https://www.cnblogs.com/chen110xi/p/6198481.html)
+2. [SpringBoot优化方案](https://www.jianshu.com/p/1e2beda1e098)
+
+
+
+
+
+### spring boot  报错   远程主机强迫关闭了一个现有的连接]
+
+```
+2018-08-28 16:42:01.000  WARN 12936 --- [ient_boss][T#5]] o.e.transport.netty4.Netty4Transport     : exception caught on transport layer [[id: 0x1058a2fd, L:/192.168.1.9:42291 - R:/42.51.192.68:10803]], closing connection
+
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_101]
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43) ~[na:1.8.0_101]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223) ~[na:1.8.0_101]
+	at sun.nio.ch.IOUtil.read(IOUtil.java:197) ~[na:1.8.0_101]
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380) ~[na:1.8.0_101]
+	at io.netty.buffer.PooledHeapByteBuf.setBytes(PooledHeapByteBuf.java:261) ~[netty-buffer-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1108) ~[netty-buffer-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:345) ~[netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:148) ~[netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:647) [netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysPlain(NioEventLoop.java:547) [netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:501) [netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461) [netty-transport-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-common-4.1.25.Final.jar:4.1.25.Final]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_101]
+
+```
+
+
+
+
+
+参考链接
+
+1. [elasticsearch中的java.io.IOException: 远程主机强迫关闭了一个现有的连接](https://blog.csdn.net/chengbai19/article/details/79172858)
+
+
+
+
+
+未知的枚举常量 javax.annotation.meta.When.MAYBE   原因: 找不到javax.annotation.meta.When的类文件
+
+
+
+
+
+[SpringBoot 利用过滤器Filter修改请求url地址](https://www.cnblogs.com/hongdada/p/9046376.html)
+
+
+
+### T0x06  Spring boot  拦截器中处理token
+
+
+
+
+
+
+
+1. https://blog.csdn.net/tomcyndi/article/details/79011093
+2. [Spring Boot使用过滤器和拦截器分别实现REST接口简易安全认证](https://www.cnblogs.com/jeffwongishandsome/p/spring-boot-use-filter-and-interceptor-to-implement-an-easy-auth-system.html)
 
 ### T0x05 Spring boot  单元测试Controller
 
