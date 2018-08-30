@@ -1005,8 +1005,77 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 ### tomcat 部署 spring boot  项目
 
-1. [SpringgBoot入门系列篇(十三):部署SpringBoot到tomcat上并启动](https://blog.csdn.net/qq_27905183/article/details/79121759)
+
+
+1. [下载tomcat ](https://tomcat.apache.org/download-90.cgi)   [apache-tomcat-9.0.11.zip](mirrors.hust.edu.cn/apache/tomcat/tomcat-9/v9.0.11/bin/apache-tomcat-9.0.11.zip)
 2. 
+
+
+
+#### Spring boot 代码适配
+
+项目中的  Application主入口 需要继承 SpringBootServletInitializer  做如下类似修改
+
+
+
+```
+@SpringBootApplication
+public class Main extends SpringBootServletInitializer{
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Main.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Main.class, args);
+    }
+
+}
+```
+
+
+
+##### pom.xml文件中引入tomcat依赖
+
+```
+	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>
+```
+
+备注 ：  引入依赖后 运行会报错 。
+
+修改打包类型为  jar 改为 war
+
+```
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+```
+
+
+
+接下来就要将该项目打包成war了，IDEA打包项目：点击Build->Build Artifacts-，然后进行build即可，生成的war包会放到对应的项目根目录下的target目录下面
+
+
+
+
+
+最后将该war包移动到tomcat/webapps目录下即可，然后启动tomcat，打开浏览器输入网址：`localhost:`port`/`war包名`/`在SpringBoot中RequestMapping设置的url请求，即可进入到对应的页面或者返回结果
+
+
+
+<http://localhost:8080/chapter1-0.0.1-SNAPSHOT/task>
+
+
+
+#### 参考链接
+
+1. [SpringgBoot入门系列篇(十三):部署SpringBoot到tomcat上并启动](https://blog.csdn.net/qq_27905183/article/details/79121759)
+2. [利用IDEA将SpringBoot的项目打包成war文件](https://blog.csdn.net/linzhiqiang0316/article/details/52601292)
+3. [使用Tomcat部署SpringBoot项目](https://blog.csdn.net/u013279563/article/details/81144154)
 
 
 
