@@ -1,4 +1,202 @@
+
+
+
+
+
+
+
+
+
+
+# GC机制
+
+
+
+参考链接
+
+1. [成为JavaGC专家（1）—深入浅出Java垃圾回收机制](https://www.cnblogs.com/wozixiaoyao/p/5658950.html)
+2. [Java GC(绝对干货) ](https://yq.aliyun.com/articles/91017?utm_campaign=wenzhang&utm_medium=article&utm_source=QQ-qun&2017531&utm_content=m_22117)
+3. 
+
+
+
+
+
+
+
+
+
+# 系统测试优化
+
+
+
+### 性能调优
+
+
+
+#### visualVm
+
+
+
+1. [java内存工具VisualVM的简单使用以及与Idea集成](https://blog.csdn.net/KingBoyWorld/article/details/75579606)
+2. [VisualVM使用方法](https://blog.csdn.net/lijie1010/article/details/78805837)
+3. 
+
+
+
+#### JProfiler
+
+JProfiler是由ej-technologies GmbH公司开发的一款性能瓶颈分析工具(该公司还开发部署工具)。
+其特点:
+
+- - 使用方便
+  - 界面操作友好
+  - 对被分析的应用影响小
+  - CPU,Thread,Memory分析功能尤其强大
+  - 支持对jdbc,noSql, jsp, servlet, socket等进行分析
+  - 支持多种模式(离线，在线)的分析
+  - 跨平台 
+
+    JProfiler  是商业软件，需要激活码。  推荐使用visualVm
+
+
+
+#### 参考链接
+
+
+
+1. [Intellij IDEA集成JProfiler性能分析神器](https://blog.csdn.net/wytocsdn/article/details/79258247)
+2. https://www.cnblogs.com/chen110xi/p/6198481.html
+3. [Java监控工具介绍，VisualVm ,JProfiler,Perfino,Yourkit,Perf4J,JProbe,Java微基准测试](https://www.cnblogs.com/amosli/p/3901794.html)
+
+
+
+### 0x01 压力测试
+
+对别可使用Jmeter 进行压力测试
+
+
+
+
+
+#### 参考链接
+
+1. [LoadRunner与JMeter的比较](https://blog.csdn.net/n8765/article/details/49427663)
+2. [原创）如何对APP服务端进行压力测试](https://www.cnblogs.com/fengyanfengyu/p/6811872.html)
+
+
+
+### Jmeter 压力测试简介
+
+meter是apache公司基于java开发的一款开源压力测试工具，体积小，功能全，使用方便，是一个比较轻量级的测试工具，使用起来非常简单。因为jmeter是java开发的，所以运行的时候必须先要安装jdk才可以。jmeter是免安装的，拿到安装包之后直接解压就可以使用，同时运行在linux/windows/macos。
+
+ jmeter可以做接口测试和压力测试。其中接口测试的简单操作包括做http脚本（发get/post请求、加cookie、加header、加权限认证、上传文件）、做webservice脚本、参数化、断言、关联（正则表达式提取器和处理json-json path extractor）和jmeter操作数据库等等。
+
+#### Jmeter-http接口脚本
+
+一般分五个步骤:（1）添加线程组 （2）添加http请求 （3）在http请求中写入接入url、路径、请求方式和参数 （4）添加查看结果树 （5）调用接口、查看返回值
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 名词解释
+
+1. 添加虚拟用户组   如下图所示，右击“测试计划”>添加>Threads（Users）>线程组。这里xmeter君需要解释一下“线程组”的意思：JMeter是由Java实现的，并且使用一个Java线程来模拟一个用户，因此线程组（Thread  Group）就是指一组用户的意思，换句话说一个线程组就是**一组虚拟用户（virtual users）**，这些虚拟用户用来模拟访问被测系统。
+
+2. 线程数：这里就是指虚拟用户数，默认的输入是“1”，则表明模拟一个虚拟用户访问被测系统，如果想模拟100个用户，则此处输入100。
+
+3. Ramp-Up Period (in seconds):  虚拟用户增长时长。不明白别着急，xmeter君给你举个栗子：比如你测试的是一个考勤系统，那么实际用户登录使用考勤系统的时候并不是大家喊1、2、3
+
+   走起，然后一起登录。实际使用场景可能是9点钟上班，那么从8:30开始，考勤系统会陆陆续续有人开始登录，直到9:10左右，那么如果完全按照用户的使用场景，设计该测试的时候此处应输入40（分钟）*
+   60（秒）= 
+   2400。但是实际测试一般不会设置如此长的Ramp-Up时间，原因嘛，难道你做一次测试要先等上40分钟做登录操作？一般情况下，可以估计出登录频率最高的时间长度，比如此处可能从8:55到9:00登录的人最多，那这里设置成300秒，如果“线程数”输入为100，则意味着在5分钟内100用户登录完毕
+
+
+4. 循环次数：该处设置一个虚拟用户做多少次的测试。默认为1，意味着一个虚拟用户做完一遍事情之后，该虚拟用户停止运行。如果选中“永远”，则意味着测试运行起来之后就根本停不下来了，除非你把它强制咔嚓。
+
+
+
+**Ramp-up Period（in seconds）**
+
+【1】决定多长时间启动所有线程。如果使用10个线程，ramp-up   period是100秒，那么JMeter用100秒使所有10个线程启动并运行。每个线程会在上一个线程启动后10秒（100/10）启动。Ramp-up需要要充足长以避免在启动测试时有一个太大的工作负载，并且要充足小以至于最后一个线程在第一个完成前启动。   一般设置ramp-up=线程数启动，并上下调整到所需的。
+
+【2】用于告知JMeter  要在多长时间内建立全部的线程。默认值是0。如果未指定ramp-up period ，也就是说ramp-up period 为零， JMeter  将立即建立所有线程。假设ramp-up period 设置成T 秒， 全部线程数设置成N个， JMeter 将每隔T/N秒建立一个线程。
+
+【3】Ramp-Up  Period(in-seconds)代表隔多长时间执行，0代表同时并发
+
+
+
+
+
+ **![img](https://img-blog.csdn.net/20160225165606089?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)**
+
+ **Delay Thread creation until needed**         
+
+ 延迟创建线程，直到该线程开始采样，即之后的任何线程组延迟和加速时间为线程本身。这样可以支持更多的线程，但不会有太多是同时处于活动状态。
+
+          
+
+ **调度器**         
+
+ 选中调度器后，需要输入启动和结束时间。当测试启动时，如果必须JMeter会等待启动时间到达。在每个周期 结束，JMeter检验结束时间是否到达，如果是，运行停止，如果不是测试被允许继续，直到迭代限制到达。 
+
+ 另外你可以使用启动延迟和持续时间文本域。注意启动延迟会覆盖启动时间，持续时间会覆盖结束时间。
+
+
+
+
+
+1.  [Jmeter下载](http://jmeter.apache.org/download_jmeter.cgi)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 参考链接
+
+
+
+1. [Jmeter（一）简介以及环境搭建](https://www.cnblogs.com/richered/p/8324039.html)
+2. [Jmeter接口测试+压力测试](https://blog.csdn.net/github_27109687/article/details/71968662)
+
+
+
+
+
+
+
 # Spring Boot
+
+
+
+
+
+
 
 ## TODO
 
