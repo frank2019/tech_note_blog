@@ -225,6 +225,35 @@ http://spring.io/projects/spring-boot
 
 
 
+
+
+[Kafka、RabbitMQ、RocketMQ消息中间件的对比](https://www.cnblogs.com/nov5026/p/9518520.html)
+
+
+
+
+
+### sping boot 日志的存储位置设置
+
+需求
+
+1. 针对不同的包名  可将日志放在不同的目录
+2. 定制日志格式
+3. 
+
+
+
+
+
+#### 参考链接
+
+1. [Spring Boot日志管理](https://www.cnblogs.com/senlinyang/p/8654133.html)
+2. [Spring Boot 中日志使用](https://blog.csdn.net/u013360850/article/details/79110839)
+
+
+
+
+
 ### java  获取请求IP
 
 
@@ -1749,6 +1778,7 @@ Spring boot  全局统一异常处理
 参考链接
 
 1. [spring-boot-samples](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+2. [使用Java Low Level REST Client操作elasticsearch](https://www.cnblogs.com/ginb/p/8682092.html)
 
 
 
@@ -1760,7 +1790,62 @@ elastic search默认tcp端口9300，http端口9200
 
 
 
-模糊查询
+### ElasticSearch 查询
+
+
+
+参考链接
+
+1. [](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html)
+
+
+
+
+
+### spring boot 中增加一个es 接口
+
+
+
+
+
+参考链接
+
+1. [使用Java Low Level REST Client操作elasticsearch](https://www.cnblogs.com/ginb/p/8682092.html)
+
+
+
+
+
+### 基于ES 使用用户统计
+
+代码中增加定义
+
+
+
+http://42.51.192.68:10802/userevent/_search
+
+
+
+http://42.51.192.68:10802/userevent/_mapping/userevent
+
+
+
+#### 错误提示
+
+```
+Caused by: NotSerializableExceptionWrapper[: Fielddata is disabled on text fields by default. Set fielddata=true on [id] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.]; nested: IllegalArgumentException[Fielddata is disabled on text fields by default. Set fielddata=true on [id] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.];
+
+```
+
+
+
+参考链接
+
+1. [Elasticsearch 统计代码例子](https://www.cnblogs.com/didda/p/5485681.html)
+
+
+
+#### 模糊查询
 
 
 
@@ -2277,6 +2362,76 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 4. [Elasticsearch学习，请先看这一篇](https://blog.csdn.net/laoyang360/article/details/52244917)
 5. [时间序列数据库的秘密(2)——索引](http://www.infoq.com/cn/articles/database-timestamp-02?utm_source=infoq)
 6. https://www.jianshu.com/p/ed7e1ebb2fb7
+
+
+
+
+
+
+
+
+
+
+
+## 数据库
+
+
+
+### 0x01 Mysql字符串字段判断是否包含字符串的方法
+
+#### **方法一：like**
+
+```
+SELECT * FROM 表名 WHERE 字段名 like "%字符%";
+```
+
+#### **方法二：find_in_set()**
+
+利用mysql 字符串函数 find_in_set();
+
+```
+SELECT * FROM users WHERE find_in_set('字符', 字段名);
+```
+
+**方法三：locate(字符,字段名)**
+
+使用**locate(字符,字段名)**函数，如果包含，返回>0的数，否则返回0 ，
+
+它的别名是 position in
+
+```
+select * from 表名 where locate(字符,字段)
+select * from 表名 where position(字符 in 字段);
+```
+
+
+
+ 例子：判断site表中的url是否包含'http://'子串,如果不包含则拼接在url字符串开头
+**update site set url =concat('http://',url) where locate('http://',url)=0** 
+
+注意mysql中字符串的拼接不能使用加号+，用concat函数  
+
+#### 方法四：INSTR(字段,字符)
+
+```
+select * from 表名 where INSTR(字段,字符)
+```
+
+
+
+#### 参考链接
+
+1.  [Mysql字符串字段判断是否包含某个字符串的方法](https://www.cnblogs.com/ericli-ericli/articles/7904019.html)
+
+
+
+
+
+
+
+
+
+
 
 
 
