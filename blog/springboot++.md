@@ -1,3 +1,141 @@
+## Tomcat
+
+### 配置日志文件位置，service
+
+#  			[tomcat 配置项目前缀（推荐方式四）](https://www.cnblogs.com/bityinjd/p/8807850.html) 		
+
+
+
+一. 显示配置 Context 的 path
+
+ 
+
+需要在 server.xml 文件中手动配置。
+
+<Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true"></Host>中添加
+
+<Context path="/" docBase="/your/project/base/" reloadable="false"></Context>
+
+path 即为访问时前缀的名称，/表示不添加前缀。
+
+ 
+
+二. 使用 webapps 子目录 ROOT
+
+ 
+
+将项目文件夹下的文件放入 webapps 下的子目录 ROOT 中（删除原来的文件，放入的文件保证有 index 之类的文件），启动项目后，访问不需要任何前缀。
+
+ 
+
+三. 直接使用 webapps 目录（方法二是方法三的特例）
+
+ 
+
+将项目文件夹放入 webapps 下，启动后前缀即是项目文件夹的名字
+
+注意：方法二和方法三使用的 webapps 目录也是可以修改的，位置就是方法一中提到的<Host>里的 appBase。
+
+ 
+
+四. 使用 conf 目录下的 Catalina/localhost 目录
+
+ 
+
+在 localhost 目录下新建一个同文件中配置的 path 同名的 xml 文件，这里是 hello.xml 。
+
+<Context path="/hello" docBase="/your/project/base/" debug="0" privileged="true"></Context>
+
+ 
+
+这样的话可以使用这里配置的 /hello 为前缀。这样的好处是可以隐藏项目的真实名字。
+
+ 
+
+注意：这种方式比较灵活，甚至可以做到比如删除掉方法二中的 ROOT 目录，然后命名该文件为 ROOT.xml，里边的 path 置空就可以了。
+
+
+
+#### 参考链接
+
+[tomcat 配置项目前缀（推荐方式四）](https://www.cnblogs.com/bityinjd/p/8807850.html)
+
+
+
+### tomcat 部署 spring boot  项目
+
+
+
+1. [下载tomcat ](https://tomcat.apache.org/download-90.cgi)   [apache-tomcat-9.0.11.zip](mirrors.hust.edu.cn/apache/tomcat/tomcat-9/v9.0.11/bin/apache-tomcat-9.0.11.zip)
+2. 
+
+
+
+#### Spring boot 代码适配
+
+项目中的  Application主入口 需要继承 SpringBootServletInitializer  做如下类似修改
+
+
+
+```
+@SpringBootApplication
+public class Main extends SpringBootServletInitializer{
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Main.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Main.class, args);
+    }
+
+}
+```
+
+
+
+##### pom.xml文件中引入tomcat依赖
+
+```
+	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>
+```
+
+备注 ：  引入依赖后 运行会报错 。
+
+修改打包类型为  jar 改为 war
+
+```
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+```
+
+
+
+接下来就要将该项目打包成war了，IDEA打包项目：点击Build->Build Artifacts-，然后进行build即可，生成的war包会放到对应的项目根目录下的target目录下面
+
+
+
+
+
+最后将该war包移动到tomcat/webapps目录下即可，然后启动tomcat，打开浏览器输入网址：`localhost:`port`/`war包名`/`在SpringBoot中RequestMapping设置的url请求，即可进入到对应的页面或者返回结果
+
+
+
+<http://localhost:8080/chapter1-0.0.1-SNAPSHOT/task>
+
+
+
+#### 参考链接
+
+1. [SpringgBoot入门系列篇(十三):部署SpringBoot到tomcat上并启动](https://blog.csdn.net/qq_27905183/article/details/79121759)
+2. [利用IDEA将SpringBoot的项目打包成war文件](https://blog.csdn.net/linzhiqiang0316/article/details/52601292)
+3. [使用Tomcat部署SpringBoot项目](https://blog.csdn.net/u013279563/article/details/81144154)
+
 
 
 
@@ -161,22 +299,6 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### 参考链接
 
 
@@ -185,6 +307,14 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 2. [Jmeter接口测试+压力测试](https://blog.csdn.net/github_27109687/article/details/71968662)
 
 
+
+
+
+### 使用nginx 负载均衡
+
+
+
+1. [nginx实现请求的负载均衡 + keepalived实现nginx的高可用](https://www.cnblogs.com/youzhibing/p/7327342.html)
 
 
 
@@ -228,6 +358,29 @@ http://spring.io/projects/spring-boot
 
 
 [Kafka、RabbitMQ、RocketMQ消息中间件的对比](https://www.cnblogs.com/nov5026/p/9518520.html)
+
+
+
+
+
+
+
+### spring boot 获取配置中的数据
+
+
+
+1. [SpringBoot获得application.properties中数据的几种方式](https://blog.csdn.net/qq_37171353/article/details/78005845)
+
+
+
+
+1. ```html
+       @Value("${jdbc.password}") 
+   
+   
+   
+       private String password;  
+  ```
 
 
 
@@ -1230,82 +1383,6 @@ Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩�
 
 
 
-### tomcat 部署 spring boot  项目
-
-
-
-1. [下载tomcat ](https://tomcat.apache.org/download-90.cgi)   [apache-tomcat-9.0.11.zip](mirrors.hust.edu.cn/apache/tomcat/tomcat-9/v9.0.11/bin/apache-tomcat-9.0.11.zip)
-2. 
-
-
-
-#### Spring boot 代码适配
-
-项目中的  Application主入口 需要继承 SpringBootServletInitializer  做如下类似修改
-
-
-
-```
-@SpringBootApplication
-public class Main extends SpringBootServletInitializer{
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Main.class);
-    }
-
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(Main.class, args);
-    }
-
-}
-```
-
-
-
-##### pom.xml文件中引入tomcat依赖
-
-```
-	<dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
-    </dependency>
-```
-
-备注 ：  引入依赖后 运行会报错 。
-
-修改打包类型为  jar 改为 war
-
-```
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-```
-
-
-
-接下来就要将该项目打包成war了，IDEA打包项目：点击Build->Build Artifacts-，然后进行build即可，生成的war包会放到对应的项目根目录下的target目录下面
-
-
-
-
-
-最后将该war包移动到tomcat/webapps目录下即可，然后启动tomcat，打开浏览器输入网址：`localhost:`port`/`war包名`/`在SpringBoot中RequestMapping设置的url请求，即可进入到对应的页面或者返回结果
-
-
-
-<http://localhost:8080/chapter1-0.0.1-SNAPSHOT/task>
-
-
-
-#### 参考链接
-
-1. [SpringgBoot入门系列篇(十三):部署SpringBoot到tomcat上并启动](https://blog.csdn.net/qq_27905183/article/details/79121759)
-2. [利用IDEA将SpringBoot的项目打包成war文件](https://blog.csdn.net/linzhiqiang0316/article/details/52601292)
-3. [使用Tomcat部署SpringBoot项目](https://blog.csdn.net/u013279563/article/details/81144154)
-
-
-
 
 
 
@@ -1790,6 +1867,245 @@ elastic search默认tcp端口9300，http端口9200
 
 
 
+### 数据查询统计
+
+
+
+```
+{"query":{"bool":{"must":[{"term":{"results.req.searchFunc":"searchmusic"}},{"range":{"results.response.data.total":{"gte":"1"}}}]}},"size":0,"aggregations":{"topSearch":{"terms":{"field":"results.req.text.keyword","size":100}}}}
+```
+
+
+
+统计字段为指定字符串的所有集合
+
+
+
+```
+{
+    "query": {
+        "constant_score": {
+            "filter": {
+                "terms": {
+                    "eventType.keyword": [
+                        "event_heartbeat",
+                        "event_start_show"
+                    ]
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+```
+{
+    "query": {
+        "constant_score": {
+            "filter": {
+                "terms": {
+                    "eventType.keyword": [
+                        "event_heartbeat",
+                        "event_start_show"
+                    ]
+                },
+                "range": {
+                    "@timestamp": {
+                        "gt": "now-2m",
+                        "lt": "now"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+
+
+```
+{
+  "size": 0,
+  "aggs": {
+    "filtered_aggs": {
+      "filter": {
+        "range": {
+          "@timestamp": {
+            "gt": "now-15m",
+            "lt": "now"
+          }
+        }
+      },
+      "aggs": {
+        "ipv": {
+          "cardinality": {
+            "field": "userId"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
+
+
+
+collapse  去重
+
+```
+{
+    "query": {
+        "match": {
+		   "eventType": "event_start_show"
+        }
+    },
+    "collapse": {
+        "field": "userId.keyword"
+    },
+    "size": 3,
+    "from": 0
+}
+```
+
+
+
+
+
+```
+{
+	"size":0,
+    "query": {
+        "constant_score": {
+            "filter": {
+                "terms": {
+                    "eventType.keyword": [
+                        "event_heartbeat",
+                        "event_start_show",
+                        "event_first_visit",
+                        "event_register"
+                    ]
+                }
+            }
+        }
+    },
+    "collapse": {
+        "field": "userId.keyword"
+    }
+}
+```
+
+
+
+
+
+多条件过滤 统计
+
+
+
+```
+{
+    "size": 0,
+    "query": {
+        "constant_score": {
+            "filter": {
+                "terms": {
+                    "eventType.keyword": [
+                        "event_first_visit"
+                        
+                    ]
+                }
+            }
+        }
+    },
+    "aggs": {
+        "user_status": {
+            "filter": {
+                "range": {
+                    "createtime": {
+                        "gte": 0,
+                        "lte": 1636128296935
+                    }
+                }
+            },
+            "aggs": {
+                "uv": {
+                    "cardinality": {
+                        "field": "userId.keyword"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+
+
+#### 统计去重后的数据
+
+1. [统计去重后的数据](https://www.elastic.co/guide/cn/elasticsearch/guide/current/cardinality.html#cardinality)
+2. 
+
+统计独立网站访问数
+
+```
+{
+    "size": 0,
+    "aggs": {
+        "distinct_colors": {
+            "cardinality": {
+                "field": "userId"
+            }
+        }
+    }
+}
+```
+
+
+
+统计    1636128296935> createtime >0  的，按照 userId  字段去重
+
+```
+{
+    "size": 0,
+    "aggs": {
+        "recent_sales": {
+            "filter": {
+                "range": {
+                    "createtime": {
+                        "gte": 0,
+                        "lte": 1636128296935
+                    }
+                }
+            },
+            "aggs": {
+                "distinct_colors": {
+                    "cardinality": {
+                        "field": "userId.keyword"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+
+
 ### ElasticSearch 查询
 
 
@@ -1797,6 +2113,8 @@ elastic search默认tcp端口9300，http端口9200
 参考链接
 
 1. [](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html)
+2. [elasticsearch常用操作](https://www.cnblogs.com/fclbky/p/7238494.html)
+3. https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html
 
 
 
@@ -1842,6 +2160,12 @@ Caused by: NotSerializableExceptionWrapper[: Fielddata is disabled on text field
 参考链接
 
 1. [Elasticsearch 统计代码例子](https://www.cnblogs.com/didda/p/5485681.html)
+
+
+
+#### ava.lang.NoClassDefFoundError: org/elasticsearch/transport/Netty3Plugin
+
+
 
 
 
