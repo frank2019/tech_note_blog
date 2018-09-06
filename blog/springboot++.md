@@ -168,6 +168,52 @@ public class Main extends SpringBootServletInitializer{
 
 
 
+### 高并发  
+
+
+
+1. QPS（TPS）：每秒钟 request/事务 数量，在互联网领域，指每秒响应请求数（指http请求）； 
+2. 吞吐量：单位时间内处理的请求数量（通常由QPS与并发数决定）
+3. 响应时间：系统对一个请求做出响应的平均时间。例如系统处理一个HTTP请求需要200ms，这个200ms就是系统的响应时间（我认为这里应该仅包含处理时间，网络传输时间忽略）。
+4. 
+
+每天300w PV 的在单台机器上，这台机器需要多少QPS？ 
+
+( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)。
+
+一般需要达到139QPS，因为是峰值。
+
+
+
+QPS 
+
+每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。
+
+每秒查询率
+
+因特网上，经常用每秒查询率来衡量域名系统服务器的机器的性能，其即为QPS。
+
+对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。
+
+
+
+指标
+
+1. 原理：每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间。
+2. 公式：( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒请求数(QPS) 。
+3. 机器：峰值时间每秒QPS / 单台机器的QPS = 需要的机器 。
+
+
+
+参考链接
+
+1.  [深入浅出QPS、RT和最佳线程数](https://www.jianshu.com/p/8532ac88ce72)
+2. [高性能高并发 面试](https://www.cnblogs.com/heartstage/p/3415584.html)
+
+
+
+
+
 ### 性能调优
 
 
@@ -314,7 +360,36 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 
 
 
+#### 安装 nginx  
+
+ 安装Nginx时报错
+
+ ./configure: error: the HTTP rewrite module requires the PCRE library.
+
+ 安装pcre-devel解决问题
+ yum -y install pcre-devel
+
+  
+
+ 错误提示：./configure: error: the HTTP cache module requires md5 functions
+ from OpenSSL library.   You can either disable the module by using
+ --without-http-cache option, or install the OpenSSL library into the system,
+ or build the OpenSSL library statically from the source with nginx by using
+ --with-http_ssl_module --with-openssl=<path> options.
+
+ 解决办法：
+
+ yum -y install openssl openssl-devel
+
+
+
+
+
+
+
 1. [nginx实现请求的负载均衡 + keepalived实现nginx的高可用](https://www.cnblogs.com/youzhibing/p/7327342.html)
+2. [Nginx 服务器安装及配置文件详解](https://www.cnblogs.com/bluestorm/p/4574688.html)
+3. [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
 
 
 
@@ -2803,3 +2878,14 @@ http://www.woshipm.com/evaluating/864679.html
 2. http://www.360doc.com/content/16/0414/08/31916802_550465254.shtml
 3. [爬虫进阶教程：抖音APP无水印视频批量下载](http://cuijiahua.com/blog/2018/03/spider-5.html)
 
+
+
+
+
+
+
+常用命令
+
+
+
+1. [Git 常用命令大全](https://blog.csdn.net/halaoda/article/details/78661334)
