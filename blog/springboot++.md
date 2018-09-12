@@ -17,7 +17,9 @@
 
 
 
+### Question
 
+1. 在自定义application.yml 中 的属性  使用@value  获取不到
 
 
 
@@ -358,7 +360,7 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 
  延迟创建线程，直到该线程开始采样，即之后的任何线程组延迟和加速时间为线程本身。这样可以支持更多的线程，但不会有太多是同时处于活动状态。
 
-          
+​          
 
  **调度器**         
 
@@ -421,6 +423,7 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 1. [nginx实现请求的负载均衡 + keepalived实现nginx的高可用](https://www.cnblogs.com/youzhibing/p/7327342.html)
 2. [Nginx 服务器安装及配置文件详解](https://www.cnblogs.com/bluestorm/p/4574688.html)
 3. [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
+4. https://www.cnblogs.com/youzhibing/p/7327342.html
 
 
 
@@ -2811,6 +2814,14 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 ## 数据库
+
+
+
+### 0x02 缓存与数据库一致性保证
+
+
+
+1. [缓存与数据库一致性保证](https://www.cnblogs.com/duyinqiang/p/5696253.html)
 
 
 
