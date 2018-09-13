@@ -25,9 +25,142 @@
 
 
 
+### Nginx反向代理tomcat服务器配置
+
+
+
+nginx.conf
+
+```
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+    include /usr/local/nginx/conf/conf.d/*.conf;
+}
+```
+
+
+
+
+
+配置测试可用
+
+1. [使用Nginx反向代理tomcat服务器](https://blog.csdn.net/u012476983/article/details/54095446)
+
+
+
+
+
+### 使用nginx 负载均衡
+
+
+
+
+
+
+
+#### 安装 nginx  
+
+ 安装Nginx时报错
+
+ ./configure: error: the HTTP rewrite module requires the PCRE library.
+
+ 安装pcre-devel解决问题
+ yum -y install pcre-devel
+
+  
+
+ 错误提示：./configure: error: the HTTP cache module requires md5 functions
+ from OpenSSL library.   You can either disable the module by using
+ --without-http-cache option, or install the OpenSSL library into the system,
+ or build the OpenSSL library statically from the source with nginx by using
+ --with-http_ssl_module --with-openssl=<path> options.
+
+ 解决办法：
+
+ yum -y install openssl openssl-devel
+
+
+
+
+
+
+
+1. [nginx实现请求的负载均衡 + keepalived实现nginx的高可用](https://www.cnblogs.com/youzhibing/p/7327342.html)
+2. [Nginx 服务器安装及配置文件详解](https://www.cnblogs.com/bluestorm/p/4574688.html)
+3. [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
+4. https://www.cnblogs.com/youzhibing/p/7327342.html
+
+
+
+
+
+
+
 
 
 ## Tomcat
+
+
+
+### tomcat 部署多个节点
+
+
+
+```
+<Server port="8005" shutdown="SHUTDOWN">,port改为8015、8025、8035，不冲突即可
+<Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+将8080改为8081、8082、8083，不冲突即可
+<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />，portt改为8019、8029、8039，不冲突即可
+```
+
+
+
+一个tomcat 对应  三个端口。  端口不要有冲突
+
+8001   8015  8019
+
+8002  8025  8029
+
+8003  8035  8039
+
+参考链接
+
+1.  [Linux（CentOS）下同时启动两个tomcat](https://www.cnblogs.com/yaowen/p/9370403.html)
+2. [正向代理与反向代理【总结】](https://www.cnblogs.com/Anker/p/6056540.html)
+
+
+
+
 
 
 
@@ -384,46 +517,6 @@ meter是apache公司基于java开发的一款开源压力测试工具，体积�
 
 1. [Jmeter（一）简介以及环境搭建](https://www.cnblogs.com/richered/p/8324039.html)
 2. [Jmeter接口测试+压力测试](https://blog.csdn.net/github_27109687/article/details/71968662)
-
-
-
-
-
-### 使用nginx 负载均衡
-
-
-
-#### 安装 nginx  
-
- 安装Nginx时报错
-
- ./configure: error: the HTTP rewrite module requires the PCRE library.
-
- 安装pcre-devel解决问题
- yum -y install pcre-devel
-
-  
-
- 错误提示：./configure: error: the HTTP cache module requires md5 functions
- from OpenSSL library.   You can either disable the module by using
- --without-http-cache option, or install the OpenSSL library into the system,
- or build the OpenSSL library statically from the source with nginx by using
- --with-http_ssl_module --with-openssl=<path> options.
-
- 解决办法：
-
- yum -y install openssl openssl-devel
-
-
-
-
-
-
-
-1. [nginx实现请求的负载均衡 + keepalived实现nginx的高可用](https://www.cnblogs.com/youzhibing/p/7327342.html)
-2. [Nginx 服务器安装及配置文件详解](https://www.cnblogs.com/bluestorm/p/4574688.html)
-3. [《Nginx官方文档》使用nginx作为HTTP负载均衡](http://ifeve.com/nginx-http/)
-4. https://www.cnblogs.com/youzhibing/p/7327342.html
 
 
 
@@ -2264,6 +2357,10 @@ http://42.51.192.68:10802/userevent/_mapping/userevent
 
 
 
+http://35.172.3.21:39200/userevent/_mapping/userevent
+
+
+
 #### 错误提示
 
 ```
@@ -2814,6 +2911,25 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 ## 数据库
+
+
+
+### 0x03同步mysql数据到elasticsearch的利器
+
+#### **go-mysql-elasticsearch**
+
+项目地址: https://github.com/siddontang/go-mysql-elasticsearch
+
+
+
+#### 参考链接
+
+1. [mysql数据实时同步到Elasticsearch](https://www.jianshu.com/p/c3faa26bc221)
+2. [mysql准实时同步数据到Elasticsearch    ](https://yq.aliyun.com/articles/276730) 
+3. https://www.elastic.co/cn/products/logstash
+4. [Logstash 基础入门](https://www.cnblogs.com/moonlightL/p/7760512.html)
+
+
 
 
 
