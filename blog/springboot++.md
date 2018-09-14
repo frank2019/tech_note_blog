@@ -2076,6 +2076,26 @@ elastic search默认tcp端口9300，http端口9200
 
 
 
+### 使用python api 访问ES
+
+
+
+
+
+
+
+参考链接
+
+1. [python对elasticsearch进行数据的增删改查](https://blog.csdn.net/chinabestchina/article/details/80905147)
+
+
+
+
+
+
+
+
+
 ### 数据查询统计
 
 
@@ -2217,9 +2237,7 @@ collapse  去重
 
 
 
-多条件过滤 统计
-
-
+多条件过滤 统计   获取 
 
 ```
 {
@@ -2911,6 +2929,22 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 ## 数据库
+
+
+
+### 0x04 redis 与本地缓存
+
+ehcache
+
+
+
+1. [java本地缓存和redis缓存](https://www.cnblogs.com/tiancaizhu/p/8600414.html)
+2. [Reids分布式缓存+Ehcache本地缓存解决方案](https://blog.csdn.net/baiyunpeng42/article/details/53694430)
+3. [Java Jedis操作Redis示例（四）——Redis和Mysql的结合方案演进](https://blog.csdn.net/kingcat666/article/details/77936970)
+4. [SpringBoot使用Redis缓存](https://www.cnblogs.com/gdpuzxs/p/7222309.html)
+5. https://www.cnblogs.com/softidea/p/5801499.html
+6. [SpringBoot之整合Redis分析和实现-基于Spring Boot2.0.2版本](https://blog.csdn.net/weixin_39723544/article/details/80743074)
+7. 
 
 
 
