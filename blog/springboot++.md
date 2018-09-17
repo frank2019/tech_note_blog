@@ -8,6 +8,8 @@
 
 
 
+
+
 ### todo
 
 1. https://www.cnblogs.com/zy-l/p/9178704.html
@@ -2924,11 +2926,231 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 
+# 缓存系统
+
+1. [IntelliJ IDEA 源值1.5已过时，将在未来所有版本中删除](https://blog.csdn.net/duchao123duchao/article/details/71480106)
+2. [Spring Cache扩展：注解失效时间+主动刷新缓存](https://blog.csdn.net/huanghongfei1/article/details/61195650/)
+
+
+
+### 0x01缓存基本概念一览
+
+tags: redis,ehcahe,jcache,memcache  
+
+
+
+缓存机制的引入可以提高系统的访问效率。
+
+它的主要实现思想是：在程序和数据源之间引入一个中间层即Cache，访问cache的时间成本肯定远低于数据源。
+
+按照Cache所在可以简单分为进程外缓存和本地缓存。
+
+对于单机推荐使用 ehcahe
+
+对于分布式 推荐使用 redis 和 　　MemCached；
+
+
+
+1. SpringBoot支持很多种缓存方式：redis、guava、ehcahe、jcache等等。
+2. Redis && memcache  缓存中间件：属于独立的运行程序 可以单机部署，也可以分布式部署；
+3. ehcache：  是程序的一个功能模块。  缓存的访问速度快，但不太适合分布式部署。
+4. 读写速度，不考虑并发问题，本地缓存是最快的
 
 
 
 
-## 数据库
+
+#### 缓存预热
+
+在缓存初始化时，缓存中是没有任何缓存数据的，需先将数据缓存后，缓存服务才算完全启动。预热方式：
+
+- miss后，实时查询，然后更新缓存数据；  
+  1. 缺点1：多个tomcat实例同时查询数据并跟新缓存，在一段时间内缓存近似于失效；
+  2. 缺点2：在高并发场景下，无法限制对数据库访问速度；
+- 通过task或接口预先加载服务，然后开启缓存服务； 
+  1. 优势1：在初始化服务时，限制加载数据的速度；
+  2. 优势2：批量查询数据库，减少与数据库之间的网络交互；
+
+#### 缓存穿透的问题
+
+问题：
+
+- 缓存穿透是指查询一个根本不存在的数据，缓存层和存储层都不会命中，
+- 缓存穿透将导致不存在的数据每次请求都要到存储层去查询，失去了缓存保护后端存储的意义。
+
+原因：代码问题， 爬虫，攻击，大量空命中
+
+场景：查询某个文章，给了一个错误的文章id。一直查询不到。
+
+方法：
+
+缓存空对象
+
+- 空值做缓存，即缓存层中存了更多的键，这就需要更多的内存空间 ，可以对其设置一个较短的过期时间，让其自动清除。
+- 优点是实时性高，代码维护简单。
+
+可以缓存到本地内存中，空对想用一个静态变量。这样不会造成 造成占用内存。
+
+
+
+#### 参考链接
+
+1. [ehcache、memcache、redis三大缓存比较](https://www.cnblogs.com/qlqwjy/p/7788912.html)
+2. [MemCached vs Redis 对象缓存的比较](https://www.cnblogs.com/shelvenn/p/3839848.html)
+3. [总结：如何使用redis缓存加索引处理数据库百万级并发](https://www.cnblogs.com/fanwencong/p/5782860.html)
+4. [学习笔记：cache 和spring cache 技术---本地缓存-分布式缓存，缓存穿透，雪崩，和热点key的问题](https://blog.csdn.net/ly_dut0627/article/details/78747555)
+
+
+
+### 0x02 SpringBoot使用注解方式同时集成Redis、Ehcache
+
+目标是
+
+1. 同时使用redis 和encache
+2. 部分缓存使用redis，部分缓存使用encache
+
+
+
+#### 在pom.xml中增加支持
+
+```
+	<!-- 本地缓存依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
+
+		<!-- redis缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+```
+
+
+
+
+
+#### 出错提示
+
+##### 1 'org.springframework.cache.interceptor.CacheExpressionRootObject' -maybe not public
+
+```
+org.springframework.expression.spel.SpelEvaluationException: EL1008E: Property or field 'test' cannot be found on object of type 'org.springframework.cache.interceptor.CacheExpressionRootObject' - maybe not public?
+```
+
+将
+
+```
+@Cacheable(value = Fields.SYS_CACHE,key = "key")
+```
+
+```
+
+
+```
+
+
+
+```
+@Cacheable(value = Fields.SYS_CACHE,key = "'key'")
+```
+
+
+
+#### 参考链接
+
+1. [在SpringBoot中配置多个cache,实现多个cacheManager灵活切换](https://blog.csdn.net/s674334235/article/details/82593899)
+
+
+
+### 0x01 Spring缓存注解@Cacheable、@CacheEvict、@CachePut使用
+
+从3.1开始，Spring引入了对Cache的支持。其使用方法和原理都类似于Spring对事务管理的支持。Spring 
+Cache是作用在方法上的，其核心思想是这样的：当我们在调用一个缓存方法时会把该方法参数和返回结果作为一个键值对存放在缓存中，等到下次利用同样的参数来调用该方法时将不再执行该方法，而是直接从缓存中获取结果进行返回。所以在使用Spring Cache的时候我们要保证我们缓存的方法对于相同的方法参数要有相同的返回结果。
+
+使用Spring Cache需要我们做两方面的事：
+
+1.  声明某些方法使用缓存
+2. 配置Spring对Cache的支持
+
+
+
+和Spring对事务管理的支持一样，Spring对Cache的支持也有基于注解和基于XML配置两种方式。下面我们先来看看基于注解的方式。
+
+#### 1       基于注解的支持
+
+Spring为我们提供了几个注解来支持Spring 
+Cache。其核心主要是@Cacheable和@CacheEvict。使用@Cacheable标记的方法在执行后Spring 
+Cache将缓存其返回结果，而使用@CacheEvict标记的方法会在方法执行前或者执行后移除Spring 
+Cache中的某些元素。下面我们将来详细介绍一下Spring基于注解对Cache的支持所提供的几个注解。
+
+##### 1.1    @Cacheable
+
+​        @Cacheable可以标记在一个方法上，也可以标记在一个类上。当标记在一个方法上时表示该方法是支持缓存的，当标记在一个类上时则表示该类所有的方法都是支持缓存的。对于一个支持缓存的方法，Spring会在其被调用后将其返回值缓存起来，以保证下次利用同样的参数来执行该方法时可以直接从缓存中获取结果，而不需要再次执行该方法。Spring在缓存方法的返回值时是以键值对进行缓存的，值就是方法的返回结果，至于键的话，Spring又支持两种策略，默认策略和自定义策略，这个稍后会进行说明。需要注意的是当一个支持缓存的方法在对象内部被调用时是不会触发缓存功能的。@Cacheable可以指定三个属性，value、key和condition。
+
+参数： value缓存名、 key缓存键值、 condition满足缓存条件、unless否决缓存条件
+
+除了上述使用方法参数作为key之外，Spring还为我们提供了一个root对象可以用来生成key。通过该root对象我们可以获取到以下信息。
+
+| 属性名称    | 描述                        | 示例                 |
+| ----------- | --------------------------- | -------------------- |
+| methodName  | 当前方法名                  | #root.methodName     |
+| method      | 当前方法                    | #root.method.name    |
+| target      | 当前被调用的对象            | #root.target         |
+| targetClass | 当前被调用的对象的class     | #root.targetClass    |
+| args        | 当前方法参数组成的数组      | #root.args[0]        |
+| caches      | 当前被调用的方法使用的Cache | #root.caches[0].name |
+
+ 
+
+示例
+
+```
+    @Cacheable(value = "user", key = "#id")  
+    public User findById(final Long id) {  
+        System.out.println("cache miss, invoke find by id, id:" + id);  
+        for (User user : users) {  
+            if (user.getId().equals(id)) {  
+                return user;  
+            }  
+        }  
+        return null;  
+    }  
+    
+@CachePut(value = "user", key = "#user.id", condition="#user.id%2==0")  
+public User save(User user) {  
+    users.add(user);  
+    return user;  
+}  
+```
+
+##### 1.2     @CachePut
+
+​       在支持Spring  Cache的环境下，对于使用@Cacheable标注的方法，Spring在每次执行前都会检查Cache中是否存在相同key的缓存元素，如果存在就不再执行该方法，而是直接从缓存中获取结果进行返回，否则才会执行并将返回结果存入指定的缓存中。@CachePut也可以声明一个方法支持缓存功能。与@Cacheable不同的是使用@CachePut标注的方法在执行前不会去检查缓存中是否存在之前执行过的结果，而是每次都会执行该方法，并将执行结果以键值对的形式存入指定的缓存中。
+
+
+
+#### 参考链接
+
+1. [Spring缓存注解@Cacheable、@CacheEvict、@CachePut使用](https://www.cnblogs.com/fashflying/p/6908028.html)
+2. [Springboot中使用缓存](https://www.cnblogs.com/m4tech/p/6641110.html)
+3. [Spring 4 Caching Annotations Tutorial](http://websystique.com/spring/spring-4-cacheable-cacheput-cacheevict-caching-cacheconfig-enablecaching-tutorial/)
+4. 
+
+
+
+
+
+# 数据库 and  redis
 
 
 
@@ -3024,6 +3246,8 @@ select * from 表名 where INSTR(字段,字符)
 
 
 
+
+# Spring boot 入门
 
 
 
