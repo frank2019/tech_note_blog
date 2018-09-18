@@ -22,7 +22,45 @@
 
 
 
-## Mysql数据库
+# Redis
+
+### release.redis相关工具软件推荐
+
+1. windows下 不错的可视化客户端      链接：https://pan.baidu.com/s/1gEeM7ttwJCik96R4teRUpw 密码：t10g
+2. windows版  redis服务端  [下载](https://github.com/ServiceStack/redis-windows/blob/master/downloads/redis-64.3.0.503.zip)
+
+#### redis测试命令
+
+获取所有key
+
+```
+keys *
+```
+
+获取指定key
+
+```
+get thekey
+```
+
+
+
+#### 相关文档：
+
+1. [windows下redis安装](https://blog.csdn.net/u012343297/article/details/78839063)
+2. [Redis 命令参考](http://doc.redisfans.com/index.html)
+
+
+
+### todo.python  redis基本操作
+
+
+
+1. [Python—redis](https://www.cnblogs.com/melonjiang/p/5342383.html)
+
+
+
+# Mysql数据库
 
 
 
@@ -34,24 +72,23 @@
 
    `conda install -c anaconda pymysql` 
 
-   
+
 
    conda install pymysql
 
-   
+
 
    ```
    python3 -m pip install PyMySQL
    ```
 
-   
+
 
    参考链接
 
    1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
    2. https://anaconda.org/anaconda/pymysql
 
-   
 
 
 

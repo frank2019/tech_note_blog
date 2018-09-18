@@ -14,6 +14,10 @@
 
 1. https://www.cnblogs.com/zy-l/p/9178704.html
 2. [SpringBoot几种定时任务的实现方式](https://www.cnblogs.com/zy-l/p/9178704.html)
+3. [技术博客](https://www.cnblogs.com/ityouknow/p/9171307.html)
+4. [为什么说 Java 程序员到了必须掌握 Spring Boot 的时候?](https://www.cnblogs.com/ityouknow/p/9175980.html)
+5. [10个基于DOCKER的顶尖开发工具](https://www.jdon.com/artichect/top-10-open-source-docker-developer-tools.html)
+6. 
 
 
 
@@ -572,7 +576,168 @@ http://spring.io/projects/spring-boot
 
 
 
+### todo.SpringBoot几种定时任务的实现方式
 
+#### 定时任务的几种实现方式；
+
+Timer：这是java自带的java.util.Timer类，这个类允许你调度一个java.util.TimerTask任务。使用这种方式可以让你的程序按照某一个频度执行，但不能在指定时间运行。一般用的较少。
+
+ScheduledExecutorService：也jdk自带的一个类；是基于线程池设计的定时任务类,每个调度任务都会分配到线程池中的一个线程去执行,也就是说,任务是并发执行,互不影响。
+
+Spring Task：Spring3.0以后自带的task，可以将它看成一个轻量级的Quartz，而且使用起来比Quartz简单许多。
+
+Quartz：这是一个功能比较强大的的调度器，可以让你的程序在指定时间执行，也可以按照某一个频度执行，配置起来稍显复杂
+
+
+
+#### Spring Quartz 和 Spring Task执行时间对比： 
+
+1. Quartz设置同步模式时：一个任务的两次执行的时间间隔是：“执行时间”和“trigger的设定间隔”的最大值 
+2. Task默认同步模式：一个任务的两次执行的时间间隔是：“执行时间”+“trigger的设定间隔”，即一个任务完成执行后，才开始trigger计时    
+
+##### Spring Quartz 特点： 
+
+ 1. 默认多线程异步执行 
+ 2. 一个任务在上一次调度未完成执行，下一次调度时间到时，会另起一个线程开始新的调度。在业务繁忙时，一个任务或许会有多个线程在执行，导致数据处理异常。 
+ 3. 单任务同步：配置属性，可以使一个任务的一次调度在未完成时，而不会开启下一次调度 
+ 4. 多个任务同时运行，任务之间没有直接的影响，多任务执行的快慢取决于CPU的性能 
+ 5. SchedulerFactoryBean不能使用注解来配置。还是我没找到注解的方法。 
+
+##### Spring Task特点： 
+
+  1. 默认单线程同步执行 
+  2. 一个任务执行完上一次之后，才会执行下一次调度 
+  3. 多任务之间按顺序执行，一个任务执行完成之后才会执行另一个任务 
+  4. 多任务并行执行需要设置线程池 
+  5. 全程可以通过注解配置 
+
+
+
+#### Spring Task的简单使用
+
+
+
+#### 定制任务场景
+
+定时任务实现，提供固定周期、固定周期延迟间隔和制定时间点执行等场景。采用@Scheduled注解进行标注。
+
+
+
+```java
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@Component
+public class TimerTask {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+    @Scheduled(fixedRate = 10000)
+    public void timerRate() {
+        System.out.println(dateFormat.format(new Date()));
+    }
+
+    //第一次延迟1秒执行，当执行完后2秒再执行
+    @Scheduled(initialDelay = 1000, fixedDelay = 2000)
+    public void timerInit() {
+        System.out.println("init : "+dateFormat.format(new Date()));
+    }
+
+    //每天18点40分50秒时执行
+    @Scheduled(cron = "50 40 18 * * ?")
+    public void timerCron() {
+        System.out.println("tiask current time : "+ dateFormat.format(new Date()));
+    }
+}
+
+```
+
+
+
+##### 启动应用程序 
+
+启动程序，需要增加@EnableScheduling注解.
+
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+@EnableScheduling
+public class SpringBootScheduledApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootScheduledApplication.class, args);
+    }
+}
+```
+
+
+
+##### Spring Task 配置多任务异步时间
+
+
+
+
+
+
+
+#### 参考链接
+
+1. [SpringBoot几种定时任务的实现方式](https://www.cnblogs.com/zy-l/p/9178704.html)
+2. [Spring Quartz 和 Spring Task使用比较](https://yq.aliyun.com/ziliao/366191)
+3. [Springboot中使用Scheduled做定时任务](https://www.cnblogs.com/lirenqing/p/6596557.html)
+
+
+
+### spring boot 获取项目运行时的根目录
+
+```
+
+```
+
+
+
+
+
+**springboot部署之后无法获取项目目录的问题：**
+
+之前看到网上有提问在开发一个springboot的项目时，在项目部署的时候遇到一个问题：就是我将项目导出为jar包，然后用java -jar 运行时，项目中文件上传的功能无法正常运行，其中获取到存放文件的目录的绝对路径的值为空，文件无法上传。[问题链接](https://zhidao.baidu.com/question/1899223905338685100.html)
+
+**不清楚此网友具体是怎么实现的，通常我们可以通过如下方案解决：**
+
+```java
+//获取跟目录
+File path = new File(ResourceUtils.getURL("classpath:").getPath());
+if(!path.exists()) path = new File("");
+System.out.println("path:"+path.getAbsolutePath());
+
+//如果上传目录为/static/images/upload/，则可以如下获取：
+File upload = new File(path.getAbsolutePath(),"static/images/upload/");
+if(!upload.exists()) upload.mkdirs();
+System.out.println("upload url:"+upload.getAbsolutePath());
+//在开发测试模式时，得到的地址为：{项目跟目录}/target/static/images/upload/
+//在打包成jar正式发布时，得到的地址为：{发布jar包目录}/static/images/upload/1234567891011
+```
+
+**另外使用以上代码需要注意，因为以jar包发布时，我们存储的路径是与jar包同级的static目录，因此我们需要在jar包目录的application.properties配置文件中设置静态资源路径，如下所示：**
+
+```properties
+#设置静态资源路径，多个以逗号分隔
+spring.resources.static-locations=classpath:static/,file:static/12
+```
+
+以jar包发布springboot项目时，默认会先使用jar包跟目录下的application.properties来作为项目配置文件。
+
+
+
+#### 参考链接
+
+1. [springboot获取项目跟目录](https://blog.csdn.net/heylun/article/details/78732451)
 
 
 
@@ -1795,7 +1960,7 @@ public class UsersControllerTest {
 
 
 
-### T0x04  Spring boot 的日志记录
+### 0x04.todo.  Spring boot 的日志记录
 
 已经有的日志框架  JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j… 
 
@@ -2933,7 +3098,7 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 
-### 0x01缓存基本概念一览
+### 0x01.release.缓存基本概念一览
 
 tags: redis,ehcahe,jcache,memcache  
 
@@ -3002,27 +3167,27 @@ tags: redis,ehcahe,jcache,memcache
 
 
 
-### 0x02 SpringBoot使用注解方式同时集成Redis、Ehcache
+### 0x02.release. SpringBoot使用注解方式同时集成Redis、Ehcache
 
-目标是
+#### 目标是
 
 1. 同时使用redis 和encache
-2. 部分缓存使用redis，部分缓存使用encache
+2. 部分缓存使用redis，部分缓存使用encache，可代码自动选择
 
 
 
 #### 在pom.xml中增加支持
 
 ```
-	<!-- 本地缓存依赖 -->
+<!-- 本地缓存依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>javax.cache</groupId>
 			<artifactId>cache-api</artifactId>
@@ -3033,15 +3198,327 @@ tags: redis,ehcahe,jcache,memcache
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0-rc5</version>
+		</dependency>
+
 ```
 
 
+
+#### 配置Application类
+
+```
+//通过exclude不注入数据源
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+public class DemocacheApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemocacheApplication.class, args);
+	}
+}
+```
+
+如果项目中没有数据源可以使用如下注解
+
+排除不进行数据源配置
+
+```
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+```
+
+也可以在有yml配置中增加数据源 ： 如数据库等
+
+
+
+#### CacheManagerConfig
+
+
+
+```
+package com.demo.cache;
+
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
+import org.springframework.boot.autoconfigure.cache.CacheProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerUtils;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+
+@Configuration
+@EnableCaching
+@EnableConfigurationProperties(CacheProperties.class)
+public class CacheManagerConfig {
+    private final CacheProperties cacheProperties;
+
+    CacheManagerConfig(CacheProperties cacheProperties) {
+        this.cacheProperties = cacheProperties;
+    }
+
+    /**
+     * cacheManager名字
+     */
+    public interface CacheManagerNames {
+        /**
+         * redis
+         */
+        String REDIS_CACHE_MANAGER = "redisCacheManager";
+
+        /**
+         * ehCache
+         */
+        String EHCACHE_CACHE_MAANGER = "ehCacheCacheManager";
+    }
+
+    /**
+     * 缓存名，名称暗示了缓存时长 注意： 如果添加了新的缓存名，需要同时在下面的RedisCacheCustomizer#RedisCacheCustomizer里配置名称对应的缓存时长
+     * ，时长为0代表永不过期；缓存名最好公司内部唯一，因为可能多个项目共用一个redis。
+     *
+     * @see RedisCacheCustomizer#customize(RedisCacheManager)
+     */
+    public interface CacheNames {
+        /** 15分钟缓存组 */
+        String CACHE_15MINS = "cp_salary:cache:15m";
+        /** 30分钟缓存组 */
+        String CACHE_30MINS = "cp_salary:cache:30m";
+        /** 60分钟缓存组 */
+        String CACHE_60MINS = "cp_salary:cache:60m";
+        /** 180分钟缓存组 */
+        String CACHE_180MINS = "cp_salary:cache:180m";
+    }
+
+    /**
+     * ehcache缓存名
+     */
+    public interface EhCacheNames {
+        String CACHE_10MINS = "cp_salary:cache:10m";
+
+        String CACHE_20MINS = "cp_salary:cache:20m";
+
+        String CACHE_30MINS = "cp_salary:cache:30m";
+    }
+
+
+    /**
+     * 默认的redisCacheManager
+     * @param redisTemplate 通过参数注入，这里没有手动给它做配置。在引入了redis的jar包，并且往
+     * application.yml里添加了spring.redis的配置项，springboot的autoconfig会自动生成一个
+     * redisTemplate的bean
+     * @return
+     */
+
+    @Primary
+    @Bean
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory factory) {
+        RedisCacheManager cacheManager = RedisCacheManager.create(factory);
+        return cacheManager;
+    }
+
+
+    @Bean
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory){
+        StringRedisTemplate template = new StringRedisTemplate(factory);
+        setSerializer(template);//设置序列化工具
+        template.afterPropertiesSet();
+        return template;
+    }
+
+    /** cache的一些自定义配置 */
+    @Bean
+    public RedisCacheCustomizer redisCacheManagerCustomizer() {
+        return new RedisCacheCustomizer();
+    }
+
+    private static class RedisCacheCustomizer
+            implements CacheManagerCustomizer<RedisCacheManager> {
+        /** CacheManager缓存自定义初始化比较早，尽量不要@autowired 其他spring 组件 */
+        @Override
+        public void customize(RedisCacheManager cacheManager) {
+            // 自定义缓存名对应的过期时间
+            Map<String, Long> expires = ImmutableMap.<String, Long>builder()
+                    .put(CacheNames.CACHE_15MINS, TimeUnit.MINUTES.toSeconds(15))
+                    .put(CacheNames.CACHE_30MINS, TimeUnit.MINUTES.toSeconds(30))
+                    .put(CacheNames.CACHE_60MINS, TimeUnit.MINUTES.toSeconds(60))
+                    .put(CacheNames.CACHE_180MINS, TimeUnit.MINUTES.toSeconds(180)).build();
+            // spring cache是根据cache name查找缓存过期时长的，如果找不到，则使用默认值
+            /*cacheManager.setDefaultExpiration(TimeUnit.MINUTES.toSeconds(30));
+            cacheManager.setExpires(expires);*/
+
+        }
+    }
+
+    /**
+     * 创建ehCacheCacheManager
+     */
+    @Bean
+    public EhCacheCacheManager ehCacheCacheManager() {
+
+        Resource p = this.cacheProperties.getEhcache().getConfig();
+        Resource location = this.cacheProperties
+                .resolveConfigLocation(p);
+        return new EhCacheCacheManager(EhCacheManagerUtils.buildCacheManager(location));
+    }
+
+    private void setSerializer(StringRedisTemplate template){
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+    }
+
+}
+
+```
+
+
+
+#### CacheConfig.java
+
+将出错信息 写入日志
+
+```
+package com.demo.cache;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheErrorHandler;
+import org.springframework.cache.interceptor.SimpleCacheErrorHandler;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+
+/**
+ * Spring cache的一些配置，建议组件相关配置都放在相应的configuration类中
+ *
+ * @author
+ */
+@Configuration
+@ConditionalOnBean(RedisCacheManager.class)
+public class CacheConfig extends CachingConfigurerSupport {
+    @Autowired
+    private RedisCacheManager redisCacheManager;
+
+    /**
+     * 重写这个方法，目的是用以提供默认的cacheManager
+     * @return
+     */
+    @Override
+    public CacheManager cacheManager() {
+        return redisCacheManager;
+    }
+
+    /** 如果cache出错， 我们会记录在日志里，方便排查，比如反序列化异常 */
+    @Override
+    public CacheErrorHandler errorHandler() {
+        return new LoggingCacheErrorHandler();
+    }
+
+
+    /* non-public */ static class LoggingCacheErrorHandler extends SimpleCacheErrorHandler {
+        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+        @Override
+        public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
+            logger.error(String.format("cacheName:%s,cacheKey:%s",
+                    cache == null ? "unknown" : cache.getName(), key), exception);
+            super.handleCacheGetError(exception, cache, key);
+        }
+
+        @Override
+        public void handleCachePutError(RuntimeException exception, Cache cache, Object key,
+                                        Object value) {
+            logger.error(String.format("cacheName:%s,cacheKey:%s",
+                    cache == null ? "unknown" : cache.getName(), key), exception);
+            super.handleCachePutError(exception, cache, key, value);
+        }
+
+        @Override
+        public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
+            logger.error(String.format("cacheName:%s,cacheKey:%s",
+                    cache == null ? "unknown" : cache.getName(), key), exception);
+            super.handleCacheEvictError(exception, cache, key);
+        }
+
+        @Override
+        public void handleCacheClearError(RuntimeException exception, Cache cache) {
+            logger.error(String.format("cacheName:%s", cache == null ? "unknown" : cache.getName()),
+                    exception);
+            super.handleCacheClearError(exception, cache);
+        }
+    }
+}
+```
+
+#### CacheDemoService.java
+
+测试代码
+
+```
+@Service
+public class CacheDemoService {
+
+    @Cacheable(key = "'key'", cacheManager = CacheManagerConfig.CacheManagerNames.EHCACHE_CACHE_MAANGER, cacheNames = CacheManagerConfig.EhCacheNames.CACHE_10MINS)
+    public String demo(String key) {
+        return "abc" + key;
+    }
+
+    //@Cacheable(key = "'key'", cacheNames = CacheManagerConfig.CacheNames.CACHE_15MINS)
+    @Cacheable(key = "'key'",cacheManager = CacheManagerConfig.CacheManagerNames.REDIS_CACHE_MANAGER,  cacheNames = CacheManagerConfig.CacheNames.CACHE_15MINS)
+    public String demo2(String key) {
+        return "abcdemo2" + key;
+    }
+}
+```
 
 
 
 #### 出错提示
 
-##### 1 'org.springframework.cache.interceptor.CacheExpressionRootObject' -maybe not public
+##### 1.'org.springframework.cache.interceptor.CacheExpressionRootObject' -maybe not public
 
 ```
 org.springframework.expression.spel.SpelEvaluationException: EL1008E: Property or field 'test' cannot be found on object of type 'org.springframework.cache.interceptor.CacheExpressionRootObject' - maybe not public?
@@ -3055,7 +3532,6 @@ org.springframework.expression.spel.SpelEvaluationException: EL1008E: Property o
 
 ```
 
-
 ```
 
 
@@ -3066,9 +3542,70 @@ org.springframework.expression.spel.SpelEvaluationException: EL1008E: Property o
 
 
 
+##### 2.java.lang.NoClassDefFoundError: org/apache/commons/pool2/impl/GenericObjectPoolConfig
+
+```
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'redisCacheManager' defined in class path resource [com/mx/config/CacheManagerConfig.class]: Unsatisfied dependency expressed through method 'redisCacheManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'redisConnectionFactory' defined in class path resource [org/springframework/boot/autoconfigure/data/redis/LettuceConnectionConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory]: Factory method 'redisConnectionFactory' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/commons/pool2/impl/GenericObjectPoolConfig
+
+```
+
+
+
+解决方法：
+
+缺少依赖包
+
+pom.xml  中加入
+
+```
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-pool2</artifactId>
+    <version>2.0</version>
+</dependency>
+
+```
+
+
+
+#### 代码demo下 
+
+democache-ehcache-redis-springboot.rar
+
+链接：https://pan.baidu.com/s/1xZqpQQOcVgkr0W_FrItHRw 密码：x2jo
+
 #### 参考链接
 
 1. [在SpringBoot中配置多个cache,实现多个cacheManager灵活切换](https://blog.csdn.net/s674334235/article/details/82593899)
+
+
+
+### Spring boot  整合Redis
+
+这里主要针对 spring boot 2.x版本
+
+
+
+#### Redis是什么
+
+Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。相比`Memcached`它支持存储的类型相对更多**（字符、哈希、集合、有序集合、列表、GEO）**，**同时Redis是线程安全的**。2010年3月15日起，Redis的开发工作由VMware主持，2013年5月开始，Redis的开发由`Pivotal`赞助。
+
+#### `Lettuce`和`Jedis`
+
+spring boot 2.x版本以后，引入了不同的客户端 `Lettuce`和`Jedis`，可选择使用。
+
+`Lettuce`和`Jedis`的都是连接`Redis Server`的客户端程序。`Jedis`在**实现上是直连redis server，多线程环境下非线程安全，除非使用连接池，为每个Jedis实例增加物理连接**。`Lettuce`基于Netty的连接实例（StatefulRedisConnection），**可以在多个线程间并发访问，且线程安全，满足多线程环境下的并发访问，同时它是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例**。
+
+
+
+
+
+#### 参考链接
+
+1. [一起来学SpringBoot | 第九篇：整合Lettuce Redis](https://blog.csdn.net/winter_chen001/article/details/80614331)
+2. [spring-boot下CacheManager配置（1.5.x & 2.x对比）](https://blog.csdn.net/lanmei618/article/details/80223763)
+
+
 
 
 
@@ -3249,7 +3786,7 @@ select * from 表名 where INSTR(字段,字符)
 
 # Spring boot 入门
 
-
+### todo.创建第一个spring boot 程序 helloword 
 
 
 
