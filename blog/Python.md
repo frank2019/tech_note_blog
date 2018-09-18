@@ -20,6 +20,43 @@
 
 
 
+
+
+## Mysql数据库
+
+
+
+0x01  读取 
+
+
+
+1. ### 0x06 python 操作mysql
+
+   `conda install -c anaconda pymysql` 
+
+   
+
+   conda install pymysql
+
+   
+
+   ```
+   python3 -m pip install PyMySQL
+   ```
+
+   
+
+   参考链接
+
+   1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
+   2. https://anaconda.org/anaconda/pymysql
+
+   
+
+
+
+
+
 -----------------------------------------------
 
 # python   
