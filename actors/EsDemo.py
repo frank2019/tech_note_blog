@@ -1,3 +1,4 @@
+#coding='UTF-8'
 from elasticsearch import Elasticsearch
 import time
 import datetime
@@ -9,29 +10,31 @@ def main():
     type_name = 'userevent'
 
     ##########################################
-    # 查看所有索引
+    # get index name
     alias = es.indices.get_alias()
     #print(alias)
 
-    # 查询所有index名称
+    # get index name
     result = es.indices.get_alias().keys()
     #print(result)
 
-    # 查询index信息,包含mapping  settings信息
+    #  mapping  settings
     result = es.indices.get(index_name)
     #print(result)
 
-    # 查询所有数据
+    # 
     result = es.search(index=index_name, doc_type=type_name)
     #print(result)
     #print(result['hits']['hits'])
 
-     # 指定条件查询
+     # 
     #query_body = {'query': {'term': {'from': 'NULL'}}}
 
     ts = int(round(time.time()*1000))
 
-    query_body = {'query': {'range': {'createtime': {"gte":ts-1000*60*6,'lte':ts}}}}
+    print("test-->")
+
+    query_body = {'query': {'range': {'createtime': {"gte":ts-1000*60*60*24,'lte':ts}}}}
     result = es.search(index=index_name, doc_type=type_name, body=query_body)
     #print(result)
     print(result['hits']['hits'])

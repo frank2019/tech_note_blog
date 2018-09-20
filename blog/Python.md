@@ -26,8 +26,13 @@
 
 ### release.redis相关工具软件推荐
 
-1. windows下 不错的可视化客户端      链接：https://pan.baidu.com/s/1gEeM7ttwJCik96R4teRUpw 密码：t10g
-2. windows版  redis服务端  [下载](https://github.com/ServiceStack/redis-windows/blob/master/downloads/redis-64.3.0.503.zip)
+windows下 不错的可视化客户端      链接：https://pan.baidu.com/s/1gEeM7ttwJCik96R4teRUpw 密码：t10g
+
+#### windows版  redis服务端
+
+1.   [下载](https://github.com/ServiceStack/redis-windows/blob/master/downloads/redis-64.3.0.503.zip)
+2.  绿色软件，不需要安装
+3. 启动命令 ：redis-server.exe  "redis.windows.conf"
 
 #### redis测试命令
 
@@ -88,7 +93,6 @@ get thekey
 
    1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
    2. https://anaconda.org/anaconda/pymysql
-
 
 
 

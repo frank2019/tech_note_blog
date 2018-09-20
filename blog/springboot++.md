@@ -3600,10 +3600,105 @@ spring boot 2.x版本以后，引入了不同的客户端 `Lettuce`和`Jedis`，
 
 
 
+#### 使用
+
+在pom.xml中引入
+
+在配置类中注册RedisTemplate 用来支持序列化和反序列化
+
+```
+@Configuration
+public class RedisConfig {
+
+    @Bean
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
+        StringRedisTemplate template = new StringRedisTemplate(factory);
+        // 使用 Jackson2JsonRedisSerializer 进行序列化，它继承 RedisSerializer，
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.afterPropertiesSet();
+        return template;
+    }
+
+}
+```
+
+#### 测试使用
+
+```
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class RedisTest {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Test
+    public void test() {
+        stringRedisTemplate.opsForValue().set("id", "1");
+        Assert.assertEquals("1", stringRedisTemplate.opsForValue().get("id"));
+    }
+
+    /**
+     * 测试存储对象，redis 需要对对象进行序列化，取出对象数据后比对，又要进行反序列化
+     * 所以注册了 RedisTemplate ，专门处理这类情况
+     */
+    @Test
+    public void test1() {
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setId(2L);
+        sysUserEntity.setEmail("k@wuwii.com");
+        ValueOperations<String, SysUserEntity> operations = redisTemplate.opsForValue();
+        operations.set("user1", sysUserEntity);
+        Assert.assertThat(sysUserEntity, Matchers.equalTo(operations.get("user1")));
+    }
+
+}
+```
+
+
+
+注意：
+
+1. 存储进redis的对象类，为支持序列化和反序列化必须有实现无参数的构造函数。不然会报错：
+
+   ```
+   Cannot construct instance of xxxxx(no Creators, like default construct, exist)
+   ```
+
+
+
+
+#### 配置缓存到期时间和过期时间
+
+
+
+```
+@Override 
+@Cacheable(value = "people#${select.cache.timeout:1800}#${select.cache.refresh:600}", key = "#person.id", sync = true) 
+public Person findOne(Person person, String a, String[] b, List<Long> c) { 
+	Person p = personRepository.findOne(person.getId()); 
+	System.out.println("为id、key为:" + p.getId() + "数据做了缓存"); 	
+	System.out.println(redisTemplate); return p; 
+}
+```
+
+
+
+
+
 #### 参考链接
 
 1. [一起来学SpringBoot | 第九篇：整合Lettuce Redis](https://blog.csdn.net/winter_chen001/article/details/80614331)
 2. [spring-boot下CacheManager配置（1.5.x & 2.x对比）](https://blog.csdn.net/lanmei618/article/details/80223763)
+3. [学习Spring Boot：（十七）Spring Boot 中使用 Redis](https://www.cnblogs.com/qnight/p/8997491.html)
+4. [SpringBoot 2.X @Cacheable，redis-cache 如何根据key设置缓存时间？ ](https://segmentfault.com/q/1010000015203664)
 
 
 
@@ -3635,6 +3730,10 @@ Cache中的某些元素。下面我们将来详细介绍一下Spring基于注解
 ​        @Cacheable可以标记在一个方法上，也可以标记在一个类上。当标记在一个方法上时表示该方法是支持缓存的，当标记在一个类上时则表示该类所有的方法都是支持缓存的。对于一个支持缓存的方法，Spring会在其被调用后将其返回值缓存起来，以保证下次利用同样的参数来执行该方法时可以直接从缓存中获取结果，而不需要再次执行该方法。Spring在缓存方法的返回值时是以键值对进行缓存的，值就是方法的返回结果，至于键的话，Spring又支持两种策略，默认策略和自定义策略，这个稍后会进行说明。需要注意的是当一个支持缓存的方法在对象内部被调用时是不会触发缓存功能的。@Cacheable可以指定三个属性，value、key和condition。
 
 参数： value缓存名、 key缓存键值、 condition满足缓存条件、unless否决缓存条件
+
+- value (也可使用 cacheNames) : 可看做命名空间，表示存到哪个缓存里了。
+- key : 表示命名空间下缓存唯一key,使用Spring Expression Language(简称SpEL,详见参考文献[5])生成。
+- condition : 表示在哪种情况下才缓存结果(对应的还有unless,哪种情况不缓存),同样使用SpEL
 
 除了上述使用方法参数作为key之外，Spring还为我们提供了一个root对象可以用来生成key。通过该root对象我们可以获取到以下信息。
 
@@ -3676,12 +3775,24 @@ public User save(User user) {
 
 
 
+
+
+
+
+#### Question
+
+1. mapper 中增加 @Cacheable  会阻塞 ？
+
+
+
+
+
 #### 参考链接
 
 1. [Spring缓存注解@Cacheable、@CacheEvict、@CachePut使用](https://www.cnblogs.com/fashflying/p/6908028.html)
 2. [Springboot中使用缓存](https://www.cnblogs.com/m4tech/p/6641110.html)
 3. [Spring 4 Caching Annotations Tutorial](http://websystique.com/spring/spring-4-cacheable-cacheput-cacheevict-caching-cacheconfig-enablecaching-tutorial/)
-4. 
+4. [spring boot 官方demo](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 
 
 
