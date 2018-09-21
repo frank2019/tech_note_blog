@@ -3781,9 +3781,35 @@ public User save(User user) {
 
 #### Question
 
-1. mapper 中增加 @Cacheable  会阻塞 ？
+##### 1.mapper 中增加 @Cacheable  会阻塞 ？
+
+```
+java.lang.IllegalStateException: No cache could be resolved for 'Builder[public final com.mx.video.bean.ViewItemBean com.sun.proxy.$Proxy118.selectById(java.lang.Integer)] caches=[] | key='#id' | keyGenerator='' | cacheManager='' | cacheResolver='' | condition='' | unless='' | sync='false'' using resolver 'org.springframework.cache.interceptor.SimpleCacheResolver@78508e6b'. At least one cache should be provided per cache operation.
+
+```
+
+```
+cacheNames = CacheManagerConfig.CacheNames.CACHE_15MINS
+```
 
 
+
+##### 2  java.lang.IllegalArgumentException: Null key returned for cache operation 
+
+```
+java.lang.IllegalArgumentException: Null key returned for cache operation (maybe you are using named params on classes without debug info?) Builder[public final com.mx.video.bean.ViewItemBean com.sun.proxy.$Proxy118.selectById(java.lang.Integer)] caches=[cp_salary:cache:15m] | key='#id' | keyGenerator='' | cacheManager='redisCacheManager' | cacheResolver='' | condition='' | unless='' | sync='false'
+
+```
+
+发现问题是缓存机制是作用到Service层的，而dao或者repository层缓存用注解用key的话它会认定为null。这样我们就用KeyGenerator来提前生成key的生成策略。
+
+
+
+
+
+##### 参考链接
+
+1. [@Cacheable缓存问题记录](https://blog.csdn.net/tavatimsa/article/details/80432405)
 
 
 
