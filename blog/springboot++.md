@@ -3828,6 +3828,36 @@ java.lang.IllegalArgumentException: Null key returned for cache operation (maybe
 
 
 
+
+
+```
+Exception in thread "Timer-3" org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: HikariDataSource HikariDataSource (HikariPool-1) has been closed.
+### The error may exist in com/mx/video/mapper/OtherPageConfigMapper.java (best guess)
+### The error may involve com.mx.video.mapper.OtherPageConfigMapper.selectValidByType
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: HikariDataSource HikariDataSource (HikariPool-1) has been closed.
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:77)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)
+	at com.sun.proxy.$Proxy68.selectOne(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy108.selectValidByType(Unknown Source)
+	at com.mx.video.service.CategoryCacheService.refreshOtherPageConfigBean(CategoryCacheService.java:103)
+	at com.mx.video.service.CategoryCacheService.access$000(CategoryCacheService.java:21)
+	at com.mx.video.service.CategoryCacheService$1.run(CategoryCacheService.java:59)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+```
+
+
+
+
+
+
+
 ### 0x04 redis 与本地缓存
 
 ehcache
