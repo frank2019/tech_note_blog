@@ -2217,6 +2217,7 @@ Spring boot  全局统一异常处理
 
 1. [Spring MVC /SpringBoot HTTP通信加解密](https://blog.csdn.net/lanmo555/article/details/77059879)
 2. [spring-boot-starter-encrypt](https://github.com/yinjihuan/spring-boot-starter-encrypt)
+3. https://docs.spring.io/spring-data/elasticsearch/docs/current/api/org/springframework/data/elasticsearch/annotations/Field.html
 
 
 
@@ -2243,11 +2244,41 @@ elastic search默认tcp端口9300，http端口9200
 
 
 
+### ElasticSearch tips
+
+
+
+#### 1.Invalid index name [MoviePool], must be lowercase
+
+索引名字必须市小写
+
+#### 2.定义Repository    
+
+```java
+public interface FLMoviePoolRepository extends ElasticsearchRepository<FLMovieEntiry,Integer> 
+```
+
+其中 ElasticsearchRepository<FLMovieEntiry,Integer>      Integer  是主键id的类型。
+
+
+
+#### 3.可以在浏览器直接测试：查看索引结构  http://127.0.0.1:9200/moviepool
+
+#### 4.查看索引元素信息： http://127.0.0.1:9200/moviepool/_search
+
+
+
+```
+Fielddata is disabled on text fields by default. Set fielddata=true on [titleCn] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+```
+
+
+
+
+
+@Field(type = FieldType.String, index = FieldIndex.not_analyzed)
+
 ### 使用python api 访问ES
-
-
-
-
 
 
 
