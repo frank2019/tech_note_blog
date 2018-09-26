@@ -3826,6 +3826,13 @@ java.lang.IllegalArgumentException: Null key returned for cache operation (maybe
 
 # 数据库 and  redis
 
+1. [35个Redis面试题总结](https://blog.csdn.net/w372426096/article/details/82657281)
+2. [Redis——10集群—— 10.1Redis集群之数据分布理论](https://blog.csdn.net/HoldBelief/article/details/79793657)
+
+
+
+
+
 
 
 
@@ -3851,6 +3858,16 @@ Exception in thread "Timer-3" org.mybatis.spring.MyBatisSystemException: nested 
 	at java.util.TimerThread.run(Timer.java:505)
 Caused by: org.apache.ibatis.exceptions.PersistenceException: 
 ```
+
+
+
+
+
+
+
+### 0x05 基于spring boot 及redis实现的token鉴权
+
+
 
 
 
