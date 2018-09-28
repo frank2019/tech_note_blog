@@ -3735,6 +3735,12 @@ public Person findOne(Person person, String a, String[] b, List<Long> c) {
 
 
 
+
+
+
+
+
+
 ### 0x01 Spring缓存注解@Cacheable、@CacheEvict、@CachePut使用
 
 从3.1开始，Spring引入了对Cache的支持。其使用方法和原理都类似于Spring对事务管理的支持。Spring 
@@ -3844,12 +3850,57 @@ java.lang.IllegalArgumentException: Null key returned for cache operation (maybe
 
 
 
+
+
+```
+TimeUnit.DAYS          //天  
+
+TimeUnit.HOURS         //小时  
+
+TimeUnit.MINUTES       //分钟  
+
+TimeUnit.SECONDS       //秒  
+
+TimeUnit.MILLISECONDS  //毫秒 
+
+TimeUnit.NANOSECONDS   //毫微秒
+
+TimeUnit.MICROSECONDS  //微秒
+
+```
+
+ [redis五大类型用法](https://www.cnblogs.com/yanan7890/p/6617305.html)
+
+
+
 #### 参考链接
 
 1. [Spring缓存注解@Cacheable、@CacheEvict、@CachePut使用](https://www.cnblogs.com/fashflying/p/6908028.html)
 2. [Springboot中使用缓存](https://www.cnblogs.com/m4tech/p/6641110.html)
 3. [Spring 4 Caching Annotations Tutorial](http://websystique.com/spring/spring-4-cacheable-cacheput-cacheevict-caching-cacheconfig-enablecaching-tutorial/)
 4. [spring boot 官方demo](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+
+
+
+
+
+
+
+1. [Java爬虫初体验:简单抓取IT之家热评(整合Spring Boot+Elasticsearch+Redis+Mybatis)](https://blog.csdn.net/crazylai1996/article/details/77621772)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
