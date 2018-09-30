@@ -2231,6 +2231,7 @@ Spring boot  全局统一异常处理
 
 1. [IntelliJ IDEA 源值1.5已过时，将在未来所有版本中删除](https://blog.csdn.net/duchao123duchao/article/details/71480106)
 2. [Spring Cache扩展：注解失效时间+主动刷新缓存](https://blog.csdn.net/huanghongfei1/article/details/61195650/)
+3. https://dzone.com/refcardz/java-caching
 
 
 
