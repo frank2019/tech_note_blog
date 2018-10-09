@@ -3049,7 +3049,165 @@ Caused by: org.apache.ibatis.exceptions.PersistenceException:
 
 
 
+### 0x06  根据时间查询
 
+MYSQL:
+
+**今天**
+
+```
+select * from 表名 where to_days(时间字段名) = to_days(now());
+```
+
+ 
+
+**昨天**
+
+
+
+```
+SELECT * FROM 表名 WHERE TO_DAYS( NOW( ) ) - TO_DAYS( 时间字段名) = 1
+```
+
+ 
+
+**近7天**
+
+```
+SELECT * FROM 表名 where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(时间字段名)
+```
+
+**近30天**
+
+```
+SELECT * FROM 表名 where DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(时间字段名)
+```
+
+**本月**
+
+```
+SELECT * FROM 表名 WHERE DATE_FORMAT( 时间字段名, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+```
+
+**上一月**
+
+```
+SELECT * FROM 表名 WHERE PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( 时间字段名, '%Y%m' ) ) =1
+```
+
+ 
+
+**查询本季度数据**
+
+```
+select * from 表名 where QUARTER(create_date)=QUARTER(now());
+```
+
+ 
+
+**查询上季度数据**
+
+```
+select * from 表名 where QUARTER(create_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER));
+```
+
+ 
+
+**查询本年数据**
+
+```
+select * from 表名 where YEAR(create_date)=YEAR(NOW());
+```
+
+ 
+
+**查询上年数据**
+
+```
+select * from 表名 where year(create_date)=year(date_sub(now(),interval 1 year));
+```
+
+ 
+
+**查询当前这周的数据**
+
+```
+SELECT name,submittime FROM 表名 WHERE YEARWEEK(date_format(submittime,'%Y-%m-%d')) = YEARWEEK(now());
+```
+
+ 
+
+**查询上周的数据**
+
+```
+SELECT name,submittime FROM 表名 WHERE YEARWEEK(date_format(submittime,'%Y-%m-%d')) = YEARWEEK(now())-1;
+```
+
+ 
+
+**查询上个月的数据**
+
+[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
+
+```
+select name,submittime from 表名 where date_format(submittime,'%Y-%m')=date_format(DATE_SUB(curdate(), INTERVAL 1 MONTH),'%Y-%m')
+
+select * from 表名 where DATE_FORMAT(pudate,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') ; 
+
+select * from 表名 where WEEKOFYEAR(FROM_UNIXTIME(pudate,'%y-%m-%d')) = WEEKOFYEAR(now()) 
+
+select * from 表名 where MONTH(FROM_UNIXTIME(pudate,'%y-%m-%d')) = MONTH(now()) 
+
+select * from 表名 where YEAR(FROM_UNIXTIME(pudate,'%y-%m-%d')) = YEAR(now()) and MONTH(FROM_UNIXTIME(pudate,'%y-%m-%d')) = MONTH(now()) 
+
+select * from 表名 where pudate between  上月最后一天  and 下月第一天 
+```
+
+[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
+
+ 
+
+**查询当前月份的数据** 
+
+```
+select name,submittime from 表名 where date_format(submittime,'%Y-%m')=date_format(now(),'%Y-%m')
+```
+
+ 
+
+**查询距离当前现在6个月的数据**
+
+```
+select name,submittime from 表名 where submittime between date_sub(now(),interval 6 month) and now()
+```
+
+**ORACLE:**
+
+**ORACLE没有提供直接获取年、周的函数，提供了一些函数，需要进行计算**
+
+**to_char()和to_date基本等价于JAVA中的SimpleDateFormat函数**
+
+**trunc()函数为指定元素而截去的日期值。**
+
+​       trunc（sysdate,'yyyy'） --返回当年第一天。
+
+　　trunc（sysdate,'mm'） --返回当月第一天。
+
+　　trunc（sysdate,'d'） --返回当前星期的第一天。
+
+　　trunc（sysdate,'dd'）--返回当前年月日
+
+  trunc()也可以对数字精度进行操作，trunc(number,length),number用于完整取精度的数字，length代表精度长度，默认为0；trunc()取精度时不进行四舍五入
+
+​     select trunc(123.458,0) from dual --123
+​     select trunc(123.458,1) from dual --123.4
+​     select trunc(123.458,-1) from dual --120
+​     select trunc(123.458,-4) from dual --0
+​     select trunc(123.458,4) from dual  --123.4580
+
+add_months(times,months)表示在time时间之上进行月份操作，months为正整数表示之后，正负数表示之前
+
+ 
 
 
 
