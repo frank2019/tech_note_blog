@@ -4,10 +4,16 @@
 
 
 
-参考链接
+### toRead
 
 1. [spring-boot-samples](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
 2. [使用Java Low Level REST Client操作elasticsearch](https://www.cnblogs.com/ginb/p/8682092.html)
+3. [Elasticsearch－基础介绍及索引原理分析](https://www.cnblogs.com/dreamroute/p/8484457.html)
+4. [《死磕 Elasticsearch 方法论》：普通程序员高效精进的 10 大狠招！（完整版）](https://blog.csdn.net/laoyang360/article/details/79293493)
+
+
+
+
 
 
 
@@ -697,6 +703,76 @@ curl -XDELETE 'IP:9200/_index?pretty'
 
 
 
+1. [elasticsearch使用索引模板和别名高效地处理日志类索引](http://www.javacoder.cn/?p=812)
+2. [Elasticsearch－基础介绍及索引原理分析](https://www.cnblogs.com/dreamroute/p/8484457.html)
+
+
+
+### 0x04  elasticsearch  动态索引名
+
+```
+@Document(indexName = "userevent-#{T(com.mx.video.utils.MyUtils).getTodayDateString()}",type = UserEventEntiry.TYPE)
+public class UserEventEntiry implements Serializable {
+
+    public static final String INDEX = "userevent";
+    public static final String TYPE = "userevent";
+
+
+    private String id;
+    private String userId;
+  }
+```
+
+
+
+@Document  属性支持SpEL表达式
+
+#### 参考链接
+
+1. [Spring ES动态索引](https://www.jianshu.com/p/0b603db1278f)
+
+
+
+### 0x03  elasticsearch  tips
+
+在使用Elasticsearch之前，先给大家聊一点干货。 
+
+1. ES和solr都是作为全文搜索引擎出现的。都是基于Lucene的搜索服务器。 
+
+2. ES不是可靠的存储系统，不是数据库，它有丢数据的风险。 
+
+3. ES不是实时系统，数据写入成功只是trans log成功（类似于MySQL的bin 
+  log），写入成功后立刻查询查不到是正常的。因为数据此刻可能还在内存里而不是进入存储引擎里。同理，删除一条数据后也不是马上消失。写入何时可查询。ES内部有一个后台线程，定时将内存中的一批数据写入到存储引擎，此后数据可见。默认后台线程一秒运行一次。该线程运行的越频繁，写入性能越低。运行的频率越低，写入的性能越高（不会无限高）。
+
+
+4. 目前已知的单ES集群可以存储PB级别的数据，不过这个就非常费劲了。TB级别数据没压力。 
+
+5. 如果使用ES官方提供的jar包访问，需要JDK1.7及以上。 
+
+6. 使用对应的版本访问ES server。如果ES server端的版本是1.7，那么请使用ES 1.7的client。如果ES server是2.1，请使用2.1的client。 
+
+7. ES索引存在Linux服务器的文件系统之上（背后是文件系统，不是类似于HDFS的分布式文件系统） 
+
+8. ES Java client是线程安全的，全局构建一个即可满足读写需求，不要每次都创建ES client。每次访问ES都构建新的es client即会抛出次异常。 
+
+9. 非常不建议使用ES的动态识别和创建的机制，因为很多情况下这并非你所需要。推荐的做法是在写数据之前仔细的创建mapping。 
+
+10. 强烈不建议在ES中使用深分页。可能会导致集群不可用。 
+
+11. ES是静态分片，一旦分片数在创建索引时确定那么后继不能修改。 
+
+12. 
+   ES里提供了type，很多人以为type是物理表，一个type的数据是独立存储的；但是在ES内部并不是这样，type在ES内部仅仅是一个字段。所以在很多数据能分为独立index的情况下，不要放到一个index里用type去分。只有嵌套类和父子类的情况下使用type才是合理的。
+
+
+13. ES并不提供原生的中文分词的能力。有第三方的中文分词的插件，比如ik等。Ik是个toy分词器，有严肃的分词需求的话，请在使用ES之前使用独立的分词器分好词后向ES写入。 
+
+14. 
+   ES中的index，首先会进行分片，每一个分片数据一般都会有自己的副本数据，ES分配分片的策略会保证同一个分片数据和自己的副本不会分配到同一个节点上。当集群中的某一节点宕机后，ES的master在ping该节点时通过一定的策略会发现该节点不存活；会开启ES的恢复过程
+
+
+15. ES没有update的能力。所有的update都是标记删除老文档，然后重新insert一条新文档。
+
 
 
 ### 0x02   ElasticSearch   与Spring boot 的集成测试
@@ -942,3 +1018,66 @@ es没有事务，而且是近实时。成本也比数据库高，几乎靠吃内
 
 
 
+
+
+----
+
+# 其他
+
+### SpEL表达式
+
+**Spring 表达式语言(简称SpEL)：**是一个支持运行时查询和操作对象图的强大的表达式语言。
+
+**语法类似于 EL：**SpEL 使用 #{...} 作为定界符 , 所有在大括号中的字符都将被认为是 SpEL , SpEL 为 bean 的属性进行动态赋值提供了便利。
+
+**通过 SpEL 可以实现：**
+
+- 通过 bean 的 id 对 bean 进行引用。
+- 调用方式以及引用对象中的属性。
+- 计算表达式的值
+- 正则表达式的匹配。
+
+
+
+#### 示例
+
+
+
+```
+@Document(indexName = "bhpms-#{configProperties['index.version']}", type = "type2")
+public class OrderItem implements Serializable {
+```
+
+
+
+```java
+ @Test
+    public void testConstructorExpression() throws Exception {
+        ExpressionParser parser = new SpelExpressionParser();
+        String result1 = parser.parseExpression("new String('haha')").getValue(String.class);
+        //Assert.assertEquals("haha", result1);
+        System.out.println("result1=" + result1);
+        Date result2 = parser.parseExpression("new java.util.Date()").getValue(Date.class);
+        Assert.assertNotNull(result2);
+        System.out.println("result2=" + result2.toString());
+
+        System.out.println("tm=" + tm);
+
+        /*String result3 = parser.parseExpression("com.mx.video.utils.MyUtils.getTodayDateString()").getValue(String.class);
+        Assert.assertNotNull(result2);
+        System.out.println("result3=" + result3);*/
+    }
+
+    @Value("userevent-#{T(com.mx.video.utils.MyUtils).getTodayDateString()}")
+    //@Value("userevent")
+     String tm ;
+```
+
+
+
+
+
+#### 参考链接
+
+1. [SpEL表达式](https://www.cnblogs.com/goodcheap/p/6490896.html)
+2. [跟我学Spring3（5.3）：Spring 表达式语言之 SpEL 语法](http://www.importnew.com/17724.html)
