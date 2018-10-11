@@ -1,15 +1,29 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
 概述：
 本文主要描述，spacemacs 下的使用
 http://spacemacs.org/layers/LAYERS.html
 
+https://blog.csdn.net/u011729865/article/details/52793134#spacemacs%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE
 
-##基本常用快捷键
+###基本常用快捷键
 
-###帮助文档
 
-SPC h d 查看 describe 相关的文档
+
+
+
+
+
+
+
+
+
+
+
+
+
+####帮助文档
+
+SPC h d   查看 describe 相关的文档
 SPC h d f 查看指定函数的帮助文档
 SPC h d b 查看指定快捷键绑定了什么命令
 SPC h d v 查看指定变量的帮助文档
@@ -84,7 +98,7 @@ SPC n , 或 . 或 < 或 > 进入 scrolling transient state
 
 
 
-###markdown模式的使用
+### markdown模式的使用
 
 #### 5.1 Element insertion
 

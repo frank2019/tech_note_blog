@@ -8,18 +8,12 @@
 
 
 
-
-
 ### LLVM Clang 是什么
 
 
 
 1. [LLVM与Clang的概述及关系](https://www.cnblogs.com/saintlas/p/5738739.html) 		
 2. [你或许应该知道的LLVM](https://blog.csdn.net/khlljm/article/details/51822973)                         
-
-
-
-
 
 
 
@@ -47,17 +41,17 @@ https://github.com/facebook/proxygen
 
 
 
-
-
-
-
 ### c++ 应用服务器 开发   推荐使用的框架和库？
 
 相关的模块：  Mysql 数据库的ORM，json解析  rsa加密，http协议解析，日志模块   [redis库]
 
 
 
+### makefile文件的编写
 
+#### 参考链接
+
+1. [教你写Makefile（很全，含有工作经验的）](https://blog.csdn.net/alpha_love/article/details/62953847)
 
 
 
