@@ -241,8 +241,8 @@ sed  -i  's/\t/    /g'  game.py
 #### 出错提示
 
   File "game.py", line 33
-    print "Received input is : ", cmd
-    ^
+​    print "Received input is : ", cmd
+​    ^
 IndentationError: unexpected indent
 
 
