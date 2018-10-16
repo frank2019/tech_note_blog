@@ -126,10 +126,22 @@ https://blog.csdn.net/su_tianbiao/article/details/50622682
 
 
 
+
+
+安装
+
+pip install  mysqlclient‑1.3.13‑cp37‑cp37m‑win_amd64.whl
+
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient
+
+
+
 参考链接
 
 1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
 2. https://anaconda.org/anaconda/pymysql
+3. [用 Python 连接 MySQL 的几种方式详解](https://www.jb51.net/article/137722.htm)
+4. [SQLAlchemy的初步使用](https://www.cnblogs.com/franknihao/p/7268752.html)
 
 
 
