@@ -7,7 +7,7 @@
 '''
  
 #这三行代码是防止在python2上面编码错误的，在python3上面不要要这样设置
-import sys
+#import sys
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
  

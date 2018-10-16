@@ -4,7 +4,8 @@
 
 
 
-单元测试PyUnit 
+1. 单元测试PyUnit 
+2. [3 个用于数据科学的顶级 Python 库](http://python.jobbole.com/89302/)
 
 
 
