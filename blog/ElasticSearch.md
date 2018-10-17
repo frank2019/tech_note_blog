@@ -7,9 +7,20 @@
 ### toRead
 
 1. [spring-boot-samples](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+
 2. [使用Java Low Level REST Client操作elasticsearch](https://www.cnblogs.com/ginb/p/8682092.html)
+
 3. [Elasticsearch－基础介绍及索引原理分析](https://www.cnblogs.com/dreamroute/p/8484457.html)
+
 4. [《死磕 Elasticsearch 方法论》：普通程序员高效精进的 10 大狠招！（完整版）](https://blog.csdn.net/laoyang360/article/details/79293493)
+
+5. 官方向导   
+   <http://www.elasticsearch.cn/guide/> 中文版    
+   <http://es-cn.medcl.net/guide/> 中文版    
+   <http://www.elasticsearch.org/guide/> 英文
+
+   翻译【ElasticSearch Server】第一章：开始使用ElasticSearch集群   
+   <http://www.cnblogs.com/jefurry/tag/ElasticSearch/>
 
 
 
@@ -20,6 +31,264 @@
 访问的是elastic search的tcp端口，需换成http端口。
 
 elastic search默认tcp端口9300，http端口9200
+
+
+
+
+
+### Python Elasticsearch Client
+
+
+
+
+
+
+
+### elasticSearch 搜索示例
+
+
+
+#### 多重条件过滤
+
+1. 查询eventType 字段为 event_first_visit 的数据
+2. 接上  过滤  0 < createtime  < 1636128296935
+3. 使用 cardinality  做 去重
+
+```
+{
+    "size": 0,
+    "query": {
+        "constant_score": {
+            "filter": {
+                "terms": {
+                    "eventType.keyword": [
+                        "event_first_visit"
+                    ]
+                }
+            }
+        }
+    },
+    "aggs": {
+        "user_status": {
+            "filter": {
+                "range": {
+                    "createtime": {
+                        "gte": 0,
+                        "lte": 1636128296935
+                    }
+                }
+            },
+            "aggs": {
+                "uv": {
+                    "cardinality": {
+                        "field": "userId.keyword"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+返回数据
+
+```
+{
+    "took": 0,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 344,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "user_status": {
+            "doc_count": 344,
+            "uv": {
+                "value": 123
+            }
+        }
+    }
+}
+```
+
+返回字段的定义
+
+took：是查询花费的时间，毫秒单位
+
+time_out：标识查询是否超时
+
+_shards：描述了查询分片的信息，查询了多少个分片、成功的分片数量、失败的分片数量等
+
+hits：搜索的结果，total是全部的满足的文档数目，hits是返回的实际数目（默认是10）
+
+_score是文档的分数信息，与排名相关度有关，参考各大搜索引擎的搜索结果，就容易理解。 
+
+
+
+#### 查看集群统计信息
+
+统计信息包含 集群的分片数，文档数，存储空间，缓存信息，内存作用率，插件内容，文件系统内容，JVM作用状况，系统CPU，OS信息，段信息。 
+
+查看全部统计信息命令：
+
+```
+curl -XGET 'http://localhost:8200/_cluster/stats?pretty'
+```
+
+返回信息：
+
+```
+
+
+```
+
+
+
+
+
+
+
+
+
+#### 参考链接
+
+1. [Elasticsearch 统计代码例子](https://www.cnblogs.com/didda/p/5485681.html)
+2. [Elasticsearch 常用基本查询](https://www.cnblogs.com/sunfie/p/6653778.html)
+
+
+
+
+
+### ElasticSearch 查询
+
+
+
+#### **1. 基本匹配查询(Basic Match Query)**
+
+　　基本匹配查询主要有两种形式：
+
+1）使用Search Lite API，并将所有的搜索参数都通过URL传递；
+
+2）使用Elasticsearch DSL，其可以通过传递一个JSON请求来获取结果。下面是在所有的字段中搜索带有"John"的结果
+
+```
+curl -XGET 'localhost:9200/megacorp/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "John",
+            "fields" : ["_all"]
+        }
+    }
+}'
+```
+
+
+
+上面的multi_match关键字通常在查询多个fields的时候作为match关键字的简写方式。fields属性指定需要查询的字段，如果我们想查询所有的字段，这时候可以使用_all关键字，正如上面的一样。以上两种方式都允许我们指定查询哪些字段。
+
+```
+curl -XGET 'localhost:9200/megacorp/employee/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "rock",
+            "fields": ["about", "interests"]
+        }
+    }
+}'
+```
+
+####  **Boosting**
+
+　　我们上面使用同一个搜索请求在多个field中查询，你也许想提高某个field的查询权重,在下面的例子中，我们把interests的权重调成3，这样就提高了其在结果中的权重，这样把_id=4的文档相关性大大提高了，如下：
+
+```
+curl -XGET 'localhost:9200/megacorp/employee/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "rock",
+            "fields": ["about", "interests^3"]
+        }
+    }
+}'
+```
+
+Boosting不仅仅意味着计算出来的分数(calculated score)直接乘以boost factor，最终的boost value会经过归一化以及其他一些内部的优化
+
+#### 4.Bool Query
+
+我们可以在查询条件中使用AND/OR/NOT操作符，这就是布尔查询(Bool
+Query)。布尔查询可以接受一个must参数(等价于AND)，一个must_not参数(等价于NOT)，以及一个should参数(等价于OR)。比如，我想查询about中出现music或者climb关键字的员工，员工的名字是John，但姓氏不是smith，我们可以这么来查询：
+
+```
+curl -XGET 'localhost:9200/megacorp/employee/_search' -d '
+{
+    "query": {
+        "bool": {
+                "must": {
+                    "bool" : { 
+                        "should": [
+                            { "match": { "about": "music" }},
+                            { "match": { "about": "climb" }} ] 
+                    }
+                },
+                "must": {
+                    "match": { "first_nale": "John" }
+                },
+                "must_not": {
+                    "match": {"last_name": "Smith" }
+                }
+            }
+    }
+}'
+```
+
+
+
+
+
+
+
+
+
+参考链接
+
+1. [](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html)
+2. [elasticsearch常用操作](https://www.cnblogs.com/fclbky/p/7238494.html)
+3. https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html
+4. https://www.iteblog.com/archives/1768.html
+
+
+
+
+
+
+
+### 使用Python Elasticsearch Client 方法ES
+
+
+
+安装Elasticsearch模块
+
+```
+pip install elasticsearch
+```
+
+
+
+https://blog.csdn.net/y472360651/article/details/76468327
+
+
 
 
 
@@ -337,18 +606,6 @@ collapse  去重
 ```
 
 
-
-
-
-### ElasticSearch 查询
-
-
-
-参考链接
-
-1. [](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html)
-2. [elasticsearch常用操作](https://www.cnblogs.com/fclbky/p/7238494.html)
-3. https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-search.html
 
 
 
