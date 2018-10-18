@@ -22,7 +22,7 @@
    翻译【ElasticSearch Server】第一章：开始使用ElasticSearch集群   
    <http://www.cnblogs.com/jefurry/tag/ElasticSearch/>
 
-
+   [elasticsearch-cn](https://github.com/elasticsearch-cn)
 
 
 
@@ -39,6 +39,10 @@ elastic search默认tcp端口9300，http端口9200
 ### Python Elasticsearch Client
 
 
+
+
+
+[如何开发自己的搜索帝国之ES图形化Kibana安装与使用](https://www.cnblogs.com/zhangs1986/p/7325504.html)
 
 
 
@@ -254,6 +258,31 @@ curl -XGET 'localhost:9200/megacorp/employee/_search' -d '
 ```
 
 
+
+
+
+```
+{
+    "query": {
+        "match": {
+            "userId": "NULLIDC5268E0993A21A7BD5398A7B2EEC1C1_2018-09-06-08-5"
+        }
+    },
+    "highlight": {
+        "pre_tags": [
+            "<tag1>",
+            "<tag2>"
+        ],
+        "post_tags": [
+            "</tag1>",
+            "</tag2>"
+        ],
+        "fields": {
+            "userId": {}
+        }
+    }
+}
+```
 
 
 
