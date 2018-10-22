@@ -48,7 +48,26 @@ elastic search默认tcp端口9300，http端口9200
 
 
 
+### 基于字段内容进行分类查询
+
+参考链接
+
+1. [elasticsearch学习之字段统计](https://blog.csdn.net/u011677067/article/details/81702999)
+
+
+
+
+
 ### elasticSearch 搜索示例
+
+
+
+设置索引的某字段可以进行搜索
+
+```
+http://35.172.3.21:39200/userevent/_mapping/userevent
+{"properties":{"eventType":{"type":"text","fielddata":true}}}
+```
 
 
 

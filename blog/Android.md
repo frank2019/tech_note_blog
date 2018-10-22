@@ -5,6 +5,7 @@
 1. [《Android虚拟机》--内存分配策略](https://www.cnblogs.com/anni-qianqian/p/7683072.html)
 2. [Android内存泄漏终极解决篇（下）](https://www.jb51.net/article/77899.htm)
 3. [Android NDK开发——C代码回调Java代码callback](https://blog.csdn.net/gnnulzy/article/details/78031311)
+4. [Android Hook框架Xposed详解](https://www.cnblogs.com/lkislam/p/4859959.html)
 
 ----
 
@@ -512,25 +513,25 @@ MVC和MVP的**主要区别**
 ### **网络流行对比段子：**
 
 **（1）相同点：** 
-     **优点：** 
-         1.降低耦合度 
-         2.模块职责划分明显 
-         3.利于测试驱动开发 
-         4.代码复用 
-         5.隐藏数据 
-         6.代码灵活性 
-     **缺点：** 
-             额外的代码复杂度及学习成本。
+​     **优点：** 
+​         1.降低耦合度 
+​         2.模块职责划分明显 
+​         3.利于测试驱动开发 
+​         4.代码复用 
+​         5.隐藏数据 
+​         6.代码灵活性 
+​     **缺点：** 
+​             额外的代码复杂度及学习成本。
 
 **（2）不同点：** 
-     **MVP模式：** 
-         1.View不直接与Model交互，而是通过与Presenter交互来与Model间接交互 
-         2.Presenter与View的交互是通过接口来进行的，更有利于添加单元测试 
-         3.通常View与Presenter是一对一的，但复杂的View可能绑定多个Presenter来处理逻辑，业务相似的时候也可以多同个View共享一个Presenter。 
-     **MVC模式：** 
-         1.View可以与Model直接交互 
-         2.Controller是基于行为的，并且可以被多个View共享 
-         3.Controller可以负责决定显示哪个View
+​     **MVP模式：** 
+​         1.View不直接与Model交互，而是通过与Presenter交互来与Model间接交互 
+​         2.Presenter与View的交互是通过接口来进行的，更有利于添加单元测试 
+​         3.通常View与Presenter是一对一的，但复杂的View可能绑定多个Presenter来处理逻辑，业务相似的时候也可以多同个View共享一个Presenter。 
+​     **MVC模式：** 
+​         1.View可以与Model直接交互 
+​         2.Controller是基于行为的，并且可以被多个View共享 
+​         3.Controller可以负责决定显示哪个View
 
 不管Activity在MVP中是View层，还是Activity在MVC中是Controller层，都无法避免Activity的代码量越来越大。我们可以根据项目的实际情况尽量优化，MVP和MVC只是一种编码思想，**再说再牛逼的架构都抵不过产品的傻逼需求！**
 

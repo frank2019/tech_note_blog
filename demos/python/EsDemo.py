@@ -43,7 +43,7 @@ def main():
     print(result['hits']['hits'])
 
 
-
+#用秒数来表示时间的浮点数
 def getTimeStamp(vdate_str):
     #vdate_str = '2018-10-02'
     vdate = datetime.strptime(vdate_str, '%Y-%m-%d').date()
@@ -64,12 +64,19 @@ def   testEs():
 
     #res = es.index(index="userevent", doc_type="userevent", id=0, body={"any": "data", "timestamp": datetime.now()})
 
-    query_body = {"size":0,"query":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}}}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}
+    #query_body = {"size":0,"query":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}}}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}
+    
+    #安装字段内容进行分类查询
+    query_body = {"aggs":{"all_interests":{"terms":{"field":"eventType"}}}}
+
+    #经过一定条件过滤后  安装字段内容进行分类
+    query_body = {"size":0,"query":{"regexp":{"userId.keyword":"NULLI.*"}},"aggs":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"all_interests":{"terms":{"field":"userId"}}}}}}}}
+
     res = es.search(index='userevent',doc_type='userevent' , body=query_body)
     #print(res)
     print(json.dumps(res))
-    for item in res["hits"]["hits"]:
-        print(item["_source"])
+    #for item in res["hits"]["hits"]:
+    #    print(item["_source"])
 
 
 def getStatistic(fromid):
@@ -106,15 +113,44 @@ def getStatistic(fromid):
     #获取fromid=NULL  ios类型设备的去重的个数   活跃用户
     query_body = {"size":0,"query":{"regexp":{"userId.keyword":"NULLI.*"}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}
 
-    query_body = {"size":10,"query":{"regexp":{"userId.keyword":"NULLI.*"}},"aggs":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}}}
+
+
+    query_body = {"size":0,"query":{"regexp":{"userId.keyword":"NULLI.*"}},"aggs":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":0,"lte":1636128296935}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}}}
     #正则表达式搜索
     #query_body = {"query":{"regexp":{"userId.keyword":"NULLI.*"}}}
 
     res = es.search(index='userevent',doc_type='userevent' , body=query_body)
     #print(res)
     print(json.dumps(res))
-    for item in res["hits"]["hits"]:
-        print(item["_source"])
+    #for item in res["hits"]["hits"]:
+    #    print(item["_source"])
+
+
+
+
+def statistic(fromid,deviceType,day):
+    fromidType =  fromid +  deviceType + ".*"
+    start = int(getTimeStamp(day)) *1000
+    end = start +  60*60*24*1000
+
+    query_body = {"size":0,"query":{"regexp":{"userId.keyword":fromidType}},"aggs":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit"]}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":start,"lte":end}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}}}
+   
+    res = es.search(index='userevent',doc_type='userevent' , body=query_body)
+    #print(json.dumps(res))
+    addUserNum = res['aggregations']['constant_score']['user_status']['uv']['value']
+    #print("adduserNum %r" %(addUserNum))
+
+    query_body = {"size":0,"query":{"regexp":{"userId.keyword":fromidType}},"aggs":{"constant_score":{"filter":{"terms":{"eventType.keyword":["event_first_visit",'event_start_show','event_register']}},"aggs":{"user_status":{"filter":{"range":{"createtime":{"gte":start,"lte":end}}},"aggs":{"uv":{"cardinality":{"field":"userId.keyword"}}}}}}}}
+    res = es.search(index='userevent',doc_type='userevent' , body=query_body)
+    activeNum = res['aggregations']['constant_score']['user_status']['uv']['value']
+    print("%s,%s,%s adduserNum=%r activeNum=%r" %(day,fromid,deviceType,addUserNum,activeNum))
+
+
+
+
+def test():
+    statistic('NULL','I','2018-10-01')
+    #statistic('NULL','I','2018-10-02')
 
 if __name__ == '__main__':
-    getStatistic('NULL')
+    testEs()
