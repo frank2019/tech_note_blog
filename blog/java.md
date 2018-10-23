@@ -51,6 +51,38 @@
 
 # java语言
 
+
+
+### java 中关键字transient的使用
+
+1. 一个对象只要实现了Serilizable接口，这个对象就可以被序列化
+
+2. 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
+
+3. transient关键字只能修饰变量，而不能修饰方法和类。
+
+4. 被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。
+
+5. 通过实现 Externalizable  接口的对象序列化，不受 transient  影响。Externalizable   通过writeExternal ，readExternal 方法实现。
+
+   ```
+       @Override
+       public void writeExternal(ObjectOutput out) throws IOException {
+           out.writeObject(content);
+       }
+    
+       @Override
+       public void readExternal(ObjectInput in) throws IOException,
+               ClassNotFoundException {
+           content = (String) in.readObject();
+       }
+   ```
+
+
+
+
+
+
 **"=="操作符的作用**
 
 1、用于基本数据类型的比较

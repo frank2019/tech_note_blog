@@ -24,7 +24,7 @@
 
    [elasticsearch-cn](https://github.com/elasticsearch-cn)
 
-
+6. [ElasticSearch 的 聚合（Aggregations）](https://www.cnblogs.com/ghj1976/p/5311183.html)
 
 
 

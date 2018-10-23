@@ -7,6 +7,7 @@
 
 1. https://github.com/kdn251/interviews/blob/master/README-zh-cn.md
 2. [数据结构与算法——常用数据结构及其Java实现](https://segmentfault.com/a/1190000009797159)
+3. https://github.com/Snailclimb/JavaGuide
 
  
 
@@ -18,7 +19,7 @@
 
 
 
-### 0x01 链表 Linked List
+### 0x02 链表 Linked List
 
 链表即是由节点（Node）组成的线性集合，每个节点可以利用指针指向其他节点。它是一种包含了多个节点的、能够用于表示序列的数据结构。 也可以不科学得理解为二叉树得一种特殊情况
 
@@ -39,24 +40,43 @@
 
 
 
+#### LinkedList
+
+```
+implements List<E>, Deque<E>, Cloneable,
+```
+
+1. ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。 
+2. 对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。 
+3. 对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。 
 
 
-### 数组
+
+### 0x01数组
 
 java数组是一种线性得数据结构，增加和删除时间复杂度为 O(n), 修改和查询 为 O(1)
 
-#### 基本得数组结构
+#### 基本数组结构 T[]
 
+```java
 int []  intarray = new int[10];
+for(int i:intarray){
+    System.out.println(i);
+}
+```
+
+
 
 循环和遍历
 
 1. 支持使用下标进行遍历和访问
 2. 支持使用foreach 形式得遍历和访问
 
+#### 动态数组结构 ArrayList<String> 
 
-
-Arraylist
+1. 是通过线性存储数据的。
+2. 可以动态增加数组长度，当存储空间满了之后，会自动分配新的空间代替已有的。
+3. 支持List<T> 接口
 
 
 
@@ -79,6 +99,8 @@ Arraylist
 | 2    | **public static boolean equals(long[] a, long[] a2)**  				如果两个指定的 long 型数组彼此*相等*，则返回  true。如果两个数组包含相同数量的元素，并且两个数组中的所有相应元素对都是相等的，则认为这两个数组是相等的。换句话说，如果两个数组以相同顺序包含相同的元素，则两个数组是相等的。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。 |
 | 3    | **public static void fill(int[] a, int val)**  				将指定的 int 值分配给指定 int 型数组指定范围中的每个元素。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。 |
 | 4    | **public static void sort(Object[] a)**  				对指定对象数组根据其元素的自然顺序进行升序排列。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。 |
+
+
 
 ### 0x00  常见数据结构
 
