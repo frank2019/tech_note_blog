@@ -8,14 +8,9 @@
 
 
 
-### LLVM Clang 是什么
 
 
-
-1. [LLVM与Clang的概述及关系](https://www.cnblogs.com/saintlas/p/5738739.html) 		
-2. [你或许应该知道的LLVM](https://blog.csdn.net/khlljm/article/details/51822973)                         
-
-
+# other
 
 ### Proxygen编译安装和开发环境的搭建
 
@@ -55,7 +50,7 @@ https://github.com/facebook/proxygen
 
 
 
------
+------
 
 
 
@@ -81,6 +76,64 @@ ${cwd} the task runner's current working directory on startup()
 1. [VSCode下C++环境的配置](https://blog.csdn.net/feynman1999/article/details/79437524)
 
 
+
+
+
+# opencv & QT
+
+
+
+### opencv qt 显示图片
+
+
+
+参考链接
+
+1. https://www.cnblogs.com/gousheng/p/7849658.html
+2. https://blog.csdn.net/lengyuezuixue/article/details/80910621
+
+
+
+
+
+# C++
+
+
+
+
+
+## 编译调试环境问题集锦
+
+
+
+
+
+
+
+### LLVM Clang 是什么
+
+
+
+1. [LLVM与Clang的概述及关系](https://www.cnblogs.com/saintlas/p/5738739.html) 		
+2. [你或许应该知道的LLVM](https://blog.csdn.net/khlljm/article/details/51822973)                         
+
+
+
+
+
+## C++修炼
+
+### 0x03 我的C++书单
+
+
+
+*Books are the ladder of human progress.    -- 高尔基*
+
+
+
+#### 入门篇
+
+##### 1，《C++ Primer》
 
 
 

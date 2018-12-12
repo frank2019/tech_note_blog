@@ -23,100 +23,81 @@
 
 
 
-# Redis
-
-### release.redis相关工具软件推荐
-
-windows下 不错的可视化客户端      链接：https://pan.baidu.com/s/1gEeM7ttwJCik96R4teRUpw 密码：t10g
-
-#### windows版  redis服务端
-
-1.   [下载](https://github.com/ServiceStack/redis-windows/blob/master/downloads/redis-64.3.0.503.zip)
-2.  绿色软件，不需要安装
-3. 启动命令 ：redis-server.exe  "redis.windows.conf"
-
-#### redis测试命令
-
-获取所有key
-
-```
-keys *
-```
-
-获取指定key
-
-```
-get thekey
-```
-
-
-
-#### 相关文档：
-
-1. [windows下redis安装](https://blog.csdn.net/u012343297/article/details/78839063)
-2. [Redis 命令参考](http://doc.redisfans.com/index.html)
-
-
-
-### todo.python  redis基本操作
-
-
-
-1. [Python—redis](https://www.cnblogs.com/melonjiang/p/5342383.html)
-
-
-
-# Mysql数据库
-
-
-
-0x01  读取 
-
-
-
-1. ### 0x06 python 操作mysql
-
-   `conda install -c anaconda pymysql` 
-
-
-
-   conda install pymysql
-
-
-
-   ```
-   python3 -m pip install PyMySQL
-   ```
-
-
-
-   参考链接
-
-   1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
-   2. https://anaconda.org/anaconda/pymysql
-
 
 
 
 
 -----------------------------------------------
 
-# python   
+# 一.python   
 
-python网络数据采集
+### todo
 
+1. wordpress   提交文章接口
 
+2. https://blog.csdn.net/su_tianbiao/article/details/50622682
 
-wordpress   提交文章接口
+3. [Python爬虫工程师告诉你爬虫应该怎么学，太详细了！](http://baijiahao.baidu.com/s?id=1578594478424685451&wfr=spider&for=pc)
 
-https://blog.csdn.net/su_tianbiao/article/details/50622682
-
-
-
-1. [Python爬虫工程师告诉你爬虫应该怎么学，太详细了！](http://baijiahao.baidu.com/s?id=1578594478424685451&wfr=spider&for=pc)
-2. RESTful架构与传统的RPC、SOAP等方式 
+4. RESTful架构与传统的RPC、SOAP等方式 
 
 
+
+### 0x07 python 项目的推荐目录结构
+
+一个好的项目结构利于项目的编写和维护。
+
+一个好的项目结构应该是：
+
+1. 易于多人合作开发；
+2. 易于理解项目结构
+3. 易于后期维护
+
+
+
+一个如下的目录不错：
+
+```
+|- LICENSE  
+|- README.md   
+|- TODO.md   
+|- docs  
+|   |-- index.md  
+|   |-- installation.md  
+|   |-- quickstart.md  
+|- sandman  
+|   |-- __init__.py  
+|   |-- exception.py  
+|   |-- model.py  
+|   |-- sandman.py  
+|- tests  
+|   |-- __init__.py  
+|   |-- test_sandman.py  
+|- setup.py  
+|- tox.ini  
+|- .gitignore  
+|- requirements.txt  
+|- requirements_dev.txt ,比requirements.txt多的是单元测试库 
+```
+
+
+
+说明：
+
+1. 假设项目名为sandman
+2. readme.md和setup.py和requirements.txt放在根目录下
+3. 一个项目至少有3个子目录, docs目录, root package 和tests package
+4. 的python代码要放在一个package中, 而不是一般的src目录中.
+5. tox 测试工具大家都在用.
+6. 用pytest和nose单元测试工具比较多, 尤其是pytest
+
+
+
+
+
+#### 参考链接
+
+1. [正确地组织python项目的结构](https://www.cnblogs.com/harrychinese/p/python_project_structure.html)
 
 
 
@@ -626,6 +607,82 @@ yum install python-pip
 当你遇到问题无法解决而抓狂的时候，可以看看网友的抱怨，原来还有另外的人跟你一样的抓狂~~~
 
 :)
+
+
+
+# Redis
+
+### release.redis相关工具软件推荐
+
+windows下 不错的可视化客户端      链接：https://pan.baidu.com/s/1gEeM7ttwJCik96R4teRUpw 密码：t10g
+
+#### windows版  redis服务端
+
+1. [下载](https://github.com/ServiceStack/redis-windows/blob/master/downloads/redis-64.3.0.503.zip)
+2. 绿色软件，不需要安装
+3. 启动命令 ：redis-server.exe  "redis.windows.conf"
+
+#### redis测试命令
+
+获取所有key
+
+```
+keys *
+```
+
+获取指定key
+
+```
+get thekey
+```
+
+
+
+#### 相关文档：
+
+1. [windows下redis安装](https://blog.csdn.net/u012343297/article/details/78839063)
+2. [Redis 命令参考](http://doc.redisfans.com/index.html)
+
+
+
+### todo.python  redis基本操作
+
+
+
+1. [Python—redis](https://www.cnblogs.com/melonjiang/p/5342383.html)
+
+
+
+# Mysql数据库
+
+
+
+0x01  读取 
+
+
+
+1. ### 0x06 python 操作mysql
+
+   `conda install -c anaconda pymysql` 
+
+
+
+   conda install pymysql
+
+
+
+```
+   python3 -m pip install PyMySQL
+```
+
+
+
+   参考链接
+
+1. [Python3 MySQL 数据库连接](http://www.runoob.com/python3/python3-mysql.html)
+2. https://anaconda.org/anaconda/pymysql
+
+
 
 
 
