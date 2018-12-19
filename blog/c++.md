@@ -123,7 +123,7 @@ ${cwd} the task runner's current working directory on startup()
 
 ## C++修炼
 
-### 0x03 我的C++书单
+### 0x03 我的C++书单（入门篇）
 
 
 
@@ -131,9 +131,25 @@ ${cwd} the task runner's current working directory on startup()
 
 
 
-#### 入门篇
+千里之行始于足下，列一个小书单，先一口一口啃下来，边读书，边实践，入了门再说。
+
+#### 
 
 ##### 1，《C++ Primer》
+
+2，C++编程规范-101条规则准则与最佳实践
+
+3，C++标准库(第2版)
+
+4，Effective C++ 中文版
+
+5，C++ API 设计
+
+6，More Effective C++ 
+
+7， *STL* *源码*剖析
+
+
 
 
 
