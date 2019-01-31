@@ -35,3 +35,23 @@ SunCC:   __SUNPRO_C和__SUNPRO_CC
 //#define X_P3 // when this is defined, the proteotypic peptide version of X! Tandem, X! P3 is built
 ```
 
+
+
+实例 __cplusplus 
+
+告诉编译器，这里的代码使用c编译方式进行编译
+
+```
+#ifdef  __cplusplus  
+extern "C" {  
+#endif  
+
+
+/**** some declaration or so *****/  
+
+
+#ifdef  __cplusplus  
+}  
+#endif  /* end of __cplusplus */  
+```
+
