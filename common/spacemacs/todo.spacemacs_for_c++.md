@@ -12,7 +12,12 @@
 #### 字体的支持
 
 1. 查看当前的字体
-2. 
+
+
+
+参考链接：
+
+#### https://www.jianshu.com/p/1d5e1aaeb3f6
 
 #### 网络配置使用国内镜像
 
@@ -50,7 +55,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 
 
-
+### C++  相关配置
 
 #### 打开c++ layer
 
@@ -71,4 +76,5 @@ git checkout -b v0.9rc1 origin/v0.9rc1
 3. https://blog.csdn.net/samjjx/article/details/52242740
 4. [因为刚好遇见你：Spacemacs](https://www.jianshu.com/p/8a8a35596b9d)
 5. [子龙山人spacemacs](https://zilongshanren.com/blog/2015-12-06-spacemacs-rocks.html)
+6. http://spacemacs.org/doc/QUICK_START.html
 
