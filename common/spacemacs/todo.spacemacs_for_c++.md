@@ -11,7 +11,17 @@
 
 #### 字体的支持
 
-1. 查看当前的字体
+首先是下载Source Code Pro字体,github上的比较慢,下面网址的很快
+
+http://www.fontsquirrel.com/
+
+然后/usr/share/fonts/ 下新建一个目录
+
+sudo mkdir /usr/share/fonts/opentype
+
+接着解压下载的字体到该目录下,然后执行
+
+sudo fc-cache -f -v       使字体生效
 
 
 
@@ -61,6 +71,34 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 
 
+安装clang-format
+
+```
+sudo apt install clang-format
+```
+
+https://liu233w.github.io/2016/06/16/clang-format.org/
+
+
+
+#### 快捷键
+
+1， Emacs风格中则绑定了M-m（一般情况下是 Alt + m）
+
+如果一个函数就在这个文件中实现，在该文件buffer的其他地方想快速跳转过来，可以用如下命令
+
+M-m m g g
+
+如果想要打开新的buffer显示这个函数定义，用下面的命令
+
+M-m m g g      M-RET g G
+
+
+
+
+
+https://blog.csdn.net/u011729865/article/details/52793134/
+
 
 
 ### 参考链接
@@ -68,6 +106,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
 ```
 git checkout -b v0.9rc1 origin/v0.9rc1
 ```
+
+
+
+
+
+
 
 
 

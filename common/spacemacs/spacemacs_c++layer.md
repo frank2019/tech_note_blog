@@ -73,7 +73,12 @@ can be found in the [dir-locals](http://www.gnu.org/software/emacs/manual/html_n
 #### 3.3.1 clang-format
 
 ```
-
+;; Bind clang-format-region to C-M-tab in all modes:
+(global-set-key [C-M-tab] 'clang-format-region)
+;; Bind clang-format-buffer to tab on the c++-mode only:
+(add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
 ```
 
  [clang-format](http://clang.llvm.org/docs/ClangFormat.html) 可以用来对指定区域代码 (`clang-format-region`) 进行格式化，也可以对整个buffer (`clang-format-buffer`) 。 格式的定义存在在 `.clang-format` 。这个文件可以放在代码的同一级目录中，也可以放在父目录中(否则会使用默认的)。
