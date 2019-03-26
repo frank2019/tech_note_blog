@@ -70,6 +70,20 @@ git pull origin master   //git pull 相当于从远程获取最新版本并merge
 
 在实际使用中，git fetch更安全一些
 
+
+
+
+
+git add   filename
+
+
+
+`git reset HEAD <撤销的文件1>`
+
+
+
+
+
 ### 参考链接
 
 1. [git fetch 和git pull 的差别](https://www.cnblogs.com/qiu-Ann/p/7902855.html)

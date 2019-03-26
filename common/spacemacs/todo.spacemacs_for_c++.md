@@ -95,6 +95,10 @@ M-m m g g      M-RET g G
 
 
 
+SPC   g  d     在 窗口下端显示 标识定义
+
+
+
 
 
 https://blog.csdn.net/u011729865/article/details/52793134/
