@@ -81,6 +81,20 @@ https://liu233w.github.io/2016/06/16/clang-format.org/
 
 
 
+
+
+#### 侧边栏显示函数列表
+
+1. https://github.com/syl20bnr/spacemacs/blob/master/layers/+tools/imenu-list/README.org
+
+
+
+
+
+
+
+1. [emacs_247_spacemacs中选扩展选择代码区域](https://blog.csdn.net/grey_csdn/article/details/82974910)
+
 #### 快捷键
 
 1， Emacs风格中则绑定了M-m（一般情况下是 Alt + m）
