@@ -2,6 +2,152 @@
 
 
 
+https://ruby.ctolib.com/article/wiki/96881
+
+
+
+#### 0x04 跳转和移动光标
+
+1，查看函数 变量的定义    alt-m  m g g
+
+2，跳转到上一次的光标位置    ctl +  o
+
+
+
+| Key Binding            | Description                                |
+| ---------------------- | ------------------------------------------ |
+| `alt-m  m g g`         | 查看函数 变量的定义                        |
+| `ctl+o`                | 跳转到上一次的光标位置，可反复使用         |
+| `` (跟~同一个位置的键) | 在上一次光标位置和这一次的光标位置之间切换 |
+| `gg`                   | 跳转到第一行                               |
+| `G`                    | 跳转到最后一行                             |
+| '8G'                   | 跳转到第8行                                |
+| '8gg'                  | 跳转到第8行                                |
+| 'ctl + f'              | 移动到上一屏                               |
+| 'ctl + b'              | 移动到下一屏                               |
+|                        |                                            |
+|                        |                                            |
+
+##### 
+
+##### 光标
+
+
+
+```
+h, j, k, l
+w, W - 下一个词首(跳过标点)
+e, E - 下一个词尾
+b, B - 回退一个词(跳过标点)
+0 - 到这一行的最开头
+^ - 到这一行的非空白最开头
+$ - 到这行的行尾
+g_ - 到这一行的非空白行为
+( - 句首
+) - 句尾
+```
+
+
+
+
+
+```
+} - Move to end of next paragraph or code block.
+{ - Move to start of previous paragraph or code block.
+Ctrl+F - Move forward one screenful.
+Ctrl+B - Move backward one screenful.
+ctrl+d - 向下翻页(down)
+ctrl+u - 向上翻页(up)
+H, M, L - 屏幕位置，分别为顶部，中间，尾部
+zz -  normal模式下区中
+ctrl-o zz - insert模式下区中 (利用insert normal模式)
+```
+
+
+
+
+
+
+
+```
+gg  - 到文件头
+G   - 到文件尾
+
+Ngg - 到N行
+NG  -
+:N  -
+
+gi  - 返回上一次插入文本的地方。
+g;  - 返回上一个修改位置
+g,  - 返回下一个修改位置
+
+gd       - 跳转到局部定义
+gf       - 跳转到文件
+
+ctrl + o - 跳转到上一位置
+ctrl + i - 跳转下一位置（和ctrl + o配合在代码间跳转）
+
+ctrl + ]
+ctrl + t
+```
+
+
+
+
+
+
+
+```
+'. - 跳转到最后一次修改的地方(.代表最后一次修改的地方)
+'" - 上一次编辑文件的地方
+'' - 跳转到上次跳转之前的位置
+'( - 当前句子的开头
+') - 当前句子的结尾
+'{ - 当前段落的开头
+'} - 当前段落的结尾
+'[ - 上一次修改或复制的第一行的第一个字符
+'] - 上一次修改或复制的最后一行的最后一个字符
+'< - 上一次Visual area的开始位置
+'> - 上一次Visual area的结束位置
+```
+
+
+
+##### 参考链接
+
+1. [vi/vim使用进阶: 指随意动，移动如飞](https://blog.easwy.com/archives/advanced-vim-skills-advanced-move-method/)
+2. [vim 移动跳转](https://mapan1984.github.io/tool/2016/04/22/Vim-%E7%A7%BB%E5%8A%A8%E8%B7%B3%E8%BD%AC/)
+
+
+
+#### 0x03窗口管理
+
+SPC 键激活
+
+w - 	window横切 	
+w / 	window竖切 	
+w c 	window close 	
+w m 	window 最大化 
+
+
+
+参考链接
+
+1. https://www.liangzl.com/get-article-detail-18899.html
+
+
+
+#### 0x02，常用命令
+
+按M-x可弹出支持的命令列表
+
+
+
+- 显示日历： M-x  calendar     在日历窗口 按q 退出
+- 显示计算器
+
+
+
 
 
 #### 0x01，侧边栏显示函数列表imenu-list
@@ -25,11 +171,15 @@
 
 1. https://github.com/syl20bnr/spacemacs/blob/master/layers/+tools/imenu-list/README.org
 
+​	
 
 
-#### 0x02，常用命令
 
-显示日历： m-x  calendar   
+
+
+
+
+
 
 
 
