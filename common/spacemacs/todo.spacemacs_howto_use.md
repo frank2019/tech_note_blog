@@ -124,10 +124,111 @@ ctrl + t
 
 SPC 键激活
 
+##### Windows操作
+
+右侧打开一个垂直分屏窗口
+
+```
+SPC w v or :vsplit
+```
+
+底部水平打开分屏窗口
+
+```
+SPC w s or :split
+```
+
+多个窗口进行窗口切换
+
+```
+SPC w h/j/k/l
+```
+
+移除当前窗口
+
+```
+SPC w H/J/K/L
+```
+
+窗口瞬时状态
+
+```
+SPC w .
+```
+
 w - 	window横切 	
 w / 	window竖切 	
 w c 	window close 	
 w m 	window 最大化 
+
+
+
+`
+
+| Keybinding                | Function                                                     |
+| ------------------------- | ------------------------------------------------------------ |
+| `SPC b b <buffer-name>`   | Create a buffer named `<buffer-name>`.                       |
+| `SPC b b`                 | Search through open buffers and recent files.                |
+| `SPC b n` or `:bnext`     | Switch to the next buffer. (See [Special buffers](http://spacemacs.org/doc/VIMUSERS.html#special-buffers)) |
+| `SPC b p` or `:bprevious` | Switch to the previous buffer. (See [Special buffers](http://spacemacs.org/doc/VIMUSERS.html#special-buffers)) |
+| `SPC b d` or `:bdelete`   | Kill current buffer.                                         |
+| `SPC b C-d`               | Kill buffers using a regular expression.                     |
+| `SPC b m`                 | Kill all buffers except the current buffer.                  |
+| `SPC b .`                 | Buffer transient-state.                                      |
+
+
+
+##### Buffers操作
+
+创建名称为<buffer-name>的buffer
+
+```
+SPC b b <buffer-name>
+```
+
+从已打开的buffers以及最近打开的文件中搜索buffer
+
+```
+SPC b b
+```
+
+切换到下一个buffer
+
+```
+SPC b n or :bnext
+```
+
+切换到上一个buffer
+
+```
+SPC b p or :bprevious
+```
+
+关闭当前buffer
+
+```
+SPC b d or :bdelete
+```
+
+用表达式关闭buffers
+
+```
+SPC b C-d
+```
+
+关闭其他buffers
+
+```
+SPC b m
+```
+
+buffer瞬时状态
+
+```
+SPC b .
+```
+
+
 
 
 
