@@ -89,7 +89,21 @@ https://liu233w.github.io/2016/06/16/clang-format.org/
 
 
 
+#### 注释插件 Evil-commentary layer
 
+
+
+| Key Binding | Description                   |
+| ----------- | ----------------------------- |
+| `SPC ;`     | comment operator              |
+| `gcc`       | comment current line          |
+| `gcap`      | comment paragraphs            |
+| `gc SPC y`  | comment up to a line with avy |
+| `gy`        | comment and yank              |
+
+参考链接
+
+1. [Evil-commentary layer](http://spacemacs.org/layers/+vim/evil-commentary/README.html)
 
 
 
