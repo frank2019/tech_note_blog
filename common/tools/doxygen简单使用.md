@@ -8,7 +8,7 @@ Graphviz可以生成视图连接将.c文件中所用到的函数、头文件生�
 
 Microsoft  HTML Help Workshop：   用于生成chm文件
 
-Doxygen的使用步骤 及Doxygen配置方法
+### 1 Doxygen配置方法
 
 #### 1.1 Doxygen的主页面
 
