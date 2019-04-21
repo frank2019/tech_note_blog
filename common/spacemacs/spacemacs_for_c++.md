@@ -1,11 +1,22 @@
 
 
+```
+合抱之木，生於毫末；九层之台，起於累土；千里之行，始於足下。
+									     -老子
+```
+
+
+
+因为工作需要在linux环境下编辑开发，选了一个合适的代码编辑器emacs 和vim的混合体之一  spacemacs。
+
+目前感觉很好用。  不过由于对键盘不够熟悉，效率还不够高，继续努力中。。。
+
 
 
 ### emacs spacemacs基本安装
 
 1. 安装emacs25以上版本，
-2. spacemacs 安装参照官网说明
+2. spacemacs 安装参照官网说明,可以使用我的spacemacs配置(https://github.com/frank2019/spacemacs )
 
 
 
@@ -17,17 +28,20 @@ http://www.fontsquirrel.com/
 
 然后/usr/share/fonts/ 下新建一个目录
 
-sudo mkdir /usr/share/fonts/opentype
-
 接着解压下载的字体到该目录下,然后执行
 
-sudo fc-cache -f -v       使字体生效
+```
+sudo mkdir /usr/share/fonts/opentype
+sudo fc-cache -f -v       //使字体生效
+```
 
 
 
 参考链接：
 
 #### https://www.jianshu.com/p/1d5e1aaeb3f6
+
+
 
 #### 网络配置使用国内镜像
 
@@ -69,8 +83,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 #### 打开c++ layer
 
-
-
 安装clang-format
 
 ```
@@ -81,17 +93,7 @@ https://liu233w.github.io/2016/06/16/clang-format.org/
 
 
 
-
-
-#### 侧边栏显示函数列表
-
-1. https://github.com/syl20bnr/spacemacs/blob/master/layers/+tools/imenu-list/README.org
-
-
-
 #### 注释插件 Evil-commentary layer
-
-
 
 | Key Binding | Description                   |
 | ----------- | ----------------------------- |
@@ -107,45 +109,15 @@ https://liu233w.github.io/2016/06/16/clang-format.org/
 
 
 
-1. [emacs_247_spacemacs中选扩展选择代码区域](https://blog.csdn.net/grey_csdn/article/details/82974910)
+#### spacemacs中选扩展选择代码区域
 
-#### 快捷键
-
-1， Emacs风格中则绑定了M-m（一般情况下是 Alt + m）
-
-如果一个函数就在这个文件中实现，在该文件buffer的其他地方想快速跳转过来，可以用如下命令
-
-M-m m g g
-
-如果想要打开新的buffer显示这个函数定义，用下面的命令
-
-M-m m g g      M-RET g G
+| Key Binding | Description                           |
+| ----------- | ------------------------------------- |
+| `SPC v`     | 选中区域，继续按v可以依次扩大选中区域 |
 
 
 
-SPC   g  d     在 窗口下端显示 标识定义
-
-
-
-
-
-https://blog.csdn.net/u011729865/article/details/52793134/
-
-
-
-### 参考链接
-
-```
-git checkout -b v0.9rc1 origin/v0.9rc1
-```
-
-
-
-
-
-
-
-
+#### 参考链接
 
 1. https://segmentfault.com/q/1010000007778370
 2. [用spacemacs打造c++ IDE](https://blog.csdn.net/csfreebird/article/details/71194235)
@@ -153,4 +125,5 @@ git checkout -b v0.9rc1 origin/v0.9rc1
 4. [因为刚好遇见你：Spacemacs](https://www.jianshu.com/p/8a8a35596b9d)
 5. [子龙山人spacemacs](https://zilongshanren.com/blog/2015-12-06-spacemacs-rocks.html)
 6. http://spacemacs.org/doc/QUICK_START.html
+7. [vim 操作命令大全（转）](https://www.cnblogs.com/uncle-qi/p/9356465.html)
 
