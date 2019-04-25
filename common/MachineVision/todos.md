@@ -17,9 +17,17 @@
 
 
 
+#### 参考链接
+
+1. [模型 16个相机参数（内参、外参、畸变参数）](https://blog.csdn.net/weixin_43206570/article/details/84797361)
+2. https://www.cnblogs.com/wangguchangqing/p/8126333.html
+
 
 
 识别：
 
 1. [](https://blog.csdn.net/wyx100/article/details/73080969
 
+
+
+1. [cmos的调试经验分享](https://wenku.baidu.com/view/afe9531454270722192e453610661ed9ad5155be.html?rec_flag=default)

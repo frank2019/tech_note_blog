@@ -66,6 +66,13 @@ $ python sample.py
 
 
 
+```
+WARNING: The conda.compat module is deprecated and will be removed in a future release.
+Collecting package metadata: done
+Solving environment: done
+
+```
+
 
 
 #### 参考链接

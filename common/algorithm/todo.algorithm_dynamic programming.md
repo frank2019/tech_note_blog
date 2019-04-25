@@ -5,10 +5,9 @@ dynamic programming
 
 
 ```
-
+曲则全，枉则直，洼则盈，敝则新，少则多，多则惑.
+									-<<道德经>>
 ```
-
-
 
 
 
@@ -55,8 +54,9 @@ dynamic programming
 两个子串：
 
 ```
-A（a1,a2,...am)
-B(b1,b2,...bn)
+A（a1,a2,...an)
+B(b1,b2,...bm)
+其中 ai  bi 均为 D中的元素。且 m<=n
 ```
 
 混合串：R
@@ -75,11 +75,22 @@ Z=（z1，z2，z3....z(m+n))
 D=(d1,d2,d3,...dk)
 ```
 
+对应的cost
+
+```
+S=（s1，s2,s3...sk）
+```
 
 
 
+```
+           A[i]  j=0;
+c[i,j] = 
+```
 
 
+
+min()
 
 
 
@@ -89,8 +100,7 @@ D=(d1,d2,d3,...dk)
 2. [算法-动态规划 Dynamic Programming--从菜鸟到老鸟](https://blog.csdn.net/u013309870/article/details/75193592)
 3. [动态规划(dynamic programming)](https://www.cnblogs.com/magicsoar/p/6675504.html)
 4. [谈谈我对dynamic programming(动态规划)的理解](https://blog.csdn.net/discoverTheFuture/article/details/79275819)
-5. [<<dynamic programming>>
-6. https://wenku.baidu.com/view/14203f791711cc7931b71633.html?sxts=1556087135338](http://vdisk.weibo.com/s/BZ8MvoVNFyoER)
+5. [dynamic programming](https://wenku.baidu.com/view/14203f791711cc7931b71633.html?sxts=1556087135338](http://vdisk.weibo.com/s/BZ8MvoVNFyoER)
 
 
 

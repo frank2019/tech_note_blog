@@ -58,3 +58,4 @@ $$
 ### 参考链接
 
 1. [相机针孔模型详解](https://blog.csdn.net/x_r_su/article/details/52682318)
+2. [SLAM入门之视觉里程计(2)：相机模型（内参数，外参数）](https://www.cnblogs.com/wangguchangqing/p/8126333.html)
