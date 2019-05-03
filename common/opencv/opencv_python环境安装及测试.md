@@ -1,5 +1,9 @@
 
 
+```
+
+```
+
 `NumPy`是`Python`的一个包,擅长进行矩阵运算，Python中的opencv基于NumPy。`
 
 #### 环境设定
@@ -31,7 +35,7 @@ $ conda create python=3.7 -n  mycv
 $ conda  activate mycv
 ```
 
-### 2. 安装模块
+#### 2. 安装模块
 
 使用以下的指令安装模块：
 
@@ -63,6 +67,36 @@ $ python sample.py
 ```
 
 加载指定图片，并显示。按任意键退出。
+
+
+
+#### 4, 练习
+
+将图像的左半部分的红通道和蓝通道交换。
+
+
+
+```python
+import cv2
+import numpy as np
+
+img = cv2.imread("imori.jpg")
+# info = img.shape
+
+img3 = img.copy()
+H,W,C = img3.shape
+img3[:H//2,:W//2] = img3[:H//2,:W//2,(2,1,0)]
+cv2.imshow('',img3);
+
+cv2.waitKey(0)
+
+```
+
+
+
+
+
+
 
 
 

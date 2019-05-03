@@ -62,9 +62,15 @@ tab键补齐
 - :cs find c func – 查找func在哪些地方被调用
 - :cw – 打开quickfix窗口查看结果
 
-## [13.4 gtags](http://www.cnblogs.com/jiqingwu/archive/2012/06/14/vim_notes.html#id105)
+## gtags
 
 Gtags综合了ctags和cscope的功能。 使用Gtags之前，你需要安装GNU Gtags。 然后在工程目录运行 gtags 。
+
+```
+sudo apt install global
+```
+
+
 
 - :Gtags funcname 定位到 funcname 的定义处。
 - :Gtags -r funcname 查询 funcname被引用的地方。
@@ -72,3 +78,34 @@ Gtags综合了ctags和cscope的功能。 使用Gtags之前，你需要安装GNU 
 - :Gtags -g string Goto string 出现的地方。 :Gtags -gi string 忽略大小写。
 - :Gtags -f filename 显示 filename 中的函数列表。 你可以用 :Gtags -f % 显示当前文件。
 - :Gtags -P pattern 显示路径中包含特定模式的文件。 如 :Gtags -P .h$ 显示所有头文件， :Gtags -P /vm/ 显示vm目录下的文件。
+
+
+
+## 5 Key bindings
+
+| Key Binding | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| `SPC m g c` | create a tag database                                     |
+| `SPC m g f` | jump to a file in tag database                            |
+| `SPC m g g` | jump to a location based on context                       |
+| `SPC m g G` | jump to a location based on context (open another window) |
+| `SPC m g d` | find definitions                                          |
+| `SPC m g i` | present tags in current function only                     |
+| `SPC m g l` | jump to definitions in file                               |
+| `SPC m g n` | jump to next location in context stack                    |
+| `SPC m g p` | jump to previous location in context stack                |
+| `SPC m g r` | find references                                           |
+| `SPC m g R` | resume previous helm-gtags session                        |
+| `SPC m g s` | select any tag in a project retrieved by gtags            |
+| `SPC m g S` | show stack of visited locations                           |
+| `SPC m g u` | manually update tag database                              |
+
+
+
+
+
+#### 参考链接
+
+1. [Helm Gtags layer](http://spacemacs.org/layers/+tags/gtags/README.html)
+
+2. [ggtags](https://github.com/leoliu/ggtags)
