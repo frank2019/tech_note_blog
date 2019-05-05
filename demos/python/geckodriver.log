@@ -1,0 +1,179 @@
+1540564958782	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.9eQLOBqqqwP2"
+*** You are running in headless mode.
+1540564961704	Marionette	INFO	Listening on port 65221
+1540564962007	Marionette	WARN	TLS certificate errors will be ignored for this session
+1540564968363	Marionette	INFO	Stopped listening on port 65221
+[Parent 3460, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 4664, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/[ipc/chromium/sCrc/child 7004hrom, Chrome_ChildThread] WARNINe/common/ipc_channel_wG: pipe errin.cor: 109: file z:/build/build/c, lisrc/ne 346i
+pc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 7004, [Parent 3460, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19196, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19196, Chrome1540564973183	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.bYcUeBATW9MB"
+*** You are running in headless mode.
+1540564975486	Marionette	INFO	Listening on port 65278
+1540564975952	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540564981215	Marionette	INFO	Stopped listening on port 65278
+[Parent 9648, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 9648, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 5712, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 5712, Chrome[Parent 9648, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19732, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19732, Chrome_1540564985689	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.ynyF7yhub30o"
+*** You are running in headless mode.
+1540564988043	Marionette	INFO	Listening on port 65335
+1540564988455	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540564994696	Marionette	INFO	Stopped listening on port 65335
+[Parent 20444, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20276, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20276[Parent 20444, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17876, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17876, Ch[Parent 20444, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20264, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20264, C1540564999209	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.WJ4drjjzqBhs"
+*** You are running in headless mode.
+1540565001476	Marionette	INFO	Listening on port 65389
+1540565001967	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565007651	Marionette	INFO	Stopped listening on port 65389
+[Parent 10496, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20316, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20316[Parent 10496, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20332, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20332, Chrom[Parent 10496, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20060, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20060, 1540565012127	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.yLJFxqsLWmQ7"
+*** You are running in headless mode.
+1540565014354	Marionette	INFO	Listening on port 65439
+1540565014406	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565020708	Marionette	INFO	Stopped listening on port 65439
+[Parent 12884, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19996, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19996,[Parent 12884, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20352, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20352, Chrome[Parent 12884, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20196, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20191540565025227	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.vqJ2cZYUJ4LH"
+*** You are running in headless mode.
+1540565027912	Marionette	INFO	Listening on port 65491
+1540565028005	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565033540	Marionette	INFO	Stopped listening on port 65491
+[Child 19992, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19992, Chrome_ChildThread] WARNING: pip[Parent 18920, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 12764, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1276[Parent 18920, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20016, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20016, Chro1540565038374	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.l6UFTyoOEGZv"
+*** You are running in headless mode.
+[GFX1-]: ClientLayerManager::BeginTransaction with IPC channel down. GPU process may have died.
+1540565041261	Marionette	INFO	Listening on port 49169
+1540565041654	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565048924	Marionette	INFO	Stopped listening on port 49169
+[Parent 20120, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19960, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19960, Chrome_Ch[Parent 20120, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19592, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19592, Chrome_Chi[Parent 20120, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20428, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20428, C1540565053538	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.Xl6jeFyQQY7h"
+*** You are running in headless mode.
+[GFX1-]: ClientLayerManager::BeginTransaction with IPC channel down. GPU process may have died.
+1540565055870	Marionette	INFO	Listening on port 49240
+1540565056307	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565061380	Marionette	INFO	Stopped listening on port 49240
+[Parent 20424, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19696, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19696, Chrom[Parent 20424, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20356, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20356, Chro[Parent 20424, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19604, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19604, C1540565066010	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.Rah337hLP7XT"
+*** You are running in headless mode.
+1540565068303	Marionette	INFO	Listening on port 49297
+1540565068782	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565074154	Marionette	INFO	Stopped listening on port 49297
+[Parent 18724, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20112, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20112[Parent 18724, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 5628, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 5628, C[Parent 18724, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19888, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19888, Chrome_ChildThr1540565078747	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.3QNnzbXhmVFJ"
+*** You are running in headless mode.
+1540565081215	Marionette	INFO	Listening on port 49350
+1540565081518	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565087213	Marionette	INFO	Stopped listening on port 49350
+[Parent 12764, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19688, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19688, Ch[Child 19844, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19844, Ch[Parent 12764, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16472, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16472, Chr1540565091963	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.zzS3QVHhtWWO"
+*** You are running in headless mode.
+1540565094410	Marionette	INFO	Listening on port 49407
+1540565094741	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565100597	Marionette	INFO	Stopped listening on port 49407
+[Child 20476, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20476,[Parent 20192, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17208, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17208, Chrome_Chil[Parent 20192, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 15200, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 15200,1540565105538	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.NPgk1E7iy8Lb"
+*** You are running in headless mode.
+1540565108001	Marionette	INFO	Listening on port 49469
+1540565108316	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565114024	Marionette	INFO	Stopped listening on port 49469
+[Parent 9628, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20228, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20228, [Parent 9628, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20308, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20308, Chrome_ChildThread] WARNING: pip[Parent 9628, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20376, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20376, Chrome_ChildThread] WARNING: pipe error: 109: 1540565118700	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.U9Spd3Zjeywp"
+*** You are running in headless mode.
+1540565121092	Marionette	INFO	Listening on port 49527
+1540565121474	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565126757	Marionette	INFO	Stopped listening on port 49527
+[Parent 19564, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20452, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20452, Chrome_Ch[Parent 19564, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20404, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20404[Parent 19564, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18740, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18740, C1540565131706	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.5BRDbqtIFITd"
+*** You are running in headless mode.
+[GFX1-]: ClientLayerManager::BeginTransaction with IPC channel down. GPU process may have died.
+1540565134228	Marionette	INFO	Listening on port 49582
+1540565134475	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565140258	Marionette	INFO	Stopped listening on port 49582
+[Parent 19928, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19488, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19488, Chrom[Parent 19928, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18888, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18888, Chrome[Parent 19928, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20336, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20336, C1540565144938	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\frank\\AppData\\Local\\Temp\\rust_mozprofile.G45pn06tQeNZ"
+*** You are running in headless mode.
+[GFX1-]: ClientLayerManager::BeginTransaction with IPC channel down. GPU process may have died.
+1540565148284	Marionette	INFO	Listening on port 49705
+1540565148336	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/log34c264.js,/mmbizwap/zh_CN/htmledition/js/sougou/index36913b.js,/mmbizwap/zh_CN/htmledition/js/biz_wap/safe/mutation_observer_report34c264.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport410774.js,/mmbizwap/zh_CN/htmledition/js/appmsg/fereport_without_localstorage413fb1.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source407ef0.js,/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos4137de.js,/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report3d6a60.js,/mmbizwap/zh_CN/htmledition/js/appmsg/wxtopic31a3be.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weapp3ff8fe.js,/mmbizwap/zh_CN/htmledition/js/appmsg/weproduct3f868a.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voicemsg3b1748.js,/mmbizwap/zh_CN/htmledition/js/appmsg/autoread3af14e.js,/mmbizwap/zh_CN/htmledition/js/appmsg/voice38518d.js,/mmbizwap/zh_CN/htmledition/js/appmsg/qqmusic3d171e.js?v=1003, line 38: TypeError: document.getElementById(...) is null
+1540565155929	Marionette	INFO	Stopped listening on port 49705
+[Parent 19712, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20296, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 202[Parent 19712, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19524, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 19524, Chrome_Chil[Parent 19712, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20380, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 20380,
