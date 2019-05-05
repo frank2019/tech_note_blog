@@ -36,7 +36,72 @@ FUSE
 
 ##### 挂载工具
 
+mount 命令进行挂载
 
+
+
+#### 目前FUSE支持的平台：
+
+- Linux 完全支持
+
+
+- BSD 部分支持
+
+
+- OX-X参考OSXFUSE
+
+#### 比较知名的用户态文件系统：
+
+- ExpanDrive：商业文件系统，实现了SFTP/FTP/FTPS协议；
+- GlusterFS：用于集群的分布式文件系统，可以扩展到PB级；
+
+- SSHFS：通过SSH协议访问远程文件系统；
+
+
+- GmailFS：通过文件系统方式访问GMail；
+
+
+- EncFS：加密的虚拟文件系统
+
+
+- NTFS-3G和Captive NTFS，在非Windows中对NTFS文件系统提供支持；
+
+
+- WikipediaFS：支持通过文件系统接口访问Wikipedia上的文章；
+
+
+- 升阳公司的Lustre：和GlusterFS类似但更早的一个集群文件系统
+
+
+- ZFS：Lustre的Linux版；
+
+
+- archivemount：
+
+
+- HDFS: Hadoop提供的分布式文件系统。HDFS可以通过一系列命令访问，并不一定经过Linux FUSE
+
+
+
+
+
+
+
+开发
+
+安装fuse库
+
+fuse3
+
+```
+sudo apt-get install fuse3 libfuse3-dev
+```
+
+fuse2
+
+```
+sudo apt-get install fuse libfuse-dev
+```
 
 
 
@@ -46,3 +111,7 @@ FUSE
 
 1. [FUSE(Filesystem in Userspace)0](https://www.jianshu.com/p/c2b77d0bbc43)
 2. https://wenku.baidu.com/view/86c61a4033687e21af45a994.html
+3. [使用 FUSE 开发自己的文件系统](https://www.ibm.com/developerworks/cn/linux/l-fuse/)
+4. [Fuse-2.9.7       ](http://www.linuxfromscratch.org/blfs/view/stable/postlfs/fuse2.html)
+5. [用户态文件系统(FUSE)框架分析和实战](https://blog.csdn.net/juS3Ve/article/details/78237236)
+
