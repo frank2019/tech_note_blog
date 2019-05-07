@@ -40,17 +40,17 @@ mount 命令进行挂载
 
 
 
-#### 目前FUSE支持的平台：
-
-- Linux 完全支持
-
-
-- BSD 部分支持
-
-
-- OX-X参考OSXFUSE
-
 #### 比较知名的用户态文件系统：
+
+目前FUSE支持的平台：
+
+1. Linux 完全支持
+
+2. BSD 部分支持
+
+3. OX-X参考OSXFUSE
+
+
 
 - ExpanDrive：商业文件系统，实现了SFTP/FTP/FTPS协议；
 - GlusterFS：用于集群的分布式文件系统，可以扩展到PB级；
@@ -102,6 +102,19 @@ fuse2
 ```
 sudo apt-get install fuse libfuse-dev
 ```
+
+
+
+#### libfuse 的示例程序
+
+libfuse提供了几个示例程序，都在example目录下：
+
+- hello.c ：最简单的libfuse用法，基本api用法
+  hello_ll.c ：ll是low level的缩写，展示了低层次接口的基本用法
+  null.c ：实现了一个类似linux下的/dev/null的设备
+  fioc.c/fioclient.c ：fioc是fuse ioctl的缩写，这个例子展示的就像很多驱动一样，能够使用ioctl接口进行交互
+  fsel.c/fselclient.c ： fsel是fuse select缩写，比较高级的用法。
+  cusexmp.c/fusexmp.c/fusexmp_fh.c ： 这几个例子都是文件映射相关的，有一定的实用意义，实现的接口较全面。
 
 
 
