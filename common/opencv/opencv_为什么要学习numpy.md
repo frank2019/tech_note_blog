@@ -1,7 +1,8 @@
 
 
 ```
-
+静胜躁，寒胜热。清静为天下正。
+                             --《道德经》
 ```
 
 
@@ -28,18 +29,19 @@ NumPy 是一个运行速度非常快的数学库，主要用于数组计算，�
 
 如果有以上需求，可以使用NumPy。
 
-
-
 #### Hello NumPy
 
-
+以下是矩阵得建议使用，请找找感觉！
 
 ```python
 import numpy as np
 
 #创建一维数组
 a = np.array([1,2,3,4,5])  
+
+#打印数组
 print(a)
+#打印数组得形状
 print(a.shape)
 
 a[0] = -1
@@ -79,10 +81,4 @@ print("f= %r\n" %(f))
 ```
 
 
-
-#### 参考链接
-
-1. [NumPy 中文文档](https://www.numpy.org.cn/article/basics/index.html)
-2. [NumPy 教程 ](https://www.runoob.com/numpy/numpy-tutorial.html)
-3. https://cloud.tencent.com/info/1de1d4b5cb1b3147d07262cec8f58f2e.html
 
