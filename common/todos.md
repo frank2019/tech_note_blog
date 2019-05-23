@@ -16,6 +16,12 @@
 
 
 
+《AI算法工程师手册》
+
+http://www.huaxiaozhuan.com/
+
+
+
 
 
 人脸识别
