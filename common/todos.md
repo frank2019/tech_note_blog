@@ -20,7 +20,7 @@
 
 http://www.huaxiaozhuan.com/
 
-
+1. [数据挖掘领域十大经典算法之—朴素贝叶斯算法（超详细附代码）](https://blog.csdn.net/fuqiuai/article/details/79458943)
 
 
 
