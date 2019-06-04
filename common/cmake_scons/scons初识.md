@@ -6,8 +6,6 @@
 水滴石穿
 ```
 
-
-
 #### 1，概述
 
 scons是一个Python写的自动化构建工具，从构建这个角度说，它跟GNU make是同一类的工具。它是一种改进，并跨平台的gnu make替代工具，其集成功能类似于autoconf/automake 。scons是一个更简便，更可靠，更高效的编译软件。
@@ -38,7 +36,7 @@ sudo apt install scons
 
 
 
-```
+```bash
 conda install scons
 ```
 
