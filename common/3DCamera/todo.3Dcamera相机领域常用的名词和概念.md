@@ -53,9 +53,25 @@ kipping mode 就是把想要的数据采集上来,把其余的数据扔掉。
 
 在这一段时间内，物体可以在底片上留下影像，曝光时间是看需要而定的，没有长短好坏的说法只有需要的讲法。比如你拍星星的轨迹，就需要很长的曝光时间（可能是几个小时），这样星星的长时间运动轨迹就会在底片上成像。如果你要拍飞驰的汽车清晰的身影就要用很短的时间（通常是几千分之一秒）。
 
+#### wiggling 
 
+由奇次谐波带来的周期性误差，亦简称为“wiggling”
+
+
+
+#### Fixed-Pattern-Phase Noise (FPPN) 
+
+FPPN（Fixed Pattern Pixel Noise），或也有称之为Pixel dependent Offset，简单来说，由于TOF芯片上每个像素点所处的位置不一样，由于快门延迟等原因，导致像素点计算得到的相位差有误差。
+这就直接导致了深度结果的误差。
+比如你拍摄的是某一距离下的一张大白板，理论上能得到一个平整的深度平面，因为每个像素点拍摄的都是同一距离。
+而实际上得到的是个曲面，如下图，右下角的深度误差是最大的
+
+FPPN便是标定校准了此类误差
 
 #### 参考链接
 
+
+
 1. [摄像头模组光学CRA(chief ray angle)](https://www.cnblogs.com/whw19818/p/7247327.html)
+2. https://www.robotic.dlr.de/fileadmin/robotic/fuchs/MPICompensationICPR2010.pdf
 
