@@ -53,7 +53,7 @@ Mat (int rows, int cols, int type, void *data, size_t step=AUTO_STEP)
  
 ```
 
-
+imgdata是指向image第一行第一个元素的指针。
 
 ### 参考链接
 

@@ -16,7 +16,7 @@ def execCmd(cmd):
 
 def do_git_pull():
     repo_dir_home = 'F:\\workspace\\tech_note_blog'
-    repo_dir_work = 'F:\\workspace\\tech_note_blog'
+    repo_dir_work = 'D:\\MoreBetter\\tech_note_blog'
 
     if os.path.exists(repo_dir_home):
         repo_dir =  repo_dir_home

@@ -469,13 +469,13 @@ from Foob import ar
 
 - ##### module_name, package_name, ClassName, method_name,  ExceptionName, function_name, GLOBAL_VAR_NAME, instance_var_name,  function_parameter_name, local_var_name.
 
-**应该避免的名称**
+#### 应该避免的名称
 
 > 1. 单字符名称, 除了计数器和迭代器.
 > 2. 包/模块名中的连字符(-)
 > 3. 双下划线开头并结尾的名称(Python保留, 例如__init__)
 
-**命名约定**
+#### 命名约定
 
 > 1. 所谓”内部(Internal)”表示仅模块内可用, 或者, 在类内是保护或私有的.
 > 2. 用单下划线(_)开头表示模块变量或函数是protected的(使用from module import *时不会包含).
@@ -483,7 +483,7 @@ from Foob import ar
 > 4. 将相关的类和顶级函数放在同一个模块里. 不像Java, 没必要限制一个类一个模块.
 > 5. 对类名使用大写字母开头的单词(如CapWords, 即Pascal风格),  但是模块名应该用小写加下划线的方式(如lower_with_under.py).  尽管已经有很多现存的模块使用类似于CapWords.py这样的命名, 但现在已经不鼓励这样做, 因为如果模块名碰巧和类名一致, 这会让人困扰.
 
-**Python之父Guido推荐的规范**
+#### Python之父Guido推荐的规范
 
 | Type                       | Public             | Internal                                                     |
 | -------------------------- | ------------------ | ------------------------------------------------------------ |
