@@ -37,3 +37,5 @@ def do_git_pull():
 if __name__ == '__main__':
     get_day_info()
     do_git_pull()
+    str = input("Press any key to quit: ");
+    print ("%s", str)
