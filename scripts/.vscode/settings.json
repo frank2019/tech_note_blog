@@ -1,8 +1,6 @@
 {
     "python.testing.pyTestArgs": [
-        "--show-capture=stdout",
         "."
-        
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
