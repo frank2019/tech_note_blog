@@ -1,5 +1,6 @@
 import datetime
 import os
+import time
 
 def get_day_info():
     weekth = datetime.datetime.now().isocalendar()
@@ -37,5 +38,7 @@ def do_git_pull():
 if __name__ == '__main__':
     get_day_info()
     do_git_pull()
-    str = input("Press any key to quit: ");
-    print ("%s", str)
+    #str = input("Press any key to quit: ");
+    #print ("%s", str)
+    print('3 seconds will close')
+    time.sleep(3)
