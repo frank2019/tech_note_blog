@@ -8,5 +8,5 @@ class EchoFactory(protocol.Factory):
     def buildProtocol(self, addr):
         return Echo()
  
-endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
+endpoints.serverFromString(reactor, "tcp:8000").listen(EchoFactory())
 reactor.run()
