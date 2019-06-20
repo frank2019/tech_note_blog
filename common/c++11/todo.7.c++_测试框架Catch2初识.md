@@ -73,7 +73,7 @@ g++ -std=c++11 -o catchTest catchTest.cpp -I/usr/local/include/
     CHECK(expression)
     REQUIRE_FALSE(expression)
     CHECK_FALSE(expression)
-    
+
 
 注意：REQUIRE和CHECK最主要的区别在于
 
@@ -136,6 +136,65 @@ TEST_CASE("approx margin", "[single-file]") {
 > 1. INFO ,CAPTURE 会在所在case 报错的时候打印出来
 > 2. WARN  运行的时候会直接打印
 > 3. FAIL，FAIL_CHECK  会直接打印出来，并终止测试
+
+# 命令行使用
+
+## Uasge
+
+```bash
+
+Catch v2.5.0
+usage:
+  depth-apis-unit-test.exe [<test name|pattern|tags> ... ] options
+
+where options are:
+  -?, -h, --help                            display usage information
+  -l, --list-tests                          list all/matching test cases
+  -t, --list-tags                           list all/matching tags
+  -s, --success                             include successful tests in
+                                            output
+  -b, --break                               break into debugger on failure
+  -e, --nothrow                             skip exception tests
+  -i, --invisibles                          show invisibles (tabs, newlines)
+  -o, --out <filename>                      output filename
+  -r, --reporter <name>                     reporter to use (defaults to
+                                            console)
+  -n, --name <name>                         suite name
+  -a, --abort                               abort at first failure
+  -x, --abortx <no. failures>               abort after x failures
+  -w, --warn <warning name>                 enable warnings
+  -d, --durations <yes|no>                  show test durations
+  -f, --input-file <filename>               load test names to run from a
+                                            file
+  -#, --filenames-as-tags                   adds a tag for the filename
+  -c, --section <section name>              specify section to run
+  -v, --verbosity <quiet|normal|high>       set output verbosity
+  --list-test-names-only                    list all/matching test cases
+                                            names only
+  --list-reporters                          list all reporters
+  --order <decl|lex|rand>                   test case order (defaults to
+                                            decl)
+  --rng-seed <'time'|number>                set a specific seed for random
+                                            numbers
+  --use-colour <yes|no>                     should output be colourised
+  --libidentify                             report name and version according
+                                            to libidentify standard
+  --wait-for-keypress <start|exit|both>     waits for a keypress before
+                                            exiting
+  --benchmark-resolution-multiple           multiple of clock resolution to
+  <multiplier>                              run benchmarks
+
+For more detailed usage please see the project docs
+```
+
+## 常用命令
+
+- 显示test case总体情况：  test -l
+- 显示所有的标签（tags）:  test -t
+- 运行某个tag下的所有test cases:   test [tag]
+- 运行某个名字的test case:  test   "name"
+
+
 
 # 参考链接
 
