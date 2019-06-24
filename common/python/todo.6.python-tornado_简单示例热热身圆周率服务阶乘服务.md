@@ -65,3 +65,5 @@ http://localhost:8888/fact?n=50
 1. [tornado官方文档](http://www.tornadoweb.org/en/stable/)
 2. [示例 Python Web 框架：Tornado](https://blog.csdn.net/xc_zhou/article/details/80637714)
 3. https://www.jianshu.com/p/d1085dbf321f
+4. http://www.nowamagic.net/academy/detail/13321002
+5. https://tornado-zh.readthedocs.io/zh/latest/

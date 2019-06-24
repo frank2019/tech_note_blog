@@ -35,10 +35,14 @@ def do_git_pull():
     ret = execCmd(cmd_git_pull)
     print(ret)
 
+def show_countdown(num):
+	for i in range(0,num):
+		print('\b%d  seconds will close'%(num - i))
+		time.sleep(1)
+
 if __name__ == '__main__':
     get_day_info()
     do_git_pull()
     #str = input("Press any key to quit: ");
     #print ("%s", str)
-    print('3 seconds will close')
-    time.sleep(3)
+    show_countdown(3)
