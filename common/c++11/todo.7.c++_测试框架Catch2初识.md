@@ -193,6 +193,7 @@ For more detailed usage please see the project docs
 - 显示所有的标签（tags）:  test -t
 - 运行某个tag下的所有test cases:   test [tag]
 - 运行某个名字的test case:  test   "name"
+- 运行指定的section   ：   test -c  section_name
 
 
 
