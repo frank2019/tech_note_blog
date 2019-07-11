@@ -8,3 +8,13 @@
 1. [C++中全排列函数next_permutation 用法](https://blog.csdn.net/howardemily/article/details/68064377)
 1. [FFT——快速傅里叶变换](https://blog.csdn.net/WADuan2/article/details/79529900)
 
+
+
+
+
+
+
+# 参考资料
+
+1. [](http://www.cplusplus.com/reference/thread/thread/)
+2. http://file.allitebooks.com/20160630/C++%20Standard%20Library%20Quick%20Reference.pdf
