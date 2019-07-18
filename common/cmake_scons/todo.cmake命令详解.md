@@ -195,4 +195,5 @@ sudo apt-get install cmake-qt-gui
 1. [cmake doc](https://cmake.org/cmake/help/v3.13/command/if.html)
 2. [**cmake 80个命令**](https://www.cnblogs.com/dverdon/p/4574221.html)
 3. [CMake学习](https://www.cnblogs.com/alphagl/p/6280061.html)
+4. https://www.cnblogs.com/is-smiling/p/3269059.html
 
