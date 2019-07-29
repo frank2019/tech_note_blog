@@ -4,6 +4,10 @@
 
 http://simd.sourceforge.net/help/annotated.html
 
+
+
+[数值计算优化方法C/C++(三)——SIMD](https://blog.csdn.net/artorias123/article/details/86524899)
+
 # 参考链接
 
 1. [C++中使用SIMD的几种方法](https://blog.csdn.net/a812073479/article/details/80549436)
