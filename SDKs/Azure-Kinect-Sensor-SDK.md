@@ -4,5 +4,9 @@
 
 
 
-https://github.com/Microsoft/Azure--Sensor-SDK
+
+
+# 参考链接
+
+1. [Azure-Kinect-Sensor-SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
 
