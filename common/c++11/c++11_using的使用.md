@@ -1,9 +1,3 @@
-
-
-
-
-
-
 # using的三种用法
 
 ## 1、命名空间的使用
@@ -13,8 +7,6 @@
 ```c++
 namespace android;
 ```
-
-
 
 1. 在code中使用的时候可以用android::加具体的类方法。
 
@@ -92,7 +84,7 @@ using Vec = MyVector<T, MyAlloc<T>>;
 Vec<int> vec;
 ```
 
-在C++11中，鼓励用using，而不用typedef的
+**在C++11中，鼓励用using，而不用typedef的**
 
 
 
