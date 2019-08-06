@@ -55,6 +55,18 @@ Mat (int rows, int cols, int type, void *data, size_t step=AUTO_STEP)
 
 imgdata是指向image第一行第一个元素的指针。
 
+
+
+Mat  
+
+rows   代表行数  也就是 height  
+
+cols 代码列数 也就是width
+
+
+
+
+
 ### 参考链接
 
 1. [opencv 3.1.0 Mat ](https://docs.opencv.org/3.1.0/d3/d63/classcv_1_1Mat.html)
