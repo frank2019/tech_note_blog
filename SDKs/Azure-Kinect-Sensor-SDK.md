@@ -1,8 +1,15 @@
 
 
+# 环境
+
+1. win10
+2. vs2015
 
 
 
+
+
+替换地址使用：https://github.com/lemenkov/libyuv
 
 
 
