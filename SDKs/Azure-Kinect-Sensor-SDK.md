@@ -7,7 +7,9 @@
 
 
 
-
+```
+git submodule add  https://github.com/lemenkov/libyuv extern/libyuv/src 
+```
 
 替换地址使用：https://github.com/lemenkov/libyuv
 
