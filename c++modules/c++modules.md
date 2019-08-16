@@ -217,9 +217,11 @@ ${cwd} the task runner's current working directory on startup()
 
 
 
+# 参考链接
 
+1. [Awesome C++](https://cpp.libhunt.com/)
 
-### 0x01 C++ 资源大全
+# 0x01 C++ 资源大全
 
 关于 C++ 框架、库和资源的一些汇总列表，内容包括：标准库、Web应用框架、人工智能、数据库、图片处理、机器学习、日志、代码分析等。
 
