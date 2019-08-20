@@ -2,9 +2,7 @@
 
 ## 1，简介
 
-clang-format，它是基于clang的一个命令行工具，能够自动化格式C/C++/Obj-C代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义风格（通过编写.clang-format文件）很方便的同意代码格式。
-
->妈妈再也不用担心code review时的代码风格错误啦！
+clang-format，它是基于clang的一个命令行工具，能够自动化格式C/C++/Obj-C代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义风格（通过编写.clang-format文件）。
 
 ## 2，安装
 
@@ -28,7 +26,7 @@ $ clang-format -version
 
 ### windows
 
-[下载](http://releases.llvm.org/download.html)
+可跟随clang一起安装。[下载](http://releases.llvm.org/download.html)
 
 ### 编辑器集成
 
@@ -49,8 +47,6 @@ $ clang-format -version
 ```bash
 clang-format -style=llvm -dump-config > .clang-format
 ```
-
-
 
 - 配置文件.clang-format详细说明
 
@@ -132,8 +128,6 @@ UseTab: Never
 
 ## 4，clang-format使用示例
 
-
-
 ### 示例
 
 ```bash
@@ -157,55 +151,91 @@ clang-format.exe [options] [<file> ...]
 
   
 
-Clang-format options:
 
-  -assume-filename=<string> - When reading from stdin, clang-format assumes this  filename to look for a style config file (with
-                              -style=file) and to determine the language.
-  -cursor=<uint>            - The position of the cursor when invoking
-                              clang-format from an editor integration
-  -dump-config              - Dump configuration options to stdout and exit.
-                              Can be used with -style option.
-  -fallback-style=<string>  - The name of the predefined style used as a
-                              fallback in case clang-format is invoked with
-                              -style=file, but can not find the .clang-format
-                              file to use.
-                              Use -fallback-style=none to skip formatting.
-  -i                        - Inplace edit <file>s, if specified.
-  -length=<uint>            - Format a range of this length (in bytes).
-                              Multiple ranges can be formatted by specifying
-                              several -offset and -length pairs.
-                              When only a single -offset is specified without
-                              -length, clang-format will format up to the end
-                              of the file.
-                              Can only be used with one input file.
-  -lines=<string>           - <start line>:<end line> - format a range of
-                              lines (both 1-based).
-                              Multiple ranges can be formatted by specifying
-                              several -lines arguments.
-                              Can't be used with -offset and -length.
-                              Can only be used with one input file.
-  -offset=<uint>            - Format a range starting at this byte offset.
-                              Multiple ranges can be formatted by specifying
-                              several -offset and -length pairs.
-                              Can only be used with one input file.
-  -output-replacements-xml  - Output replacements as XML.
-  -sort-includes            - If set, overrides the include sorting behavior determined by the SortIncludes style flag
-  -style=<string>           - Coding style, currently supports:
-                                LLVM, Google, Chromium, Mozilla, WebKit.
-                              Use -style=file to load style configuration from
-                              .clang-format file located in one of the parent
-                              directories of the source file (or current
-                              directory for stdin).
-                              Use -style="{key: value, ...}" to set specific
-                              parameters, e.g.:
-                              -style="{BasedOnStyle: llvm, IndentWidth: 8}"
-  -verbose                  - If set, shows the list of processed files
 
-Generic Options:
+### Clang-format options:
 
-  -help                     - Display available options (-help-hidden for more)
-  -help-list                - Display list of available options (-help-list-hidden for more)
-  -version                  - Display the version of this program
+####   -assume-filename=<string> 
+
+When reading from stdin, clang-format assumes this  filename to look for a style config file (with -style=file) and to determine the language.
+
+#### -cursor=<uint>           
+
+The position of the cursor when invoking
+   clang-format from an editor integration
+
+#### -dump-config             
+
+Dump configuration options to stdout and exit.
+Can be used with -style option.
+
+#### -fallback-style=<string>  
+
+The name of the predefined style used as a
+fallback in case clang-format is invoked with
+-style=file, but can not find the .clang-format
+file to use.
+Use -fallback-style=none to skip formatting.
+
+#### -i                        
+
+Inplace edit <file>s, if specified.
+
+#### -length=<uint>            
+
+Format a range of this length (in bytes).
+Multiple ranges can be formatted by specifying
+several -offset and -length pairs.
+When only a single -offset is specified without
+-length, clang-format will format up to the end
+of the file.
+Can only be used with one input file.
+
+#### -lines=<string>           - <start line>:<end line> 
+
+format a range of
+lines (both 1-based).
+Multiple ranges can be formatted by specifying
+several -lines arguments.
+Can't be used with -offset and -length.
+Can only be used with one input file.
+
+#### -offset=<uint>            
+
+Format a range starting at this byte offset.
+Multiple ranges can be formatted by specifying
+several -offset and -length pairs.
+Can only be used with one input file.
+
+#### -output-replacements-xml  
+
+Output replacements as XML.
+
+#### -sort-includes           
+
+ - If set, overrides the include sorting behavior determined by the SortIncludes style flag
+
+#### -style=<string>           
+
+Coding style, currently supports:
+LLVM, Google, Chromium, Mozilla, WebKit.
+Use -style=file to load style configuration from
+.clang-format file located in one of the parent
+directories of the source file (or current
+directory for stdin).
+Use -style="{key: value, ...}" to set specific
+parameters, e.g.:
+-style="{BasedOnStyle: llvm, IndentWidth: 8}"
+
+#### -verbose                  
+
+If set, shows the list of processed files
+
+### Generic Options:
+
+-  -help                     - Display available options (-help-hidden for more)
+- -help-list                - Display list of available options (-help-list-hidden for more)
+- -version                  - Display the version of this program
 
 
 

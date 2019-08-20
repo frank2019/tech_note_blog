@@ -32,9 +32,8 @@ Cppcheck是c/c++代码的静态分析工具。Cppcheck 不是一个风格检查�
 
 2. 默认安装到C:\Program Files\Cppcheck，
 
-3. 将C:\Program Files\Cppcheck添加path环境变量，便于以后的使用。
+3. 将C:\Program Files\Cppcheck添加path环境变量，便于以后的使用。  
 
-    
 
 ### vs中配置
 
@@ -48,10 +47,52 @@ cppcheck --enable=all --project=$(ProjectFileName)
 
 在生成中使用  选择 是。
 
+### Debian:
 
+```
+sudo apt-get install cppcheck
+```
+
+### Fedora:
+
+```
+sudo yum install cppcheck
+```
+
+### Mac:
+
+```
+brew install cppcheck
+```
+
+
+
+### Clients and plugins
+
+Cppcheck is integrated with many popular development tools. For instance:
+
+- **CLion** - [Cppcheck plugin](https://plugins.jetbrains.com/plugin/8143)
+- **Codacy** - [integrated](https://www.codacy.com/) - Check for code style and security issues on every commit and pull request
+- **Code::Blocks** - *integrated*
+- **CodeDX** (software assurance tool) - [integrated](http://codedx.com/code-dx-standard/)
+- **CodeLite** - *integrated*
+- **CppDepend 5** - [integrated](http://www.cppdepend.com/CppDependV5.aspx)
+- **Eclipse** - [Cppcheclipse](https://github.com/kwin/cppcheclipse/wiki/Installation)
+- **KDevelop** - [integrated since v5.1](https://kdevelop.org/)
+- **gedit** - [gedit plugin](http://github.com/odamite/gedit-cppcheck)
+- **Hudson** - [Cppcheck Plugin](http://wiki.hudson-ci.org/display/HUDSON/Cppcheck+Plugin)
+- **Jenkins** - [Cppcheck Plugin](http://wiki.jenkins-ci.org/display/JENKINS/Cppcheck+Plugin)
+- **Mercurial (Linux)** - [pre-commit hook](http://sourceforge.net/p/cppcheck/wiki/mercurialhook/) - Check for new errors on commit (requires interactive terminal)
+- **Tortoise SVN** - [Adding a pre-commit hook script](http://omerez.com/automatic-static-code-analysis/)
+- **Git (Linux)** - [pre-commit hook](https://github.com/danmar/cppcheck/blob/master/tools/git-pre-commit-cppcheck) - Check for errors in files going into commit (requires interactive terminal)
+- **Visual Studio** - [Visual Studio plugin](https://github.com/VioletGiraffe/cppcheck-vs-addin/releases/latest)
+- **QtCreator** - [Qt Project Tool (qpt)](https://sourceforge.net/projects/qtprojecttool/files)
 
 ## 4，命令行的使用
+
+
 
 # 参考链接
 
 1. [Cppcheck -A tool for static C/C++ code analysis](http://cppcheck.net/)
+2. https://www.cnblogs.com/lidabo/p/3489645.html

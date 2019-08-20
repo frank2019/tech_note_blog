@@ -1,4 +1,4 @@
-# 代码风格审查工具cpplint
+# 代码风格审查工具Cpplint
 
 
 
@@ -20,17 +20,11 @@ Cpplint在Window下可以如下几种方式使用
 
 ### 2.1运行命令行检测
 
-使用“Python cpplint.py + 目标源文件” 命令即可对代码文件进行检测。
+使用命令即可对代码文件进行检测。
 
 ```bash
-cpplint.py [--verbose=#] [--output=vs7] [--filter=-x,+y,...]
-                   [--counting=total|toplevel|detailed] [--root=subdir]
-                   [--linelength=digits] [--headers=x,y,...]
-                   [--quiet]
-        <file> [file] ...
+Python cpplint.py   <file>
 ```
-
-
 
 ### 2.2 集成到VS中使用
 
@@ -42,18 +36,13 @@ cpplint.py [--verbose=#] [--output=vs7] [--filter=-x,+y,...]
 
 写入如下代码：
 
-```
+```ini
 Title：Cpplint.py
 Command：E:\CpplintToPython\Python27\python.exe
-
 Arguments：”E:\Cpplint\cpplint.py\cpplint.py” –output=vs7 $(ItemPath)
-
 Initial directory：$（ItemDir）
-
 Check Use Output window
 ```
-
-
 
 ### 2.3 使用python安装版本
 
@@ -65,7 +54,7 @@ pip install cpplint
 
 或者
 
-```
+```bash
 easy_install  cpplint
 ```
 
@@ -83,9 +72,11 @@ easy_install  cpplint
 cpplint.py    	[--verbose=#] 
 				[--output=vs7] 
 				[--filter=-x,+y,...]
-                [--counting=total|toplevel|detailed] [--root=subdir]
-                 [--linelength=digits] [--headers=x,y,...]
-                 [--quiet]
+                [--counting=total|toplevel|detailed] 
+                [--root=subdir]
+                [--linelength=digits] 
+                [--headers=x,y,...]
+                [--quiet]
         <file> [file] ...
 ```
 
@@ -129,31 +120,29 @@ cpplint.py --verbose=3 test.cpp
 
 例子：
 
+```bash
 --counting=total
-
-输出：
-
+#输出
 Total errors found: 96
+```
 
+
+
+```bash
 --counting=toplevel
-
-输出：
-
+#输出
 Category 'whitespace' errors found: 88
-
 Category 'build' errors found: 8
-
 Total errors found: 96
+```
 
+```bash
 --counting=detailed
-
-输出：
-
+#输出：
 Category 'whitespace/braces' errors found: 28
-
 Category 'whitespace/semicolon' errors found: 1
-
 Total errors found: 29 
+```
 
 
 cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含多组键值对实现配置
@@ -168,12 +157,6 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
 ```
 
 ## 4, Q&A
-
-
-
-```
-
-```
 
 ### 常见报错原因
 
@@ -209,6 +192,4 @@ cpplint.exe  --filter=-readability/utf8,-whitespace/ending_newline    tofinfo.h
 2. [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
 3. https://github.com/cpplint/cpplint
 
-其他类似项目
-
-http://microsoft.github.io/CodeAnalysis/
+4. [microsoft CodeAnalysis](http://microsoft.github.io/CodeAnalysis/)
