@@ -6,6 +6,14 @@
 
 Cpplint是一个Python脚本，作为一款开源免费的代码静态检测工具，Google也使用它作为自己的C++代码检测工具，也就是说，只要你想代码遵从Google C++代码规范，那么Cpplint将会提供很好的代码静态检测支持。
 
+cpplint
+
+- Cpplint.py支持的文件格式包括.cc、.h、.cpp、.cu、.cuh。
+
+- Cpplint只是一个代码风格检测工具，其并不对代码逻辑、语法错误等进行检查。
+
+  
+
 ## 2，安装
 
 Cpplint在Window下可以如下几种方式使用
@@ -67,16 +75,7 @@ easy_install  cpplint
 
 注意：直接只用python源码版本或者安装版本的话，需要判断其是否支持python3
 
-
-
-## 3，说明
-
-- Cpplint.py支持的文件格式包括.cc、.h、.cpp、.cu、.cuh。
-- Cpplint只是一个代码风格检测工具，其并不对代码逻辑、语法错误等进行检查。
-  
-  
-
-## 4，命令行的详细使用
+## 3，命令行的详细使用
 
 
 
@@ -168,7 +167,7 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
       headers=x,y,...
 ```
 
-## Q&A
+## 4, Q&A
 
 
 
@@ -200,16 +199,15 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
 
 使用如下配置可以屏蔽 readability/utf8,whitespace/ending_newline。多于1个以逗号作为分割，-代表屏蔽，+代表取消屏蔽。
 
-```
+```bash
 cpplint.exe  --filter=-readability/utf8,-whitespace/ending_newline    tofinfo.h
 ```
-
-
 
 ## 5，参考链接
 
 1. [谷歌编码风格](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
 2. [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
+3. https://github.com/cpplint/cpplint
 
 其他类似项目
 
