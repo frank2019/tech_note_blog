@@ -156,6 +156,44 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
       headers=x,y,...
 ```
 
+
+
+### 屏蔽代码不被检查
+
+假设代码中有些部分不希望被检查，或者觉得是cpplint产生的误报。仅仅须要在对应代码行尾加入凝视”// NOLINT”就可以，cpplint就会跳过这些行。如：
+
+```c++
+return 0; // NOLINT
+```
+
+
+
+### 控制过滤置信度
+
+对于发现的每一个问题，cpplint都会给出一个位于区间[1, 5]之间的置信度评分，分数越高就代表问题越肯定，能够通过verbose选项控制输出哪些级别。例如以下。置信度评分为1、2的将不会再输出：
+
+```bash
+cpplint  --verbose=3 test.cpp
+```
+
+
+
+
+
+假设须要让cpplint支持其他文件扩展，又不想改动源代码。则能够通过extensions选项如：
+
+`cpplint --extensions=hpp test.cpp`
+
+
+
+能够通过filter选项。依照自己的须要过滤掉特定的警告，”-FOO”表示不输出带有FOO的警告，”+FOO”表示输出带有FOO的警告，如：
+
+`cpplint --filter=-whitespace/tab,+whitespace/ending_newline  test.cpp`
+
+能够通过counting选项。来显示每种Category有多少个错误，如：
+
+` cpplint.py --counting=detailed test.cpp`
+
 ## 4, Q&A
 
 ### 常见报错原因
@@ -169,6 +207,7 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
 7. Redundant blank line at the end of a code block should be deleted. 代码块最后的空行应该被删除
 8. Line contains invalid UTF-8 (or Unicode replacement character) 使用了中文注释报的错
 9. Line ends in whitespace. 代码行最后存在空格
+10. Include the directory when naming .h files  [build/include_subdir] [4] 
 
 ### 屏蔽指定报错的具体示例
 
@@ -183,8 +222,12 @@ cpplint支持每个目录放置CPPLINT.cfg 单独配置,CPPLINT.cfg通过包含�
 使用如下配置可以屏蔽 readability/utf8,whitespace/ending_newline。多于1个以逗号作为分割，-代表屏蔽，+代表取消屏蔽。
 
 ```bash
-cpplint.exe  --filter=-readability/utf8,-whitespace/ending_newline    tofinfo.h
+cpplint.exe  --filter=-readability/utf8,-whitespace/ending_newline    info.h
 ```
+
+
+
+
 
 ## 5，参考链接
 
