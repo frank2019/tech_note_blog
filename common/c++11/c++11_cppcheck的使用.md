@@ -90,6 +90,8 @@ Cppcheck is integrated with many popular development tools. For instance:
 
 ## 4，命令行的使用
 
+Cppcheck Gui 可满足需求，Cppcheck也支持命令行版本
+
 ```ini
 Cppcheck - A tool for static C/C++ code analysis
 
