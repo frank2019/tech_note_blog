@@ -187,3 +187,7 @@ Scikit-Learn 作为机器学习一个非常全面的库，是一份不可多得�
 5. [零基础初学者人工智能学习路线](https://zhuanlan.zhihu.com/p/45146188)
 6. https://machinelearningmastery.com/start-here/
 7. https://pic3.zhimg.com/v2-8b04444c0088fea1efa9778f0dfc2dbb_r.jpg
+
+
+
+https://www.cnblogs.com/17bdw/p/11309094.html#_label0_2
