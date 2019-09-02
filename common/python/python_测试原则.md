@@ -2,12 +2,16 @@
 
 ```
 
+
+
+
+
 #### 关于测试
 
 1. 单元测试就是测试的对象是程序中的最小单元的测试
 2. 程序的最小单元可以是一个函数，一个类，也可以是函数的组合，类的组合。
 3. 测试有：单元测试  模块测试，集成系统和系统测试等；
-4. 常用测试框架：**unittest, nose**和**pytest**
+4. 常用测试框架：**unittest, nose**和 **pytest**，unittest2
 
 #### 测试原则
 
@@ -21,6 +25,10 @@
 8. 单元测试函数使用长的而且具有描述性的名字。在正式执行代码中，可能使用square()或sqr()取名，但是在测试函数中，你必须取像test_square_of_number_2()、test_square_negativer_number()这些名字，这些名字描述更加清楚；
 9. 测试代码必须具有可读性；
 10. 单元测试对新进的开发人员来说是工作指南。
+
+
+
+### 测试框架的选择
 
 
 
@@ -40,3 +48,4 @@ mock的详细文档：http://www.voidspace.org.uk/python/mock/
 1. https://www.jianshu.com/p/932a4d9f78f8
 2. [在VS Code中对Python进行单元测试](https://www.cnblogs.com/it-tsz/p/9346087.html)
 3. [自动化测试知识体系](https://www.zhihu.com/question/27610343/answer/535512755)
+4. [全功能Python测试框架：pytest](https://www.jianshu.com/p/932a4d9f78f8)
