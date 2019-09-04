@@ -230,6 +230,175 @@ CMake 允许为项目增加编译选项，从而可以根据用户的环境和�
 
 例如，可以将 MathFunctions 库设为一个可选的库，如果该选项为 `ON` ，就使用该库定义的数学函数来进行运算。否则就调用标准库中的数学函数库。
 
+### 根据选项是否编译某模块
+
+//TODO
+
+### 一个定义版本的常用做法
+
+
+
+## 安装和测试
+
+
+
+CMake 也可以指定安装规则，以及添加测试。这两个功能分别可以通过在产生 Makefile 后使用 `make install` 和 `make test` 来执行。在以前的 GNU Makefile 里，你可能需要为此编写 `install` 和 `test` 两个伪目标和相应的规则，但在 CMake 里，这样的工作同样只需要简单的调用几条命令。
+
+
+
+### 定制安装规则
+
+首先先在 math/CMakeLists.txt 文件里添加下面两行：
+
+```
+# 指定 MathFunctions 库的安装路径
+install (TARGETS MathFunctions DESTINATION bin)
+install (FILES MathFunctions.h DESTINATION include)
+```
+
+指明 MathFunctions 库的安装路径。之后同样修改根目录的 CMakeLists 文件，在末尾添加下面几行
+
+```
+# 指定安装路径
+install (TARGETS Demo DESTINATION bin)
+install (FILES "${PROJECT_BINARY_DIR}/config.h"
+         DESTINATION include)
+```
+
+通过上面的定制，生成的 Demo 文件和 MathFunctions 函数库 libMathFunctions.o 文件将会被复制到 `/usr/local/bin` 中，而 MathFunctions.h 和生成的 config.h 文件则会被复制到 `/usr/local/include` 中。我们可以验证一下
+
+
+
+### 为工程添加测试
+
+添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 `add_test` 命令。
+
+```cmake
+# 启用测试
+enable_testing()
+# 测试程序是否成功运行
+add_test (test_run Demo 5 2)
+# 测试帮助信息是否可以正常提示
+add_test (test_usage Demo)
+set_tests_properties (test_usage
+  PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .* base exponent")
+# 测试 5 的平方
+add_test (test_5_2 Demo 5 2)
+set_tests_properties (test_5_2
+ PROPERTIES PASS_REGULAR_EXPRESSION "is 25")
+# 测试 10 的 5 次方
+add_test (test_10_5 Demo 10 5)
+set_tests_properties (test_10_5
+ PROPERTIES PASS_REGULAR_EXPRESSION "is 100000")
+# 测试 2 的 10 次方
+add_test (test_2_10 Demo 2 10)
+set_tests_properties (test_2_10
+ PROPERTIES PASS_REGULAR_EXPRESSION "is 1024")
+```
+
+
+
+上面的代码包含了四个测试。第一个测试 `test_run` 用来测试程序是否成功运行并返回 0 值。剩下的三个测试分别用来测试 5 的 平方、10 的 5 次方、2 的 10 次方是否都能得到正确的结果。其中 `PASS_REGULAR_EXPRESSION` 用来测试输出是否包含后面跟着的字符串。
+
+让我们看看测试的结果：
+
+
+
+```
+[ehome@xman Demo5]$ make test
+Running tests...
+Test project /home/ehome/Documents/programming/C/power/Demo5
+    Start 1: test_run
+1/4 Test #1: test_run .........................   Passed    0.00 sec
+    Start 2: test_5_2
+2/4 Test #2: test_5_2 .........................   Passed    0.00 sec
+    Start 3: test_10_5
+3/4 Test #3: test_10_5 ........................   Passed    0.00 sec
+    Start 4: test_2_10
+4/4 Test #4: test_2_10 ........................   Passed    0.00 sec
+100% tests passed, 0 tests failed out of 4
+Total Test time (real) =   0.01 sec
+```
+
+如果要测试更多的输入数据，像上面那样一个个写测试用例未免太繁琐。这时可以通过编写宏来实现：
+
+
+
+
+
+```
+# 定义一个宏，用来简化测试工作
+macro (do_test arg1 arg2 result)
+  add_test (test_${arg1}_${arg2} Demo ${arg1} ${arg2})
+  set_tests_properties (test_${arg1}_${arg2}
+    PROPERTIES PASS_REGULAR_EXPRESSION ${result})
+endmacro (do_test)
+ 
+# 使用该宏进行一系列的数据测试
+do_test (5 2 "is 25")
+do_test (10 5 "is 100000")
+do_test (2 10 "is 1024")
+```
+
+关于 CTest 的更详细的用法可以通过 `man 1 ctest` 参考 CTest 的文档。
+
+## 支持 gdb
+
+让 CMake 支持 gdb 的设置也很容易，只需要指定 `Debug` 模式下开启 `-g` 选项：
+
+```
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+```
+
+之后可以直接对生成的程序使用 gdb 来调试
+
+## 添加环境检查
+
+有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。在这个例子中，我们检查系统是否自带 pow 函数。如果带有 pow 函数，就使用它；否则使用我们定义的 power 函数。
+
+#### 添加 CheckFunctionExists 宏
+
+首先在顶层 CMakeLists 文件中添加 CheckFunctionExists.cmake 宏，并调用 `check_function_exists` 命令测试链接器是否能够在链接阶段找到 `pow` 函数。
+
+```
+# 检查系统是否支持 pow 函数
+include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
+check_function_exists (pow HAVE_POW)
+```
+
+
+
+将上面这段代码放在 `configure_file` 命令前。
+
+#### 预定义相关宏变量
+
+接下来修改 [config.h.in](http://config.h.in) 文件，预定义相关的宏变量。
+
+
+
+```
+// does the platform provide pow function?
+#cmakedefine HAVE_POW
+```
+
+
+
+#### 在代码中使用宏和函数
+
+最后一步是修改 [main.cc](http://main.cc) ，在代码中使用宏和函数：
+
+
+
+```
+#ifdef HAVE_POW    printf("Now we use the standard library. \n");    double result = pow(base, exponent);#else    printf("Now we use our own Math library. \n");    double result = power(base, exponent);#endif
+```
+
+
+
+## 参考链接
+
 
 
 
