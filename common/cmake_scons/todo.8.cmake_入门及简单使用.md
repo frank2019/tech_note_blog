@@ -8,7 +8,7 @@
 
 ## 
 
-## 引言
+## 0，引言
 
 
 
@@ -27,7 +27,7 @@
 
 
 
-## 什么是 CMake
+## 1，什么是 CMake
 
 ​       你或许听过好几种 Make 工具，例如 GNU Make ，QT 的 [qmake](http://qt-project.org/doc/qt-4.8/qmake-manual.html) ，微软的 [MS nmake](http://msdn.microsoft.com/en-us/library/ms930369.aspx)，BSD Make（[pmake](http://www.freebsd.org/doc/en/books/pmake/)），[Makepp](http://makepp.sourceforge.net/)，等等。这些Make 工具遵循着不同的规范和标准，所执行的 Makefile 
 格式也千差万别。这样就带来了一个严峻的问题：如果软件想跨平台，必须要保证能够在不同平台编译。而如果使用上面的 Make 工具，就得为每一种标准写一次 Makefile ，这将是一件让人抓狂的工作。
@@ -58,7 +58,7 @@ CMake就是针对上面问题所设计的工具：它首先允许开发者编写
 
 
 
-## 入门案例：单个源文件
+## 2，入门案例：单个源文件
 
 对于简单的项目，只需要写几行代码就可以了。例如，假设现在我们的项目中只有一个源文件 main.c，该程序的用途是计算一个斐波那契数。
 
@@ -127,7 +127,7 @@ CMakeLists.txt 的语法比较简单，由命令、注释和空格组成，其�
 
 
 
-## 多个源文件
+## 3，多个源文件
 
 上面的例子只有单个源文件。现在假如把 `FibonacciSequence`函数单独写进一个名为 `Math.c` 的源文件里，使得这个工程变成如下的形式：
 
@@ -170,7 +170,7 @@ add_executable(Demo ${DIR_SRCS})
 
 这样，CMake 会将当前目录所有源文件的文件名赋值给变量 `DIR_SRCS` ，再在add_executable 中引用这个变量 指示变量 `DIR_SRCS` 中的源文件需要编译成一个名称为 Demo 的可执行文件。
 
-## 多个目录，多个源文件
+## 4，多个目录，多个源文件
 
 
 
@@ -224,21 +224,204 @@ add_library (MathFunctions ${DIR_LIB_SRCS})
 
 
 
-## 自定义编译选项
+## 5，自定义编译选项
 
 CMake 允许为项目增加编译选项，从而可以根据用户的环境和需求选择最合适的编译方案。
 
 例如，可以将 MathFunctions 库设为一个可选的库，如果该选项为 `ON` ，就使用该库定义的数学函数来进行运算。否则就调用标准库中的数学函数库。
 
-### 根据选项是否编译某模块
+### 5.1 根据选项是否编译某模块
 
-//TODO
+我们可以将某一部分设置为可选，在编译的时候根据界面选择，来决定是否将其放进项目。
 
-### 一个定义版本的常用做法
+假设有以下需求
+
+1. 新增一个测试模块
+2. 模块是可选的，默认为不编译
+
+我们基于上一版本的基础上做修改
+
+#### 根目录的 CMakeLists.txt
+
+```cmake
+# CMake 最低版本号要求
+cmake_minimum_required (VERSION 2.8)
+# 项目信息
+project (Demo)
+# 查找当前目录下的所有源文件
+# 并将名称保存到 DIR_SRCS 变量
+aux_source_directory(. DIR_SRCS)
+# 添加 math 子目录
+add_subdirectory(math)
+
+#编译选项
+OPTION(BUILD_UNIT_TESTS        "tests"      OFF)
+
+#条件判断
+if(BUILD_UNIT_TESTS)
+	add_subdirectory(tests)
+endif()
+
+# 指定生成目标 
+add_executable(Demo main.c)
+# 添加链接库
+target_link_libraries(Demo MathFunctions)
+```
 
 
 
-## 安装和测试
+这里使用了option命令字
+
+```cmake
+#       选项名					注释			初始状态
+OPTION(BUILD_UNIT_TESTS        "tests"      OFF)
+```
+
+入下图，value值可以勾选配置。
+
+![](img/2.jpg)
+
+
+
+新增模块test 的 CMakeLists.txt 与MathFunctions 类似
+
+
+
+### 5.2 一个定义版本号的常用做法
+
+假设我们有一个这样的需求
+
+> 1. 在CMakeLists.txt文件中定义test模块的版本
+> 2. 每次如果修改CMakeLists.txt即可修改其版本
+
+
+
+CMake中有一个configure_file的命令
+
+#### configure_file
+
+将一份文件拷贝到另一个位置并修改它的内容
+
+```ini
+configure_file(<input> <output>
+               [COPYONLY] [ESCAPE_QUOTES] [@ONLY]
+               [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF] ])
+```
+
+复制一个`<input>`文件到一个`<output>`文件和替代变量值作为引用`@VAR@`或`${VAR}`在输入文件内容。每个变量引用将替换为变量的当前值，如果未定义变量，则替换为空字符串。
+
+参数定义
+
+- <input>
+
+输入文件的路径。相对路径根据值来处理CMAKE_CURRENT_SOURCE_DIR。输入路径必须是文件，而不是目录。
+
+- <output>
+
+输出文件或目录的路径。相对路径根据值来处理CMAKE_CURRENT_BINARY_DIR。如果路径命名现有目录，则输出文件将放在该目录中，文件名与输入文件相同。
+
+- COPYONLY
+
+
+复制文件而不替换任何变量引用或其他内容。此选项可能不会用于NEWLINE_STYLE。
+
+- ESCAPE_QUOTES
+
+
+使用反斜杠（C风格）转义任何替换引号。
+
+- @ONLY
+
+
+将变量替换限制为表单的引用@VAR@。这对于配置使用${VAR}语法的脚本很有用。
+
+- NEWLINE_STYLE <style>
+
+
+为输出文件指定换行样式。指定 UNIX或LF用于\n换行，或指定 DOS，WIN32或CRLF用于\r\n换行。此选项可能不会用于COPYONLY。
+
+
+这里我们的基本思路是
+
+利用configure_file ，根据CMakelist.txt 中定义的变量生成一个头文件，头文件中定义版本宏。
+
+#### 实现
+
+修改子目录tests中的 CMakeLists.txt
+
+```cmake
+# 查找当前目录下的所有源文件
+# 并将名称保存到 DIR_LIB_SRCS 变量
+
+#TEST 模块版本定义
+set (TEST_VERSION_MAJOR 1)
+set (TEST_VERSION_MINOR 0)
+set (TEST_VERSION_PATCHLEVEL 1)
+set (TEST_VERSION_RELEASER 1)
+
+
+configure_file (
+  "test_version.h.ini"
+  "${PROJECT_BINARY_DIR}/test_version.h"
+  )
+#添加头文件的索引目录  
+include_directories(${PROJECT_BINARY_DIR})
+
+aux_source_directory(. DIR_LIB_SRCS)
+# 生成链接库
+add_library (Tests ${DIR_LIB_SRCS})
+```
+
+其中
+
+变量 PROJECT_BINARY_DIR  代表项目的编译目录
+
+变量 PROJECT_SOURCE_DIR  代表源码目录
+
+一般建议在项目目录下新建一个目录 比如build 作为编译目录，编译期间生成的文件的根目录在这里。
+
+
+
+test_version.h.ini
+
+```ini
+#define TEST_VERSION_MAJOR @TEST_VERSION_MAJOR@
+#define TEST_VERSION_MINOR @TEST_VERSION_MINOR@
+#define TEST_VERSION_PATCHLEVEL @TEST_VERSION_PATCHLEVEL@
+#define TEST_VERSION_RELEASER @TEST_VERSION_RELEASER@
+
+```
+
+重新编译即可在build目录下生成 test_version.h
+
+```c
+#define TEST_VERSION_MAJOR 1
+#define TEST_VERSION_MINOR 0
+#define TEST_VERSION_PATCHLEVEL 1
+#define TEST_VERSION_RELEASER 1
+```
+
+
+
+
+
+### 5.3 支持 gdb
+
+让 CMake 支持 gdb 的设置也很容易，只需要指定 `Debug` 模式下开启 `-g` 选项：
+
+```cmake
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+```
+
+之后可以直接对生成的程序使用 gdb 来调试
+
+
+
+
+
+## 6， 安装和测试
 
 
 
@@ -246,30 +429,38 @@ CMake 也可以指定安装规则，以及添加测试。这两个功能分别�
 
 
 
-### 定制安装规则
+### 6.1 定制安装规则
 
-首先先在 math/CMakeLists.txt 文件里添加下面两行：
+#### 首先先在 tests/CMakeLists.txt 文件里添加下面两行：
 
-```
-# 指定 MathFunctions 库的安装路径
-install (TARGETS MathFunctions DESTINATION bin)
-install (FILES MathFunctions.h DESTINATION include)
+```cmake
+# 指定 tests 库的安装路径
+install (TARGETS Tests DESTINATION  ${PROJECT_BINARY_DIR}/bin)
+install (FILES test.h DESTINATION  ${PROJECT_BINARY_DIR}/include)
 ```
 
 指明 MathFunctions 库的安装路径。之后同样修改根目录的 CMakeLists 文件，在末尾添加下面几行
 
-```
+```cmake
 # 指定安装路径
-install (TARGETS Demo DESTINATION bin)
-install (FILES "${PROJECT_BINARY_DIR}/config.h"
-         DESTINATION include)
+install (TARGETS Demo DESTINATION ${PROJECT_BINARY_DIR}/bin)
 ```
 
-通过上面的定制，生成的 Demo 文件和 MathFunctions 函数库 libMathFunctions.o 文件将会被复制到 `/usr/local/bin` 中，而 MathFunctions.h 和生成的 config.h 文件则会被复制到 `/usr/local/include` 中。我们可以验证一下
+重新编译，会在工程中生成  INSTALL 模块，
+
+通过上面的定制，生成的 Demo 文件和 tests函数库 Tests.lib 文件将会被复制到 `${PROJECT_BINARY_DIR}/bin` 中，而 test.h 文件则会被复制到 `${PROJECT_BINARY_DIR}/include` 中。我们可以验证一下。
+
+其中bin  及include 不需要预先创建，会自动生成。
 
 
 
-### 为工程添加测试
+### 6.2 TODO 为工程添加测试
+
+CTest是CMake的一部分，是一个测试框架，可以将构建，配置，测试，覆盖率等指标更新到CDash看板工具上。 
+ 有两种模式：
+
+- 一种是，在CMakeLists.txt中创建和执行测试
+- 一种是，运行脚本来执行整个测试流程，包括更新代码，配置和构建项目 
 
 添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 `add_test` 命令。
 
@@ -342,19 +533,13 @@ do_test (2 10 "is 1024")
 
 关于 CTest 的更详细的用法可以通过 `man 1 ctest` 参考 CTest 的文档。
 
-## 支持 gdb
 
-让 CMake 支持 gdb 的设置也很容易，只需要指定 `Debug` 模式下开启 `-g` 选项：
 
-```
-set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
-set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
-```
+## 7，添加环境检查
 
-之后可以直接对生成的程序使用 gdb 来调试
 
-## 添加环境检查
+
+
 
 有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。在这个例子中，我们检查系统是否自带 pow 函数。如果带有 pow 函数，就使用它；否则使用我们定义的 power 函数。
 
@@ -397,12 +582,108 @@ check_function_exists (pow HAVE_POW)
 
 
 
-## 参考链接
+
+
+## 8，生成安装包
+
+本节将学习如何配置生成各种平台上的安装包，包括二进制安装包和源码安装包。为了完成这个任务，我们需要用到 CPack ，它同样也是由 CMake 提供的一个工具，专门用于打包。
+
+首先在顶层的 CMakeLists.txt 文件尾部添加下面几行：
+
+```cmake
+# 构建一个 CPack 安装包
+include (InstallRequiredSystemLibraries)
+set (CPACK_RESOURCE_FILE_LICENSE
+  "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set (CPACK_PACKAGE_VERSION_MAJOR "${Demo_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${Demo_VERSION_MINOR}")
+include (CPack)
+```
+
+上面的代码做了以下几个工作：
+
+1. 导入 InstallRequiredSystemLibraries 模块，以便之后导入 CPack 模块；
+2. 设置一些 CPack 相关变量，包括版权信息和版本信息，其中版本信息用了上一节定义的版本号；
+3. 导入 CPack 模块。
+
+接下来的工作是像往常一样构建工程，并执行 `cpack` 命令。
+
+- 生成二进制安装包：
+
+
+
+关于 CPack 的更详细的用法可以通过 `man 1 cpack` 参考 CPack 的文档。
+
+## 9，CMake关于交叉编译
+
+
+
+#### 参考链接
+
+https://segmentfault.com/a/1190000019276315
+
+
+
+10，
+
+引用第三方模块
 
 
 
 
 
-https://www.hahack.com/wiki/tools-makefile.html
+## 将其他平台的项目迁移到 CMake
 
-https://www.hahack.com/codes/cmake/
+
+
+CMake 可以很轻松地构建出在适合各个平台执行的工程环境。而如果当前的工程环境不是 CMake ，而是基于某个特定的平台，是否可以迁移到 CMake 呢？答案是可能的。下面针对几个常用的平台，列出了它们对应的迁移方案。
+
+#### autotools
+
+- [am2cmake](https://projects.kde.org/projects/kde/kdesdk/kde-dev-scripts/repository/revisions/master/changes/cmake-utils/scripts/am2cmake) 可以将 autotools 系的项目转换到 CMake，这个工具的一个成功案例是 KDE 。
+- [Alternative Automake2CMake](http://emanuelgreisen.dk/stuff/kdevelop_am2cmake.php.tgz) 可以转换使用 automake 的 KDevelop 工程项目。
+- [Converting autoconf tests](http://www.cmake.org/Wiki/GccXmlAutoConfHints)
+
+#### qmake
+
+- [qmake converter](http://www.cmake.org/Wiki/CMake:ConvertFromQmake) 可以转换使用 QT 的 qmake 的工程。
+
+#### Visual Studio
+
+- [vcproj2cmake.rb](http://vcproj2cmake.sf.net/) 可以根据 Visual Studio 的工程文件（后缀名是 `.vcproj` 或 `.vcxproj`）生成 CMakeLists.txt 文件。
+- [vcproj2cmake.ps1](http://nberserk.blogspot.com/2010/11/converting-vc-projectsvcproj-to.html) vcproj2cmake 的 PowerShell 版本。
+- [folders4cmake](http://sourceforge.net/projects/folders4cmake/) 根据 Visual Studio 项目文件生成相应的 “source_group” 信息，这些信息可以很方便的在 CMake 脚本中使用。支持 Visual Studio 9/10 工程文件。
+
+#### CMakeLists.txt 自动推导
+
+- [gencmake](http://websvn.kde.org/trunk/KDE/kdesdk/cmake/scripts/) 根据现有文件推导 CMakeLists.txt 文件。
+- [CMakeListGenerator](http://www.vanvelzensoftware.com/postnuke/index.php?name=Downloads&req=viewdownload&cid=7) 应用一套文件和目录分析创建出完整的 CMakeLists.txt 文件。仅支持 Win32 平台。
+
+## 相关链接
+
+1. [官方主页](http://www.cmake.org)
+2. [官方文档](http://www.cmake.org/cmake/help/cmake2.4docs.html)
+3. [官方教程](http://www.cmake.org/cmake/help/cmake_tutorial.html)
+4. [Wiki](http://www.cmake.org/Wiki/CMake#Basic_CMakeLists.txt_from-scratch-generator)
+5. [FAQ](http://www.cmake.org/Wiki/CMake_FAQ)
+6. [bug tracker](http://www.cmake.org/Bug)
+7. 邮件列表： 
+   - [cmake on Gmane](http://dir.gmane.org/gmane.comp.programming.tools.cmake.user)
+   - http://www.mail-archive.com/cmake@cmake.org/
+   - [http://marc.info/?l=cmake](http://www.mail-archive.com/cmake@cmake.org/)
+8. 其他推荐文章 
+   - [在 linux 下使用 CMake 构建应用程序](http://www.ibm.com/developerworks/cn/linux/l-cn-cmake/)
+   - [cmake的一些小经验](http://www.cppblog.com/skyscribe/archive/2009/12/14/103208.aspx)
+   - [Packaging Software with CPack](http://www.kitware.com/media/archive/kitware_quarterly0107.pdf)
+   - [视频教程: 《Getting Started with CMake》](http://www.youtube.com/watch?v=CLvZTyji_Uw)
+   - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
+   - [这个页面](http://www.cmake.org/Wiki/CMake_Projects)详细罗列了使用 CMake 的知名项目
+
+## 类似工具
+
+- [SCons](http://scons.org/)：Eric S. Raymond、Timothee Besset、Zed A. Shaw 等大神力荐的项目架构工具。和 CMake 的最大区别是使用 Python 作为执行脚本。
+
+------
+
+
+
