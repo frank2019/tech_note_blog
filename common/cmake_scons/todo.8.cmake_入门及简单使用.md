@@ -298,7 +298,7 @@ OPTION(BUILD_UNIT_TESTS        "tests"      OFF)
 
 CMake中有一个configure_file的命令
 
-#### configure_file
+**configure_file**
 
 将一份文件拷贝到另一个位置并修改它的内容
 
@@ -345,7 +345,7 @@ configure_file(<input> <output>
 
 利用configure_file ，根据CMakelist.txt 中定义的变量生成一个头文件，头文件中定义版本宏。
 
-#### 实现
+**实现**
 
 修改子目录tests中的 CMakeLists.txt
 
@@ -431,7 +431,7 @@ CMake 也可以指定安装规则，以及添加测试。这两个功能分别�
 
 ### 6.1 定制安装规则
 
-#### 首先先在 tests/CMakeLists.txt 文件里添加下面两行：
+首先先在 tests/CMakeLists.txt 文件里添加下面两行：
 
 ```cmake
 # 指定 tests 库的安装路径
@@ -454,13 +454,15 @@ install (TARGETS Demo DESTINATION ${PROJECT_BINARY_DIR}/bin)
 
 
 
-### 6.2 TODO 为工程添加测试
+### 6.2 为工程添加测试
 
-CTest是CMake的一部分，是一个测试框架，可以将构建，配置，测试，覆盖率等指标更新到CDash看板工具上。 
+CTest是CMake的一部分，是一个测试框架，可以将构建，配置，测试，覆盖率等指标更新到[CDash]()或[Dart]()看板工具上。 
  有两种模式：
 
-- 一种是，在CMakeLists.txt中创建和执行测试
-- 一种是，运行脚本来执行整个测试流程，包括更新代码，配置和构建项目 
+- 一种是，CMake用来配置和编译一个项目，在CMakeLists.txt中使用特殊的指令来创建和执行测试。CTest用来执行这些测试，并作为可选项更新测试结果到看板服务。
+- 一种是，运行脚本(使用跟CMakeLists.txt的语法)来控制测试流程，包括下载 更新代码，配置和构建项目  运行测试。
+
+
 
 添加测试同样很简单。CMake 提供了一个称为 CTest 的测试工具。我们要做的只是在项目根目录的 CMakeLists 文件中调用一系列的 `add_test` 命令。
 
@@ -489,11 +491,20 @@ set_tests_properties (test_2_10
 
 
 
+可以使用如下命令查看帮助
+
+```bash
+cmake --help-command enable_testing
+cmake --help-command add_test
+cmake --help-property "<CONFIG>_POSTFIX"
+cmake --help-command set_property
+```
+
+
+
 上面的代码包含了四个测试。第一个测试 `test_run` 用来测试程序是否成功运行并返回 0 值。剩下的三个测试分别用来测试 5 的 平方、10 的 5 次方、2 的 10 次方是否都能得到正确的结果。其中 `PASS_REGULAR_EXPRESSION` 用来测试输出是否包含后面跟着的字符串。
 
 让我们看看测试的结果：
-
-
 
 ```
 [ehome@xman Demo5]$ make test
@@ -511,11 +522,14 @@ Test project /home/ehome/Documents/programming/C/power/Demo5
 Total Test time (real) =   0.01 sec
 ```
 
+相当于在命令行下执行
+
+```bash
+#再build目录下执行
+ctest.exe --force-new-ctest-process -C Debug
+```
+
 如果要测试更多的输入数据，像上面那样一个个写测试用例未免太繁琐。这时可以通过编写宏来实现：
-
-
-
-
 
 ```
 # 定义一个宏，用来简化测试工作
@@ -533,54 +547,69 @@ do_test (2 10 "is 1024")
 
 关于 CTest 的更详细的用法可以通过 `man 1 ctest` 参考 CTest 的文档。
 
-
-
-## 7，添加环境检查
-
+1. [ctest官方文档](https://cmake.org/cmake/help/v3.15/manual/ctest.1.html)
 
 
 
+## 7，TODO环境检查
 
-有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。在这个例子中，我们检查系统是否自带 pow 函数。如果带有 pow 函数，就使用它；否则使用我们定义的 power 函数。
+有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。或者或者当前的编译器信息。
 
-#### 添加 CheckFunctionExists 宏
+### 7.1 CheckSymbolExists检测符号是否存在
 
-首先在顶层 CMakeLists 文件中添加 CheckFunctionExists.cmake 宏，并调用 `check_function_exists` 命令测试链接器是否能够在链接阶段找到 `pow` 函数。
+```ini
+check_symbol_exists(<symbol> <files> <variable>)
 
-```
-# 检查系统是否支持 pow 函数
-include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
-check_function_exists (pow HAVE_POW)
+Check that the <symbol> is available after including given header <files> and store the result in a <variable>. Specify the list of files in one argument as a semicolon-separated list. <variable> will be created as an internal cache variable.
 ```
 
 
 
-将上面这段代码放在 `configure_file` 命令前。
+```cmake
+cmake_minimum_required(VERSION 3.0)
+include(CheckSymbolExists)
 
-#### 预定义相关宏变量
+# Define executable
+add_executable(myexe main.c)
 
-接下来修改 [config.h.in](http://config.h.in) 文件，预定义相关的宏变量。
+# atan2 requires the math library to be linked
+list(APPEND CMAKE_REQUIRED_LIBRARIES m)
 
+check_symbol_exists(atan2 math.h HAVE_ATAN2)
 
+if(NOT HAVE_ATAN2)
+	message("do not HAVE_ATAN2")
+endif()
 
-```
-// does the platform provide pow function?
-#cmakedefine HAVE_POW
-```
-
-
-
-#### 在代码中使用宏和函数
-
-最后一步是修改 [main.cc](http://main.cc) ，在代码中使用宏和函数：
-
-
-
-```
-#ifdef HAVE_POW    printf("Now we use the standard library. \n");    double result = pow(base, exponent);#else    printf("Now we use our own Math library. \n");    double result = power(base, exponent);#endif
+# Add compile definitions if we have the library
+if(HAVE_ATAN2)
+	target_compile_definitions(myexe PRIVATE -DHAVE_ATAN2)
+endif()
 ```
 
+检测include math.h 后是否存在符号atan2（包括函数  宏 变量名），如果存在 则在代码中定义宏HAVE_ATAN2
 
+参考[CheckSymbolExists](https://cmake.org/cmake/help/latest/module/CheckSymbolExists.html)
+
+
+
+### 7.2 常用的系统信息宏
+
+
+
+- WIN32 	Set to `True` when the target system is Windows, including Win64.
+- Win64      windows 64bit
+- APPLE      Set to `True` when the target system is an Apple platform(macOS, iOS, tvOS or watchOS).
+- ANDROID   Set to `1` when the target system ([`CMAKE_SYSTEM_NAME`](https://cmake.org/cmake/help/latest/variable/CMAKE_SYSTEM_NAME.html#variable:CMAKE_SYSTEM_NAME)) is`Android`.
+
+
+
+### 7.3 参考链接
+
+- 常用的cmake方法库 [cmake-modules](https://cmake.org/cmake/help/latest/manual/cmake-modules.7.html)
+
+- CMake中常用的变量 [cmake-variables](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#id1)
+  - 这里可以看到CMake中常用的变量 包括 系统信息描述类的  控制编译  语言相关变量   CTest 相关变量 CPack相关变量等等
 
 
 
@@ -628,7 +657,8 @@ https://segmentfault.com/a/1190000019276315
 
 引用第三方模块
 
-
+1. [7.11 Git 工具 - 子模块](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+2. http://blog.changyy.org/2016/04/git-submodule-cmake-googletest.html?m=1
 
 
 
@@ -678,6 +708,10 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
    - [视频教程: 《Getting Started with CMake》](http://www.youtube.com/watch?v=CLvZTyji_Uw)
    - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
    - [这个页面](http://www.cmake.org/Wiki/CMake_Projects)详细罗列了使用 CMake 的知名项目
+
+
+
+9. [cmake库](https://github.com/bilke/cmake-modules)
 
 ## 类似工具
 

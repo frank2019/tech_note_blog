@@ -52,15 +52,15 @@ set(CMAKE_FIND_ROOT_PATH /opt/arm /opt/inst)
 
  对FIND_LIBRARY()起作用，表示在链接的时候的库的相关选项，因此这里需要设置成ONLY来保证我们的库是在交叉环境中找的.
 
-#### ​    7，CMAKE_FIND_ROOT_PATH_MODE_INCLUDE:
+####     7，CMAKE_FIND_ROOT_PATH_MODE_INCLUDE:
 
   对FIND_PATH()和FIND_FILE()起作用，一般来说也是ONLY,如果你想改变，一般也是在相关的FIND命令中增加option来改变局部设置，有NO_CMAKE_FIND_ROOT_PATH,ONLY_CMAKE_FIND_ROOT_PATH,BOTH_CMAKE_FIND_ROOT_PATH
 
-#### ​    8，BOOST_ROOT：
+####     8，BOOST_ROOT：
 
  对于需要boost库的用户来说，相关的boost库路径配置也需要设置，因此这里的路径即ARM下的boost路径，里面有include和lib。
 
-#### ​    9，QT_QMAKE_EXECUTABLE: 
+####     9，QT_QMAKE_EXECUTABLE: 
 
 对于Qt用户来说，需要更改相关的qmake命令切换成嵌入式版本，因此这里需要指定成相应的qmake路径（指定到qmake本身）
 
@@ -100,3 +100,21 @@ SET(BOOST_ROOT /opt/boost_arm)
 
 1. [CMake交叉编译配置](https://www.cnblogs.com/rickyk/p/3875334.html)
 2. https://cmake.org/Wiki/CMake_Cross_Compiling
+
+
+
+# 参考链接
+
+1. [[基于cmake的交叉编译工具链](https://segmentfault.com/a/1190000019276315)
+2. [链接动态库](https://gotowqj.iteye.com/blog/1926771)
+3. https://blog.csdn.net/sinat_32596537/article/details/78084262
+4. [CMake解决动态链接库RPATH错误问题](http://kescoode.com/cmake-rpath-problem/)
+
+## 9，CMake关于交叉编译
+
+
+
+#### 参考链接
+
+https://segmentfault.com/a/1190000019276315
+
