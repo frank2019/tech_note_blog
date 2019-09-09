@@ -492,8 +492,18 @@ C++通用框架和库
 - [QJson](https://github.com/flavio/qjson)：将JSON数据映射到QVariant对象的基于Qt的库
 - [RapidJSON](https://github.com/miloyip/rapidjson)： 用于C++的快速JSON 解析生成器，包含SAX和DOM两种风格的API
 - [YAJL](https://github.com/lloyd/yajl) ：C语言中快速流JSON解析库
+- [JSON for Modern C++](https://nlohmann.github.io/json/)
 
  
+
+Q：哪一个json库比较好用？
+
+A：  依据网友做的评测，RapidJSON 是一个不错的选择，腾讯出品。
+
+依据：  [28个 C/C++ 开源 JSON 程序库性能及标准符合程度评测](https://blog.csdn.net/q499803363/article/details/79141054)
+
+1. [RapidJSON 文档](http://rapidjson.org/zh-cn/)
+2. google protocol buff
 
 #### 日志
 

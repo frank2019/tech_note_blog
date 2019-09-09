@@ -4,15 +4,13 @@
 
 
 
-![ CMake](https://www.hahack.com/images/cmake/cmake100.png)
+![ CMake](img/cmake.png)
 
 ## 
 
 ## 0，引言
 
 
-
-夫妻之间吵架，吵得不可开交，这时可以通过第三方调解，这第三方可以是一个心理咨询机构，可以是熟悉的朋友，甚至可以是上帝！
 
 关于间接层，软件工程领域有个著名的结论：
 
@@ -24,6 +22,12 @@
 > **David Wheeler**（计算机科学家）
 
 
+
+这个在生活中也不乏其例。 夫妻之间吵架，吵得不可开交，这时可以通过第三方调解，这第三方可以是一个心理咨询机构，可以是熟悉的朋友，甚至可以是上帝！
+
+
+
+那么 按照如此说法，CMake也是有一个间接层。
 
 
 
@@ -551,7 +555,7 @@ do_test (2 10 "is 1024")
 
 
 
-## 7，TODO环境检查
+## 7，环境检查
 
 有时候可能要对系统环境做点检查，例如要使用一个平台相关的特性的时候。或者或者当前的编译器信息。
 
@@ -595,8 +599,6 @@ endif()
 
 ### 7.2 常用的系统信息宏
 
-
-
 - WIN32 	Set to `True` when the target system is Windows, including Win64.
 - Win64      windows 64bit
 - APPLE      Set to `True` when the target system is an Apple platform(macOS, iOS, tvOS or watchOS).
@@ -613,7 +615,7 @@ endif()
 
 
 
-## 8，生成安装包
+## 8，TODO 生成安装包
 
 本节将学习如何配置生成各种平台上的安装包，包括二进制安装包和源码安装包。为了完成这个任务，我们需要用到 CPack ，它同样也是由 CMake 提供的一个工具，专门用于打包。
 
@@ -643,17 +645,11 @@ include (CPack)
 
 关于 CPack 的更详细的用法可以通过 `man 1 cpack` 参考 CPack 的文档。
 
-## 9，CMake关于交叉编译
 
 
 
-#### 参考链接
 
-https://segmentfault.com/a/1190000019276315
-
-
-
-10，
+## 9，CMake调用第三方指令
 
 引用第三方模块
 
@@ -662,7 +658,31 @@ https://segmentfault.com/a/1190000019276315
 
 
 
-## 将其他平台的项目迁移到 CMake
+在cmake中调用第三方程序
+
+
+
+
+
+
+
+## 扩展阅读
+
+
+
+- [在 linux 下使用 CMake 构建应用程序](http://www.ibm.com/developerworks/cn/linux/l-cn-cmake/)
+- [cmake的一些小经验](http://www.cppblog.com/skyscribe/archive/2009/12/14/103208.aspx)
+- [Packaging Software with CPack](http://www.kitware.com/media/archive/kitware_quarterly0107.pdf)
+- [视频教程: 《Getting Started with CMake》](http://www.youtube.com/watch?v=CLvZTyji_Uw)
+- [CMake 入门实战](https://www.hahack.com/codes/cmake/)
+- [这个页面](http://www.cmake.org/Wiki/CMake_Projects)详细罗列了使用 CMake 的知名项目
+- [基于cmake的交叉编译工具链](https://segmentfault.com/a/1190000019276315)
+- [cmake 第三方库](https://github.com/bilke/cmake-modules)
+- [透过git submodule 和 CMake 使用 GoogleTest]()
+
+
+
+### 将其他平台的项目迁移到 CMake
 
 
 
@@ -701,17 +721,6 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
    - [cmake on Gmane](http://dir.gmane.org/gmane.comp.programming.tools.cmake.user)
    - http://www.mail-archive.com/cmake@cmake.org/
    - [http://marc.info/?l=cmake](http://www.mail-archive.com/cmake@cmake.org/)
-8. 其他推荐文章 
-   - [在 linux 下使用 CMake 构建应用程序](http://www.ibm.com/developerworks/cn/linux/l-cn-cmake/)
-   - [cmake的一些小经验](http://www.cppblog.com/skyscribe/archive/2009/12/14/103208.aspx)
-   - [Packaging Software with CPack](http://www.kitware.com/media/archive/kitware_quarterly0107.pdf)
-   - [视频教程: 《Getting Started with CMake》](http://www.youtube.com/watch?v=CLvZTyji_Uw)
-   - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
-   - [这个页面](http://www.cmake.org/Wiki/CMake_Projects)详细罗列了使用 CMake 的知名项目
-
-
-
-9. [cmake库](https://github.com/bilke/cmake-modules)
 
 ## 类似工具
 
