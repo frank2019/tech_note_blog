@@ -1,5 +1,7 @@
 
 
+
+
 chrono是一个time library, 源于boost，现在已经是C++标准。
 
 
@@ -13,6 +15,12 @@ chrono是一个模版库，使用简单，功能强大，只需要理解三个�
 duration、time_point、clock
 
 
+
+chrono 库主要包含了三种类型：时间间隔 Duration、时钟 Clocks 和时间点 Time point
+
+
+
+## 应用示例
 
 
 
