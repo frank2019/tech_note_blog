@@ -1,12 +1,10 @@
 
 
-```
-
-```
+>  安徐正静
 
 
 
-## `pytest` 特点
+## pytest 特点
 
 pytest是一个非常成熟的全功能的Python测试框架，主要有以下几个特点：
 
@@ -74,7 +72,7 @@ def test_answer():
 命令行切换到文件所在目录，执行测试（也可以直接在IDE中运行）
 
 ```
-
+pytest  xxx.py
 ```
 
 当需要编写多个测试样例的时候，我们可以将其放到一个测试类当中，如
@@ -122,8 +120,6 @@ pytest --html=report.html
 ```
 
 报告效果：
-
-
 
 
 
@@ -236,17 +232,16 @@ pytest test_se.py -s
 pytest test_se.py -s -n 4
 ```
 
-学习网站：
- [pytest documentation](https://links.jianshu.com/go?to=https%3A%2F%2Fdocs.pytest.org%2Fen%2Flatest%2Fcontents.html)
- 好用的Pytest单元测试框架（《51测试天地》四十九（下）- 44）
- [Pytest学习笔记](https://links.jianshu.com/go?to=http%3A%2F%2Fwww.cnblogs.com%2Fsparkling-ly%2Fcategory%2F851617.html)
- [pytest单元测试框架](https://links.jianshu.com/go?to=https%3A%2F%2Fblog.csdn.net%2Fliuchunming033%2Farticle%2Fcategory%2F3193659)
-
-
-
-
-
 ## 参考链接
 
 1. [unittest和pytest对比](https://www.cnblogs.com/xiaohuhu/p/9804527.html)
+
 2. [全功能Python测试框架：pytest](https://www.jianshu.com/p/932a4d9f78f8)
+
+3. [Full pytest documentation](https://docs.pytest.org/en/latest/contents.html)
+
+4.  [Pytest学习笔记](https://www.cnblogs.com/sparkling-ly/category/851617.html)
+
+5.  [pytest单元测试框架](https://blog.csdn.net/liuchunming033/article/category/3193659)
+
+   
