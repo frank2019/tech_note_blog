@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include  "mymath.h"
+#include  "mychrono.h"
+#include  "my_debug_helper.h"
+
 
 
 
@@ -14,6 +16,8 @@ int main(int argc, char *argv[])
     int  index  = atoi(argv[1]);
     int value = FibonacciSequence(index);
 
-    printf("FibonacciSequence index %d is %d\n", index, value);
+    //printf("FibonacciSequence index %d is %d\n", index, value);
+
+    debug_helper_main(argc, argv);
     return 0;
 }

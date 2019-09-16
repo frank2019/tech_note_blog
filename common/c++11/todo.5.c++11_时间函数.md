@@ -2,6 +2,10 @@
 
 
 
+
+
+## 概述
+
 chrono是一个time library, 源于boost，现在已经是C++标准。
 
 
@@ -14,9 +18,94 @@ chrono是一个模版库，使用简单，功能强大，只需要理解三个�
 
 duration、time_point、clock
 
+## 主要概念
+
 
 
 chrono 库主要包含了三种类型：时间间隔 Duration、时钟 Clocks 和时间点 Time point
+
+
+
+### 时钟
+
+>
+>
+>```c++
+> /* 时钟:
+> *
+> * std::chrono::system_clock:  依据系统的当前时间 (不稳定)
+> * std::chrono::steady_clock:  以统一的速率运行(不能被调整)
+> * std::chrono::high_resolution_clock: 提供最小可能的滴答周期
+> *                   (可能是steady_clock或者system_clock的typedef)
+> *
+> * std:ratio<>表示时钟周期，即时间的计量单位
+> */
+>```
+
+
+
+```c++
+std::ratio<1,10>  r; // 
+cout << r.num << "/" << r.den << endl;
+
+cout << chrono::system_clock::period::num << "/" << chrono::system_clock::period::den << endl;
+cout << chrono::steady_clock::period::num << "/" << chrono::steady_clock::period::den << endl;
+cout << chrono::high_resolution_clock::period::num << "/" << chrono::high_resolution_clock::period::den << endl;
+```
+
+
+
+### 时间间隔
+
+```
+/*
+ *
+ * std:chrono::duration<>:  表示持续的时间
+ *    duration<int, ratio<1,1>> --  秒数存储在一个int中 (默认)
+ *    duration<double, ration<60,1>> -- 分钟数储存在一个double中
+ *    库中定义了如下方便的duration:
+ *    nanoseconds, microseconds, milliseconds, seconds, minutes, hours
+ * system_clock::duration  -- duration<T, system_clock::period>
+ *                                 T是一个有符号的算术类型, 可以是int或long或其他
+ */
+chrono::microseconds mi(2745);
+chrono::nanoseconds na = mi;
+chrono::milliseconds mill = chrono::duration_cast<chrono::milliseconds>(mi);  // 当可能发生信息丢失的时候，要显式地转换
+                                                          // 直接截断，而不是四舍五入
+    mi = mill + mi;  // 2000 + 2745 = 4745
+    mill = chrono::duration_cast<chrono::milliseconds>(mill + mi);  // 6
+    cout << na.count() << std::endl;
+    cout << mill.count() << std::endl;
+    cout << mi.count() << std::endl;
+
+   cout << "min: " << chrono::system_clock::duration::min().count() << "\n";
+   cout << "max: " << chrono::system_clock::duration::max().count() << "\n";
+```
+
+
+
+### 时间点
+
+```c++
+ /* std::chrono::time_point<>: 表示一个时间点
+ *       -- 自从一个指定的时间点开始的过去的时间长度: 
+ *          00:00 January 1, 1970 (Corordinated Universal Time - UTC)  -- 时钟的纪元
+ * time_point<system_clock, milliseconds>:  依据system_clock, 自从纪元开始经过的毫秒数
+ *
+ * typdefs
+  system_clock::time_point  -- time_point<system_clock, system_clock::duration>
+  steady_clock::time_point  -- time_point<steady_clock, steady_clock::duration>
+ */
+    // 使用系统时间
+    chrono::system_clock::time_point tp = chrono::system_clock::now();
+    cout << tp.time_since_epoch().count() << endl;  
+    tp = tp + seconds(2);  // 因为tp精度高，不需要转换
+    cout << tp.time_since_epoch().count() << endl;
+```
+
+
+
+
 
 
 
@@ -29,14 +118,11 @@ chrono 库主要包含了三种类型：时间间隔 Duration、时钟 Clocks �
 
 
 ```c++
-std::time_t getTimeStamp()
-{
-    std::chrono::time_point<std::chrono::system_clock,std::chrono::milliseconds> tp = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
-    auto tmp=std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch());
-    std::time_t timestamp = tmp.count();
-    //std::time_t timestamp = std::chrono::system_clock::to_time_t(tp);
-    return timestamp;
-}
+ // 获取毫秒时间戳
+    long long GetTimeMillisecondsStamp(){
+        auto time_now = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
+        return time_now.count();
+    }
 
 
 //时间戳转日期
@@ -55,15 +141,7 @@ std::tm* gettm(int64 timestamp)
 
 
 
-
-
-
-
 ### 线程休眠函数
-
-
-
-
 
 休眠5秒
 
@@ -71,23 +149,23 @@ std::tm* gettm(int64 timestamp)
 std::this_thread::sleep_for(std::chrono::seconds(5));
 ```
 
-休眠
+休眠100毫秒
 
 ```
 std::this_thread::sleep_for(std::chrono::milliseconds(100))
 ```
 
-
-
-
-
 ### 计算时间差
 
 ```c++
-std::chrono::time_point<std::chrono::high_resolution_clock> stub, last_stub;
-stub = std::chrono::high_resolution_clock::now();
-//printf("costs %u ms\n", (unsigned)std::chrono::duration_cast<std::chrono::milliseconds>( stub - last_stub).count());
-int num = (unsigned)std::chrono::duration_cast<std::chrono::milliseconds>(stub - last_stub).count();
-				last_stub = stub;
+    // 计算时间间隔最好用steady_clock
+    chrono::steady_clock::time_point start = chrono::steady_clock::now();
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+
+    chrono::steady_clock::duration d = end - start;
+    if (d == chrono::steady_clock::duration::zero())    //0时间长度的表示
+        cout << "no time elapsed" << endl;
+    cout << duration_cast<microseconds>(d).count() << endl;
+   // 使用system_clock可能得到不正确的值
 ```
 

@@ -5,8 +5,8 @@ project (Demo)
 # 查找当前目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量
 aux_source_directory(. DIR_SRCS)
-# 添加 math 子目录
-add_subdirectory(math)
+# 添加 chrono 子目录
+add_subdirectory(chrono)
 
 #编译选项
 OPTION(BUILD_UNIT_TESTS        "tests"      OFF)
@@ -15,10 +15,13 @@ if(BUILD_UNIT_TESTS)
 	add_subdirectory(tests)
 endif()
 
+include_directories("${PROJECT_SOURCE_DIR}/chrono")
+
+
 # 指定生成目标 
-add_executable(Demo main.c)
+add_executable(Demo main.cpp)
 # 添加链接库
-target_link_libraries(Demo MathFunctions)
+target_link_libraries(Demo chrono)
 
 
 install (TARGETS Demo DESTINATION ${PROJECT_BINARY_DIR}/bin)
