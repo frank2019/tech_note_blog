@@ -120,8 +120,7 @@ int test_print_strace() {
         //ret = camera.RecordFrames(save_dir, 6, distance);
         //REQUIRE(ret == 0);
         //printStack();
-        std::
-        
+        throw new std::exception();
     }
     catch (const std::exception& e) {
         std::cout << e.what() << std::endl;

@@ -1,5 +1,71 @@
 
 
+>
+>
+>抛开目标谈路线都是扯淡
+
+
+
+##  基础
+
+### 目标
+
+1. 掌握python基本语法
+2. 良好python 编码风格
+3. 可以解决一般性问题
+
+### 推荐工具
+
+1. 《python核心编程》第三版
+2. python_编程规范  google版
+3. vscode 
+
+
+
+## 方向  网络全栈
+
+### 目标
+
+1. 熟悉HTTP 协议
+2. 熟悉常用的模块 网络请求（如：requests），数据库模块如，网络框架 如tomato，redis模块
+3. 可实现简单的网络服务
+
+
+
+
+
+## 方向:爬虫 数据分析
+
+
+
+## 方向:人工智能 算法
+
+
+
+## 参考链接
+
+- **知乎：Python学习路径及练手项目合集**
+
+https://zhuanlan.zhihu.com/p/23561159
+
+- **知乎：Python 的练手项目有哪些值得推荐？**
+
+https://www.zhihu.com/question/29372574
+
+
+
+https://zhuanlan.zhihu.com/p/25824007
+
+https://zhuanlan.zhihu.com/p/23561159
+
+https://www.zhihu.com/question/29372574
+
+
+
+----
+
+
+
 Python安装包，我推荐下载Anaconda，Anaconda是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统，提供了包管理与环境管理的功能，可以很方便地解决多版本Python并存、切换以及各种第三方包安装问题。
 
 下载地址：
