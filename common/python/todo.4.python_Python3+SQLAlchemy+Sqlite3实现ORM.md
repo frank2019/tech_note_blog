@@ -374,4 +374,5 @@ https://stackoverflow.com/questions/34009296/using-sqlalchemy-session-from-flask
 1. [](https://www.jianshu.com/p/215468e2b5e1)
 2. https://www.cnblogs.com/zhw511006/archive/2010/09/08/1821596.html
 3. [Python3+SQLAlchemy+Sqlite3实现ORM教程](https://www.cnblogs.com/lsdb/p/9835894.html)
+4. [官方API文档](https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query)
 

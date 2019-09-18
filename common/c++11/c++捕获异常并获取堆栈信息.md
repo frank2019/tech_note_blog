@@ -1,13 +1,12 @@
-#include <chrono>
-#include <iostream>
-#include <stdint.h>
-#include <time.h>       /* time_t, struct tm, time, gmtime */
-
-#include  "my_debug_helper.h"
-#include  "mychrono.h"
 
 
 
+
+# c++捕获异常并获取堆栈信息
+
+
+
+```c++
 #if defined(WIN32)
 #include <io.h>
 #include <direct.h>
@@ -87,26 +86,7 @@ static void printf_stacktrace() {
 }
 
 
-void PrintStack(void){
-    unsigned int   i;
-    void         * stack[100];
-    unsigned short frames;
-    SYMBOL_INFO  * symbol;
-    HANDLE         process;
 
-    process = GetCurrentProcess();
-    SymInitialize(process, NULL, TRUE);
-    frames = CaptureStackBackTrace(0, 100, stack, NULL);
-    symbol = (SYMBOL_INFO *)calloc(sizeof(SYMBOL_INFO) + 256 * sizeof(char), 1);
-    symbol->MaxNameLen = 255;
-    symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
-
-    for (i = 0; i < frames; i++){
-        SymFromAddr(process, (DWORD64)(stack[i]), 0, symbol);
-        printf("%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address);
-    }
-    free(symbol);
-}
 
 int test_print_strace() {
     try {
@@ -120,7 +100,14 @@ int test_print_strace() {
     return  0;
 }
 
-int debug_helper_main(int argc, char **argv) {
-    return  test_print_strace();
-}
+```
 
+
+
+libcsdbg 
+
+## 参考链接
+
+1. https://blog.csdn.net/zqp2013/article/details/51140236
+2. https://blog.csdn.net/weixin_33725722/article/details/85819408
+3. [BugTrap：程序崩溃快照、bug跟踪之利器](https://blog.csdn.net/zqp2013/article/details/51140236)
