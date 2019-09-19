@@ -71,8 +71,8 @@ static void printf_stacktrace() {
         SymFromAddr(process, (DWORD64)(stack[i]), 0, symbol);
         snprintf(st_line, sizeof(st_line) - 1, "    %d: %s [0x%X]\n", frames - i - 1, symbol->Name, symbol->Address);
         printf("%s", st_line);
-
     }
+    free(symbol);
 #elif defined(linux)
     char **st_arr = NULL;
 
@@ -87,26 +87,7 @@ static void printf_stacktrace() {
 }
 
 
-void PrintStack(void){
-    unsigned int   i;
-    void         * stack[100];
-    unsigned short frames;
-    SYMBOL_INFO  * symbol;
-    HANDLE         process;
 
-    process = GetCurrentProcess();
-    SymInitialize(process, NULL, TRUE);
-    frames = CaptureStackBackTrace(0, 100, stack, NULL);
-    symbol = (SYMBOL_INFO *)calloc(sizeof(SYMBOL_INFO) + 256 * sizeof(char), 1);
-    symbol->MaxNameLen = 255;
-    symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
-
-    for (i = 0; i < frames; i++){
-        SymFromAddr(process, (DWORD64)(stack[i]), 0, symbol);
-        printf("%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address);
-    }
-    free(symbol);
-}
 
 int test_print_strace() {
     try {
@@ -120,6 +101,27 @@ int test_print_strace() {
     return  0;
 }
 
+
+void PrintStack(void) {
+    unsigned int   i;
+    void         * stack[100];
+    unsigned short frames;
+    SYMBOL_INFO  * symbol;
+    HANDLE         process;
+
+    process = GetCurrentProcess();
+    SymInitialize(process, NULL, TRUE);
+    frames = CaptureStackBackTrace(0, 100, stack, NULL);
+    symbol = (SYMBOL_INFO *)calloc(sizeof(SYMBOL_INFO) + 256 * sizeof(char), 1);
+    symbol->MaxNameLen = 255;
+    symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+
+    for (i = 0; i < frames; i++) {
+        SymFromAddr(process, (DWORD64)(stack[i]), 0, symbol);
+        printf("%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address);
+    }
+    free(symbol);
+}
 int debug_helper_main(int argc, char **argv) {
     return  test_print_strace();
 }

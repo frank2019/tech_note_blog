@@ -730,3 +730,13 @@ CMake 可以很轻松地构建出在适合各个平台执行的工程环境。�
 
 
 
+
+
+
+
+
+
+1. [An Introduction to Modern CMake](http://cliutils.gitlab.io/modern-cmake/)
+
+2. https://training.kitware.fr/browse/204
+3. https://gitlab.com/CLIUtils/modern-cmake/tree/master
