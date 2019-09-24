@@ -36,9 +36,20 @@ Super-Resolution 可分为两类:从多张低分辨率图像重建出高分辨�
 
 a. [深度学习之超分辨率重建技术（Super-Resolution）总结：从 SRCNN 到 WDSR](https://blog.csdn.net/TeFuirnever/article/details/90719309)
 
-b.[超分辨率（Super-Resolution）论文整理
+b.[超分辨率（Super-Resolution）
+
+### 离散余弦变换(DCT)
+
+DCT变换的全称是离散余弦变换(Discrete Cosine 
+Transform)，主要用于将数据或图像的压缩，能够将空域的信号转换到频域上，具有良好的去相关性的性能。DCT变换本身是无损的，但是在图像编码等领域给接下来的量化、哈弗曼编码等创造了很好的条件，同时，由于DCT变换时对称的，所以，我们可以在量化编码后利用DCT反变换，在接收端恢复原始的图像信息。DCT变换在当前的图像分析已经压缩领域有着极为广大的用途，我们常见的JPEG静态图像编码以及MJPEG、MPEG动态编码等标准中都使用了DCT变换。
+
+参考链接： [离散余弦变换(DCT)](https://blog.csdn.net/yanceyxin/article/details/82080242)
 
 
+
+### CABAC熵编码
+
+1 [H.264协议CABAC熵编码学习](https://blog.csdn.net/u011875342/article/details/79627194)
 
 
 

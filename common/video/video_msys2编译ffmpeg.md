@@ -20,7 +20,7 @@ pacman -S make yasm diffutils pkg-config
 
 安装
 
-```
+```bash
 pacman -S mingw-w64-i686-gcc 
 pacman -S mingw-w64-x86_64-gcc 
 ```
@@ -46,8 +46,10 @@ msys2_shell.cmd -mingw32
 ２、编译
 　　按顺序执行
 
-    make 
-    make install
+```bash
+make 
+make install
+```
 
 备注：生成的库在C:\msys64\usr\local\bin
 
@@ -61,10 +63,12 @@ msys2_shell.cmd -mingw64
 
 在启动的shell中，执行
 
-    ./configure --enable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264 --arch=x86_64
+```bash
+./configure --enable-shared --disable-everything --enable-decoder=h264 --enable-parser=h264 --arch=x86_64
+```
 
 ２、编译
-　　　　按顺序执行
+　按顺序执行
 
     make 
     make install
@@ -73,6 +77,35 @@ msys2_shell.cmd -mingw64
 　
 
 特别说明：用Msys2生成的库有依赖，依赖于C:\msys64\mingw32\bin 或 C:\msys64\mingw64\bin 下的某些dll库。
+
+
+
+若需要ffmpeg支持其他视频音频编解码器，只需下载相应源代码，按照以下步骤安装：
+
+**配置(./configure)—>编译(make)—>安装(make install)—>导入环境变量(export)。**
+
+另外，在编译ffmpeg时，开启相应编解码器的配置即可。
+
+
+
+## 遇到的问题
+
+### ffmpeg 源码编译找不到 libpostproc 库
+
+给 ./configure   加参数
+ --enable-shared : 编译动态库
+ --enable-postproc
+ --enable-gpl
+
+即 使用 ./configure --enable-shared --enable-postproc --enable-gpl
+
+
+
+
+
+
+
+
 
 ## 参考链接
 
