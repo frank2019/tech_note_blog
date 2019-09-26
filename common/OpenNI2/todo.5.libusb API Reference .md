@@ -28,8 +28,22 @@
 
 ### 4 libusb_hotplug_register_callback
 
-函数原型：int LIBUSB_CALL libusb_hotplug_register_callback(libusb_context *ctx,        libusb_hotplug_event events,libusb_hotplug_flag flags,        int vendor_id, int product_id,
-                                                int dev_class,        libusb_hotplug_callback_fn cb_fn,        void *user_data,libusb_hotplug_callback_handle *handle);
+函数原型：
+
+```c++
+int LIBUSB_CALL libusb_hotplug_register_callback(
+	libusb_context *ctx,        
+	libusb_hotplug_event events,
+	libusb_hotplug_flag flags,        
+	int vendor_id, 
+	int product_id,
+  	int dev_class,        
+  	libusb_hotplug_callback_fn cb_fn,
+  	void *user_data,
+  	libusb_hotplug_callback_handle *handle);
+```
+
+
 功能说明：注册回调函数，响应热插拔事件。
 参数说明：ctx 通常为NULL
           events 要响应的事件，参数为LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED设备插入事件 LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT 设备拔出事件，也可以LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED|LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT表示同时响应插拔事件
@@ -43,16 +57,16 @@
 返回值：0成功，非0 失败
 注意：不要在回调函数中调用可能阻塞的操作，否则可能造成libusb的其他函数执行失败，不要在回调函数中调用libusb_claim_interface等操作，有可能会失败
 
+### 5 libusb_hotplug_deregister_callback
 
-5 libusb_hotplug_deregister_callback
 函数原型：void LIBUSB_CALL libusb_hotplug_deregister_callback(libusb_context *ctx,libusb_hotplug_callback_handle handle);
 参数说明：注销libusb_hotplug_register_callback函数注册的回调函数
 参数说明：ctx 通常为NULL          
           handle   libusb_hotplug_register_callback返回的句柄
 返回值：无
 
+### 6 libusb_handle_events  
 
-6 libusb_handle_events  
 函数原型： int LIBUSB_CALL libusb_handle_events(libusb_context *ctx);  
 功能说明：在阻塞模式中处理任何挂起的事件。
 参数说明：ctx 通常为NULL  
@@ -90,7 +104,8 @@ int main(int argc, char **argv)
         libusb_hotplug_deregister_callback(hp);
 }  
 
-7   libusb_open_device_with_vid_pid
+### 7   libusb_open_device_with_vid_pid
+
 函数原型：libusb_device_handle * LIBUSB_CALL libusb_open_device_with_vid_pid(        libusb_context *ctx, uint16_t vendor_id, uint16_t product_id); 
 函数功能：通过VID和PID打开一个USB 设备，并返回设备句柄libusb_device_handle的指针
 参数说明：ctx 通常为NULL 
@@ -98,31 +113,31 @@ int main(int argc, char **argv)
           product_id 设备的PID
 返回值：成功返回libusb_device_handle的指针 ，失败返回NULL
 
+### 8 libusb_open
 
-8 libusb_open
 函数原型：int LIBUSB_CALL libusb_open(libusb_device *dev, libusb_device_handle **handle);
 函数功能：通过libusb_device的指针打开一个USB设备，并返回设备句柄libusb_device_handle的指针
 参数说明：dev libusb_device的指针
           handle 用来返回设备句柄libusb_device_handle的指针
 返回值：0成功，非0 失败
 
+### 9 libusb_close
 
-9 libusb_close
 函数原型：void LIBUSB_CALL libusb_close(libusb_device_handle *dev_handle);
 函数功能：关闭 libusb_open或者libusb_open_device_with_vid_pid打开的设备
 参数说明：dev_handle  调用libusb_open或者libusb_open_device_with_vid_pid返回的设备句柄libusb_device_handle的指针
 返回值： 无
 
+### 10 libusb_get_device_list
 
-10 libusb_get_device_list
 函数原型：ssize_t LIBUSB_CALL libusb_get_device_list(libusb_context *ctx,        libusb_device ***list);
 函数功能：获取当前的设备列表
 函数功能：ctx 通常为NULL 
           list USB设备列表
 返回值：0成功，非0 失败
 
+### 11 libusb_free_device_list
 
-11 libusb_free_device_list
 函数原型：void LIBUSB_CALL libusb_free_device_list(libusb_device **list,        int unref_devices);
 函数功能：释放以前使用的设备列表
 参数说明：list 要释放的设备列表的指针
@@ -140,7 +155,9 @@ int main(int argc, char **argv)
         }
         libusb_free_device_list(devs, 1);
         
-12 libusb_get_device_descriptor
+
+### 12 libusb_get_device_descriptor
+
 函数原型：int LIBUSB_CALL libusb_get_device_descriptor(libusb_device *dev,        struct libusb_device_descriptor *desc);        
 函数功能：获取USB设备的设备描述符
 参数说明：dev libusb_device的指针，是要读取的设备
@@ -154,8 +171,8 @@ libusb_get_device_descriptor(dev,desc);
 struct libusb_device_descriptor desc;
 libusb_get_device_descriptor(dev,&desc);        
 
+### 13 libusb_get_config_descriptor
 
-13 libusb_get_config_descriptor
 函数原型：int LIBUSB_CALL libusb_get_config_descriptor(libusb_device *dev,        uint8_t config_index, struct libusb_config_descriptor **config);
 函数功能：获取指定设备的配置描述符
 参数说明：dev libusb_device的指针，是要读取的设备
@@ -163,16 +180,16 @@ libusb_get_device_descriptor(dev,&desc);
           config 配置描述符的指针，用来带回设备描述符
 返回值：0成功，非0 失败
 
+### 14 libusb_free_config_descriptor  
 
-14 libusb_free_config_descriptor  
 函数原型：void LIBUSB_CALL libusb_free_config_descriptor(        struct libusb_config_descriptor *config); 
 函数功能：释放配置描述符
 参数说明：config 要释放的配置描述符
 返回值：无
 注意： 用libusb_get_config_descriptor获取配置描述符后必须要调用        libusb_free_config_descriptor释放，否则会造成内存泄漏。
 
+### 15  libusb_control_transfer
 
-15  libusb_control_transfer
 函数原型：int LIBUSB_CALL libusb_control_transfer(libusb_device_handle *dev_handle,        uint8_t request_type, uint8_t bRequest, uint16_t wValue, uint16_t wIndex,
               unsigned char *data, uint16_t wLength, unsigned int timeout);  
 参数说明：dev_handle libusb_device_handle的指针
@@ -227,24 +244,24 @@ C:[To Endpoint]设置端点描述符.
 11.SYNCH_FRAME(0CH)
 用于设备设置和报告一个端点的同步帧.
 
+### 16 libusb_kernel_driver_active
 
-16 libusb_kernel_driver_active
 函数原型：int LIBUSB_CALL libusb_kernel_driver_active(libusb_device_handle *dev,int interface_number);
 函数功能：确定指定接口的内核驱动程序是否已经激活。如果一个内核驱动程序是激活的，libusb_claim_interface调用的会失败
 参数说明：dev 调用 libusb_open或者libusb_open_device_with_vid_pid返回的libusb_device_handle的句柄
                   interface_number 接口号，这个对应接口描述符的 bInterfaceNumber
 返回值：1 已经激活，非1 没有激活
 
+### 17 libusb_detach_kernel_driver
 
-17 libusb_detach_kernel_driver
 函数原型：int LIBUSB_CALL libusb_detach_kernel_driver(libusb_device_handle *dev,int interface_number);
 函数功能：卸载指定接口的内核驱动程序。如果一个内核驱动程序是激活的，必须先调用这个函数，再调用libusb_claim_interface
 参数说明：dev 调用 libusb_open或者libusb_open_device_with_vid_pid返回的libusb_device_handle的句柄
                   interface_number 接口号，这个对应接口描述符的 bInterfaceNumber
 返回值：0 成功，非0失败
 
+### 18 libusb_claim_interface
 
-18 libusb_claim_interface
 函数原型：int LIBUSB_CALL libusb_claim_interface(libusb_device_handle *dev,        int interface_number);
 函数功能：为指定的设备申请接口
 参数说明：dev 调用 libusb_open或者libusb_open_device_with_vid_pid返回的libusb_device_handle的句柄
@@ -327,7 +344,8 @@ C:[To Endpoint]设置端点描述符.
                   timeout 超时的毫秒数，0 永不超时
 返回值：0 成功，非0失败                        
 
-24 libusb_set_configuration
+### 24 libusb_set_configuration
+
 函数原型：int LIBUSB_CALL libusb_set_configuration(libusb_device_handle *dev,int configuration);
 函数功能：为设备设置一个配置参数，大部分设备只有一个配置这个函数通常不需要调用。当某个USB设备有多个配置的时候需要设置
 参数说明：dev  调用 libusb_open或者libusb_open_device_with_vid_pid返回的libusb_device_handle的句柄

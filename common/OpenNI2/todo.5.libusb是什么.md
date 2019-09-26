@@ -79,3 +79,5 @@ https://github.com/pbatard/libwdi/wiki/Zadig
 4. download：https://github.com/libusb/libusb
 5. mailing list：http://mailing-list.libusb.info
    libusb test demo：https://github.com/crazybaoli/libusb-test
+6. [USB in a NutShell](https://www.beyondlogic.org/usbnutshell/usb1.shtml#Introduction)
+
