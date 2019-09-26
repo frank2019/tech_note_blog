@@ -1,5 +1,0 @@
-
-
-
-
-visual-paradigm
