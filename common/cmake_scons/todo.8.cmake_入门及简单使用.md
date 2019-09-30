@@ -456,6 +456,12 @@ install (TARGETS Demo DESTINATION ${PROJECT_BINARY_DIR}/bin)
 
 其中bin  及include 不需要预先创建，会自动生成。
 
+可以通过 CMAKE_INSTALL_PREFIX  变量指定安装位置
+
+```
+SET(CMAKE_INSTALL_PREFIX    <install_path>)
+```
+
 
 
 ### 6.2 为工程添加测试
@@ -647,7 +653,7 @@ include (CPack)
 
 
 
-
+https://juejin.im/post/5a731dd56fb9a06334263cd6
 
 ## 9，CMake调用第三方指令
 

@@ -123,3 +123,23 @@ error：
 提取码：27wu 
 ```
 
+
+
+
+
+错误MSB3073	命令“setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+:VCEnd”已退出，代码为 1。	INSTALL	C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets	133	
+
+
+
+原因
+
+一般是安装的目录不存在 或者不拥有权限，可以通过设置CMAKE_INSTALL_PREFIX  变量来指定安装位置

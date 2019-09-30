@@ -84,6 +84,12 @@ usage: http [--json] [--form] [--pretty {all,colors,format,none}]
 
 
 
+```bash
+http  POST  http://ontest.cloudmob.vip/api/sdkchannel?id=3  fromid="1234"
+```
+
+
+
 # 参考链接
 
 1. [官网](https://httpie.org/)
