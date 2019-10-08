@@ -20,6 +20,12 @@
 
 
 
+
+
+## openNI驱动的实现
+
+
+
 而對於驅動程式模組這部分，雖然 OpenNI 沒有提供相關文件，不過由於整個 SDK 是開放原始碼的，所以這部分也是有提供原始碼的。這些模組的原始碼，都在 https://github.com/OpenNI/OpenNI2/tree/master/Source/Drivers。可以看到，除了提供的三個 binary 外，這邊還有 DummyDevice 和 TestDevice 另外兩個模組，算是不實用、單純用來做測試參考之用的。
 
 基本上，要開發一個 OpenNI 2 的 driver 來存取自己的裝置，需要依循著 OpenNI 2 定義的介面，而這些定義，則是由 \Include\Driver\OniDriverAPI.h 這個檔案（[GitHub](https://github.com/OpenNI/OpenNI2/blob/master/Include/Driver/OniDriverAPI.h)）所提供的。在 oni::driver 這個 namespace 下，包含了 DriverService、DriverBase、DeviceBase、StreamBase 這四個類別。
