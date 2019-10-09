@@ -1,10 +1,10 @@
 
 
-## 目标
+## 1，目标
 
 搭建windows下 ffmpeg的开发环境
 
-## 需要的文件
+## 2，需要的文件
 
 去官方下载ffmpeg  可参见：http://ffmpeg.zeranoe.com/builds/  
 
@@ -23,11 +23,11 @@
 
 
 
-## demo
+## 3，demo
 
+### cmake配置文件
 
-
-```
+```cmake
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 2.8)
 # 项目信息
@@ -73,15 +73,15 @@ set (CPACK_PACKAGE_VERSION_MINOR "${Demo_VERSION_MINOR}")
 include (CPack)
 ```
 
+### 测试源码
+
+FFmpegTest.cpp 中的代码内容使用sample中的metadata.c 作为测试代码
 
 
-FFmpegTest.cpp 中的代码内容使用sample中的metadata.c
 
 
 
-
-
-### 报错及解决
+## 4，报错及解决
 
 ### error LNK2026: 模块对于 SAFESEH 映像是不安全的
 
@@ -101,15 +101,11 @@ FFmpegTest.cpp 中的代码内容使用sample中的metadata.c
 无法定位程序输入点av_file_map 于动态链接库。。。上
 ```
 
-。。。
+原因可能是使用的lib文件与实际的不匹配
 
 
 
-## 参考链接
-
-https://blog.csdn.net/zp704393004/article/details/80780909
-
-
+## 5，参考链接
 
 1. [ffmpeg官网](http://ffmpeg.org/)
 2. [FFmpeg专栏 | 代码导读——基础篇(一) ](http://www.livevideostack.com/portal.php?mod=view&aid=65)
