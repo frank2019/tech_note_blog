@@ -143,3 +143,29 @@ if %errorlevel% neq 0 goto :VCEnd
 原因
 
 一般是安装的目录不存在 或者不拥有权限，可以通过设置CMAKE_INSTALL_PREFIX  变量来指定安装位置
+
+
+
+### error LNK2026: 模块对于 SAFESEH 映像是不安全的
+
+#### 解决方法1
+
+1.打开该项目的“属性页”对话框。
+
+2.单击“链接器”文件夹。
+
+3.单击“命令行”属性页。
+
+4.将 /SAFESEH:NO 键入“其他选项”框中，然后点击应用。
+
+#### 解决方法2
+
+在cmake中增加设置
+
+```cmake
+#模块对于SAFESEH映像是不安全
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SAFESEH:NO")
+set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /SAFESEH:NO")
+```
+

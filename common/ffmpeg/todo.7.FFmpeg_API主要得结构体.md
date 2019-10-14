@@ -1,12 +1,12 @@
+本文主要描述 FFmpeg 对外API中常用结构体
 
 
 
-
-## 结构体分类
+## 分类
 
 FFMPEG中结构体很多。最关键的结构体可以分成以下几类：
 
-a)        解协议（http,rtsp,rtmp,mms）
+a)  解协议（http,rtsp,rtmp,mms）
 
 AVIOContext，URLProtocol，URLContext主要存储视音频使用的协议的类型以及状态。URLProtocol存储输入视音频使用的封装格式。每种协议都对应一个URLProtocol结构。（注意：FFMPEG中文件也被当做一种协议“file”）
 
@@ -26,7 +26,35 @@ d) 存数据
 
 解码后数据：AVFrame
 
+
+
+## 关系图
+
+
+
+![](resource/api/1.png)
+
+## 常用结构体解析
+
+- AVFrame
+
+AVFrame结构体一般用于存储原始数据（即非压缩数据，例如对视频来说是YUV，RGB，对音频来说是PCM），此外还包含了一些相关的信息。比如说，解码的时候存储了宏块类型表，QP表，运动矢量表等数据。编码的时候也存储了相关的数据。因此在使用FFMPEG进行码流分析的时候，AVFrame是一个很重要的结构体。
+
+
+- AVPacket  	是存储压缩编码数据相关信息的结构体
+- AVFormatContext是包含码流参数较多的结构体
+
+- AVIOContext是FFMPEG管理输入输出数据的结构体
+
+- AVStream是存储每一个视频/音频流信息的结构体
+- AVCodec是存储编解码器信息的结构体
+
+
+
+
+
 ## 参考链接
 
 1. [FFMPEG结构体分析：AVCodecContext](https://blog.csdn.net/leixiaohua1020/article/details/14214859)
 
+https://blog.csdn.net/leixiaohua1020/article/details/11693997
