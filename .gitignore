@@ -27,3 +27,4 @@ build/
 .vscode
 .pytest_cache
 __pycache__
+*.bak_00*
