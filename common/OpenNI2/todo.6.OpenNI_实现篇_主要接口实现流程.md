@@ -24,6 +24,7 @@
   - Context::resolvePathToOpenNI()   获取当前程序得运行目录存在在m_pathToOpenNI
   - rc = configure();    通过配置文件ini获取配置： m_driversList，日志情况
   - loadLibraries()；   依次遍历加载驱动库，加入到驱动链表 m_deviceDrivers。每个驱动注册回调事件(设备连接 断开  状态变化)
+  - oniDriverInitialize()
 
 
 

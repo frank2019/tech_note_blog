@@ -71,13 +71,17 @@ int LIBUSB_CALL libusb_hotplug_register_callback(
 功能说明：在阻塞模式中处理任何挂起的事件。
 参数说明：ctx 通常为NULL  
 返回值：0成功，非0 失败
-注意：1调用libusb_handle_events的线程，不要执行阻塞的操作，否则可能造成libusb其他函数执行失败
+注意：
+
+1调用libusb_handle_events的线程，不要执行阻塞的操作，否则可能造成libusb其他函数执行失败
 2 如果注册了热插拔事件，必须要在循环中调用这个函数 例如下面的代码如论怎么插拔USB设备，都不会打印“device insert”
+
+```c++
 static int LIBUSB_CALL hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotplug_event event, void *user_data)
 {
         printf("device insert  \n");   
 }  
-int main(int argc, char **argv)
+int main(int argc, char argv)
 {
         libusb_hotplug_callback_handle hp;
         libusb_init (NULL);
@@ -86,6 +90,11 @@ int main(int argc, char **argv)
         while(1);
         libusb_hotplug_deregister_callback(hp);
 }  
+```
+
+
+
+
 必须要改为下面的代码,插拔USB才会有“device insert” 的信息  
 static int LIBUSB_CALL hotplug_callback(libusb_context *ctx, libusb_device *dev, libusb_hotplug_event event, void *user_data)
 {
@@ -144,7 +153,10 @@ int main(int argc, char **argv)
           unref_devices 如果该参数置1 列表中的每个设备的引用计数减1
 返回值：无
 注：下面是示例代码：
-        libusb_device **devs;
+        
+
+```c++
+ 		libusb_device devs;
         ssize_t cnt;
         int i;
         libusb_init (NULL); 
@@ -154,7 +166,10 @@ int main(int argc, char **argv)
                 PrintUsbDec(devs[i]);
         }
         libusb_free_device_list(devs, 1);
-        
+       
+```
+
+ 
 
 ### 12 libusb_get_device_descriptor
 
