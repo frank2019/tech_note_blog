@@ -8,6 +8,13 @@
 
 
 
+- uvc是一种硬件的框架结构，符合此标准的设计即可实现免驱。
+
+- V4L2 是专门为 linux 设备设计的一套视频框架，其主体框架在 linux 内核，可以理解为是整个 linux 系统上面的视频源捕获驱动框架。其广泛应用在嵌入式设备以及移动端、个人电脑设备上面，市面上的编码产品类如：SDV、手机、IPC、行车记录仪都会用到这个框架来进行视频采集。
+  
+
+
+
 ## 概述
 
 如今的主流操作系统都已提供UVC设备驱动，因此符合UVC规格的硬件设备在不需要安装任何的驱动程序下即可在主机中正常使用。使用UVC技术的包括摄像头、数码相机、类比影像转换器、电视棒及静态影像相机等设备。
@@ -34,8 +41,21 @@ UVC同MSC一样，系USB框架下的功能类协议，但却与MSC有着较大�
 
 而UVC则刚好相反，它采用Control+ISO传输机制实现（BULK和INTR机制为可选特性），其枚举流程，描述符配置较为复杂，繁琐，定义了诸多的类控制命令，Entity等；而具体的数据传输阶段即ISO传输较为简单。
 
-## 准备材料
 
 
+## 参考链接
 
-1. [USB官网下载UVC官方文档](https://www.usb.org/document-library/video-class-v15-document-set)
+1. [libuvc](https://ken.tossell.net/libuvc/doc/)
+
+维基百科中的描述：
+ https://en.wikipedia.org/wiki/USB_video_device_class
+
+uvc协议下载：
+ https://www.usb.org/documents
+ https://www.usb.org/document-library/video-class-v15-document-set
+ https://www.usb.org/document-library/video-class-v11-document-set
+ https://www.usb.org/document-library/audi
+
+1. USB官网下载UVC官方文档](https://www.usb.org/document-library/video-class-v15-document-set)
+
+libuvc是基于libusb的USB摄像头驱动库
