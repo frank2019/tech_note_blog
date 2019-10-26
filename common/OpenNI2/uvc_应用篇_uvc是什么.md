@@ -2,11 +2,9 @@
 
 
 
-## UVC
+## UVC(USB Video Class)
 
 **UVC全称为USB Video Class，即：USB视频类，是一种为USB视频捕获设备定义的协议标准。**是Microsoft与另外几家设备厂商联合推出的为USB视频捕获设备定义的协议标准，目前已成为USB org标准之一。
-
-
 
 - uvc是一种硬件的框架结构，符合此标准的设计即可实现免驱。
 
@@ -37,25 +35,73 @@ VCInterface用于进行配置，操控，设置UVC设备进入不同的功能状
 
 ## UVC VS MSC
 
-UVC同MSC一样，系USB框架下的功能类协议，但却与MSC有着较大差异。MSC功能采用Control+Bulk传输完成，其枚举流程，描述符配置较为清晰，控制传输阶段简单，定义的类功能控制命令较少。而BULK传输阶段则较为复杂繁琐，出错机制，续传机制等要求较为严格。
+UVC同MSC（大容量存储设备）一样，系USB框架下的功能类协议，但却与MSC有着较大差异。MSC功能采用Control+Bulk传输完成，其枚举流程，描述符配置较为清晰，控制传输阶段简单，定义的类功能控制命令较少。而BULK传输阶段则较为复杂繁琐，出错机制，续传机制等要求较为严格。
 
 而UVC则刚好相反，它采用Control+ISO传输机制实现（BULK和INTR机制为可选特性），其枚举流程，描述符配置较为复杂，繁琐，定义了诸多的类控制命令，Entity等；而具体的数据传输阶段即ISO传输较为简单。
 
 
 
+
+
+## 解析uvc 使用那个SDK？
+
+### libuvc 
+
+a cross-platform library for USB video devices https://ken.tossell.net/libuvc/
+
+项目地址： https://github.com/libuvc/libuvc
+
+参考链接
+
+1. [libuvc on Windows](https://github.com/libuvc/libuvc/issues/12)
+
+### UVCCamera
+
+安卓USB   uvc摄像头类库
+
+### Media Foundation SDK
+
+MicrosoftMediaFoundation允许开发用于在WindowsVista及更高版本上使用数字媒体的应用程序和组件。Media Foundation是Windows的下一代多媒体平台，它使开发人员、消费者和内容提供商能够以更强的健壮性、无与伦比的质量和无缝的互操作性接受新一轮的优质内容。
+
+Media Foundation 是[DirectShow](https://baike.baidu.com/item/DirectShow)为主的旧式多媒体[应用程序接口](https://baike.baidu.com/item/应用程序接口)的替代者与继承者，在微软的计划下将逐步汰换[DirectShow](https://baike.baidu.com/item/DirectShow)技术。Media Foundation要求Windows Vista或更高版本，不支持较早期的Windows版本，特别是Windows XP。
+
+Media Foundation 长于高质量的音频和视频播放，高清内容（如[HDTV](https://baike.baidu.com/item/HDTV), 高清电视）和数字版权管理（DRM）访问控制。Media Foundation在不同的Windows版本上能力不同，如Windows 7上就添加了H264编码支持。Windows 8上则提供数种更高质量的设置。
+
+
+
+开源项目Azure-Kinect-Sensor-SDK  在windows下使用的即是此接口SDK，在linux下使用的是libuvc。
+
+而开源项目librealsense 在win7 使用自定义的实现基于winusb.h。 在其他版本 使用的是Media Foundation SDK。 在linux使用libuvc。
+
+### 参考链接
+
+1. [Media Foundation Headers and Libraries](https://docs.microsoft.com/zh-cn/windows/win32/medfound/media-foundation-headers-and-libraries?redirectedfrom=MSDN)
+2. [Microsoft Media Foundation官方文档翻译（一）《Microsoft Media Foundation》](https://blog.csdn.net/rzdyzx/article/details/86684365)
+
+
+
+### 初步结论
+
+在不同平台 选择不同的库，
+
+- 在windows 使用 Media Foundation SDK
+
+- 在linux平台使用 libuvc
+- android 平台
+
+
+
 ## 参考链接
 
-1. [libuvc](https://ken.tossell.net/libuvc/doc/)
+1. [libuvc 官网](https://ken.tossell.net/libuvc/doc/)
 
-维基百科中的描述：
- https://en.wikipedia.org/wiki/USB_video_device_class
+2. [维基百科中的描述]( https://en.wikipedia.org/wiki/USB_video_device_class)
 
-uvc协议下载：
- https://www.usb.org/documents
- https://www.usb.org/document-library/video-class-v15-document-set
- https://www.usb.org/document-library/video-class-v11-document-set
- https://www.usb.org/document-library/audi
+3. uvc协议下载：
+    https://www.usb.org/documents
+    https://www.usb.org/document-library/video-class-v15-document-set
+    https://www.usb.org/document-library/video-class-v11-document-set
+    https://www.usb.org/document-library/audi
 
-1. USB官网下载UVC官方文档](https://www.usb.org/document-library/video-class-v15-document-set)
+4.[USB官网下载UVC官方文档](https://www.usb.org/document-library/video-class-v15-document-set)
 
-libuvc是基于libusb的USB摄像头驱动库
