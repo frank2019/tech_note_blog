@@ -175,3 +175,33 @@ if (frame.getVideoMode().getPixelFormat() != PIXEL_FORMAT_DEPTH_1_MM && frame.ge
 	OpenNI::shutdown();
 ```
 
+
+
+
+
+获取分辨率
+
+
+
+驱动层使用得id
+
+openni2.3\Include\OniCProperties.h
+
+```
+	ONI_STREAM_PROPERTY_CROPPING			= 0, // OniCropping*
+	ONI_STREAM_PROPERTY_HORIZONTAL_FOV		= 1, // float: radians
+	ONI_STREAM_PROPERTY_VERTICAL_FOV		= 2, // float: radians
+	ONI_STREAM_PROPERTY_VIDEO_MODE			= 3, // OniVideoMode*
+
+	ONI_STREAM_PROPERTY_MAX_VALUE			= 4, // int
+	ONI_STREAM_PROPERTY_MIN_VALUE			= 5, // int
+```
+
+
+
+E:\workspace\read\openni2.3\Source\Drivers\orbbec\DriverImpl\XnOniMapStream.cpp
+
+```c++
+OniStatus XnOniMapStream::getProperty(int propertyId, void* data, int* pDataSize)
+```
+
