@@ -179,7 +179,7 @@ if (frame.getVideoMode().getPixelFormat() != PIXEL_FORMAT_DEPTH_1_MM && frame.ge
 
 
 
-获取分辨率
+## 获取分辨率通过属性接口
 
 
 
@@ -202,6 +202,41 @@ openni2.3\Include\OniCProperties.h
 E:\workspace\read\openni2.3\Source\Drivers\orbbec\DriverImpl\XnOniMapStream.cpp
 
 ```c++
-OniStatus XnOniMapStream::getProperty(int propertyId, void* data, int* pDataSize)
+ONI_STREAM_PROPERTY_VIDEO_MODE
+
+OniStatus XnOniMapStream::getProperty(int propertyId, void* data, int* pDataSize);
+XnStatus XnOniMapStream::GetVideoMode(OniVideoMode* pVideoMode);
+
+nRetVal = m_pSensor->GetProperty(m_strType, XN_STREAM_PROPERTY_OUTPUT_FORMAT, &nValue);
+nRetVal = m_pSensor->GetProperty(m_strType, XN_STREAM_PROPERTY_X_RES, &nValue);
+nRetVal = m_pSensor->GetProperty(m_strType, XN_STREAM_PROPERTY_Y_RES, &nValue);   
+nRetVal = m_pSensor->GetProperty(m_strType, XN_STREAM_PROPERTY_FPS, &nValue);
+
+```
+
+
+
+```c++
+XnStatus XnDeviceBase::GetProperty(const XnChar* ModuleName, XnUInt32 propertyId, XnUInt64* pnValue)
+```
+
+根据name匹配找到合适的 XnDeviceModule，然后调用
+
+```c++
+XnStatus XnDeviceModule::GetProperty(XnUInt32 propertyId, XnUInt64* pnValue) const
+```
+
+
+
+```c++
+XnStatus XnDeviceModule::GetPropertyImpl(XnUInt32 propertyId, XnPropertyType Type, XnProperty** ppProperty) const
+```
+
+本函数通过查询成员变量 XnPropertiesHash m_Properties;   哈希表 查询得到的元素。
+
+此成员函数在模组初始化的时候一并进行初始化
+
+```
+XnStatus XnSensor::CreateDeviceModule(XnDeviceModuleHolder** ppModuleHolder)
 ```
 
