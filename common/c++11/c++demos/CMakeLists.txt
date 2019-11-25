@@ -15,7 +15,7 @@ if(BUILD_UNIT_TESTS)
 	add_subdirectory(tests)
 endif()
 
-include_directories("${PROJECT_SOURCE_DIR}/chrono")
+include_directories("${PROJECT_SOURCE_DIR}/chrono"  "${PROJECT_SOURCE_DIR}/common")
 
 
 # 指定生成目标 

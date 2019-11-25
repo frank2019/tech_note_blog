@@ -13,8 +13,11 @@
 #include <chrono>
 #include <stdint.h>
 #include <time.h>       /* time_t, struct tm, time, gmtime */
+#include <string>
+#include <iostream>
 
 #include  "mychrono.h"
+#include  "mz_status.h"
 
 /**
  * 返回 斐波那契数列 指定位置的元素
@@ -32,6 +35,65 @@ int FibonacciSequence(int index) {
 int64_t GetTimeMillisecondsStamp() {
     auto time_now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
     return time_now.count();
+}
+
+bool  IsIntegerNumberStr(std::string& n) {
+    //TODO 
+    return true;
+}
+
+
+int BigNumberPlus(std::string &in1, std::string &in2, std::string * p_out) {
+	if (nullptr == p_out) {
+		return  -kMzStatusInputNullPtr;
+	}
+	if (in1.empty()) {
+		*p_out = in2;
+		return  0;
+	}
+	else if (in2.empty()) {
+		*p_out = in1;
+		return  0;
+	}
+    if (!IsIntegerNumberStr(in1) || !IsIntegerNumberStr(in2)) {
+        return  -kMzStatusInvalid;
+    }
+    size_t max_length = in1.length() > in2.length() ? (in1.length() + 2) : (in2.length() + 2);
+    char* p_sum = new (std::nothrow)char[max_length];
+    if (nullptr == p_sum) {
+        return  -kMzStatusNoMemory;
+    }
+    memset(p_sum, 0, max_length);
+
+    std::string* p_long = nullptr, *p_short = nullptr;
+
+    in1.length() > in2.length() ? (p_long = &in1, p_short = &in2) : (p_long = &in2, p_short = &in1);
+    int tmp = 0;
+    int carry = 0;
+    for (int i = 0; i <p_short->length(); i++) {
+        tmp = p_long->at(p_long->length()-i-1) - '0' + p_short->at(p_short->length()-i-1) - '0' + carry;
+        p_sum[max_length-2-i] = tmp % 10 + '0';
+        carry = tmp / 10;
+    }
+    if (p_long->length() - p_short->length() > 0) {
+        for (int i = 0;i< p_long->length() - p_short->length() ;i++) {
+            tmp = p_long->at(p_long->length() -  i- 1- p_short->length()) - '0' + carry;
+            p_sum[max_length-2-i- p_short->length()] = tmp % 10 + '0';
+            carry = tmp / 10;
+        }
+    }
+ 
+    //if (carry) 
+    {
+        p_sum[0] = carry + '0';
+        
+    }
+    printf("sum:%s\n", p_sum);
+    std::cout << p_sum << std::endl;
+    *p_out = p_sum;
+
+    //delete[] p_out;
+	return  kMzStatusOK;
 }
 
 

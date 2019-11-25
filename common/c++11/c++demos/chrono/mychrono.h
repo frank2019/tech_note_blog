@@ -18,6 +18,8 @@ extern "C" {
 
     int FibonacciSequence(int index);
 
+    int BigNumberPlus(std::string& in1, std::string& in2, std::string* p_out);
+
 #ifdef __cplusplus
 }
 #endif

@@ -16,3 +16,9 @@
 
 1. [](http://www.cplusplus.com/reference/thread/thread/)
 2. http://file.allitebooks.com/20160630/C++%20Standard%20Library%20Quick%20Reference.pdf
+
+
+
+https://github.com/huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms
+
+https://github.com/Jack-Cherish/LeetCode
