@@ -42,7 +42,13 @@ bool  IsIntegerNumberStr(std::string& n) {
     return true;
 }
 
-
+/**
+ *@brief 计算两个字符串大数
+ *@param [in] in1  大数1
+ *@param [in] in2  大数1
+ *@param [out] p_out  结果
+ *@return 0: success, < 0 failed   see@MzStatusCode
+ */
 int BigNumberPlus(std::string &in1, std::string &in2, std::string * p_out) {
 	if (nullptr == p_out) {
 		return  -kMzStatusInputNullPtr;
@@ -82,17 +88,14 @@ int BigNumberPlus(std::string &in1, std::string &in2, std::string * p_out) {
             carry = tmp / 10;
         }
     }
- 
-    //if (carry) 
+    if (carry) 
     {
         p_sum[0] = carry + '0';
-        
+        *p_out = p_sum ;
     }
-    printf("sum:%s\n", p_sum);
-    std::cout << p_sum << std::endl;
-    *p_out = p_sum;
-
-    //delete[] p_out;
+    else {
+        *p_out = p_sum +1;
+    }
 	return  kMzStatusOK;
 }
 

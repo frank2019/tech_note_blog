@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     }
 
 
-    std::string in1 = "1234568";
+    std::string in1 = "21234568";
     std::string in2 = "87654321";
 
     std::string  sum;
@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
         printf("BigNumberPlus\n");
         return  0;
     }
-
-    std::cout << sum << std::endl;
+    std::cout << "BigNumberPlus:" << std::endl;
+    std::cout << in1 << "+" << in2 << " = " << sum << std::endl;
     return  0;
 
 
