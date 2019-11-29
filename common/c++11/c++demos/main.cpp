@@ -19,8 +19,7 @@ int main(int argc, char *argv[])
 
     std::string in1 = "21234568";
     std::string in2 = "87654321";
-
-    std::string  sum;
+    std::string sum;
 
     int ret = BigNumberPlus(in1, in2, &sum);
     if (ret ) {
