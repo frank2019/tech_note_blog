@@ -1,0 +1,9 @@
+@startuml
+
+openni->ONI_C_API:"oniInitialize()" 
+ONI_C_API->Context:"initialize()"
+Context->Context:"resolvePathToOpenNI()"
+Context->Context:"configure()"
+Context->Context:"loadLibraries()"
+
+@enduml
