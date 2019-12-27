@@ -179,3 +179,8 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SAFESEH:NO")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /SAFESEH:NO")
 ```
 
+
+
+
+
+错误	3	error LNK2026: 模块对于 SAFESEH 映像是不安全的。	E:\project\RV1108\openni2.3\Source\Drivers\orbbec\avcodec.lib(dcirbs00160.o)	orbbec
