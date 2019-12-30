@@ -1,0 +1,65 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class AbstractFactory(抽象工厂模式)" #DDDDDD {
+    abstract class AbstractProductA
+    {
+    +method():void
+    }
+
+    abstract class AbstractProductB
+    {
+    +method():void
+    }
+
+    class ConcreteProductA1
+    {
+    +method():void
+    }
+
+    class ConcreteProductA2
+    {
+    +method():void
+    }
+
+    class ConcreteProductB1
+    {
+    +method():void
+    }
+
+    class ConcreteProductB2
+    {
+    +method():void
+    }
+
+    abstract class AbstractFactory
+    {
+    +createProductA():AbstractProductA
+    +createProductB():AbstractProductB
+    }
+    note top of AbstractFactory: 抽象工厂
+
+    class ConcreteFactory1
+    {
+    +createProductA():AbstractProductA
+    +createProductB():AbstractProductB
+    }
+
+    class ConcreteFactory2
+    {
+    +createProductA():AbstractProductA
+    +createProductB():AbstractProductB
+    }
+
+    AbstractProductA <|-- ConcreteProductA1
+    AbstractProductA <|-- ConcreteProductA2
+    AbstractProductB <|-- ConcreteProductB1
+    AbstractProductB <|-- ConcreteProductB2
+    AbstractFactory <|-- ConcreteFactory1
+    AbstractFactory <|-- ConcreteFactory2
+    ConcreteFactory1 ..> ConcreteProductA1
+    ConcreteFactory1 ..> ConcreteProductB1
+    ConcreteFactory2 ..> ConcreteProductA2
+    ConcreteFactory2 ..> ConcreteProductB2
+}
+@enduml

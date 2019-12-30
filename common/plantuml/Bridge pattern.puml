@@ -1,0 +1,30 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Bridge(桥接模式)" #DDDDDD {
+
+    abstract class Abstraction
+    Abstraction : +operation()
+    note right: 抽象部分
+
+    class RefinedAbstraction
+    note top of RefinedAbstraction:优化的抽象部分
+
+    interface Implementor
+    Implementor : +operationImpl()
+    note right:实现部分
+
+    class Client
+    note right : 客户端
+
+    ConcreteImplementorA : +operationImpl()
+
+    ConcreteImplementorB : +operationImpl()
+
+    Client --> Abstraction
+    RefinedAbstraction --|> Abstraction
+    Implementor --o Abstraction
+    ConcreteImplementorA ..|> Implementor
+    ConcreteImplementorB ..|> Implementor
+}
+@enduml

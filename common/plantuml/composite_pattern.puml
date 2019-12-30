@@ -1,0 +1,32 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Composite(组合模式)" #DDDDDD {
+    class Client
+
+    abstract class Component{
+    #name:String
+    +Component(String):void
+    +doSomething():void
+    }
+
+    class Leaf{
+    +Component(String):void
+    +doSomething():void
+    }
+
+    class Composite{
+    -components:List<Component>
+    +Component(String):void
+    +doSomething():void
+    +addChild(Component):void
+    +getChildren(int):Component
+    +removeChild(Component):void
+    }
+
+    Component <-- Client
+    Component <|-- Leaf
+    Component <|-- Composite
+    Component <--o Composite
+}
+@enduml

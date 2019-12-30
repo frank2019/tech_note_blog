@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Visitor(访问者模式)" #DDDDDD {
+    class Visitor<< (I,#FF7700) abstract>>
+    {
+    +visitElementA(ElementA):void
+    +visitElementB(ElementB):void
+    }
+    note top of Visitor: 访问者接口或抽象类
+
+    class ConcreteVisitorA
+    {
+    +visitElementA(ElementA):void
+    +visitElementB(ElementB):void
+    }
+
+    class ConcreteVisitorB
+    {
+    +visitElementA(ElementA):void
+    +visitElementB(ElementB):void
+    }
+
+    class Element<< (I,#FF7700) abstract>>
+    {
+    +accept(Visitor)
+    }
+    note top of Element: 元素接口或抽象类
+
+    class ElementA
+    {
+    +accept(Visitor)
+    +operationA()
+    }
+
+    class ElementB
+    {
+    +accept(Visitor)
+    +operationB()
+    }
+
+    class ObjectStructure
+    note bottom of ObjectStructure: 管理元素集合的对象结构
+
+    class Client
+
+    Visitor <|-- ConcreteVisitorA
+    Visitor <|-- ConcreteVisitorB
+    Element <|-- ElementA
+    Element <|-- ElementB
+    Element --o ObjectStructure
+    Client ..> Visitor:<<use>>
+    Client ..> ObjectStructure:<<use>>
+
+}
+@enduml

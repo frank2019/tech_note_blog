@@ -1,0 +1,40 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Comand(命令模式)" #DDDDDD {
+    class Invoker
+    {
+    -comand:Comand
+    +Invoker(Comand)
+    +action():void
+    }
+    note right: 请求者
+
+    class Receiver
+    {
+    -comand:Comand
+    +action():void
+    }
+    note right: 接收者
+
+    class Comand<< (I,#FF7700) interface>>
+    {
+    +execute():void
+    }
+    note right: 命令
+
+    class ConcreteComand
+    {
+    -receiver:Receiver
+    +ConcreteComand(Comand)
+    +execute():void
+    }
+    note right: 具体命令
+
+    Client..>Invoker
+    Client..>Receiver
+    Invoker o--> Comand
+    Receiver <-- ConcreteComand
+    Comand <|.. ConcreteComand
+}
+@enduml

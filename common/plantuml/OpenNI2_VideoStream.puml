@@ -21,6 +21,7 @@ skinparam sequence {
     ActorFontName Aapex
 }
 App->OpenNI_Device:"open()"
+activate App
 OpenNI_Device->ONI_C_API:"oniDeviceOpen()"
 ONI_C_API ->ONI_C_API:"oniDeviceOpenEx()"
 ONI_C_API->g_Context:"deviceOpen()"
@@ -33,6 +34,13 @@ XnSensor->XnSensor:"InitSensor()"
 XnSensor->m_SensorIO:"OpenDevice(pDeviceConfig->cpConnectionString)"
 m_SensorIO->Xnlib:"xnUSBOpenDeviceByPath()"
 m_SensorIO->Xnlib:"xnUSBOpenEndPoint()"
-XnSensor->m_SensorIO:""
+
+deactivate App 
+
+App->OpenNI_Device:"start()"
+OpenNI_Device->ONI_C_API:"oniStreamStart(m_stream)"
+ONI_C_API->g_Context:"m_stream.start()"
+g_Context->XnOniDriver:"m_driverHandler.streamGetRequiredFrameSize(m_pSensor->streamHandle())"
+
 
 @enduml

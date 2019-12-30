@@ -1,0 +1,32 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Strategy(策略模式)" #DDDDDD {
+    interface Strategy
+    {
+    +algorithm()
+    }
+    note right: 策略的抽象
+
+    class ConcreteStrategyA
+    {
+    +algorithm()
+    }
+
+    class ConcreteStrategyB
+    {
+    +algorithm()
+    }
+
+    class Context
+    {
+    +setStrategy(Strategy)
+    +algorithm()
+    }
+    note right:上下文环境
+
+    Context o-- Strategy
+    Strategy <|.. ConcreteStrategyA
+    Strategy <|.. ConcreteStrategyB
+}
+@enduml

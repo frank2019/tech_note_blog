@@ -1,0 +1,34 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Builder(生成器模式)" #DDDDDD {
+    abstract class Builder
+    {
+    +buildPartA():void
+    +buildPartB():void
+    +buildPartC():void
+    }
+    note right: 抽象Builder类
+
+    class ConcreteBuilder
+    {
+    +buildPartA():void
+    +buildPartB():void
+    +buildPartC():void
+    }
+    note right: 具体Builder类
+
+    class Director
+    {
+    +construct()
+    }
+    note right:统一组装过程
+
+    abstract class Product
+    note right:产品的抽象类
+
+    Director o-- Builder
+    Builder <|-- ConcreteBuilder
+    Product <.. ConcreteBuilder:<<use>>
+}
+@enduml

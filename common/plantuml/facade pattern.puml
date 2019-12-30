@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Facade(外观模式)" #DDDDDD {
+    class Facade{
+    + operationA()
+    + operationB():void
+    + operationC():void
+    }
+    note right: 系统对外的统一接口
+
+    class SystemA << (I,#FF7700) Interface>>
+    class SystemB << (I,#FF7700) Interface>>
+    class SystemC << (I,#FF7700) Interface>>
+    Facade --> SystemA:<<use>>
+    Facade --> SystemB:<<use>>
+    Facade --> SystemC:<<use>>
+}
+@enduml

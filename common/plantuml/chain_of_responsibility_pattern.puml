@@ -1,0 +1,27 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class ChainOfResponsibility(责任链模式)" #DDDDDD {
+    abstract class Handler
+    {
+    #successor():Handler
+    +handleRequest(String):void
+    }
+    note left: 抽象处理者
+
+    class ConcreteHandler1
+    {
+    +handleRequest(String):void
+    }
+
+    class ConcreteHandler2
+    {
+    +handleRequest(String):void
+    }
+
+    Handler o-- Handler:0..1
+    Handler <|-- ConcreteHandler1
+    Handler <|-- ConcreteHandler2
+    Client ..> Handler
+}
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class Observer(观察者模式)" #DDDDDD {
+    class Subject<< (A,#FF7700) abstract>>
+    {
+    +notifyObservers(Object)
+    }
+    note right: 抽象主题
+
+    class ConcreteSubject
+    {
+    +notifyObservers(Object)
+    }
+    note right: 具体主题
+
+    class Observer<< (I,#FF7700) interface>>
+    {
+    +update(Object)
+    }
+    note right: 抽象观察者
+
+    class ConcreteObserver
+    {
+    +update(Object)
+    }
+    note right: 具体观察者
+
+    Subject <|-- ConcreteSubject
+    Subject "1" o-- "0..*" Observer
+    Observer <|.. ConcreteObserver
+}
+@enduml

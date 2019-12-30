@@ -1,0 +1,32 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "class State(状态模式)" #DDDDDD {
+    interface State
+    {
+    +doSomething():void
+    }
+    note right: 抽象状态类或状态接口
+
+    class ConcreteStateA
+    {
+    +doSomething():void
+    }
+
+    class ConcreteStateB
+    {
+    +doSomething():void
+    }
+
+    class Context
+    {
+    +addState(State)
+    +doSomething():void
+    }
+    note right:环境类
+
+    Context -- State
+    State <|.. ConcreteStateA
+    State <|.. ConcreteStateB
+}
+@enduml
