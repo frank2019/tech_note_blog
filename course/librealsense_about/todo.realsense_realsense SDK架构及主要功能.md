@@ -2,9 +2,7 @@
 
 
 
-
-
-## Librealsense 是什么
+## Intel RealSense SDK Architecture 
 
 
 
