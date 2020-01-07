@@ -1,0 +1,31 @@
+@startuml
+
+
+
+!include libc4/C4_Container.puml
+
+'LAYOUT_WITH_LEGEND()
+LAYOUT_AS_SKETCH()
+
+Person(user, "用户")
+
+System_Boundary(item, "商品相关"){
+    System(itemCenter, "商品中心", "")
+    System(priceCenter, "价格中心", "")
+    System(InventoryCenter,"销售库存","")
+}
+
+System_Ext(orderPlatform, "订单平台")
+System_Ext(wmsStock,"wms库存")
+System_Ext(buy,"导购平台")
+
+Rel(wmsStock, InventoryCenter, "库存上抛")
+Rel(buy,itemCenter,"商品信息查询")
+Rel(user,orderPlatform,"提交订单")
+Rel(buy,priceCenter,"价格查询")
+Rel(orderPlatform,InventoryCenter,"扣减库存")
+Rel(InventoryCenter, itemCenter, "查询商品sku")
+Rel(priceCenter,itemCenter,"查询商品sku")
+Rel(user,buy,"用户浏览")
+
+@enduml
