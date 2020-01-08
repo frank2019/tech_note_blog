@@ -42,9 +42,10 @@ Rel(process_interface,sdk_Interfaces,"")
 Rel(java_interface,sdk_Interfaces,"")
 Rel(others_interface,sdk_Interfaces,"")
 
-Rel(sdk_Interfaces,c1,"")
-Rel_Neighbor(sdk_core,io_module,"")
-Rel_Neighbor(sdk_core,capability_module1,"")
+Rel(sdk_Interfaces,sdk_core,"")
+Rel_D(sdk_core,io_module,"")
+Rel_R(sdk_core,capability_module1,"")
+Rel_R(capability_module1,capability_module2,"")
 
 
 @enduml
