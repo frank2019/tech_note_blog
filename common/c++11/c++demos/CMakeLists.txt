@@ -24,6 +24,15 @@ add_executable(Demo main.cpp)
 target_link_libraries(Demo chrono)
 
 
+# 指定生成目标 
+add_executable(demo_enable_shared_from_this demo_enable_shared_from_this.cpp)
+
+
+
+
+
+
+
 install (TARGETS Demo DESTINATION ${PROJECT_BINARY_DIR}/bin)
 
 # 构建一个 CPack 安装包
