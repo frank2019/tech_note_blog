@@ -1,0 +1,74 @@
+@startuml
+'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+ !include libc4/C4_Container.puml
+
+LAYOUT_TOP_DOWN
+'LAYOUT_AS_SKETCH
+LAYOUT_WITH_LEGEND()
+
+title librealsense diagram for SDK Architecture 
+
+Person(sdk_application,SDKApplication,"基于此SDK的应用")
+Person(sdk_demos_tools,SDKDemosTools,"基于此SDK的示例，工具")
+
+
+System_Boundary(c0, "C++APIs") {
+
+    Container(rs2_context, "rs2_context", "C#", "base c#")
+    Container(unity_interface, "Unity Interface", "JavaScript, Angular", " base unity framework")
+    Container(process_interface, "Processing Interface", "C#, Xamarin", "Provides ")
+    Container(java_interface, "Java Interface", "java", "base  java")
+    Container(others_interface, "Others Interface", "other  languages", "Provides SDK functionality via API")
+}
+
+System_Boundary(c1, "C APIs") {
+
+    Container(rs2_context, "rs2_context", "C#", "base c#")
+    Container(rs2_device_list, "rs2_device_list", "JavaScript, Angular", " base unity framework")
+    Container(rs2_device, "rs2_device", "C#, Xamarin", "Provides ")
+    Container(rs2_pipeline, "rs2_pipeline", "java", "base  java")
+    Container(rs2_config, "rs2_config", "java", "base  java")
+    Container(rs2_stream, "rs2_stream", "java", "base  java")
+    Container(rs2_frame, "rs2_frame", "other  languages", "Provides SDK functionality via API")
+}
+
+System_Boundary(c11, "librealsense") {
+
+    Container(context, "context", "C#", "base c#")
+    Container(device_hub, "device_hub", "JavaScript, Angular", " base unity framework")
+    Container(pipeline, "pipeline", "C#, Xamarin", "Provides ")
+    Container(config, "config", "java", "base  java")
+    Container(frame_holder, "frame_holder", "java", "base  java")
+    Container(profile, "profile", "java", "base  java")
+    Container(rs2_frame, "rs2_frame", "other  languages", "Provides SDK functionality via API")
+}
+
+ Container(sdk_Interfaces, "SDK Interfaces", "Java, Docker Container", "Provides Internet banking functionality via API")
+
+System_Boundary(c2, "SDK Core About") {
+    Container(sdk_core, "SDK Core", "Java, Spring MVC", "Module Management Pipeline Execution Interoperability")
+    Container(io_module, "I/O Module", "JavaScript, Angular", "")
+    Container(capability_module1, "Capability Module", "C#, Xamarin", "")
+    Container(capability_module2, "Capability Module", "SQL Database", "")
+}
+
+Rel(sdk_application,csharp_interface,"")
+Rel(sdk_application,unity_interface,"")
+Rel(sdk_application,process_interface,"")
+Rel(sdk_application,java_interface,"")
+Rel(sdk_application,others_interface,"")
+
+Rel(csharp_interface,sdk_Interfaces,"")
+Rel(unity_interface,sdk_Interfaces,"")
+Rel(process_interface,sdk_Interfaces,"")
+Rel(java_interface,sdk_Interfaces,"")
+Rel(others_interface,sdk_Interfaces,"")
+
+Rel(sdk_Interfaces,sdk_core,"")
+Rel_D(sdk_core,io_module,"")
+Rel_R(sdk_core,capability_module1,"")
+Rel_R(capability_module1,capability_module2,"")
+
+
+@enduml

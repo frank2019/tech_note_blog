@@ -6,7 +6,7 @@ librealsense2为帧管理和同步提供了灵活的模型。文档将概述帧�
 
 核心的抽象类是`rs2::frame`类和 `rs2::device::start`方法，所有其他管理和同步原语都可以从这两个API中派生出来。
 
-```
+```c++
 /**
  * Start passing frames into user provided callback
  * \param[in] callback   Stream callback, can be any callable object accepting rs2::frame

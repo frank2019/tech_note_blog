@@ -37,3 +37,11 @@ swap 交换两个 shared_ptr 对象(即交换所拥有的对象)
 reset 放弃内部对象的所有权或拥有对象的变更, 会引起原有对象的引用计数的减少
 
 get 返回内部对象(指针), 由于已经重载了()方法, 因此和直接使用对象是一样的
+
+
+
+
+
+## std::unique_ptr
+
+[unique_ptr](https://msdn.microsoft.com/zh-cn/library/ee410601.aspx) 不共享它的指针。它无法复制到其他 unique_ptr，无法通过值传递到函数，也无法用于需要副本的任何标准模板库 (STL) 算法。只能移动
