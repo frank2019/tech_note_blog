@@ -1,0 +1,60 @@
+@startuml
+title realsense基础类
+package platform <<frame>> #Blue {
+    class control_range{
+        +control_range()
+        +std::vector<uint8_t> min;
+        +std::vector<uint8_t> max;
+        +std::vector<uint8_t> step;
+        +std::vector<uint8_t> def;
+    }
+
+    class backend {
+        +virtual std::shared_ptr<uvc_device> create_uvc_device(uvc_device_info info) const = 0;
+        +virtual std::vector<uvc_device_info> query_uvc_devices() const = 0;
+        +virtual std::shared_ptr<command_transfer> create_usb_device(usb_device_info info) const = 0;
+        +virtual std::vector<usb_device_info> query_usb_devices() const = 0;
+
+        +virtual std::shared_ptr<hid_device> create_hid_device(hid_device_info info) const = 0;
+        +virtual std::vector<hid_device_info> query_hid_devices() const = 0;
+
+        +virtual std::shared_ptr<time_service> create_time_service() const = 0;
+
+        +virtual std::shared_ptr<device_watcher> create_device_watcher() const = 0;
+
+        +virtual std::string get_device_serial(uint16_t device_vid, uint16_t device_pid, const std::string& device_uid) const
+        +virtual ~backend() = default;
+    }
+    class wmf_backend {
+        
+    }
+
+    backend <|-- wmf_backend
+
+}
+
+package librealsense <<Frame>> #Green {
+    class device_info{
+        +{abstract} std::shared_ptr<device_interface> create_device(bool register_device_notifications = false) const
+
+    }
+
+    class context {
+        +context(backend_type type)
+        +void stop()
+        +~context()
+        +std::vector<std::shared_ptr<device_info>> query_devices(int mask) const;
+        +const platform::backend& get_backend() const
+        +uint64_t register_internal_device_callback(devices_changed_callback_ptr callback);
+        +void unregister_internal_device_callback(uint64_t cb_id);
+        +void set_devices_changed_callback(devices_changed_callback_ptr callback);
+        +std::vector<std::shared_ptr<device_info>> create_devices(platform::backend_device_group devices,
+            const std::map<std::string, std::weak_ptr<device_info>>& playback_devices, int mask) const;
+        +std::shared_ptr<playback_device_info> add_device(const std::string& file);
+        +void remove_device(const std::string& file);
+        +void add_software_device(std::shared_ptr<device_info> software_device);
+    }
+}
+
+
+@enduml

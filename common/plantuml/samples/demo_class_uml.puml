@@ -1,0 +1,101 @@
+@startuml
+title 视频播放功能的业务关联图
+package 全屏播放业务功能 <<Cloud>> #DeepSkyBlue{
+    package 视频播放业务层 <<Frame>> #DodgerBlue{
+        package 播放内核 <<Frame>> #Blue{
+            interface ADVideoPlayerListener{
+                  +{static}{abstract}void onBufferUpdate(int position);//回调，视频缓冲
+                  +{static}{abstract}void onAdVideoLoadSucess();//回调，视频加载成功
+                  +{static}{abstract}void onAdVideoPlayComplete();//回调，视频正常播放完成
+                  +{static}{abstract}void onAdVideoLoadFailed();//回调，视频不能正常播放
+                  +{static}{abstract}void onClickVideo();//回调，点击视频区域的
+                  +{static}{abstract}void onClickFullScreenBtn();//回调，点击全屏按钮
+                  +{static}{abstract}void onClickBackBtn();
+                  +{static}{abstract}void onClickPlay();
+            }
+            class CustomVideoView {
+                .. 视频播放器，只有暂停、播放和停止的基本功能 ..
+                ..其他功能事件实现在业务层..
+                interface ADVideoPlayerListener
+                -MediaPlayer mediaPlayer
+                -ADVideoPlayerListener listener
+                -ScreenEventReceiver mScreenEventReceiver
+                ...
+            }
+
+            CustomVideoView o-down- ADVideoPlayerListener
+
+        }
+
+        interface AdSDKShellListener {
+           +{static}{abstract}ViewGroup getAdParent();
+           +{static}{abstract}void onAdVideoLoadSuccess();
+           +{static}{abstract}void onAdVideoLoadFailed();
+           +{static}{abstract}void onAdVideoPlayComplete();
+           +{static}{abstract}void onClickVideo(String url);
+        }
+
+        class VideoAdShell{
+            ..视频播放器的业务封装层..
+            interface ADVideoPlayerListener
+            +VideoAdShell(AdValue, AdSDKShellListener, ADFrameImageLoadListener)
+            -MediaPlayer mediaPlayer
+            -ADVideoPlayerListener listener
+            -ScreenEventReceiver mScreenEventReceiver
+            ...
+        }
+
+        AdSDKShellListener -down-o VideoAdShell
+        VideoAdShell -right-|> ADVideoPlayerListener
+        VideoAdShell .right.> CustomVideoView
+
+    }
+
+
+
+    class VideoFullDialog{
+        ..全屏视频播放..
+        - AdSDKShellListener mShellListener
+        -MediaPlayer mediaPlayer
+        -ADVideoPlayerListener listener
+        -ScreenEventReceiver mScreenEventReceiver
+        +VideoFullDialog(Context, CustomVideoView, AdValue, int)
+        +void setShellListener(AdSDKShellListener)//承接业务层回调
+        +void setListener(FullToSmallListener)//切换小屏回调
+        ...
+    }
+
+    VideoFullDialog -up-|> ADVideoPlayerListener
+}
+VideoAdShell<..>VideoFullDialog
+
+
+package 客户端 <<Frame>> #LightGray{
+package SDK入口 <<Frame>> #gray{
+    interface AdSDKShellListener{
+        +{static}{abstract}void onAdSuccess();//视频资源加载成功
+        +{static}{abstract}void onAdFailed();//无法播放
+        +{static}{abstract}void onClickVideo(String url);//点击播放窗口回调
+    }
+
+    class VideoAdFactory{
+        ..使用构建者模式构建实例,方便用户使用..
+        ..使用外观模式封装视频播放SDK,方便使用API..
+        -final ViewGroup mParentView;
+        -final AdValue mInstance;
+        +void setAdResultListener(AdFactoryInterface)
+        +void updateAdInScrollView//根据用户滑动页面来判断视频自动播放
+        +{static} class Builder
+    }
+
+    VideoAdFactory -up-|> AdSDKShellListener
+}
+    class Client<<用户层>> {
+            ..生成VideoAdFactory实例,
+            调用视频的API..
+    }
+
+    Client -left-> VideoAdFactory
+}
+
+@enduml
