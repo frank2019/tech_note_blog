@@ -26,8 +26,15 @@ package platform <<frame>> #Blue {
         +virtual ~backend() = default;
     }
     class wmf_backend {
-        
+
     }
+    class device_watcher
+    {
+        +virtual void start(device_changed_callback callback) = 0;
+        +virtual void stop() = 0;
+        +virtual ~device_watcher();
+    };
+
 
     backend <|-- wmf_backend
 

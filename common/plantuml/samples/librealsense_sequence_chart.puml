@@ -1,0 +1,45 @@
+@startuml
+
+skinparam backfroundColor #EEEBDC
+skinparam handwritten true
+
+skinparam sequence {
+
+    ArrowColor DeepSkyBlue
+    ActorBorderColor blue
+    LifeLineBorderColor blue
+    LifeLineBackgroundColor #A9DCDF
+
+    ParticipantBorderColor DeepSkyBlue
+    ParticipantBackgroundColor DodgerBlue
+    ParticipantFontName Aapex
+    ParticipantFontColor #A9DCDF
+
+    ActorBackgroundColor aqua
+    ActorFontColor DeepSkyBlue
+    ActorFontSize 17
+    ActorFontName Aapex
+}
+
+App->Context:"rs2_create_context()"
+activate Context
+Context->Context:"Context(backend_type::standard)"
+Context->platform_backend:"platform::create_backend()"
+platform_backend->wmf_backend:"wmf_backend()"
+Context->platform_backend:"create_device_watcher()"
+platform_backend->win_event_device_watcher:"win_event_device_watcher()"
+deactivate Context
+
+App->Context:"rs2_query_devices()"
+
+Context->platform_backend:""
+
+loop "Context->loadLibraries()遍历驱动dll"
+Context->XnOniDriver:"initialize()"
+
+end
+
+
+
+
+@enduml
