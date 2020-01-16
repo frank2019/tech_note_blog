@@ -30,9 +30,34 @@ Context->platform_backend:"create_device_watcher()"
 platform_backend->win_event_device_watcher:"win_event_device_watcher()"
 deactivate Context
 
-App->Context:"rs2_query_devices()"
 
-Context->platform_backend:""
+App->Context:"rs2_query_devices()"
+activate Context
+Context->platform_backend:"query_devices(int mask)"
+platform_backend->wmf_backend:"query_uvc_devices()"
+platform_backend->wmf_backend:"query_usb_devices()"
+platform_backend->wmf_backend:"query_hid_devices()"
+deactivate Context
+
+
+
+App->Context:"rs2_get_device_count(device_list, &e)"
+
+
+App->Context:"rs2_create_device(device_list, 0, &e)"
+activate Context
+Context->device_info:"create_device(bool register_device_notifications = false)"
+device_info->sr300_info:"create(_ctx, register_device_notifications)"
+device_info->sr300_camera:"sr300_camera()"
+sr300_camera->sr300_camera:"create_depth_device(ctx, depth)"
+sr300_camera->sr300_camera:"create_color_device(ctx, color)"
+sr300_camera->sr300_camera:"hw_monitor()"
+sr300_camera->stream_interface:"stream(RS2_STREAM_DEPTH)"
+sr300_camera->stream_interface:"stream(RS2_STREAM_INFRARED)"
+sr300_camera->stream_interface:"stream(RS2_STREAM_COLOR)"
+
+deactivate Context
+
 
 loop "Context->loadLibraries()遍历驱动dll"
 Context->XnOniDriver:"initialize()"
