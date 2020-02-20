@@ -14,6 +14,31 @@ def execCmd(cmd):
     r.close()  
     return text  
 
+def init_env(name_list):
+
+    repo_dir_home_blog = 'F:\\workspace\\more\\tech_note_blog'
+    repo_dir_work_blog = 'D:\\MoreBetter\\tech_note_blog'
+
+    name_list.append(repo_dir_home_blog)
+    name_list.append(repo_dir_work_blog)
+
+    repo_dir_home_opencv = 'F:\\workspace\\more\\ffmpeg_with_opencv'
+    name_list.append(repo_dir_home_opencv)
+   
+
+
+def do_git_pull_repo(name_list):
+
+    for name in name_list:
+        if not os.path.exists(name):
+            continue
+        cmd_git_pull = 'git -C ' + name + ' pull'
+        #cmd_git_status='git -C ' + repo_dir + ' status'
+        #os.system("git  -C F:\\workspace\\tech_note_blog status")
+        print(cmd_git_pull)
+        ret = execCmd(cmd_git_pull)
+        print(ret)
+
 
 def do_git_pull():
     repo_dir_home = 'F:\\workspace\\more\\tech_note_blog'
@@ -42,7 +67,10 @@ def show_countdown(num):
 
 if __name__ == '__main__':
     get_day_info()
-    do_git_pull()
+    #do_git_pull()
     #str = input("Press any key to quit: ");
     #print ("%s", str)
+    name_list = []
+    init_env(name_list)
+    do_git_pull_repo(name_list)
     show_countdown(3)
