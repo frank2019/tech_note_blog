@@ -23,7 +23,9 @@ def init_env(name_list):
     name_list.append(repo_dir_work_blog)
 
     repo_dir_home_opencv = 'F:\\workspace\\more\\ffmpeg_with_opencv'
+	repo_dir_work_opencv = 'D:\\MoreBetter\\more\\ffmpeg_with_opencv'
     name_list.append(repo_dir_home_opencv)
+	name_list.append(repo_dir_work_opencv)
    
 
 

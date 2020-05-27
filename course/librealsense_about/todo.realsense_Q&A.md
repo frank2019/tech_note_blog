@@ -4,13 +4,9 @@
 
 
 
-从realsense SDK中拿到原始数据？
+### Q   usb获取数据帧
 
-
-
-
-
-## librealsense\src\mf\mf-uvc.cpp
+librealsense\src\mf\mf-uvc.cpp
 
 OnReadSample
 
@@ -34,9 +30,10 @@ IMFSourceReaderCallback
 
 
 
-
-
 ```
 void aggregator::handle_frame(frame_holder frame, synthetic_source_interface* source)
 ```
 
+
+
+### todo.realsense_SDK是否可以拿到原始IR数据
